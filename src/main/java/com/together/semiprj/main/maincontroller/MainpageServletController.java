@@ -1,4 +1,4 @@
-package com.together.semiprj.main;
+package com.together.semiprj.main.maincontroller;
 
 import java.io.IOException;
 
