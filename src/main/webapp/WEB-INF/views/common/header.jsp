@@ -15,11 +15,6 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-<header>
-	<%--헤더작성 구간입니다. --%>
-</header>
-=======
 	<div id="login-wrap">
 	    <div id="login">
 	        <ul>
@@ -95,4 +90,3 @@
 	    </div>
 	</div> 
 </body>
->>>>>>> 660f9514a5c4a876da9e54a7c1d6e21fdf5f45a9
