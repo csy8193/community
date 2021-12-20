@@ -114,7 +114,7 @@ document.getElementById("id").addEventListener("input", function(){
 
         // ***************************************************************************************************
     }else{
-        checkId.innerText = "유효하지 않은 아이디 입니다."
+        checkId.innerText = "6~12자 영문 대 소문자, 숫자를 사용하세요."
         checkId.style.color = ("red");
         signUpCheckObj.id = false; // 유효 x
     }
@@ -242,7 +242,7 @@ document.getElementById("pw1").addEventListener("input", function(){
         checkPw1.style.color = "green";
         signUpCheckObj.pw1 = true;
     }else{
-        checkPw1.innerText = "유효하지 않은 비밀번호 입니다."
+        checkPw1.innerText = "6~20자 영문 대 소문자, 숫자, 특수문자(!,@,#,-,_)를 사용하세요."
         checkPw1.style.color = "red";
         signUpCheckObj.pw1 = false;
     }
