@@ -291,3 +291,31 @@ function loginValidate(){
         return false;
     }
 }
+
+function agreeCheckObj(){
+	
+	
+	
+	const agree = $("input:checkbox[id=agree]").is(":checked");
+	const agree2 = $("input:checkbox[id=agree2]").is(":checked");
+	const agree3 = $("input:checkbox[id=agree3]").is(":checked");
+	
+	console.log(agree)
+	if(agree == false){
+		alert("이용약관을 눌러주세요.");
+		agree.focus();
+		return false;
+	}
+	if(agree2 == false){
+		alert("개인정보 처리 방침을 눌러주세요.");
+		agree2.focus();
+		return false;
+	}
+	if(agree3 == false){
+		alert("만 14세 이상입니다.를 눌러주세요.");
+		agree3.focus();
+		return false;
+	}
+	
+	location.href = path + "/member/signup";
+}

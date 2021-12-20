@@ -40,7 +40,7 @@
 	                    <li>
 	                        <a href="#">아이디 찾기</a>
 	                        <a href="#">비밀번호 찾기</a>
-	                        <a href="${contextPath}/member/signup">회원가입</a>
+	                        <a href="${contextPath}/member/agree">회원가입</a>
 	                    </li>
 	                </ul>
 	            </form>
