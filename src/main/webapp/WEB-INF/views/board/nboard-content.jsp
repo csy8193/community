@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../common/header.jsp"/>
-<section>
+	<section>
     <div id="nboard-content">
         <h3 style="color : #4facfe;">${nboard.boardName}</h3>
         <h1 class="nboard-title">${nboard.boardTitle }</h1>
@@ -78,6 +78,8 @@
         </div>
     </div>
 </section>
+
 <jsp:include page="../common/footer.jsp"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/nboardcontent.css">
 </body>
 </html>
