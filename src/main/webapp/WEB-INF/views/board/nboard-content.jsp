@@ -80,6 +80,5 @@
 </section>
 
 <jsp:include page="../common/footer.jsp"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/nboardcontent.css">
 </body>
 </html>

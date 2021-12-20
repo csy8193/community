@@ -66,6 +66,5 @@
     </div>
 </section>
 <jsp:include page="../common/footer.jsp"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/eventList.css">
 </body>
 </html>
