@@ -2,7 +2,35 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-	<entry key="login">
-		
+	
+	<!-- 회원가입 -->
+	<entry key="signUp">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)
 	</entry>
+	
+	<!-- 아이디 중복 확인 -->
+	<entry key="idDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE STATUS_CD != 101
+		AND MEMBER_ID = ?
+	</entry>
+	
+	<!-- 이메일 중복 확인 -->
+	<entry key="emailDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE STATUS_CD != 101
+		AND MEMBER_EMAIL = ?
+	</entry>
+	
+	<!-- 로그인 -->
+	<entry key="login">
+		SELECT MEMBER_NO, MEMBER_NM, MEMBER_EMAIL,
+        ENROLL_DT, STATUS_CD, GRADE_CD
+		FROM MEMBER
+		WHERE MEMBER_ID = ?
+		AND MEMBER_PW = ?
+		AND STATUS_CD != 101
+	</entry>
+	
 </properties>

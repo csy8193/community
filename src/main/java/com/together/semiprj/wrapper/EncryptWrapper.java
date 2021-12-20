@@ -21,13 +21,15 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		String value = null;
+		System.out.println(name);
 		switch(name) {
-		case "memberPw": case "pwd1":
+		case "memberPw" : /*암호화*/
+		case "pw1" :
+		case "currentPw" :
+		case "newPw1" :
 			value = getSha512(super.getParameter(name));
-			
 			break;
-		
-		default :value = super.getParameter(name);
+		default : value = super.getParameter(name);
 		}
 		
 		
