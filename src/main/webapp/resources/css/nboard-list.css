@@ -1,0 +1,152 @@
+@charset "UTF-8";
+        /* 게시판 전체 틀 */
+        #nboard-wrapper{
+            margin: 0 auto;
+            margin-top: 100px;
+            width: 1400px;
+        }
+        @media screen and (max-width: 900px) 
+		{  #nboard-wrapper { 
+			width: 800px;
+			} 
+			.nboard-pic{
+			height: 140px!important;
+			}
+		}
+        
+        #nboard-category{
+        	text-align : center;
+        	margin-bottom : 20px;
+        	color : #4facfe;
+        	font-weight : 700;
+        	font-size : 35px;
+        }
+        /* 게시글 1개 틀 클래스 */
+        .nboard-style{
+            width: 100%;
+            height: 160px;
+            border-bottom: 1px solid #e7e7e7;
+            border-top: 1px solid #e7e7e7;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        /* 게시글 메인 사진 구역 div */
+        .nboard-pic{
+            float: left;
+            width: 15%;
+            height: 100%;
+            line-height : 150px;
+        }
+        /* 게시글 메인 사진 img */
+        .nboard-pic>img{
+            width: 90%;
+            height: 90%;
+			vertical-align:middle;
+			border-radius : 20%;
+        }
+        /* 게시글 1개 전체 내용 구역 */
+        .nboard-content{
+            float: left;
+            width: 85%;
+            height: 100%;
+        }
+        .nboard-content>div{
+            margin-bottom: 5px;
+        }
+        /* 게시글 이름 */
+        .nboard-content>div:nth-child(1){
+            width: 100%;
+            height: 10%;
+            color: #4facfe;
+        }
+        /* 게시글 제목 */
+        .nboard-content>div:nth-child(2){
+            width: 100%;
+            height: 25%;
+            font-size: 25px;
+        }
+        /*  게시글 내용 */
+        .nboard-content>div:nth-child(3){
+            width: 100%;
+            height: 35%;
+            font-size: 18px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+        }
+        /* 아이디 & 게시글 STATUS */
+        .nboard-content>div:nth-child(4){
+            width: 100%;
+            height: 20%;
+            margin-bottom: 0px;
+            font-size: 20px;
+        }
+        /* 아이디 & 게시글 정보 폰트크기 */
+        .nboard-content>div:nth-child(4)>div>*{
+            font-size: 15px;
+            line-height: 35px;
+        }
+        /* 미니 프로필사진 & ID 틀*/
+        .nboard-info{
+        	float:left;
+        }
+        .nboard-info:first-of-type{
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .nboard-info:first-of-type>img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .nboard-info:last-of-type>a,.nboard-info:last-of-type>span{
+            margin-right: 20px;
+        }
+        .nboard-info:last-of-type>i{
+        	margin-right: 5px;
+        }
+        #paging{
+            text-align: center;
+            font-size: 25px;
+        }
+        #write{
+            position: fixed;
+            right: 300px;
+            top: 1100px;
+            text-align:center;
+        }
+        @media screen and (max-width: 1200px) 
+		{  #write { 
+			right: 100px;
+			} 
+		}
+        @media screen and (max-width: 1100px) 
+		{  #write { 
+			right: 50px;
+			} 
+		}
+        #write>i{
+            color : #4facfe;
+        }
+        .pen{
+        	display:none;
+        	font-size:20px;
+        	
+        }
+        #write:hover{
+        	cursor:pointer;
+        }
+        #write:hover>.pen{
+        	display: inline;
+        	font-size:24px;
+        	text-decoration: underline;
+        } 
+        .fa-heart{
+            color: red;
+        }
+        .fa-eye, .fa-comment-dots, .fa-calendar-alt{
+            color: rgba(0,0,0,0.5);
+        }
+
+     
