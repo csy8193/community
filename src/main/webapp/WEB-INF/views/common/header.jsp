@@ -12,49 +12,50 @@
 <!-- 공용 CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="${contextPath}/resources/css/header.css">
-
+<link rel="stylesheet" href="${contextPath}/resources/css/mainpage.css">
 </head>
 <body>
-	<div id="login-wrap">
-	    <div id="login">
-	        <ul>
-	        <c:choose>
-					<c:when test="${ empty sessionScope.loginMember }">
-						<%-- 로그인이 되어있지 않을 때 --%>
-	               		<li><a href="${contextPath}/member/login">로그인</a></li>
-	               		<li><a href="${contextPath}/member/signup">회원가입</a></li>
-					</c:when>
-					<c:otherwise>
-						<%-- 로그인이 되어 있을 때 --%>
-						<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/myPage">${sessionScope.loginMember.memberNm}</a></li>
-						<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout">로그아웃</a></li>
-					</c:otherwise>
-				</c:choose>
-	            
-	            
-	        </ul>
-	    </div>
-	</div>
+	
+	
 	<div id="header_wrap">
+		<div id="login-wrap">
+		    <div id="login">
+		        <ul>
+		        <c:choose>
+						<c:when test="${ empty sessionScope.loginMember }">
+							<%-- 로그인이 되어있지 않을 때 --%>
+		               		<li><a href="${contextPath}/member/login">로그인</a></li>
+		               		<li><a href="${contextPath}/member/signup">회원가입</a></li>
+						</c:when>
+						<c:otherwise>
+							<%-- 로그인이 되어 있을 때 --%>
+							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/myPage">${sessionScope.loginMember.memberNm}</a></li>
+							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout">로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>
+		            
+		        </ul>
+	       	</div> 
+	    </div>
 	    <div id="header">
 	        <div id="logo">
-	            <a href="#"><img src="img/logo2.png"></a>
+	            <a href="#"><img src="${contextPath}/resources/images/main/logo2.png"></a>
 	        </div>
 	        <div id="nav_wrap">
 	            <ul id="nav">
 	                <li class="nav-li">
 	                    <a href="#">반려동물</a>
-	                    <div>
+	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">왕왕냥냥</a></li>
-	                            <li><a href="#">멍부냥조</a></li>
+	                            <li><a href="#">자유게시판</a></li>
+	                            <li><a href="#">노하우게시판</a></li>
 	                            <li><a href="#">자랑게시판</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
 	                <li class="nav-li"> 
 	                    <a href="#">유기동물</a>
-	                    <div>
+	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
 	                            <li><a href="#">신고하기</a></li>
 	                            <li><a href="#">보호소추천</a></li>
@@ -67,7 +68,7 @@
 	                </li>
 	                <li class="nav-li">
 	                    <a href="#">산책</a>
-	                    <div>
+	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
 	                            <li><a href="#">산책일지</a></li>
 	                            <li><a href="#">산책랭킹</a></li>
@@ -76,7 +77,7 @@
 	                </li>
 	                <li class="nav-li">
 	                    <a href="#">공지사항</a>
-	                    <div>
+	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
 	                            <li><a href="#">1:1 문의하기</a></li>
 	                            <li><a href="#">자주하는 질문</a></li>
@@ -84,9 +85,13 @@
 	                        </ul>
 	                    </div>
 	                </li>
-	                <li class="nav-li"><a href="#">마이페이지</a></li>
+	                <li class="nav-li"><a href="${contextPath}/member/mypage">마이페이지</a></li>
 	            </ul>
+	            <%-- nav end --%>
 	        </div>
+	        <%-- nav-wrap end --%>
 	    </div>
-	</div> 
+	    <%-- header end--%>
+	</div>
+	<%-- haeder-wrap end --%>
 </body>
