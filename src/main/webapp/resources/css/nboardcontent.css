@@ -3,6 +3,7 @@
 #nboard-content{
     margin: 0 auto;
     width: 800px;
+    margin-top : 220px;
 }
 .nboard-title{
     font-size: 35px;
@@ -80,8 +81,12 @@
 	height : 100%;
 	resize: none;
 }
-#reply-btn{
-    position: absolute;
+#feedback-text{
+	width : 750px;
+	height : 100px;
+	resize : none;
+}
+#feedbackbtn,#reply-btn,#feedbackcancelbtn{
     width: 80px;
     height: 40px;
     border: none;
@@ -90,6 +95,9 @@
     color: #fff;
     font-size: 14px;
     font-weight: 700;
+}
+#reply-btn{
+    position: absolute;
     right:0;
     bottom:0;
 }
@@ -172,6 +180,9 @@
     transform: rotate(90deg);
     margin-right: 20px;
 }
+.fa-edit, .fa-trash{
+	text-align : right;
+}
 #like-btn{
     position: fixed;
     bottom: 200px;
@@ -210,8 +221,8 @@
 #like-btn>div:nth-of-type(3){
     background-color: red;
     box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
-
 }
+
 #like-btn>div:hover{
     transform: translateY(-6px);
     cursor: pointer;

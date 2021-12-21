@@ -13,7 +13,6 @@
 	FROM "REPLY" A
 	JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
     JOIN STATUS C ON (A.STATUS_CD = C.STATUS_CD)
-	WHERE STATUS_NM  != '삭제'
 	AND BOARD_NO = ? ) CC
     LEFT JOIN ANIMAL D ON (CC.MEMBER_NO = D.MEMBER_NO)
     LEFT JOIN ANIMAL_IMG E ON ( D.ANIMAL_NO = E.ANIMAL_NO)
@@ -22,6 +21,11 @@
 	</entry>
 	<entry key="insertReply">
 	INSERT INTO REPLY
-	VALUES(SEQ_REPLY_NO.NEXTVAL , ? ,SYSDATE ,? , ? , 1 , NULL)
+	VALUES(SEQ_REPLY_NO.NEXTVAL , ? ,SYSDATE ,? , ? , 1 , ?)
+	</entry>
+	<entry key="deleteReply">
+	UPDATE REPLY
+	SET STATUS_CD = 2
+	WHERE REPLY_NO = ?
 	</entry>
 </properties>

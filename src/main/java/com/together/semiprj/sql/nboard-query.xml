@@ -28,7 +28,7 @@
             LEFT JOIN BOARD_PIC DD ON (  CC.BOARD_NO = DD.BOARD_NO)
             LEFT JOIN ANIMAL EE ON (CC.MEMBER_NO = EE.MEMBER_NO)
             LEFT JOIN ANIMAL_IMG FF ON ( EE.ANIMAL_NO = FF.ANIMAL_NO)
-            WHERE ANIMAL_IMG_LEVEL = 0
+            WHERE ANIMAL_IMG_LEVEL = 0 OR ANIMAL_IMG_LEVEL IS NULL
             ORDER BY RNUM
 	</entry>
 	<entry key="selectBoardView">
@@ -49,7 +49,7 @@
 		    WHERE A.STATUS_CD != 2 AND A.BOARD_NO = ?) CC) DD 
             LEFT JOIN ANIMAL G ON ( G.MEMBER_NO = DD.MEMBER_NO)
             LEFT JOIN ANIMAL_IMG H ON ( H.ANIMAL_NO = G.ANIMAL_NO) 
-            WHERE ANIMAL_IMG_LEVEL =0
+            WHERE ANIMAL_IMG_LEVEL =0 OR ANIMAL_IMG_LEVEL IS NULL
 	</entry>
 	<entry key="readCountPlus">
 		UPDATE BOARD 
@@ -67,5 +67,11 @@
 		JOIN ANIMAL_IMG C ON (A.ANIMAL_NO = C.ANIMAL_NO)
 		WHERE A.MEMBER_NO = ?
 		ORDER BY C.ANIMAL_NO ,C. ANIMAL_IMG_LEVEL
+	</entry>
+	<entry key="updateLikeCount">
+		INSERT INTO "LIKE"
+		VALUES(
+		 ? , ?
+		)
 	</entry>
 </properties>

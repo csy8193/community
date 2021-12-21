@@ -2,8 +2,8 @@
         /* 게시판 전체 틀 */
         #nboard-wrapper{
             margin: 0 auto;
-            margin-top: 100px;
-            width: 1400px;
+            margin-top: 250px;
+            width: 1200px;
         }
         @media screen and (max-width: 900px) 
 		{  #nboard-wrapper { 
@@ -16,10 +16,10 @@
         
         #nboard-category{
         	text-align : center;
-        	margin-bottom : 20px;
+        	margin-bottom : 40px;
         	color : #4facfe;
         	font-weight : 700;
-        	font-size : 35px;
+        	font-size : 40px;
         }
         /* 게시글 1개 틀 클래스 */
         .nboard-style{
@@ -112,8 +112,8 @@
         }
         #write{
             position: fixed;
-            right: 300px;
-            top: 1100px;
+            right: 250px;
+            bottom: 250px;
             text-align:center;
         }
         @media screen and (max-width: 1200px) 

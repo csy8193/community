@@ -26,7 +26,6 @@ public class NormalBoardReplyController extends HttpServlet{
  		try {
  			if(command.equals("select")) {
  				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
- 				
  				List<NboardReply> rList = service.selectReplyList(boardNo);
  				
  				new Gson().toJson(rList,resp.getWriter());
@@ -35,12 +34,19 @@ public class NormalBoardReplyController extends HttpServlet{
  				//파라미터를 얻어와 Reply Vo에 담아서 Service 호출 후 결과 반환 받기
  				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
  				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+ 				int feedbackNo = Integer.parseInt(req.getParameter("feedbackNo"));
  				String replyContent = req.getParameter("replyContent");
  				NboardReply reply  = new NboardReply();
  				reply.setMemberNo(memberNo);
  				reply.setBoardNo(boardNo);
  				reply.setReplyContent(replyContent);
+ 				reply.setFeedbackReplyNo(feedbackNo);
  				int result = service.insertReply(reply);
+ 				resp.getWriter().print(result);
+ 			}
+ 			else if(command.equals("delete")) {
+ 				int delReplyNo = Integer.parseInt(req.getParameter("delReplyNo"));
+ 				int result = service.deleteReply(delReplyNo);
  				
  				resp.getWriter().print(result);
  			}
@@ -52,7 +58,6 @@ public class NormalBoardReplyController extends HttpServlet{
  			resp.setStatus(500);
  			resp.getWriter().print(e.getMessage());
  		}
- 		
  		
 	}
 	@Override
