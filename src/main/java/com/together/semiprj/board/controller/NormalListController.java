@@ -20,7 +20,6 @@ import com.together.semiprj.member.model.vo.Member;
 public class NormalListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		//필요한 정보 set 후 foward
 //		1. method 저장
 //		String method = req.getMethod();
@@ -33,7 +32,6 @@ public class NormalListController extends HttpServlet{
 		else {
 			memberNo = 1;
 		}
-		
 		try {
 			Nboard nboard = new Nboard();
 			int cp = req.getParameter("cp") ==null ? 1 : Integer.parseInt(req.getParameter("cp"));
@@ -48,7 +46,6 @@ public class NormalListController extends HttpServlet{
 			
 			List<Nboard> boardList = service.selectBoardList(pagination,memberNo);
 			//페이지네이션 매개변수로 해당하는 페이지의 글들을 전부 가져옴
-
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("boardList", boardList);
 			

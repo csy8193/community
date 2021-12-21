@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.together.semiprj.board.model.vo.Nboard;
+import com.together.semiprj.board.model.vo.NboardAnimalImg;
+import com.together.semiprj.board.model.vo.NboardImage;
 import com.together.semiprj.board.model.vo.Pagination;
 
 import static com.together.semiprj.common.JDBCTemplate.*;
@@ -108,6 +110,11 @@ public class NboardDAO {
 				nboard.setLikecount(rs.getInt("LIKECOUNT"));
 				nboard.setReplycount(rs.getInt("REPLYCOUNT"));
 				nboard.setLikeDone(rs.getBoolean("LIKEDONE"));
+				nboard.setBoardPicNo(rs.getInt("BOARD_PIC_NO"));
+				nboard.setBoardMainImgPath(rs.getString("MAINIMGPATH"));
+				nboard.setAnimalImgNo(rs.getInt("ANIMAL_IMG_NO"));
+				nboard.setAnimalMainImgPath(rs.getNString("MAINANIMALPATH"));
+				
 				nboardList.add(nboard);
 			}
 			}finally {
@@ -144,7 +151,8 @@ public class NboardDAO {
 				nboard.setLikecount(rs.getInt("LIKECOUNT"));
 				nboard.setReplycount(rs.getInt("REPLYCOUNT"));
 				nboard.setLikeDone(rs.getBoolean("LIKEDONE"));
-				
+				nboard.setAnimalImgNo(rs.getInt("ANIMAL_IMG_NO"));
+				nboard.setAnimalMainImgPath(rs.getNString("MAINANIMALPATH"));
 			}
 			
 		}
@@ -168,12 +176,88 @@ public class NboardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
-			
+			System.out.println(result);
 		}finally {
 			close(pstmt);
 		}
 		
 		return result;
 	}
+	/**특정 게시글의 이미지 목록 조회
+	 * @param conn
+	 * @param boardNo
+	 * @return imgList
+	 * @throws Exception
+	 */
+	public List<NboardImage> selectNboardImgList(Connection conn, int boardNo) throws Exception{
+/*		SELECT * FROM IMG
+		
+*/		
+		List<NboardImage> imgList = null; 
+		
+		try {
+			String sql = prop.getProperty("selectBoardImageList");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rs= pstmt.executeQuery();
+			imgList =new ArrayList<NboardImage>();
+			while(rs.next()) {
+				NboardImage img = new NboardImage();
+				img.setImgNo(rs.getInt(1));
+				img.setImgPath(rs.getString(2));
+				img.setImgName(rs.getString(3));
+				img.setImgOriginal(rs.getString(4));
+				img.setImgLevel(rs.getInt(5));
+				img.setboardNo(boardNo);
+				imgList.add(img);
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return imgList;
+	}
+	/**특정 회원 반려동물 이미지 목록 조회
+	 * @param conn
+	 * @param boardNo
+	 * @return imgList
+	 * @throws Exception
+	 */
+	public List<NboardAnimalImg> selectNboardAnimalImgList(Connection conn, int memberNo) throws Exception{
+		/*		SELECT * FROM IMG
+		
+		 */		
+		List<NboardAnimalImg> animalImgList = null;
+		
+		try {
+			String sql = prop.getProperty("selectNboardAnimalImgList");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rs= pstmt.executeQuery();
+			animalImgList = new ArrayList<NboardAnimalImg>();
+			while(rs.next()) {
+				NboardAnimalImg img = new NboardAnimalImg();
+				img.setAnimalNo(rs.getInt(1));
+				img.setImgNo(rs.getInt(3));
+				img.setImgPath(rs.getString(4));
+				img.setImgName(rs.getString(5));
+				img.setImgOriginal(rs.getString(6));
+				img.setImgLevel(rs.getInt(7));
+				img.setMemberNo(memberNo);
+				animalImgList.add(img);
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return animalImgList;
+	}
+	
 
 }

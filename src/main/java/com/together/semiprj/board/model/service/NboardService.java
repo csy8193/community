@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.together.semiprj.board.model.dao.NboardDAO;
 import com.together.semiprj.board.model.vo.Nboard;
+import com.together.semiprj.board.model.vo.NboardAnimalImg;
+import com.together.semiprj.board.model.vo.NboardImage;
 import com.together.semiprj.board.model.vo.Pagination;
 
 public class NboardService {
@@ -36,6 +38,9 @@ public class NboardService {
 		Connection conn = getConnection();
 		List<Nboard> nboardList = dao.selectBoardList(conn, pagination, memberNo);
 		
+		for(Nboard aa : nboardList) {
+			System.out.println(aa);
+		}
 		close(conn);
 		return nboardList;
 	}
@@ -50,7 +55,6 @@ public class NboardService {
 		Nboard nboard = dao.selectBoardView(conn, boardNo,memberNo);
 		int result = 0 ;
 		
-		
 		if(memberNo != nboard.getMemberNo()) {
 			result = dao.readCountPlus(conn,boardNo);
 			
@@ -59,6 +63,11 @@ public class NboardService {
 				commit(conn);
 			}
 			else rollback(conn);
+		}
+		List<NboardImage> NboardImgList = dao.selectNboardImgList(conn,boardNo);
+		
+		if(NboardImgList!=null) {
+			nboard.setnBoardImgList(NboardImgList);
 		}
 		
 		close(conn);

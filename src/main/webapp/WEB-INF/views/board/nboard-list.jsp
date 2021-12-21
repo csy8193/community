@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../common/header.jsp"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/nboard-list.css">
 	<section>
 	    <div id="nboard-wrapper">
         <h1 id = "nboard-category">${boardList[0].boardName}</h1>
-				
             	<c:choose>
             	<c:when test="${empty boardList}">
            			<div class="content-category">게시글이 존재하지 않습니다.</div>
@@ -12,18 +12,22 @@
            		<c:otherwise>
            			<c:forEach items="${boardList}" var="board">
 			         <div class="nboard-style">
-           				  <div class="nboard-pic">
-                				<img src="https://cdn.pixabay.com/photo/2019/11/08/11/56/cat-4611189_960_720.jpg" alt=""> 
-           				 </div>
+           				  	<c:if test="${!empty board.boardMainImgPath}">
+	           				  <div class="nboard-pic">
+                				<img src="${contextPath}${board.boardMainImgPath}" alt=""> 
+	           				 </div>
+           				  	</c:if>
 		            	<div class="nboard-content" >
 	            		 <div class="content-category" >${board.boardName}</div>
-	            		 <div class="content-title" onclick="location.href ='view?cp=${pagination.currentPage}&boardNo=${board.boardNo}&statusCd=${board.statusCd}'" style="cursor:pointer;">
+	            		 <div class="content-title" onclick="location.href ='view?cp=${pagination.currentPage}&boardNo=${board.boardNo}&boardCd=${board.boardCd}'" style="cursor:pointer;">
 	            		 ${board.boardTitle}</div>
 	            		 <div class="content-text">${board.boardContent}</div>
 	            		 <div>
-     							<div class="nboard-info">
-	                        		<img src="https://cdn.pixabay.com/photo/2016/07/01/22/34/people-1492052_960_720.jpg" alt="">
-	                    		</div>
+	     							<div class="nboard-info">
+	     							<c:if test="${!empty board.animalMainImgPath}">
+		                				<img src="${contextPath}${board.animalMainImgPath}" alt=""> 
+	           				  		</c:if>
+		                    		</div>
 	                    		<div class="nboard-info">
 	                        		<a href="">${board.memberId}</a>
 			                        <i class="far fa-heart"></i><span>${board.likecount}</span>
@@ -67,6 +71,5 @@
     </div>
 	</section>
 <jsp:include page="../common/footer.jsp"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/nboard-list.css">
 </body>
 </html>

@@ -97,7 +97,7 @@
     transform: translateY(-6px);
     cursor: pointer;
 }
-.all-reply{
+#all-reply{
     width: 100%;
     list-style: none;
     display: block;
@@ -109,23 +109,25 @@
     border-bottom: 1px solid #ddd;
     overflow:auto; 
 }
-.one-reply>div{
+.one-reply>p{
 	margin-bottom : 5px;
    	overflow-y:auto; 
 }
-.one-reply>div>img{
+
+.original>p>img,.feedback>p>img{
     height: 80px;
     width: 80px;
     padding: 10px;
     border-radius: 50%;
 }
-.one-reply>div>*{
+.original>*, .feedback>*{
     float: left;
 }
 
 .reply-user{
     border-bottom: 1px dotted #ddd;
 }
+
 .reply-content{
 	padding-left : 20px;
 }
@@ -143,15 +145,26 @@
 .reply-content>button:hover{
 	cursor:pointer;
 }
+.original{overflow: auto;}
 .feedback{
     margin-left: 50px;
     width: calc(100% - 50px);
     background-color: #f7f3f3;
+    overflow: auto;
+}
+.one-reply>div>p, .feedback>div>p{
+	display: inline-block;
+    height: 80px;
+    width: 80px;
 }
 .feedback>.reply-user,.feedback>.reply-content{
     width: 670px;
 }
+.reply-user>span:first-of-type{
+	font-size : 20px;
+}
 .reply-user>span:last-of-type{
+	font-size : 13px;
     float: right;
     color: rgb(143, 142, 142);
 }
