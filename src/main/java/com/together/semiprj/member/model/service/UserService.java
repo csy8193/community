@@ -4,21 +4,21 @@ import static com.together.semiprj.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
-import com.together.semiprj.member.model.dao.MemberDAO;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.dao.UserDAO;
+import com.together.semiprj.member.model.vo.User;
 
 
 
-public class MemberService {
+public class UserService {
 	
-	private MemberDAO dao = new MemberDAO();
+	private UserDAO dao = new UserDAO();
 	
 	/** 회원 가입
 	 * @param member
 	 * @return result(1 성공)
 	 * @throws Exception
 	 */
-	public int signUp(Member member) throws Exception {
+	public int signUp(User member) throws Exception {
 		// 1) DBCP에서 Connection 얻어오기
 		Connection conn = getConnection();
 		
@@ -71,14 +71,48 @@ public class MemberService {
 	 * @return loginMember(실패시 null 반환)
 	 * @throws Exception
 	 */
-	public Member login(String memberId, String memberPw) throws Exception {
+	public User login(String memberId, String memberPw) throws Exception {
 		Connection conn = getConnection();
 		
-		Member loginMember = dao.login(memberId, memberPw, conn);
+		User loginMember = dao.login(memberId, memberPw, conn);
 		
 		close(conn);
 		
 		return loginMember;
+	}
+
+	/** 비밀번호 찾기(회원 정보 검색)
+	 * @param memberId
+	 * @param memberEmail
+	 * @return result(1 있음, 0 없음)
+	 * @throws Exception
+	 */
+	public int certification(User member) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.certification(member, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 비밀번호 찾기(변경)
+	 * @param member
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int pwUpdate(User member) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.pwUpdate(member, conn);
+		
+		if(result > 0) 	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 	
 

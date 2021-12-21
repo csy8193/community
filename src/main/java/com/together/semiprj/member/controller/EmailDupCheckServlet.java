@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.together.semiprj.member.model.service.MemberService;
+import com.together.semiprj.member.model.service.UserService;
 
 
 @WebServlet("/member/emailDupCheck")
@@ -21,7 +21,7 @@ public class EmailDupCheckServlet extends HttpServlet {
 
 		String inputEmail = req.getParameter("inputEmail");
 		try {
-			MemberService service = new MemberService();
+			UserService service = new UserService();
 			
 			
 			int result = service.emailDupCheck(inputEmail);

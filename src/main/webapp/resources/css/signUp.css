@@ -55,7 +55,7 @@ label{
     display: inline-block;
 }
 
-#check-btn{
+.check-btn{
     height: 45px;
     width: 80px;
     background-color: #4facfe;
@@ -63,8 +63,9 @@ label{
     border: none;
     border-radius: 10px;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
+    float : right;
 }
 
 .check{

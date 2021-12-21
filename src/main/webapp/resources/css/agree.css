@@ -95,7 +95,7 @@ strong{
     color: white;
 }
 
-#agree-li2{
+.li-content{
     border: 1px solid #e7e7e7;
     border-radius: 20px;
     padding: 15px 12px;
@@ -104,7 +104,18 @@ strong{
     margin: 10px 0 20px;
 }
 
-#addBtn{
+.li-content::-webkit-scrollbar{
+    width: 7px;
+}
+
+.li-content::-webkit-scrollbar-thumb{
+    background-color: #e7e7e7;
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+
+
+#addBtn, #addBtn2{
     display: block;
     text-align: right;
     float: right;

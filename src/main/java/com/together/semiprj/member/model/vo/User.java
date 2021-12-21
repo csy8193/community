@@ -2,7 +2,7 @@ package com.together.semiprj.member.model.vo;
 
 import java.sql.Date;
 
-public class Member {
+public class User {
 
 	private int memberNo;
 	private String memberId;
@@ -13,14 +13,27 @@ public class Member {
 	private int statusCd;
 	private int gradeCd;
 	
-	public Member() { }
+	public User() { }
 
-	public Member(String memberId, String memberPw, String memberNm, String memberEmail) {
+	public User(String memberId, String memberPw, String memberNm, String memberEmail) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
 		this.memberNm = memberNm;
 		this.memberEmail = memberEmail;
+	}
+
+	// 이메일 인증
+	public User(String memberId, String memberEmail) {
+		this.memberId = memberId;
+		this.memberEmail = memberEmail;
+	}
+	
+	// 비밀번호 변경
+	public User(String memberId, String memberEmail, String memberPw) {
+		this.memberId = memberId;
+		this.memberEmail = memberEmail;
+		this.memberPw = memberPw;
 	}
 
 	public int getMemberNo() {

@@ -51,8 +51,9 @@
                     <span class="ps-box email-box">
                         <input type="email" id="email" name="email" placeholder="이메일 입력">
                     </span>
-                    <button id="check-btn">인증</button>
+                    <button id="check-btn" class="check-btn" type="button">인증</button>
                     <p class="check" id="checkEmail"></p>
+                    <span></span>
                 </div>
                 <button id="signup-btn">회원가입</button>
             </form>

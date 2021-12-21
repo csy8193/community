@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.together.semiprj.member.model.service.MemberService;
+import com.together.semiprj.member.model.service.UserService;
 
 
 @WebServlet("/member/idDupCheck")
@@ -25,7 +25,7 @@ public class IdDupCheckServlet extends HttpServlet{
 		// System.out.println("inputId : " +  inputId);
 		
 		try {
-			MemberService service = new MemberService();
+			UserService service = new UserService();
 			
 			// DB에 중복되는 아이디가 있는지 조회하는 서비스 요청 한 후 결과 반환 받기
 			int result = service.idDupCheck(inputId);
