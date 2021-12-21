@@ -18,41 +18,16 @@
 		            <h4 class="title">이미지 등록<span> *</span></h4>
 		            <button type="button" id="image-upload">이미지 업로드</button>
 		            <ul class="image-preview">
-		                <li class="boardImg">
+		                <!-- <li class="boardImg">
 		                    <img>
-		                    <div onclick="removeImage(this, 0);">
+		                    <div onclick="removeImage(this);">
 		                        <i class="fas fa-trash-alt"></i>
 		                    </div>
-		                </li>
-		                <li class="boardImg">
-		                    <img>
-		                    <div onclick="removeImage(this, 1);">
-		                        <i class="fas fa-trash-alt"></i>
-		                    </div>
-		                </li>
-		                <li class="boardImg">
-		                    <img>
-		                    <div onclick="removeImage(this, 2);">
-		                        <i class="fas fa-trash-alt"></i>
-		                    </div>
-		                </li>
-		                <li class="boardImg">
-		                    <img>
-		                    <div onclick="removeImage(this, 3);">
-		                        <i class="fas fa-trash-alt"></i>
-		                    </div>
-		                </li>
-		                <li class="boardImg">
-		                    <img>
-		                    <div onclick="removeImage(this, 4);">
-		                        <i class="fas fa-trash-alt"></i>
-		                    </div>
-		                </li>
+		                </li> -->
 		            </ul>
 		        </div>
 		        
 		        <div id="fileArea">
-					<input type="file" name="img0" onchange="loadImg(this)"> 
 				</div>
 				
 		        <h4 class="title">글 작성<span> *</span></h4>
@@ -66,22 +41,21 @@
 	</main>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		let count = 0;
+		let index = 0;
 	
 		$(function() {
 			$("#image-upload").on("click", function() {
 						// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
-				if(count > 4){
-					alert("5개까지만 가능");
-				}else{
-					$("[type=file]").eq(count).click();
-				}
+					$("#fileArea").append('<input type="file" id="input-img'+index+'" name="img'+index+'" onchange="loadImg(this)">')
+					console.log("#input-img"+index);
+					$("#input-img"+index).click();
+					index++;
 				// 타입이 file인 요소 중 몇번째 인덱스 요소를 선택하여 클릭해라
 			});
 	
 		});
 		
-		function loadImg(value, num) {
+		function loadImg(value) {
 			// 매개변수 value == 클릭된 input 요소
 		
 
@@ -102,22 +76,20 @@
 					// console.log(e.target.result);
 					// e.target.result
 					// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
-
-					console.log($(".boardImg").eq(num).children("img"));
-					$(".boardImg").eq(num).css("display", "block")
-					$(".boardImg").eq(num).children("img").attr("src", e.target.result);
-					console.log($(".boardImg").eq(num).children("img").outerWidth());
-					count += 1;
+		            const boardImg = $("<li class='boardImg'>")
+		            const div = $("<div onclick='removeImage(this, "+(index-1)+");'>");
+		            div.append("<i class='fas fa-trash-alt'></i>");
+		            boardImg.append("<img src='"+e.target.result+"'>", div);
+		            
+		            $(".image-preview").append(boardImg);
 				}
 
 			}
 		}
 		
-		function removeImage(value, num){
-			$(value).prev().removeAttr("src");
-			$(value).parent().css("display", "none");
-			$("[type=file]").eq(num).val("");
-			count -= 1;
+		function removeImage(value, idx){
+			$(value).parent().remove();
+			$("#input-img"+idx).remove();
 
 		}
 		/* $(".boardImg > div").on("click", function(){

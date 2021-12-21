@@ -77,7 +77,6 @@ main{
 
 .image-preview > li {
     position: relative;
-    display: none;
 }
 
 .image-preview > li > div{

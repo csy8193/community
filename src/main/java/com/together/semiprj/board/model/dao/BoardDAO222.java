@@ -127,11 +127,6 @@ public class BoardDAO222 {
 
 			pstmt = conn.prepareStatement(sql);
 			
-			System.out.println(img.getImgPath());
-			System.out.println(img.getImgName());
-			System.out.println(img.getImgOriginal());
-			System.out.println(img.getImgLevel());
-			System.out.println(img.getBoardNo());
 
 			pstmt.setString(1, img.getImgPath());
 			pstmt.setString(2, img.getImgName());
@@ -141,7 +136,6 @@ public class BoardDAO222 {
 
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
 
 		}finally {
 			close(pstmt);
