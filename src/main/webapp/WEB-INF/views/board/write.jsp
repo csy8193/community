@@ -16,24 +16,22 @@
 	
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
-	<main>
-           <div id="main">
-           <form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
-               <h1 class="board">게시판 이름</h1>
-               <h4 class="title">글 제목<span> *</span></h4>
-               <input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요">
-               <h4 class="title">글 작성<span> *</span></h4>
+<main>
+	<div id="main">
+		<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
+			<h1 class="board">게시판 이름</h1>
+			<h4 class="title">글 제목<span> *</span></h4>
+			<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요">
+			<h4 class="title">글 작성<span> *</span></h4>
 			<textarea id="summernote"></textarea>
-
+		
 			<div class="btns">
-                <button id="reg-btn">등록하기</button>
-                <button id="cancel-btn">취소하기</button>
-            </div>
-            <div id="img-test">
-            </div>
+			    <button id="reg-btn">등록하기</button>
+			    <button id="cancel-btn">취소하기</button>
+		    </div>
 		</form>
-           </div>
-       </main>
+	</div>
+</main>
        
        
        
