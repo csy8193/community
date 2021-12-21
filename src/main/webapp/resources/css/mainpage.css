@@ -1,0 +1,213 @@
+
+/*공통*/
+.left-float{
+    float: left;
+}
+.right-float{
+    float: right;
+}
+
+input:focus{outline:none;}
+
+
+#container{
+    width:100%;
+    margin-top:250px;
+}
+
+/*메인 검색창*/
+#main-search-wrap{
+    width:1400px;
+    margin:0 auto;
+    margin-bottom: 70px;
+}
+
+#search-wrap2{
+    width:1000px;
+    height: 70px;
+    margin:0 200px;
+    border-radius: 50px;
+    border:3px solid #000;
+}
+#search-btn{
+    border:none;
+    background-color: #fff;
+    margin:12px 0 0 15px;
+    float: left;
+}
+#search-btn img{
+    width:40px;
+
+}
+#main-search{
+    width:800px;
+    height: 40px;
+    margin: 11px 0 0 20px;
+    font-size: 20px;
+    float: left;
+    border: none;
+}
+#main-search:checked{
+    border:none;
+}
+
+
+/*첫번쨰 보드 랩*/
+#board-wrap{
+    width:1400px;
+    height: 1000px;
+    margin:0 auto;
+    margin-bottom:100px;
+}
+
+/*베스트 게시판*/
+#best-wrap{
+    width:835px;
+    height:1000px;
+    background-color: #4facfe;
+    padding: 30px;
+    color: #fff;
+}
+.board-title{
+    border-top: 4px solid #fff;
+    padding: 10px 0 20px 0;
+    color: #fff;
+}
+
+#best-wrap li{
+    height: 87px;
+    border-bottom: 1px solid #fff;
+    padding:20px 0;
+}
+
+.best-ranking{
+    display: inline-block;
+    font-size:45px;
+    font-family: "Gotham";
+    margin: 0 30px;
+}
+
+.best-date{
+    font-size: 13px;
+}
+
+.left-float > div{
+    display: inline-block;
+}
+
+.left-float > div > p{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.eyes{
+    line-height: 70px;
+    margin-right: 20px;
+}
+
+.eyes > img{
+    width:25px;
+}
+
+/* 실시간 자유게시판 & 노하우게시판 */
+#first-wrap{
+    width: 530px;
+    height: 1000px;
+}
+
+#free-board{
+    width:100%;
+    height: 485px;
+    margin-bottom:30px;
+}
+
+.board-title-b{
+    border-top: 4px solid #000;
+    padding: 10px 0 20px 0;
+}
+
+.free-know li,
+#qna li,
+#notice li{
+    height:40px;
+}
+
+.free-know > ul p,
+#qna li p,
+#notice li p{
+    font-size: 17px;
+}
+
+.free-know > ul p > span,
+#qna li p > span,
+#notice li p > span{
+    float: right;
+    font-size: 14px;
+}
+
+#know-how-board{
+    width:100%;
+    height: 485px;
+}
+
+/* 좋아요 랭킹 top3 */
+
+#good-ranking-wrap{
+    width:100%;
+    height: 994px;
+    background-color: #eaeaea;
+    margin-bottom: 100px;
+}
+#good-ranking-wrap > div{
+    width:1400px;
+    height:994px;
+    margin: 0 auto;
+    text-align: center;
+}
+#good-ranking-wrap h2{
+    font-size: 40px;
+    padding: 80px 0 20px 0;
+}
+
+#good-ranking-wrap h2 > span{
+    font-weight: 300;
+}
+
+#event-wrap{
+    width:1400px;
+    height: 380px;
+    margin: 0 auto;
+    background-color: #4facfe;
+    padding:25px;
+    margin-bottom: 100px;
+}
+
+#event-wrap p{
+    font-size: 35px;
+    font-weight: 300;
+    color:#fff;
+    margin : 20px 0 80px 0;
+}
+
+#event-wrap span{
+    color: #fff; 
+}
+
+#notice-wrap{
+    width:1400px;
+    height: 390px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+#qna,#notice{
+    width:650px;
+    height: 100%;
+}
+
+/*footer*/
+#footer{
+    width:100%;
+    height:250px;
+    background-color: #f6f6f6;
+}
