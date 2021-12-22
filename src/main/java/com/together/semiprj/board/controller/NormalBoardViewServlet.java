@@ -34,7 +34,7 @@ public class NormalBoardViewServlet extends HttpServlet{
 			memberNo = loginmember.getMemberNo();
 		}
 		else {
-			memberNo = 1;
+			memberNo = -1;
 		}
 		try {
 			//2. 뷰 정보 모두 가져오기(+조회수 증가)
@@ -75,7 +75,7 @@ public class NormalBoardViewServlet extends HttpServlet{
 				session.setAttribute("message","게시글이 존재하지 않습니다.");
 				resp.sendRedirect("list");
 			}
-
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

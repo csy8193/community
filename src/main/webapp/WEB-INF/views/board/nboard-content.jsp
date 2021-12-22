@@ -35,7 +35,7 @@
         </div>
         	<div class="nboard-reply">
   		        <div  id="reply-text">
-                <textarea name="replyText-Area" id="nboard-reply-input"></textarea>
+                <textarea name="replyText-Area" id="nboard-reply-input" placeholder="댓글을 입력해주세요"></textarea>
                 <button id="reply-btn">등록</button>
             	</div>
             	<ul id="all-reply">
@@ -57,8 +57,22 @@
 	                   		 <span>${reply.memberId}</span><span>${reply.replyCreateDate}</span>
                     		</div>
                     		<div class="reply-content">
-		                        <span>${reply.replyContent}</span><br>
-		                        <button onclick="createReplyArea(this)"><i class="far fa-comment-dots"></i>댓글달기</button><button><i class="fas fa-bullhorn"></i>신고하기</button>
+                    			<c:choose>
+                    			<c:when test="${reply.statusCode==2}"><span>삭제된 댓글입니다.</span><br>
+                    			</c:when>
+                    			<c:when test="${reply.statusCode==3}"><span>블라인드 된 댓글입니다.</span><br>
+                    			</c:when>
+                    			<c:otherwise><span>${reply.replyContent}</span><br>
+                    			</c:otherwise>
+                    			</c:choose>
+		                        <c:if test="${reply.statusCode==1}">
+		                        <button onclick="createReplyArea(this)" value="${reply.replyNo}"><i class="far fa-comment-dots"></i>댓글달기</button>
+		                        <%--<button><i class="fas fa-bullhorn"></i>신고하기</button> --%>
+			                    	<c:if test="${reply.memberNo == loginMember.memberNo}">
+			                    	<button>수정</button>
+			                    	<button onclick="deleteNrep(this)">삭제</button>
+			                    	</c:if>
+		                    	</c:if>
 		                    </div>
 		        			<c:forEach items="${rList}" var="checkfeedback">
 		        				<c:if test="${checkfeedback.feedbackReplyNo == reply.replyNo}">
@@ -76,9 +90,23 @@
 			                    	<div class="reply-user">
 			                        <i class="fas fa-level-up-alt"></i><span>${checkfeedback.memberId}</span><span>${checkfeedback.replyCreateDate}</span>
 			                    	</div>
-			                    	<div class="reply-content">
-			                           <span>${checkfeedback.replyContent}</span><br>
-			                           <button onclick="createReplyArea(this)"><i class="far fa-comment-dots"></i>댓글달기</button><button><i class="fas fa-bullhorn"></i>신고하기</button>
+			                    	<div class="reply-content" >
+			                    			<c:choose>
+			                    			<c:when test="${checkfeedback.statusCode==2}"><span>삭제된 댓글입니다.</span><br>
+			                    			</c:when>
+			                    			<c:when test="${checkfeedback.statusCode==3}"><span>블라인드 된 댓글입니다.</span><br>
+			                    			</c:when>
+			                    			<c:otherwise><span>${checkfeedback.replyContent}</span><br>
+			                    			</c:otherwise>
+			                    			</c:choose>
+		                    			<c:if test="${reply.statusCode==1}">
+			                           		<button onclick="createReplyArea(this)" value="${checkfeedback.replyNo}"><i class="far fa-comment-dots"></i>댓글달기</button>
+			                           		<%--<button><i class="fas fa-bullhorn"></i>신고하기</button>--%>
+					                   		<c:if test="${reply.memberNo == loginMember.memberNo}">
+					                    	<button>수정</button>
+					                    	<button onclick="deleteNrep(this)">삭제</button>
+					                    	</c:if>
+				                    	</c:if>
 			                   		</div>
 		                    	</div>
 		        				</c:if>
@@ -96,19 +124,27 @@
             <div>
                 <i class="fas fa-list" title="목록으로 돌아가기"></i>
             </div>
-            <div>
-                <i class="fas fa-heart" title="좋아요 누르기"></i>
+            <div <c:if test="${nboard.likeDone}">style="background: none; box-shadow:none; color : red"</c:if>>
+            	<c:choose>
+            		<c:when test ="${nboard.likeDone}" >
+                <i class="fas fa-heart" title="좋아요 누르기" id="nboard-like" style="color : red;" ></i>
+            		</c:when>
+            		<c:otherwise>
+            	<i class="fas fa-heart" title="좋아요" id="nboard-like" style="color : white;" ></i>
+            		</c:otherwise>
+            	</c:choose>
             </div>
         </div>
     </div>
 </section>
 <script>
 const contextPath = "${contextPath}";
-
+const memberNo = "${nboard.memberNo}"
 const loginMemberNo ="${loginMember.memberNo}";
-
-const boardNo = ${nboard.boardNo};
-const category = ${param.boardCd};  
+const boardNo = "${nboard.boardNo}";
+const category = "${param.boardCd}";  
+const likedone = "${nboard.likeDone}";
+const likecount = "${nboard.likecount}";
 // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 let beforeReplyRow;
 

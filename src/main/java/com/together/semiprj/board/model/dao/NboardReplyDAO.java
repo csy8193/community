@@ -79,11 +79,12 @@ public class NboardReplyDAO {
 		
 		try {
 			String sql = prop.getProperty("insertReply");
-
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reply.getReplyContent());
 			pstmt.setInt(2, reply.getBoardNo());
 			pstmt.setInt(3, reply.getMemberNo());
+			if(reply.getFeedbackReplyNo()==0) {pstmt.setString(4, null);}
+			else {pstmt.setInt(4, reply.getFeedbackReplyNo());}
 			
 			result = pstmt.executeUpdate();
 			
@@ -91,6 +92,25 @@ public class NboardReplyDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+	/** 댓글 상태 삭제로 변경
+	 * @param delReplyNo
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteReply(int delReplyNo, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("deleteReply");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, delReplyNo);
+			result = pstmt.executeUpdate();
+		}
+		finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	

@@ -124,6 +124,13 @@ public class NboardDAO {
 		
 		return nboardList;
 	}
+	/**상세조회문
+	 * @param conn
+	 * @param boardNo
+	 * @param memberNo
+	 * @return nboard (상세게시판 정보)
+	 * @throws Exception
+	 */
 	public Nboard selectBoardView(Connection conn, int boardNo, int memberNo) throws Exception{
 		Nboard nboard = null;
 		try {
@@ -257,6 +264,30 @@ public class NboardDAO {
 			close(pstmt);
 		}
 		return animalImgList;
+	}
+	
+	/** 좋아요 증가
+	 * @param conn
+	 * @param memberNo
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int plusLike(Connection conn, int memberNo, int boardNo) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateLikeCount");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 

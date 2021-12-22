@@ -39,7 +39,6 @@ public class NboardReplyService {
 		//개행 문자 처리
 		reply.setReplyContent(replaceEnter(reply.getReplyContent()));
 		
-		
 		int result = dao.insertReply(reply,conn);
 		
 		if(result >0 ) commit(conn);
@@ -49,6 +48,25 @@ public class NboardReplyService {
 		
 		return result;
 	}
+	
+	/** 댓글 상태 삭제로 변경
+	 * @param delReplyNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteReply(int delReplyNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.deleteReply(delReplyNo,conn);
+		
+		if(result >0 ) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	private String replaceParameter(String parameter) {
 		if(parameter != null) {
 			parameter = parameter.replaceAll("&","&amp;");
@@ -65,4 +83,5 @@ public class NboardReplyService {
 		}
 		return parameter;
 	}
+
 }

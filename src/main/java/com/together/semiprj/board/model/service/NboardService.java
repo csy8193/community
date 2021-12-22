@@ -73,5 +73,24 @@ public class NboardService {
 		close(conn);
 		return nboard;
 	}
+	/** 좋아요 증가
+	 * @param memberNo
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int plusLike(int memberNo, int boardNo) throws Exception{
+		int result=0;
+		
+		Connection conn= getConnection();
+		result = dao.plusLike(conn, memberNo,boardNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 
 }
