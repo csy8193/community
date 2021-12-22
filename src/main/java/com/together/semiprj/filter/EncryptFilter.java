@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.together.semiprj.wrapper.EncryptWrapper;
 
 
-@WebFilter(filterName="encryptFilter", urlPatterns= {"/member/login" , "/member/signup"})
+@WebFilter(filterName="encryptFilter", urlPatterns= {"/member/login" , "/member/signup", "/member/pwupdate"})
 public class EncryptFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
