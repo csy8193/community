@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	
+	<!-- 게시글 삽입 -->
+	<entry key="insertBoard">
+		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT, 10, 1, ?)
+	</entry>
+	
+	<!-- 다음 게시글 번호 조회  -->
+	<entry key="nextBoardNo">
+		SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+	</entry>
+	
+	
+		<!-- 게시글 삽입 -->
+	<entry key="insertBoard">
+		INSERT INTO BOARD VALUES
+		(?, DEFAULT, ?, DEFAULT, DEFAULT, 10, 1, ?)
+	</entry>
+	
+		<!-- 게시글 이미지 정보 삽입 -->
+	<entry key="insertBoardImage">
+		INSERT INTO BOARD_PIC
+		VALUES(SEQ_BOARD_PIC_NO.NEXTVAL, ?, ?, ?, ?, ?)
+	</entry>
+	
+</properties>
