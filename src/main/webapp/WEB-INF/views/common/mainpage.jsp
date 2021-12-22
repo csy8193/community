@@ -100,6 +100,8 @@
 </section>
 <jsp:include page="footer.jsp"/>
 
+<<<<<<< HEAD
+=======
 <%-- session에 message 속성이 존재하는 경우 alert창으로 해당 내용을 출력 --%>
 <c:if test="${!empty sessionScope.message }">
 	<script>
@@ -115,5 +117,6 @@
 	<%-- message 1회 출력 후 session에서 제거 --%>
 	<c:remove var="message" scope="session"/>
 </c:if>
+>>>>>>> 8437ca5160cf998949c7537015695dad7fd8afa2
 </body>
 </html>
