@@ -12,13 +12,13 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<main>
 	    <div id="main">
-	    	<form action="pinsert"  method="post" enctype="multipart/form-data" role="form">
+	    	<form action="pinsert"  method="post" enctype="multipart/form-data" role="form" onsubmit="return insertValidate();">
 		        <h1 class="board">게시판 이름</h1>
 		        <div class="image-reg">
 		            <h4 class="title">이미지 등록<span> *</span></h4>
 		            <button type="button" id="image-upload">이미지 업로드</button>
 		            <ul class="image-preview">
-		                <!-- <li class="boardImg">
+	                <!-- <li class="boardImg">
 		                    <img>
 		                    <div onclick="removeImage(this);">
 		                        <i class="fas fa-trash-alt"></i>
@@ -45,7 +45,7 @@
 	
 		$(function() {
 			$("#image-upload").on("click", function() {
-						// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
+				// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
 					$("#fileArea").append('<input type="file" id="input-img'+index+'" name="img'+index+'" onchange="loadImg(this)">')
 					console.log("#input-img"+index);
 					$("#input-img"+index).click();
@@ -76,7 +76,7 @@
 					// console.log(e.target.result);
 					// e.target.result
 					// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
-		            const boardImg = $("<li class='boardImg'>")
+		            const boardImg = $("<li class='boardImg' onclick='thumbnail(this, "+(index-1)+");'>");
 		            const div = $("<div onclick='removeImage(this, "+(index-1)+");'>");
 		            div.append("<i class='fas fa-trash-alt'></i>");
 		            boardImg.append("<img src='"+e.target.result+"'>", div);
@@ -92,11 +92,40 @@
 			$("#input-img"+idx).remove();
 
 		}
-		/* $(".boardImg > div").on("click", function(){
-			$(this).prev().removeAttr("src");
-			$(this).parent().css("display", "none");
-			count -= 1;
-		}) */
+		
+		function thumbnail(value, idx){
+			const input = $("[type=file]");
+			
+			for(let i=0; i<input.length; i++){
+				$(input[i]).attr("name", "img"+(i+1))
+			}
+			
+			$("#input-img"+idx).attr("name", "img0");
+			
+			
+			console.log($(".boarImg"));
+			$(".boarImg").children("img").css("border", 0);
+			$(this).children("img").css("border", "2px solid #4facfe");
+		}
+		
+		
+		function insertValidate(){
+			if($("#write-content").val().trim().length == 0){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+			
+			if($(".boardImg").length == 0){
+				alert("이미지를 첨부해주세요.");
+				return false;
+			}
+			
+			if($("[name=img0]").length == 0){
+				alert("썸네일을 지정해주세요.");
+				return false;
+			}
+		}
+		
 	
 	</script>
 </body>
