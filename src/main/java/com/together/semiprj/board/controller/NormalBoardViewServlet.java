@@ -15,7 +15,7 @@ import com.together.semiprj.board.model.service.NboardReplyService;
 import com.together.semiprj.board.model.service.NboardService;
 import com.together.semiprj.board.model.vo.Nboard;
 import com.together.semiprj.board.model.vo.NboardReply;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.vo.User;
 
 @WebServlet("/nboard/view")
 public class NormalBoardViewServlet extends HttpServlet{
@@ -28,7 +28,7 @@ public class NormalBoardViewServlet extends HttpServlet{
 		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 		int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 		HttpSession session = req.getSession();
-		Member loginmember = (Member)session.getAttribute("loginMember");
+		User loginmember = (User)session.getAttribute("loginMember");
 		int memberNo;
 		if(loginmember != null) {
 			memberNo = loginmember.getMemberNo();

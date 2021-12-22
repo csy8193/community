@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.together.semiprj.board.model.service.NboardService;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.vo.User;
 
 @WebServlet("/nboard/view/sub/*")
 public class NormalBoardSubFunctionController extends HttpServlet{
