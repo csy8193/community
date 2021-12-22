@@ -49,8 +49,6 @@ public class BoardController222 extends HttpServlet{
 						
 						int cd = Integer.parseInt(req.getParameter("cd"));
 						
-						System.out.println(cd);
-						
 						Pagination pagination = service.getPagination(cp, cd);
 						
 						List<Board> boardList = service.selectBoardList(pagination, cd);
@@ -58,9 +56,6 @@ public class BoardController222 extends HttpServlet{
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
 
-						System.out.println(pagination);
-						System.out.println(boardList);
-						
 						path = "/WEB-INF/views/board/notice.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
