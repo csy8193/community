@@ -15,7 +15,7 @@
 	
 	
 		<!-- 게시글 삽입 -->
-	<entry key="insertBoard">
+	<entry key="picInsertBoard">
 		INSERT INTO BOARD VALUES
 		(?, DEFAULT, ?, DEFAULT, DEFAULT, 10, 1, ?)
 	</entry>
@@ -24,6 +24,20 @@
 	<entry key="insertBoardImage">
 		INSERT INTO BOARD_PIC
 		VALUES(SEQ_BOARD_PIC_NO.NEXTVAL, ?, ?, ?, ?, ?)
+	</entry>
+	
+		<!-- 전체 게시글 수 조회 -->
+	<entry key="getListCount">
+		SELECT COUNT(*) FROM BOARD WHERE STATUS_CD != 2 AND BOARD_CD = ?
+	</entry>
+	
+	<entry key="selectBoardList">
+		SELECT * FROM
+		(SELECT ROWNUM RNUM, A.*
+		        FROM (SELECT * FROM BOARD_LIST
+		        WHERE STATUS_CD != 2 AND BOARD_CD = ?
+		        ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 </properties>

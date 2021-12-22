@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.together.semiprj.board.model.service.BoardService222;
 import com.together.semiprj.board.model.vo.Board;
 import com.together.semiprj.board.model.vo.BoardImage;
+import com.together.semiprj.board.model.vo.Pagination;
 import com.together.semiprj.common.MyRenamePolicy;
 import com.together.semiprj.member.model.vo.User;
 
@@ -27,16 +28,12 @@ public class BoardController222 extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 데이터 전달 방식 저장용 변수
 				String method = req.getMethod();
 				
-				// 요청 주소 뒷 부분을 잘라내어 구분 방법 만들기
 				String uri = req.getRequestURI();
 				String contextPath = req.getContextPath();
 				
 				String command = uri.substring( (contextPath + "/board/").length() );
-												// /semi/board/
-				// -> 요청 주소에서 /semi/board/ 의 길이만큼 잘라낸 후 나머지 문자열을 저장
 				
 				String path = null;
 				RequestDispatcher dispatcher = null;
@@ -46,11 +43,27 @@ public class BoardController222 extends HttpServlet{
 					
 					BoardService222 service = new BoardService222();
 					
+					int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
+
 					if(command.equals("notice")) {
+						
+						int cd = Integer.parseInt(req.getParameter("cd"));
+						
+						System.out.println(cd);
+						
+						Pagination pagination = service.getPagination(cp, cd);
+						
+						List<Board> boardList = service.selectBoardList(pagination, cd);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
+
+						System.out.println(pagination);
+						System.out.println(boardList);
+						
 						path = "/WEB-INF/views/board/notice.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
-						
 					}
 					
 					
@@ -233,7 +246,7 @@ public class BoardController222 extends HttpServlet{
 					}
 				} catch (Exception e) {
 					
-					
+					e.printStackTrace();
 					
 				}
 	}

@@ -8,6 +8,7 @@ import java.util.List;
 import com.together.semiprj.board.model.dao.BoardDAO222;
 import com.together.semiprj.board.model.vo.Board;
 import com.together.semiprj.board.model.vo.BoardImage;
+import com.together.semiprj.board.model.vo.Pagination;
 import com.together.semiprj.common.XSS;
 
 
@@ -100,5 +101,41 @@ public class BoardService222 {
 		
 		return result;
 	}
-	
+
+	/** 페이지 처리
+	 * @param cp
+	 * @param cd 
+	 * @return
+	 * @throws Exception
+	 */
+	public Pagination getPagination(int cp, int cd) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		// 전체 게시글 수 조회 DAO 생성
+		int listCount = dao.getListCount(conn, cd);
+		
+		close(conn);
+		
+		
+		return new Pagination(listCount, cp);
+	}
+
+	/** 게시글 목록 조회
+	 * @param pagination
+	 * @param cd 
+	 * @return boardList
+	 * @throws Exception
+	 */
+	public List<Board> selectBoardList(Pagination pagination, int cd) throws Exception{
+		Connection conn = getConnection();
+		
+		List<Board> boardList = dao.selectBoardList(pagination, conn, cd);
+		
+		
+		close(conn);
+		
+		return boardList;
+	}
+
 }
