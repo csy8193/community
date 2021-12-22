@@ -1,6 +1,7 @@
 package com.together.semiprj.board.controller;
 
-import java.io.IOException;
+import java.io.IOException
+;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.together.semiprj.board.model.service.NboardService;
+<<<<<<< HEAD
 import com.together.semiprj.member.model.vo.User;
+=======
+>>>>>>> 8eaf8cef89887f10196a928dd933e3a9eaf56a02
 
 @WebServlet("/nboard/view/sub/*")
 public class NormalBoardSubFunctionController extends HttpServlet{

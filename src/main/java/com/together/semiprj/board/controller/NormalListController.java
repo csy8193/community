@@ -1,6 +1,7 @@
 package com.together.semiprj.board.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;

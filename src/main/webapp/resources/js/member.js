@@ -293,7 +293,10 @@ function loginValidate(){
         memberPw.focus();
         return false;
     }
+
 }
+
+
 
 function agreeCheckObj(){
 	
@@ -397,3 +400,4 @@ document.getElementById("check-btn").addEventListener("click", function(){
 		flag = false;
 	}			
 });
+
