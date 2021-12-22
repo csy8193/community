@@ -12,14 +12,14 @@
 	<!-- 아이디 중복 확인 -->
 	<entry key="idDupCheck">
 		SELECT COUNT(*) FROM MEMBER
-		WHERE STATUS_CD != 101
+		WHERE STATUS_CD != 2
 		AND MEMBER_ID = ?
 	</entry>
 	
 	<!-- 이메일 중복 확인 -->
 	<entry key="emailDupCheck">
 		SELECT COUNT(*) FROM MEMBER
-		WHERE STATUS_CD != 101
+		WHERE STATUS_CD != 2
 		AND MEMBER_EMAIL = ?
 	</entry>
 	
@@ -30,7 +30,23 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = ?
 		AND MEMBER_PW = ?
-		AND STATUS_CD != 101
+		AND STATUS_CD != 2
 	</entry>
 	
+	<entry key="certification">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID=?
+		AND MEMBER_EMAIL=?
+		AND STATUS_CD != 2
+	</entry>
+	
+	<!-- 비밀번호 변경 -->
+	<entry key="pwUpdate">
+		UPDATE MEMBER 
+		SET MEMBER_PW = ?
+		WHERE MEMBER_ID = ?
+		AND MEMBER_EMAIL = ?
+		AND status_cd != 2
+	</entry>
 </properties>

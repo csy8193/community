@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.together.semiprj.member.model.service.MemberService;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.service.UserService;
+import com.together.semiprj.member.model.vo.User;
 
 
 @WebServlet("/member/signup")
@@ -38,11 +38,11 @@ public class SignUpServlet extends HttpServlet{
 		
 		
 		// 저장된 파라미터를 하나의 Member 객체에 저장
-		Member member = new Member(memberId, memberPw, memberNm, memberEmail);
+		User member = new User(memberId, memberPw, memberNm, memberEmail);
 		
 		try {
 			// MemberService 객체 생성
-			MemberService service = new MemberService();
+			UserService service = new UserService();
 			
 			// 회원 가입 Service 수행 후 결과 반환 받기
 			int result = service.signUp(member);

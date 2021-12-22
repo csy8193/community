@@ -51,13 +51,18 @@
                     <span class="ps-box email-box">
                         <input type="email" id="email" name="email" placeholder="이메일 입력">
                     </span>
-                    <button id="check-btn">인증</button>
+                    <button id="check-btn" class="check-btn" type="button">인증</button>
                     <p class="check" id="checkEmail"></p>
+                    <span></span>
                 </div>
                 <button id="signup-btn">회원가입</button>
             </form>
         </div>    
     </div>
+    
+    <%-- 상대 경로 --%>
+	<jsp:include page="../common/footer.jsp"/>
+	
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/js/member.js"></script>
 </body>

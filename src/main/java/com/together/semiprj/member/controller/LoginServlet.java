@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.together.semiprj.member.model.service.MemberService;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.service.UserService;
+import com.together.semiprj.member.model.vo.User;
 
 @WebServlet("/member/login")
 public class LoginServlet extends HttpServlet{
@@ -32,9 +32,9 @@ public class LoginServlet extends HttpServlet{
 		
 		try {
 			
-			MemberService service = new MemberService();
+			UserService service = new UserService();
 			
-			Member loginMember = service.login(memberId, memberPw);
+			User loginMember = service.login(memberId, memberPw);
 			
 			HttpSession session = req.getSession();
 			

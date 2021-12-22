@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap'); 
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif; 
+}
+
+ul, li, a{
+    list-style: none;
+    text-decoration: none;
+}
+
+label{
+  cursor: pointer;
+}
+
+#container{
+    width: 1400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow: auto;
+}
+
+#image-area{
+    float: left;
+    width: 50%;
+}
+
+#text-area{
+    float: left;
+    width: 50%;
+}
+
+#img-wrap{
+    height: 574px;
+    background-color: #000;
+    text-align: center;
+}
+
+#photo{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#img2-wrap{
+    padding: 20px 0 0;
+}
+
+#count{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+#count-area{
+    text-align: center;
+}
+
+.ul-count{
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.img-count{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 8px;
+}
+
+li.img-count a{
+    width: 133px;
+    height: 100%;
+    display: block;
+    padding-bottom: 100%;
+    position: relative;
+    border: 2px solid #e7e7e7;
+    overflow: hidden;
+}
+
+li.img-count a > img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    min-height: 100%;
+    max-width: 100%;
+    
+}
+
+.img-count:not(:first-of-type){
+    margin-left: -4px;
+}
+
+#text-header{
+    padding: 14px 20px;
+    border-bottom: 3px solid #e7e7e7;   
+}
+
+.user-img{
+    background: url('https://web-wit.s3.ap-northeast-2.amazonaws.com/images/user/5624/user_1638887303.jpg') center center no-repeat;
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
+}
+
+#text-title > p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 32px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#contend-area{
+    padding: 20px;
+    height: 340px;
+    overflow-y: auto;
+    padding-bottom: 0;
+}
+
+#contend-area::-webkit-scrollbar{
+    display: none;
+}
+
+#contend{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#like-area{
+    margin-top: 15px;
+    color: gray;
+}
+
+#like-area > i{
+    padding-top: 5px;
+    margin-right: 13px;
+    font-size: 25px;
+}
+
+.time{
+    float: right;
+    padding: 5px;
+}
+
+.text-comment{
+    padding-top: 15px;
+}
+
+.profile-img{
+    width: 30px;
+    float: left;
+}
+
+.user-img2{
+    background: url('https://web-wit.s3.ap-northeast-2.amazonaws.com/images/user/5135/user_1633925591.jpeg') center center no-repeat;
+    background-size: cover;
+    float: left;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.comment-wrapper{
+    float: right;
+    padding-left: 5px;
+    width: calc( 100% - 30px);
+}
+
+.profile{
+    float: left;
+}
+
+.profile::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.comment{
+    width: 100%;
+    float: right;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.comment-text{
+    padding : 2px 5px 5px 0;
+    overflow: hidden;
+}
+
+#reply-text{
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.userName{
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.comment-item{
+    clear: both;
+    display: flex;
+    align-items: center;
+}
+
+.comment-item > ul{
+    display: flex;
+    align-items: center;
+}
+
+.comment-item > ul > li{
+    display: flex;
+    font-size: 12px;
+}
+
+.comment-item > ul > li:first-child{
+    margin-right: 10px;
+}
+
+li::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
+
+#write-area{
+    margin: 12px auto;
+    border : 1px solid #e7e7e7;
+    border-radius: 4px;
+    height: 80px;
+    width: 659px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#txt-box{
+    width: 100%;
+    height: 78px;
+}
+
+#commentArea{
+    float: left;
+    width: calc( 100% - 114px );
+    height: 100%;
+    border : 0;
+    outline: none;
+    padding: 10px 14px;
+    overflow: auto;
+    vertical-align: top;
+}
+
+
+#commentArea::-webkit-scrollbar{
+    width: 6px;
+}
+
+#commentArea::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: #e7e7e7;
+    border-radius: 10px;
+}
+#commentArea::-webkit-scrollbar-track{
+    background-color: white ;
+}
+
+#click_btn{
+    right: 12px;
+    bottom: 10px;
+    position: absolute;
+}
+
+#click_btn > button{
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4facfe;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+
+}
