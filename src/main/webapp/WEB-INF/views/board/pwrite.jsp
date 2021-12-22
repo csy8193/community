@@ -45,43 +45,28 @@
 	
 		$(function() {
 			$("#image-upload").on("click", function() {
-				// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
 					$("#fileArea").append('<input type="file" id="input-img'+index+'" name="img'+index+'" onchange="loadImg(this)">')
-					console.log("#input-img"+index);
 					$("#input-img"+index).click();
 					index++;
-				// 타입이 file인 요소 중 몇번째 인덱스 요소를 선택하여 클릭해라
 			});
 	
 		});
 		
 		function loadImg(value) {
-			// 매개변수 value == 클릭된 input 요소
-		
 
-			// 파일이 선택된 경우 true
 			if (value.files && value.files[0]) {
 				var reader = new FileReader();
-				// 자바스크립트 FileReader
-				// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
-
-				// 선택된 파일 읽기 시작
 				reader.readAsDataURL(value.files[0]);
-				// FileReader.readAsDataURL()
-				// 지정된의 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
-
-				// FileReader.onload
-				// load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
 				reader.onload = function(e) {
-					// console.log(e.target.result);
-					// e.target.result
-					// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
 		            const boardImg = $("<li class='boardImg' onclick='thumbnail(this, "+(index-1)+");'>");
 		            const div = $("<div onclick='removeImage(this, "+(index-1)+");'>");
 		            div.append("<i class='fas fa-trash-alt'></i>");
 		            boardImg.append("<img src='"+e.target.result+"'>", div);
 		            
 		            $(".image-preview").append(boardImg);
+		            if((index-1) == 0){
+		            	$(".boardImg > img").css("border", "3px solid #4facfe");
+		            }
 				}
 
 			}
@@ -103,9 +88,8 @@
 			$("#input-img"+idx).attr("name", "img0");
 			
 			
-			console.log($(".boarImg"));
-			$(".boarImg").children("img").css("border", 0);
-			$(this).children("img").css("border", "2px solid #4facfe");
+			$(".boardImg").children("img").css("border", "3px solid #e7e7e7");
+			$(value).children("img").css("border", "3px solid #4facfe");
 		}
 		
 		
