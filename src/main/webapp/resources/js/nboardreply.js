@@ -1,5 +1,7 @@
 let feedbackReplyStatus = false;
+let updateRepStatus = false;
 let prevReplyWriterNo = 0;
+let prevUpdateReplyClickNo = 0;
 //등록 버튼 클릭시 댓글 달림
 document.getElementById("reply-btn").addEventListener("click", function(){
 			addReply(0);
@@ -241,7 +243,6 @@ function createReplyArea(el){
 		if(prevReplyWriterNo!=nowReplyWriterNo){
 			createReplyArea(el)
 		}
-		
 	}
 }
 
@@ -277,4 +278,49 @@ function deleteNrep(el){
 	}
 }
 
+function updateReply(el){
+	console.log('댓글 수정 화면입니다.');
+	
+	if(!updateRepStatus){
+		const span = $(el).siblings("span");
+		const tempText = span.text();
+		$(span).text("");
+		const textarea = $('<textarea id ="nboardUpdateRep">');
+		textarea.text(tempText);
+		textarea.css("width", "100%");
+		textarea.css("height", "100px");
+		textarea.css("resize", "none");
+		textarea.css("position", "relative");
+	
+		const button1 = $('<button id="updateRep">');
+		button1.attr("onclick","updateRep(this)")
+		button1.text("등록");
+		const button2 = $('<button id="updateRepCancel">');
+		button2.attr("onclick","cancelUpdateRep(this)")
+		button2.text("취소");
+		
+		span.after(textarea,button1,button2);
 
+		updateRepStatus= true;
+		prevUpdateReplyClickNo = $(el).prev().val();
+	}
+	else{
+		let nowUpdateReplyClickNo = $(el).prev().val();
+			$("#nboardUpdateRep").next().remove()
+			$("#nboardUpdateRep").next().remove()
+			$("#nboardUpdateRep").remove();
+			updateRepStatus=false;
+		
+		if(prevUpdateReplyClickNo!=nowUpdateReplyClickNo){
+			updateReply(el)
+		}
+	}
+}
+
+function updateRep(el){
+	console.log("댓글수정");
+}
+
+function cancelUpdateRep(el){
+	console.log("댓글삭제");
+}
