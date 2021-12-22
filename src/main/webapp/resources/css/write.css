@@ -99,6 +99,9 @@ main{
     border-radius: 5px;
 }
 
+#fileArea {
+   display: none;
+}
 
 
 

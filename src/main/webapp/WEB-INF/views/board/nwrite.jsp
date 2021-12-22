@@ -33,6 +33,9 @@
 	                    </div>
 	                </li> -->
 	            </ul>
+	            
+	            <div id="fileArea">
+				</div>
 			
 				<div class="btns">
 				    <button id="reg-btn">등록하기</button>
@@ -68,6 +71,8 @@
 					            if(index == 0){
 					            	$(".boardImg > img").css("border", "3px solid #4facfe");
 					            }
+					            $("#fileArea").append('<input type="text" id="input-img'+index+'" value="'+$(img[length]).attr("src")+'" name="img'+index+'">');
+					            
 					            index += 1;
 								
 							}else{
