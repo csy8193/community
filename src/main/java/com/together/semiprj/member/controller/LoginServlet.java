@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet{
 				if(loginMember.getStatusCd() == 1) {
 					session.setAttribute("loginMember", loginMember);
 					
-					
 					session.setMaxInactiveInterval(3000);
 					
 					Cookie cookie = new Cookie("saveId", memberId);

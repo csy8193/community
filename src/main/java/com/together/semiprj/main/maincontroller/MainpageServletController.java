@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 public class MainpageServletController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		//필요한 정보 set 후 mainpage foward
-		
 		String path = "/WEB-INF/views/common/mainpage.jsp";
 		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 		dispatcher.forward(req, resp);
+		
+		
 	}
 }

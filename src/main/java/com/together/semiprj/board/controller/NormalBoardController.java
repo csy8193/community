@@ -1,6 +1,7 @@
 package com.together.semiprj.board.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -14,11 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.together.semiprj.board.model.service.BoardService;
+import com.together.semiprj.board.model.service.BoardService222;
 import com.together.semiprj.board.model.vo.Board;
 import com.together.semiprj.board.model.vo.BoardImage;
 import com.together.semiprj.common.MyRenamePolicy;
-import com.together.semiprj.member.model.vo.Member;
 
 
 @WebServlet("/board/*")
@@ -43,7 +43,7 @@ public class NormalBoardController extends HttpServlet{
 				
 				try {
 					
-					BoardService service = new BoardService();
+					BoardService222 service = new BoardService222();
 					
 					if(command.equals("notice")) {
 						path = "/WEB-INF/views/board/notice.jsp";

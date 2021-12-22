@@ -1,8 +1,12 @@
 /* content */
+#all-wrap{
+	width:100%;
+}
 
 #login-form-wrap{
-    width:1400px;
-    margin: 0 auto;
+	width:1400px;
+	 margin: 0 auto;
+	 margin-top:250px;
 }
 
 #login-form-wrap > div{
