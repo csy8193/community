@@ -33,4 +33,16 @@
 		AND STATUS_CD != 101
 	</entry>
 	
+	<!-- 반려동물 카테고리 목록 조회 -->
+	<entry key="selectAnimalCategory">
+		SELECT * FROM ANIMAL_CATEGORY
+	</entry>
+	
+	<!-- 반려동물 리스트 -->
+	<entry key="selectanimalList">
+		SELECT ANIMAL_NAME,ANIMAL_VARIETY,ANIMAL_SEX,ANIMAL_BIRTH
+		FROM ANIMAL
+		WHERE MEMBER_NO = ?
+	</entry>
+	
 </properties>

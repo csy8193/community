@@ -3,8 +3,11 @@ package com.together.semiprj.member.model.service;
 import static com.together.semiprj.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.together.semiprj.member.model.dao.MemberDAO;
+import com.together.semiprj.member.model.vo.Animal;
+import com.together.semiprj.member.model.vo.AnimalCategory;
 import com.together.semiprj.member.model.vo.Member;
 
 
@@ -80,6 +83,37 @@ public class MemberService {
 		
 		return loginMember;
 	}
-	
+
+	/** 반려동물 목록 리스트
+	 * @param memberNo
+	 * @return aniList
+	 * @throws Exception
+	 */
+	public List<Animal> selectanimalList(int memberNo) throws Exception  {
+		Connection conn = getConnection();
+		
+		List<Animal> aniList = dao.selectanimalList(memberNo, conn);
+		
+		close(conn);
+		
+		return aniList;
+	}
+
+	/** 카테고리 목록 리스트
+	 * @return AnimalCategory
+	 * @throws Exception
+	 */
+	public List<AnimalCategory> selectAnimalCategory() throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<AnimalCategory> AnimalCategory = dao.selectAnimalCategory(conn);
+		
+		close(conn);
+		
+		return AnimalCategory;
+	}
+
+
 
 }

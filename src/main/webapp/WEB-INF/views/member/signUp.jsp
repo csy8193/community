@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${contextPath}/resources/css/signUp.css">
-	<title></title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="${contextPath}/resources/css/signUp.css">
+   <title></title>
 </head>
 <body>
-	<%-- 상대 경로 --%>
-	<jsp:include page="../common/header.jsp"/>
-	
+   <%-- 상대 경로 --%>
+   <jsp:include page="../common/header.jsp"/>
+   
     <div id="container">
         <div id="title-container">
             <h1>회원정보 입력</h1>
@@ -59,6 +59,6 @@
         </div>    
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script src="${contextPath}/resources/js/member.js"></script>
+   <script src="${contextPath}/resources/js/member.js"></script>
 </body>
 </html>

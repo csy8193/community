@@ -3,14 +3,20 @@ package com.together.semiprj.member.model.dao;
 import static com.together.semiprj.common.JDBCTemplate.*;
 
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import com.together.semiprj.member.model.vo.Animal;
+import com.together.semiprj.member.model.vo.AnimalCategory;
 import com.together.semiprj.member.model.vo.Member;
+
 
 
 public class MemberDAO {
@@ -174,6 +180,78 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return loginMember;
+	}
+
+
+
+	/** 반려동물 목록 리스트
+	 * @param memberNo
+	 * @param conn
+	 * @return aniList
+	 * @throws Exception
+	 */
+	public List<Animal> selectanimalList(int memberNo, Connection conn) throws Exception{
+		
+		List<Animal> aniList = new ArrayList<Animal>();
+		
+		try {
+			
+			String sql = prop.getProperty("selectanimalList");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Animal animal = new Animal();
+				
+				animal.setAnimalNm(rs.getString("ANIMAL_NAME"));
+				animal.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
+				animal.setAnimalGender(rs.getInt("ANIMAL_SEX"));
+				animal.setAnimalBirthday(rs.getDate("ANIMAL_BIRTH"));
+				
+				aniList.add(animal);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return aniList;
+	}
+
+
+
+	/** 반려동물 카테고리 조회
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public List<AnimalCategory> selectAnimalCategory(Connection conn) throws Exception{
+		
+		List<AnimalCategory> AnimalCategory = new ArrayList<AnimalCategory>();
+		try {
+			String sql = prop.getProperty("selectAnimalCategory");
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AnimalCategory ac = new AnimalCategory();
+				
+				ac.setAnimalCategoryCode(rs.getInt("ANIMAL_CATEGORY_CD"));
+				ac.setAnimalCategoryName(rs.getString("ANIMAL_CATEGORY_NM"));
+				
+				AnimalCategory.add(ac);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return AnimalCategory;
 	}
 
 }
