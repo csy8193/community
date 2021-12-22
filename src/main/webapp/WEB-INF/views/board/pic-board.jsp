@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <link rel="stylesheet" type="text/css" href=${contextPath}/resources/css/pic-board.css">
+	 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/pic-board.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Single+Day&display=swap" rel="stylesheet">
 	<title>사진 게시판 목록</title>
@@ -23,7 +23,7 @@
                     <p>고양이 집사</p>
                 </div>
                 <div class="item-pic">
-                    <div class="item-img"></div>
+                    <div class="item-img" onclick="location.href='${contextPath}/pboard/view'"></div>
                 </div>
                 <div class="item-content">
                     <div class="click-btn">
