@@ -4,6 +4,7 @@ import static com.together.semiprj.common.JDBCTemplate.*;
 
 
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,20 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-<<<<<<< HEAD:src/main/java/com/together/semiprj/member/model/dao/MemberDAO.java
+
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
-import com.together.semiprj.member.model.vo.Member;
-
-
-
-public class MemberDAO {
-=======
 import com.together.semiprj.member.model.vo.User;
 
-
+	
 public class UserDAO {
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266:src/main/java/com/together/semiprj/member/model/dao/UserDAO.java
 
 	private Statement stmt;
 	private PreparedStatement pstmt;
@@ -189,9 +183,68 @@ public class UserDAO {
 		return loginMember;
 	}
 
+	/** 비밀번호 찾기(회원 정보 검색)
+	 * @param member
+	 * @param conn
+	 * @return result(1 있음, 0 없음)
+	 * @throws Exception
+	 */
+	public int certification(User member, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("certification");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberEmail());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+}
 
-<<<<<<< HEAD:src/main/java/com/together/semiprj/member/model/dao/MemberDAO.java
-
+	/** 비밀번호 찾기(변경)
+	 * @param member
+	 * @param conn
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int pwUpdate(User member, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			// 2) SQL 얻어오기
+			String sql = prop.getProperty("pwUpdate");
+			
+			// 3) pstmt 객체 생성 및 sql 적재
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4) 위치홀더에 알맞은 값 세팅
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberId());
+			pstmt.setString(3, member.getMemberEmail());
+			
+			// 5) SQL 수행 후 결과 반환 받기
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			// 6) 사용한 JDBC 자원 반환
+			close(pstmt);
+		}
+		
+		// 7) 결과 반환
+		return result;
+	}
+	
+	
 	/** 반려동물 목록 리스트
 	 * @param memberNo
 	 * @param conn
@@ -230,39 +283,9 @@ public class UserDAO {
 		
 		
 		return aniList;
-=======
-	/** 비밀번호 찾기(회원 정보 검색)
-	 * @param member
-	 * @param conn
-	 * @return result(1 있음, 0 없음)
-	 * @throws Exception
-	 */
-	public int certification(User member, Connection conn) throws Exception {
-		int result = 0;
-		try {
-			String sql = prop.getProperty("certification");
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, member.getMemberId());
-			pstmt.setString(2, member.getMemberEmail());
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
-		}finally{
-			close(rs);
-			close(pstmt);
-		}
-		return result;
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266:src/main/java/com/together/semiprj/member/model/dao/UserDAO.java
-	}
-
-
-
-<<<<<<< HEAD:src/main/java/com/together/semiprj/member/model/dao/MemberDAO.java
+		
+}
+	
 	/** 반려동물 카테고리 조회
 	 * @param conn
 	 * @return
@@ -289,39 +312,6 @@ public class UserDAO {
 			close(pstmt);
 		}
 		return AnimalCategory;
-=======
-	/** 비밀번호 찾기(변경)
-	 * @param member
-	 * @param conn
-	 * @return result(1 성공, 0 실패)
-	 * @throws Exception
-	 */
-	public int pwUpdate(User member, Connection conn) throws Exception{
-		int result = 0;
-		
-		try {
-			// 2) SQL 얻어오기
-			String sql = prop.getProperty("pwUpdate");
-			
-			// 3) pstmt 객체 생성 및 sql 적재
-			pstmt = conn.prepareStatement(sql);
-			
-			// 4) 위치홀더에 알맞은 값 세팅
-			pstmt.setString(1, member.getMemberPw());
-			pstmt.setString(2, member.getMemberId());
-			pstmt.setString(3, member.getMemberEmail());
-			
-			// 5) SQL 수행 후 결과 반환 받기
-			result = pstmt.executeUpdate();
-			
-		}finally {
-			// 6) 사용한 JDBC 자원 반환
-			close(pstmt);
-		}
-		
-		// 7) 결과 반환
-		return result;
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266:src/main/java/com/together/semiprj/member/model/dao/UserDAO.java
 	}
-
+	
 }

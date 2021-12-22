@@ -33,7 +33,6 @@
 		AND STATUS_CD != 2
 	</entry>
 	
-<<<<<<< HEAD
 	<!-- 반려동물 카테고리 목록 조회 -->
 	<entry key="selectAnimalCategory">
 		SELECT * FROM ANIMAL_CATEGORY
@@ -45,8 +44,7 @@
 		FROM ANIMAL
 		WHERE MEMBER_NO = ?
 	</entry>
-	
-=======
+
 	<entry key="certification">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -63,5 +61,5 @@
 		AND MEMBER_EMAIL = ?
 		AND status_cd != 2
 	</entry>
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266
+
 </properties>

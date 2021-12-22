@@ -2,19 +2,15 @@ package com.together.semiprj.member.model.service;
 
 import static com.together.semiprj.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/com/together/semiprj/member/model/service/MemberService.java
-import com.together.semiprj.member.model.dao.MemberDAO;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
-import com.together.semiprj.member.model.vo.Member;
-=======
+
 import com.together.semiprj.member.model.dao.UserDAO;
 import com.together.semiprj.member.model.vo.User;
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266:src/main/java/com/together/semiprj/member/model/service/UserService.java
-
 
 
 public class UserService {
@@ -89,39 +85,6 @@ public class UserService {
 		return loginMember;
 	}
 
-<<<<<<< HEAD:src/main/java/com/together/semiprj/member/model/service/MemberService.java
-	/** 반려동물 목록 리스트
-	 * @param memberNo
-	 * @return aniList
-	 * @throws Exception
-	 */
-	public List<Animal> selectanimalList(int memberNo) throws Exception  {
-		Connection conn = getConnection();
-		
-		List<Animal> aniList = dao.selectanimalList(memberNo, conn);
-		
-		close(conn);
-		
-		return aniList;
-	}
-
-	/** 카테고리 목록 리스트
-	 * @return AnimalCategory
-	 * @throws Exception
-	 */
-	public List<AnimalCategory> selectAnimalCategory() throws Exception{
-		
-		Connection conn = getConnection();
-		
-		List<AnimalCategory> AnimalCategory = dao.selectAnimalCategory(conn);
-		
-		close(conn);
-		
-		return AnimalCategory;
-	}
-
-
-=======
 	/** 비밀번호 찾기(회원 정보 검색)
 	 * @param memberId
 	 * @param memberEmail
@@ -156,6 +119,37 @@ public class UserService {
 		return result;
 	}
 	
->>>>>>> 43e6768afe43a35fd022fcbc9bccfd0807402266:src/main/java/com/together/semiprj/member/model/service/UserService.java
+
+	/** 반려동물 목록 리스트
+	 * @param memberNo
+	 * @return aniList
+	 * @throws Exception
+	 */
+	public List<Animal> selectanimalList(int memberNo) throws Exception  {
+		Connection conn = getConnection();
+		
+		List<Animal> aniList = dao.selectanimalList(memberNo, conn);
+		
+		close(conn);
+		
+		return aniList;
+	}
+
+	/** 카테고리 목록 리스트
+	 * @return AnimalCategory
+	 * @throws Exception
+	 */
+	public List<AnimalCategory> selectAnimalCategory() throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<AnimalCategory> AnimalCategory = dao.selectAnimalCategory(conn);
+		
+		close(conn);
+		
+		return AnimalCategory;
+	}
+
+
 
 }

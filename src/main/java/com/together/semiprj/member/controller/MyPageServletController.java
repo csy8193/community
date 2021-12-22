@@ -1,6 +1,7 @@
 package com.together.semiprj.member.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.together.semiprj.member.model.service.MemberService;
+
+import com.together.semiprj.member.model.service.UserService;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.vo.User;
+
 
 
 
@@ -25,7 +28,7 @@ public class MyPageServletController extends HttpServlet{
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-			MemberService service = new MemberService();
+			UserService service = new UserService();
 			
 			// 데이터 전달 방식 저장용 변수
 			String method = req.getMethod();
@@ -54,7 +57,7 @@ public class MyPageServletController extends HttpServlet{
 				// 미리 얻어와서 준비 시켜두는 것이 좋다
 				int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));     
 				
-				Member loginMember = (Member)req.getSession().getAttribute("loginMember");
+				User loginMember = (User)req.getSession().getAttribute("loginMember");
 				
 				
 				if(command.equals("mypage")) {
@@ -79,11 +82,7 @@ public class MyPageServletController extends HttpServlet{
 						dispatcher.forward(req, resp);
 						
 					}else { // post 방식
-						
-						
-						
-						
-						
+
 					}
 	
 

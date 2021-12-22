@@ -1,6 +1,7 @@
 package com.together.semiprj.board.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.together.semiprj.board.model.service.NboardService;
 import com.together.semiprj.board.model.vo.Nboard;
 import com.together.semiprj.board.model.vo.Pagination;
-import com.together.semiprj.member.model.vo.Member;
+import com.together.semiprj.member.model.vo.User;
 
 @WebServlet("/nboard/list")
 public class NormalListController extends HttpServlet{
@@ -24,7 +25,7 @@ public class NormalListController extends HttpServlet{
 //		1. method 저장
 //		String method = req.getMethod();
 		HttpSession session = req.getSession();
-		Member loginmember = (Member)session.getAttribute("loginMember");
+		User loginmember = (User)session.getAttribute("loginMember");
 		int memberNo;
 		if(loginmember != null) {
 			memberNo = loginmember.getMemberNo();
