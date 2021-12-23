@@ -26,6 +26,8 @@ public class NormalListController extends HttpServlet{
 //		String method = req.getMethod();
 		HttpSession session = req.getSession();
 		User loginmember = (User)session.getAttribute("loginMember");
+		int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+		
 		int memberNo;
 		if(loginmember != null) {
 			memberNo = loginmember.getMemberNo();
@@ -41,14 +43,16 @@ public class NormalListController extends HttpServlet{
 			NboardService service = new NboardService();
 			
 			//카테고리?
-			int boardCate =	 10;
-			Pagination pagination = service.getPagination(cp,boardCate);
+			Pagination pagination = service.getPagination(cp,boardCd);
 			//전체 게시글 수 조회 후 페이지네이션 객체에 넣으면 페이지 계산 나옴
 			
-			List<Nboard> boardList = service.selectBoardList(pagination,memberNo);
+			List<Nboard> boardList = service.selectBoardList(pagination,memberNo, boardCd);
 			//페이지네이션 매개변수로 해당하는 페이지의 글들을 전부 가져옴
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("boardList", boardList);
+			req.setAttribute("boardCd", boardCd);
+			
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
