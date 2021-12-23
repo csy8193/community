@@ -50,6 +50,14 @@ public class NormalBoardReplyController extends HttpServlet{
  				
  				resp.getWriter().print(result);
  			}
+ 			else if(command.equals("update")) {
+ 				int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+ 				String contents = req.getParameter("replycontent");
+ 				int result = service.updateReply(replyNo,contents);
+ 				
+ 				resp.getWriter().print(result);
+ 			}
+ 			
  		}
  		catch(Exception e){
  			e.printStackTrace();
