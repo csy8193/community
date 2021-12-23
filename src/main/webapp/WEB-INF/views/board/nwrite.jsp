@@ -18,7 +18,7 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<main>
 		<div id="main">
-			<form action="ninsert" method="post" onsubmit="return boardValidate();">
+			<form action="ninsert" method="post" onsubmit="return insertValidate();">
 				<h1 class="board">게시판 이름</h1>
 				<h4 class="title">글 제목<span> *</span></h4>
 				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요">
@@ -105,6 +105,25 @@
 			$("#fileArea").append('<input type="text" id="input-img" value="'+$(value).children("img").attr("src")+'" name="input-img">');
 			
         }
+        
+        function insertValidate(){
+			if($("#boardTitle").val().trim().length == 0){
+				alert("제목을 입력해주세요.");
+				return false;
+			}
+			
+			if($("#summernote").val().replaceAll("&nbsp;", "").replaceAll("<br>", "").replaceAll("<p>", "").replaceAll("</p>", "").trim().length == 0){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+			
+			if($(".boardImg").length >= 1){
+				if($("#fileArea > *").length == 0){
+					alert("썸네일을 지정해주세요.");
+					return false;
+				}
+			}
+		}
            
 	</script>
 	<script src="${contextPath}/resources/js/boardWrite.js"></script>

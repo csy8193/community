@@ -216,6 +216,8 @@ public class BoardController222 extends HttpServlet{
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
 						
+						System.out.println(boardList);
+						
 						path = "/WEB-INF/views/board/eventList.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
