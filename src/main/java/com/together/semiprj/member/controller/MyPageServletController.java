@@ -2,6 +2,10 @@ package com.together.semiprj.member.controller;
 
 import java.io.IOException;
 
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.together.semiprj.common.MyRenamePolicy;
 import com.together.semiprj.member.model.service.UserService;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
+import com.together.semiprj.member.model.vo.AnimalProfile;
 import com.together.semiprj.member.model.vo.User;
-
-
-
 
 
 @WebServlet("/member/*")
@@ -59,23 +63,106 @@ public class MyPageServletController extends HttpServlet{
 				
 				User loginMember = (User)req.getSession().getAttribute("loginMember");
 				
+
 				
-				if(command.equals("mypage")) {
+				// 반려동물 조회 리스트
+				 if(command.equals("selectAnimal")) {
+					
+					if(method.equals("GET")) {
+						
+						int memberNo = loginMember.getMemberNo();
+						
+						List<Animal> aniList = service.selectanimalList(memberNo);
+
+						new Gson().toJson(aniList,resp.getWriter());
+						
+					}
+				
+				}
+				
+				// 반려동물 등록
+				else if(command.equals("addAnimal")) {
+					
+					if(method.equals("POST")) {
+						
+						int maxSize = 1024 * 1024 * 100; //100MB
+						
+						// 프로젝트의 webapp 폴더의 컴퓨터상 실제 절대 경로
+						String root = session.getServletContext().getRealPath("/");
+						
+						// 나머지 파일경로 (DB에 저장되어 주소 경로로 사용할 예정)
+						String filePath = "/resources/images/animalProfileImg/";
+						
+						// 실제 경로
+						String realPath = root+filePath;
+						
+						MultipartRequest mReq = 
+								new MultipartRequest(req,realPath,maxSize,"UTF-8",new MyRenamePolicy());
+						
+						// 반려동물 정보 파라미터 가지고 오기
+						int animalCategoryCode =  Integer.parseInt(mReq.getParameter("animalCategory"));
+						String animalVariety = mReq.getParameter("animalVariety");
+						String animalNm = mReq.getParameter("animalNm");
+						String aniBirthday = mReq.getParameter("aniBirthday");                				
+						String animalGender = mReq.getParameter("animalGender");
+						
+						// 로그인한 멤버 번호 값
+						int memberNo = loginMember.getMemberNo();
+
+						// 파일 형식의 파라미터
+						Enumeration<String> files = mReq.getFileNames();
+						
+						// 업로드된 이미지 정보를 담을 객체 생성
+						AnimalProfile aniPro = new AnimalProfile();
+						
+						while(files.hasMoreElements()) {
+							
+							String name = files.nextElement(); 
+							
+							if(mReq.getFilesystemName(name) != null) {
+								
+								//파일 파라미터 값 가지고 오기
+								aniPro.setAnimalImgNm(mReq.getFilesystemName(name));
+								aniPro.setAnimalImgOriginal(mReq.getOriginalFileName(name));
+								aniPro.setAnimalImgPath(filePath);
+								
+							}// end if
+							
+						} // end while
+
+						Animal animal = new Animal(animalNm, animalVariety, animalGender,aniBirthday,memberNo,animalCategoryCode);
+						
+						//System.out.println(animal);
+						//System.out.println(aniPro);
+						
+						int result = service.addAnimal(animal,aniPro);
+						
+						System.out.println(result);
+
+						new Gson().toJson(result,resp.getWriter());
+						
+					}
+				}
+				// 마이페이지 이동
+				 else if(command.equals("mypage")) {
 					
 					if(method.equals("GET")) {
 						
 						if(loginMember != null) {
 							
+							int memberNo = loginMember.getMemberNo();
+							
 							List<AnimalCategory> animalCategory = service.selectAnimalCategory();
+							List<Animal> aniList = service.selectanimalList(memberNo);
 							
+							
+							req.setAttribute("aniList", aniList);
 							req.setAttribute("animalCategory", animalCategory);
-							
+							req.setAttribute("loginMember", loginMember);
 							path = "/WEB-INF/views/member/mypage.jsp";
 
 						}else {
-							message = "로그인 후 이용해주세요";
 							path = "/WEB-INF/views/member/login.jsp";
-							session.setAttribute("message",message);
 						}
 							
 						dispatcher = req.getRequestDispatcher(path);
@@ -85,13 +172,6 @@ public class MyPageServletController extends HttpServlet{
 
 					}
 	
-
-				}
-				
-				// 반려동물 리스트 목록
-				else if(command.equals("selectAnimal")) {
-					int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-					List<Animal> aniList = service.selectanimalList(memberNo);
 				}
 				
 			}catch(Exception e) {

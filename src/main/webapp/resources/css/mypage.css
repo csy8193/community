@@ -67,7 +67,41 @@
 }
 
 
-#animal-add li{
+
+#profile-chk{
+    margin-bottom: 30px;
+    float: right;
+}
+
+#profile-chk select{
+    width:200px;
+    height: 30px;
+    border:1px solid #ddd;
+    margin-left: 10px;
+    padding-left:10px;
+}
+
+#profile-chk button{
+    width:50px;
+    height:30px;
+    border:1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#profile-chk button:hover{
+	border:none;
+    background-color: #4facfe;
+    color:#fff;
+}
+
+#animal-add-wrap{
+    clear: both;
+}
+
+
+#animalList li,
+#animalAdd{
     width:31%;
     height: 460px;
     float: left;
@@ -78,11 +112,14 @@
     position: relative;
 }
 
-#animal-add li:nth-child(3n){
-    margin-right: 0;
+#animalAdd{
+	border:none;
+	margin-right: 0;
 }
 
-#animal-add li span{
+
+
+#animalList li span{
     width:250px;
     height: 250px;
     border-radius:300px;
@@ -92,20 +129,29 @@
 }
 
 #animal-profile{
-    width:250px;
+    width:200px;
 }
 
-#animal-profile img{
-	width:250px;	
+.ani-profile-size{
+	width:200px;	
 }
 
-#animal-add li p{
+.img-size{
+	font-size:11px;
+	color:#ddd;
+}
+
+.img-size > p{
+	text-align: right;
+}
+
+#animalList li p{
     font-size: 20px;
     font-weight: bold;
     margin: 15px 0;
 }
 
-#animal-add li button{
+#animalList li button{
     width:280px;
     height:40px;
     border :1px solid #ddd;
@@ -116,16 +162,17 @@
     cursor: pointer;
 }
 
-#animal-add li button:hover{
+#animalList li:nth-child(3n){
+	margin-right: 0;
+}
+
+#animalList li button:hover{
     background-color: #4facfe;
     color:#fff;
     transition: 0.2s;
     border:none;
 }
 
-#animal-add li:last-child{
-    border:none;
-}
 
 #plus{
     position: absolute;
@@ -163,7 +210,7 @@
     left: 50%; 
     width:600px; 
     height: 710px; 
-    padding: 40px; 
+    padding: 30px; 
     background-color: rgb(255, 255, 255); 
     border-radius: 10px; 
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15); 
@@ -210,6 +257,7 @@
     position: relative;
     cursor: pointer;
 }
+
 #animal-profile > img{
     position: absolute;
     margin: auto;
