@@ -23,7 +23,7 @@
 						<c:when test="${ empty sessionScope.loginMember }">
 							<%-- 로그인이 되어있지 않을 때 --%>
 		               		<li><a href="${contextPath}/member/login">로그인</a></li>
-		               		<li><a href="${contextPath}/member/signup">회원가입</a></li>
+		               		<li><a href="${contextPath}/member/agree">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
 							<%-- 로그인이 되어 있을 때 --%>

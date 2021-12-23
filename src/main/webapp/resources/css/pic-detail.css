@@ -19,7 +19,7 @@ label{
 #container{
     width: 1400px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 200px;
     overflow: auto;
 }
 
@@ -37,11 +37,18 @@ label{
     height: 574px;
     background-color: #000;
     text-align: center;
+    position: relative;
 }
 
 #photo{
     max-width: 100%;
     max-height: 100%;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 #img2-wrap{
@@ -297,5 +304,5 @@ li::after{
     color: #fff;
     font-size: 14px;
     font-weight: 700;
-
+	cursor: pointer;
 }
