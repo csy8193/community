@@ -23,7 +23,7 @@ public class PboardDAO {
 	private Properties prop;
 	
 	public PboardDAO() {
-		String filePath = NboardDAO.class.getResource("/com/together/semiprj/sql/pboard-query.xml").getPath();                    
+		String filePath = PboardDAO.class.getResource("/com/together/semiprj/sql/pboard-query.xml").getPath();                    
 		
 		try {
 			prop = new Properties();
@@ -89,6 +89,7 @@ public class PboardDAO {
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
 				board.setMemberNm(rs.getString("MEMBER_NM"));
 				board.setReadCount(rs.getInt("READ_COUNT"));
 				board.setBoardName(rs.getString("BOARD_NAME"));
@@ -145,6 +146,75 @@ public class PboardDAO {
 		}
 		
 		return imgList;
+	}
+
+
+	/** 게시글 상세 조회
+	 * @param boardNo
+	 * @param conn
+	 * @return board(없으면 null)
+	 * @throws Exception
+	 */
+	public Pboard selectBoard(int boardNo, Connection conn) throws Exception {
+
+		Pboard board = null;
+		
+		try {
+			String sql = prop.getProperty("selectPboard");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,boardNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Pboard();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberNo(rs.getInt("MEMBER_NO"));
+				board.setMemberNm(rs.getString("MEMBER_NM"));
+				board.setCreateDt(rs.getString("CREATE_DT"));
+				board.setStatusCd(rs.getInt("STATUS_CD"));
+				board.setStatusNm(rs.getString("STATUS_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setBoardCd(rs.getInt("BOARD_CD"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+				
+				
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return board;
+	}
+
+
+	/** 조회수 증가
+	 * @param boardNo
+	 * @param conn
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int increaseReadCount(int boardNo, Connection conn) throws Exception{
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("increaseReadCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

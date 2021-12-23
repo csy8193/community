@@ -15,11 +15,37 @@
 		        WHERE STATUS_CD != 2
 		        ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
+		
 	</entry>
 	<entry key="selectPboardImageList">
 		SELECT * FROM BOARD_PIC
 		WHERE BOARD_NO = ?
 		ORDER BY BOARD_PIC_LEVEL
+	</entry>
+	
+	<!-- 상세페이지 조회 -->
+	<entry key="selectPboard">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT,
+        MEMBER_NO, MEMBER_NM,
+        CASE WHEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD')) - TO_DATE(TO_CHAR(CREATE_DT, 'YYYY-MM-DD')) = 0
+            THEN TO_CHAR( CREATE_DT, 'HH24:MI' )
+            ELSE TO_CHAR( CREATE_DT, 'YYYY-MM-DD' )
+        END AS CREATE_DT,
+        BOARD_CD, BOARD_NAME,
+        READ_COUNT, STATUS_NM, STATUS_CD
+		FROM BOARD B
+		JOIN MEMBER USING(MEMBER_NO)
+		JOIN BOARD_CODE USING(BOARD_CD)
+		JOIN STATUS S ON(B.STATUS_CD = S.STATUS_CD)
+		WHERE BOARD_NO = ?
+		AND STATUS_CD != 2
+	</entry>
+	
+	<!-- 조회수 증가 -->
+	<entry key="increaseReadCount">
+		UPDATE BOARD SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = ?
 	</entry>
 	
 </properties>

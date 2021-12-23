@@ -44,7 +44,6 @@ public class PictureBoardController2 extends HttpServlet{
 			
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("boardList", boardList);
-			System.out.println(boardList);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

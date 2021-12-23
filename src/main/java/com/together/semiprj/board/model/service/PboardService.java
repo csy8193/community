@@ -51,4 +51,36 @@ public class PboardService {
 		return pboardList;
 	}
 
+
+	/** 게시글 상세 조회
+	 * @param boardNo
+	 * @param memberNo
+	 * @return board(없으면 null)
+	 * @throws Exception
+	 */
+	public Pboard selectBoard(int boardNo, int memberNo) throws Exception{
+
+		Connection conn = getConnection();
+		
+		Pboard board = dao.selectBoard(boardNo, conn);
+		
+		List<PboardImage> imgList = dao.selectBoardImageList(boardNo, conn);
+		
+		board.setPBoardImgList(imgList);
+		
+		if(board != null && board.getMemberNo() != memberNo) {
+			int result = dao.increaseReadCount(boardNo, conn);
+			
+			if(result > 0) {
+				commit(conn);
+				
+				board.setReadCount(board.getReadCount() + 1);
+			}else rollback(conn);
+		}
+		
+		close(conn);
+		
+		return board;
+	}
+
 }
