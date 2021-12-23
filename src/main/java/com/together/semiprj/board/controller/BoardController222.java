@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.together.semiprj.board.model.service.BoardService222;
 import com.together.semiprj.board.model.vo.Board;
 import com.together.semiprj.board.model.vo.BoardImage;
+import com.together.semiprj.board.model.vo.Pagination;
 import com.together.semiprj.common.MyRenamePolicy;
 import com.together.semiprj.member.model.vo.User;
 
@@ -27,16 +28,12 @@ public class BoardController222 extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 데이터 전달 방식 저장용 변수
 				String method = req.getMethod();
 				
-				// 요청 주소 뒷 부분을 잘라내어 구분 방법 만들기
 				String uri = req.getRequestURI();
 				String contextPath = req.getContextPath();
 				
 				String command = uri.substring( (contextPath + "/board/").length() );
-												// /semi/board/
-				// -> 요청 주소에서 /semi/board/ 의 길이만큼 잘라낸 후 나머지 문자열을 저장
 				
 				String path = null;
 				RequestDispatcher dispatcher = null;
@@ -46,11 +43,22 @@ public class BoardController222 extends HttpServlet{
 					
 					BoardService222 service = new BoardService222();
 					
+					int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
+
 					if(command.equals("notice")) {
+						
+						int bc = 20;
+						
+						Pagination pagination = service.getPagination(cp, bc);
+						
+						List<Board> boardList = service.selectBoardList(pagination, bc);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
+
 						path = "/WEB-INF/views/board/notice.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
-						
 					}
 					
 					
@@ -89,6 +97,7 @@ public class BoardController222 extends HttpServlet{
 						
 						resp.getWriter().print(mReq.getFilesystemName(name));
 						
+						
 					}
 					
 					
@@ -96,12 +105,13 @@ public class BoardController222 extends HttpServlet{
 					else if(command.equals("ninsert")) {
 						String boardTitle = req.getParameter("boardTitle");
 						String boardContent = req.getParameter("boardContent");
+						String picPath = req.getParameter("input-img");
 						
 						HttpSession session = req.getSession();
 						
 						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
 						
-						int result = service.insertBoard(boardTitle, boardContent, memberNo);
+						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath);
 						
 						
 					}
@@ -114,56 +124,19 @@ public class BoardController222 extends HttpServlet{
 					
 					
 					else if(command.equals("pinsert")) {
-						// ***** 주의 *****
-						// encType="multipart/form-data" 형식의 form태그에서
-						// 전달된 파라미터는 
-						// HttpServletRequest 객체로는 다룰 수 없다!
-						// --> cos.jar에서 제공하는 MultipartRequest를 사용해야 한다.
-						
-						
-						// ***** MultipartRequest 사용을 위한 준비 *****
-						
-						// 1. 업로드 되는 파일 전체 합의 최대 용량 지정(byte 단위)
 						int maxSize = 1024 * 1024 * 100; // 100MB
 						
-						// 2. 업로드 되는 파일을 서버 컴퓨터 어디에 저장할지 경로 지정
-						// -> 특정 폴더의 컴퓨터 내부 절대 경로
 						HttpSession session = req.getSession();
 						
-						// 프로젝트의 webapp폴더의 컴퓨터상 실제 절대 경로
 						String root = session.getServletContext().getRealPath("/");
 						
-						// 나머지 파일 경로 (DB에 저장되어 주소 경로로 사용할 예정)
 						String filePath = "/resources/images/board/";
 						
-						// 실제 경로
 						String realPath = root + filePath;
 						
 						
-						// 3. 저장되는 파일의 이름을 변경
-						// 		-> 중복되는 파일명을 방지하기 위해서
-						// 		--> MyRenamePolicy 클래스
-						
-						
-						// ****************************************************
-						// MultipartRequest 객체 생성
 						
 						MultipartRequest mReq = new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());
-						
-						// !!!!!!!!!! MultipartRequest 객체가 성공적으로 생성된 경우
-						// 			  지정된 파일 경로에 파일이 바로 업로드된다!
-						
-						// 만약 객체가 생성되었지만 파일 저장이 안되는 경우
-						// Servers탭 -> 사용하는 서버 더블클릭 -> Overview
-						// -> Server Options 메뉴 -> serve modules without publishing 체크
-						
-						
-						// ****************************************************
-						
-						// MultipartRequest 다루기
-						
-						// 1) 텍스트 형식의 파라미터
-						// System.out.println(mReq.getParameter("boardTitle"));
 						
 						String boardContent = mReq.getParameter("boardContent");
 //						int categoryCode = Integer.parseInt( mReq.getParameter("categoryCode") );
@@ -231,9 +204,27 @@ public class BoardController222 extends HttpServlet{
 //						session.setAttribute("message", message);
 //						resp.sendRedirect(path);
 					}
+					
+					else if(command.equals("event")) {
+						
+						int bc = 70;
+						
+						Pagination pagination = service.getPagination(cp, bc);
+						
+						List<Board> boardList = service.selectBoardList(pagination, bc);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
+						
+						System.out.println(boardList);
+						
+						path = "/WEB-INF/views/board/eventList.jsp";
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
+					}
 				} catch (Exception e) {
 					
-					
+					e.printStackTrace();
 					
 				}
 	}

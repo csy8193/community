@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,56 +20,63 @@
                 </div>
                 <div class="main-content">
                     <table class="notice-table">
-                        <tr>
-                            <th class="table-hd table-head1">글번호</th>
-                            <th class="table-hd table-head2">제목</th>
-                            <th class="table-hd table-head3">작성일</th>
-                        </tr>
-                        <tr>
-                            <td class="table-hd table-data1">3</td>
-                            <td class="table-hd table-data2"><a href="#">공지 사항</a></td>
-                            <td class="table-hd table-data3">21-12-11</td>
-                        </tr>
-                        <tr>
-                            <td class="table-hd table-data1">2</td>
-                            <td class="table-hd table-data2"><a href="#">공지 사항</a></td>
-                            <td class="table-hd table-data3">21-12-11</td>
-                        </tr>
-                        <tr>
-                            <td class="table-hd table-data1">1</td>
-                            <td class="table-hd table-data2"><a href="#">공지 사항</a></td>
-                            <td class="table-hd table-data3">21-12-11</td>
-                        </tr>
+	                    <c:choose>
+	                    	<c:when test="${empty boardList}">
+		                    	<tr>
+		                    		<td colspan="3">게시글이 존재하지 않습니다.</td>
+		                    	</tr>
+	                    	</c:when>
+	                    	<c:otherwise>
+		                        <tr>
+		                            <th class="table-hd table-head1">글번호</th>
+		                            <th class="table-hd table-head2">제목</th>
+		                            <th class="table-hd table-head3">작성일</th>
+		                        </tr>
+		                        <c:forEach var="board" items="${boardList}">
+		                        	<tr>
+			                            <td class="table-hd table-data1">${board.boardNo}</td>
+			                            <td class="table-hd table-data2"><a href="#">${board.boardTitle}</a></td>
+			                            <td class="table-hd table-data3">${board.createDate}</td>
+			                        </tr>
+		                        </c:forEach>
+	                    	</c:otherwise>
+	                    </c:choose>
                     </table>
                     <div class="page-number">
                         <ul class="page-ul">
-                            <li>
-                                <a href="#"><i class="fas fa-angle-double-left"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fas fa-angle-left"></i></a>
-                            </li>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fas fa-angle-right"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fas fa-angle-double-right"></i></a>
-                            </li>
+                        	<c:if test="${pagination.startPage != 1}">
+	                            <li>
+	                                <a href="notice?cd=110&cp=1"><i class="fas fa-angle-double-left"></i></a>
+	                            </li>
+	                            <li>
+	                                <a href="notice?cd=110&cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
+	                            </li>
+                        	</c:if>
+                        	
+                        	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
+                        		<c:choose>
+                        			<c:when test="${i == pagination.currentPage}">
+	                        			<li style="border: 1px solid #4facfe; border-radius: 50%; background-color: #4facfe;">
+			                                <a style="color: white;">${i}</a>
+			                            </li>
+                        			</c:when>
+		                            <c:otherwise>
+	                        			<li>
+			                                <a href="${contextPath}/board/notice?cd=110&cp=${i}">${i}</a>
+			                            </li>
+	                        		</c:otherwise>
+                        		</c:choose>
+                        	</c:forEach>
+                            
+                            
+                            <c:if test="${pagination.endPage != pagination.maxPage}">
+	                            <li>
+	                                <a href="${contextPath}/board/notice?cd=110&cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
+	                            </li>
+	                            <li>
+	                                <a href="${contextPath}/board/notice?cd=110&cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
+	                            </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -76,5 +84,6 @@
             </div>
             
         </main>
+        
 </body>
 </html>
