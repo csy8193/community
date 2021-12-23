@@ -2,15 +2,16 @@ package com.together.semiprj.member.model.service;
 
 import static com.together.semiprj.common.JDBCTemplate.*;
 
-
 import java.sql.Connection;
 import java.util.List;
 
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
-
+import com.together.semiprj.member.model.vo.AnimalProfile;
+import com.together.semiprj.common.XSS;
 import com.together.semiprj.member.model.dao.UserDAO;
 import com.together.semiprj.member.model.vo.User;
+
 
 
 public class UserService {
@@ -150,6 +151,49 @@ public class UserService {
 		return AnimalCategory;
 	}
 
+	/** 반려동물 등록
+	 * @param animal
+	 * @return
+	 * @throws Exception
+	 */
+	public int addAnimal(Animal animal, AnimalProfile aniPro) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int animalNo = dao.nextAnimalNo(conn);
+		
+		animal.setAnimalNo(animalNo);
+		
+		animal.setAnimalVariety(XSS.replaceParameter(animal.getAnimalVariety()));
+		animal.setAnimalNm(XSS.replaceParameter(animal.getAnimalNm()));
+		
+		animal.setAnimalVariety(animal.getAnimalVariety().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+		animal.setAnimalNm(animal.getAnimalNm().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+		
+		int result = dao.addAnimal(animal,conn);
+		
+		if(result > 0) {
+			
+			if(aniPro != null) {
+				
+				aniPro.setAnimalNo(animalNo);
+				
+				result = dao.insertaniProfile(aniPro,conn);
+							
+			}
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn); 
+			}
+
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
 
 }

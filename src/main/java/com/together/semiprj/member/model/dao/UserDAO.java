@@ -17,6 +17,7 @@ import java.util.Properties;
 
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
+import com.together.semiprj.member.model.vo.AnimalProfile;
 import com.together.semiprj.member.model.vo.User;
 
 	
@@ -268,10 +269,14 @@ public class UserDAO {
 			while(rs.next()) {
 				Animal animal = new Animal();
 				
+				animal.setAnimalNo(rs.getInt("ANIMAL_NO"));
 				animal.setAnimalNm(rs.getString("ANIMAL_NAME"));
 				animal.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
-				animal.setAnimalGender(rs.getInt("ANIMAL_SEX"));
-				animal.setAnimalBirthday(rs.getDate("ANIMAL_BIRTH"));
+				animal.setAnimalGender(rs.getString("ANIMAL_SEX"));
+				animal.setAnimalBirthday(rs.getString("ANIMAL_BIRTH"));
+				animal.setAnimalCategoryCode(rs.getInt("ANIMAL_CATEGORY_CD"));
+				animal.setAnimalCategoryName(rs.getString("ANIMAL_CATEGORY_NM"));
+				animal.setMemberNo(rs.getInt("MEMBER_NO"));
 				
 				aniList.add(animal);
 			}
@@ -312,6 +317,94 @@ public class UserDAO {
 			close(pstmt);
 		}
 		return AnimalCategory;
+	}
+
+
+
+	public int addAnimal(Animal animal, Connection conn) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("addAnimal");
+			
+			pstmt = conn.prepareStatement(sql);
+					
+			pstmt.setInt(1,animal.getAnimalNo());
+			pstmt.setString(2,animal.getAnimalNm());
+			pstmt.setString(3,animal.getAnimalVariety());
+			pstmt.setString(4,animal.getAnimalGender());
+			pstmt.setString(5,animal.getAnimalBirthday());			
+			pstmt.setInt(6,animal.getMemberNo());
+			pstmt.setInt(7,animal.getAnimalCategoryCode());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 다음 반려동물 번호 조회
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int nextAnimalNo(Connection conn) throws Exception{
+		
+		int animalNo = 0;
+	
+		try {
+			String sql = prop.getProperty("nextAnimalNo");
+			
+			System.out.println(sql);
+			stmt = conn.createStatement();
+			
+			rs= stmt.executeQuery(sql);
+
+			if(rs.next()) {
+				animalNo = rs.getInt(1);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return animalNo;
+	}
+
+
+
+	/** 반려동물 프로필사진 삽입
+	 * @param aniPro
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertaniProfile(AnimalProfile aniPro, Connection conn) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertaniProfile");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,aniPro.getAnimalImgPath());
+			pstmt.setString(2,aniPro.getAnimalImgNm());
+			pstmt.setString(3,aniPro.getAnimalImgOriginal());
+			pstmt.setInt(4,aniPro.getAnimalNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
