@@ -12,59 +12,73 @@
                     <input type="text" name="main-search" id="main-search" placeholder="관심있는 내용을 검색해보세요!">
                 </div>
             </div>
-
             <div id="board-wrap">
                 <div id="best-wrap" class="left-float">
                     <h1 class="board-title">게시판 베스트</h1>
                     <ul>
-                    <%--
-                     <li>
+                     <%-- <li>${mostViewList}</li>  --%>
+                    <c:set var="count" value="1" />
+                    <c:forEach items="${mostViewList}" var ="most">
+                  	     <li>
                             <div class="left-float">
-                                <span class="best-ranking">1</span>
+                                <span class="best-ranking">${count}</span>
+                                <c:set var="count" value="${count+1}" />
                                 <div>
-                                    <p>게시판 베스트 제목입니다.</p>
-                                    <span class="best-date">2021/11/12 [자유게시판]</span>
+                                    <p><a href="${contextPath}/nboard/view?boardNo=${most.boardNo}&boardCd=${most.boardCode}">${most.boardTitle}</a></p>
+                                    <span class="best-date">${most.createDate} ${most.boardName}</span>
                                 </div>
                             </div>
                             <div class="right-float">
                                 <div class="eyes">
                                     <img src="${contextPath}/resources/images/main/vision.png">
-                                    <span>256</span>
+                                    <span>${most.readCount}</span>
                                 </div>
                             </div>
                         </li>
-                     --%>
-                       
+                    </c:forEach>
                     </ul>
                 </div>
                 <div id="first-wrap" class="right-float">
                     <div id="free-board" class="free-know">
                         <h1 class="board-title-b">실시간 자유게시판</h1>
                         <ul>
-                            <%-- 
-                            <li>
-                                <a href="#"><p>자유게시판 제목이여라~<span>15:12</span></p></a>
+                        <%-- <li>${currentFree}</li> --%>
+                        <c:forEach items="${currentFree}" var ="Free">
+                        	<li>
+                                <p><a href="${contextPath}/nboard/view?boardNo=${Free.boardNo}&boardCd=10">${Free.boardTitle}</a><span>${Free.createDate}</span></p>
                             </li>
-                            --%>
+                        </c:forEach>
                         </ul>
                     </div>
                     <div id="know-how-board" class="free-know">
                         <h1 class="board-title-b">실시간 노하우게시판</h1>
                         <ul>
-                            <%-- 
-                            <li>
-                                <a href="#"><p>자유게시판 제목이여라~<span>15:12</span></p></a>
+                       <%--  <li>${currentKnowhow }</li> --%>
+                        <c:forEach items="${currentKnowhow}" var ="Knowhow">
+                        	<li>
+                                <p><a href="${contextPath}/nboard/view?boardNo=${Knowhow.boardNo}&boardCd=20">${Knowhow.boardTitle}</a><span>${Knowhow.createDate}</span></p>
                             </li>
-                            --%>
+                        </c:forEach>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div id="good-ranking-wrap">
                 <div>
                     <h2>이달의 좋아요 순위!<br><span>누가 제일 멋쟁이인지 구경할까요?</span></h2>
-                    <a href="#">자랑하기 게시판 보러가기 ></a>
+                    <a href="${contextPath}">자랑하기 게시판 보러가기 ></a><br>
+                    <span class ="ranks123" id="ranking2"><img src="${contextPath}${topLikePeople[1].animalImg}">
+                    ${topLikePeople[1].animalName} / ${topLikePeople[1].animalVariety}<br>
+                    좋아요 : ${topLikePeople[1].likeCount}  
+                    </span>
+                    <span class ="ranks123" id="ranking1"><img src="${contextPath}${topLikePeople[0].animalImg}">
+                    ${topLikePeople[0].animalName} / ${topLikePeople[0].animalVariety}<br>
+                     좋아요 : ${topLikePeople[0].likeCount} 
+                    </span>
+                    <span class ="ranks123" id="ranking3"><img src="${contextPath}${topLikePeople[0].animalImg}">
+                    ${topLikePeople[2].animalName} / ${topLikePeople[2].animalVariety}<br>
+                     좋아요 : ${topLikePeople[2].likeCount} 
+                    </span>
                 </div>
             </div>
 
@@ -78,37 +92,37 @@
                 <div id="qna" class="left-float">
                     <h1 class="board-title-b">자주하는 질문</h1>
                     <ul>
-                    	<%--
-                    	 <li>
-                            <a href="#"><p>자주하는 질문 22222<span>15:12</span></p></a>
+                    <%-- <li>${currentFreQ }</li> --%>
+                    <c:forEach items="${currentFreQ}" var ="FreQ">
+                    	<li>
+                            <p><a href="#">${FreQ.boardTitle}</a><span>${FreQ.createDate}</span></p>
                         </li>
-                    	 --%>
+                    </c:forEach>
                     </ul>
                 </div>
                 <div id="notice" class="right-float">
                     <h1 class="board-title-b">공지사항</h1>
                     <ul>
-                    	<%--
+                    	<%-- <li>${currentNotice}</li> --%>
+                    <c:forEach items="${currentNotice}" var ="Notice">
                     	<li>
-                            <a href="#"><p>자주하는 질문 22222<span>15:12</span></p></a>
+                            <p><a href="#">${Notice.boardTitle}</a><span>${Notice.createDate}</span></p>
                         </li>
-                    	 --%>
+                    </c:forEach>
                     </ul>
                 </div>
             </div>
         </div>
 </section>
+<link rel="stylesheet" href="${contextPath}/resources/css/plus2mainpage.css">
 <jsp:include page="footer.jsp"/>
 
-<<<<<<< HEAD
-=======
 <%-- session에 message 속성이 존재하는 경우 alert창으로 해당 내용을 출력 --%>
 <c:if test="${!empty sessionScope.message }">
 	<script>
 	$(function(){ // readey() 함수로 페이지 로딩 완료 후 alert 출력
 		alert("${message}")
 	})
-		
 		// EL 작성 시 scope를 지정하지 않으면
 		// page -> reuest -> session -> application 순서로 검색하여
 		// 일치하는 속성이 있으면 출력
@@ -117,6 +131,5 @@
 	<%-- message 1회 출력 후 session에서 제거 --%>
 	<c:remove var="message" scope="session"/>
 </c:if>
->>>>>>> 8437ca5160cf998949c7537015695dad7fd8afa2
 </body>
 </html>

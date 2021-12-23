@@ -113,5 +113,19 @@ public class NboardReplyDAO {
 		}
 		return result;
 	}
+	public int updateReply(Connection conn, int replyNo, String contents) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updateReply");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contents);
+			pstmt.setInt(2, replyNo);
+			result = pstmt.executeUpdate();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }

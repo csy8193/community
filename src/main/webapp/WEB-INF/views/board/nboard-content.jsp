@@ -68,10 +68,10 @@
 		                        <c:if test="${reply.statusCode==1}">
 		                        <button onclick="createReplyArea(this)" value="${reply.replyNo}"><i class="far fa-comment-dots"></i>댓글달기</button>
 		                        <%--<button><i class="fas fa-bullhorn"></i>신고하기</button> --%>
-			                    	<c:if test="${reply.memberNo == loginMember.memberNo}">
-			                    	<button>수정</button>
+		                    	<c:if test="${reply.memberNo == loginMember.memberNo}">
+			                    	<button onclick="updateReply(this)">수정</button>
 			                    	<button onclick="deleteNrep(this)">삭제</button>
-			                    	</c:if>
+			                    </c:if>
 		                    	</c:if>
 		                    </div>
 		        			<c:forEach items="${rList}" var="checkfeedback">
@@ -102,8 +102,8 @@
 		                    			<c:if test="${reply.statusCode==1}">
 			                           		<button onclick="createReplyArea(this)" value="${checkfeedback.replyNo}"><i class="far fa-comment-dots"></i>댓글달기</button>
 			                           		<%--<button><i class="fas fa-bullhorn"></i>신고하기</button>--%>
-					                   		<c:if test="${reply.memberNo == loginMember.memberNo}">
-					                    	<button>수정</button>
+					                   		<c:if test="${checkfeedback.memberNo == loginMember.memberNo}">
+					                    	<button onclick="updateReply(this)">수정</button>
 					                    	<button onclick="deleteNrep(this)">삭제</button>
 					                    	</c:if>
 				                    	</c:if>

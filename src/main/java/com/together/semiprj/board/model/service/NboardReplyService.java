@@ -83,5 +83,19 @@ public class NboardReplyService {
 		}
 		return parameter;
 	}
+	public int updateReply(int replyNo, String contents) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		result = dao.updateReply(conn,replyNo,contents );
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		
+		return result;
+	}
 
 }

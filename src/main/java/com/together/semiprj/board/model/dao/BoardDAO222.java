@@ -56,7 +56,6 @@ public class BoardDAO222 {
 			
 		} finally {
 			close(pstmt);
-			
 		}
 		return result;
 	}
@@ -69,7 +68,6 @@ public class BoardDAO222 {
 	public int nextBoardNo(Connection conn) throws Exception{
 		
 		int boardNo = 0;
-		
 		try {
 			String sql = prop.getProperty("nextBoardNo");
 
@@ -108,7 +106,6 @@ public class BoardDAO222 {
 			pstmt.setInt(3, board.getMemberNo());
 
 			result = pstmt.executeUpdate();
-			
 
 		}finally {
 			close(pstmt);
@@ -129,7 +126,6 @@ public class BoardDAO222 {
 			String sql = prop.getProperty("insertBoardImage");
 
 			pstmt = conn.prepareStatement(sql);
-			
 
 			pstmt.setString(1, img.getImgPath());
 			pstmt.setString(2, img.getImgName());
@@ -138,12 +134,10 @@ public class BoardDAO222 {
 			pstmt.setInt(5, img.getBoardNo());
 
 			result = pstmt.executeUpdate();
-			
 
 		}finally {
 			close(pstmt);
 		}
-
 
 		return result;
 	}
