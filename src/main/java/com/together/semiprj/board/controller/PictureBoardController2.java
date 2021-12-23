@@ -25,6 +25,9 @@ public class PictureBoardController2 extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		User loginmember = (User)session.getAttribute("loginMember");
+		
+		
+		
 		int memberNo;
 		if(loginmember != null) {
 			memberNo = loginmember.getMemberNo();

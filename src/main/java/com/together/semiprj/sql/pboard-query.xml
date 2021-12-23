@@ -14,7 +14,8 @@
 		    FROM (SELECT * FROM BOARD_LIST
 		        WHERE STATUS_CD != 2
 		        ORDER BY BOARD_NO DESC) A)
-		WHERE RNUM BETWEEN ? AND ?
+		WHERE BOARD_CD = ?
+		RNUM BETWEEN ? AND ?
 		
 	</entry>
 	<entry key="selectPboardImageList">
