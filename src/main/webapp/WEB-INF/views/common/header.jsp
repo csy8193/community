@@ -37,7 +37,7 @@
 	    </div>
 	    <div id="header">
 	        <div id="logo">
-	            <a href="#"><img src="${contextPath}/resources/images/main/logo2.png"></a>
+	            <a href="${contextPath}"><img src="${contextPath}/resources/images/main/logo2.png"></a>
 	        </div>
 	        <div id="nav_wrap">
 	            <ul id="nav">
@@ -45,9 +45,9 @@
 	                    <a href="#">반려동물</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">자유게시판</a></li>
-	                            <li><a href="#">노하우게시판</a></li>
-	                            <li><a href="#">자랑게시판</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=10">자유게시판</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=20">노하우게시판</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=70">자랑게시판</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -55,9 +55,9 @@
 	                    <a href="#">유기동물</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">신고하기</a></li>
-	                            <li><a href="#">보호소추천</a></li>
-	                            <li><a href="#">아이들근황</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=80">신고하기</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=30">보호소추천</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=90">아이들근황</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -78,8 +78,8 @@
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
 	                            <li><a href="#">1:1 문의하기</a></li>
-	                            <li><a href="#">자주하는 질문</a></li>
-	                            <li><a href="#">이벤트</a></li>
+	                            <li><a href="${contextPath}/board/notice">자주하는 질문</a></li>
+	                            <li><a href="${contextPath}/board/event">이벤트</a></li>
 	                        </ul>
 	                    </div>
 	                </li>

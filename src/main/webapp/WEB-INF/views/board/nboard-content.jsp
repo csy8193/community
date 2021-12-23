@@ -30,7 +30,6 @@
             <img src="https://cdn.pixabay.com/photo/2021/09/27/03/19/bichon-6659330_960_720.jpg" alt="">
             <p>
                 ${nboard.boardContent}
-		        ${rList}
             </p>
         </div>
         	<div class="nboard-reply">

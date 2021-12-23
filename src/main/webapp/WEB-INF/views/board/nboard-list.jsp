@@ -14,7 +14,7 @@
 			         <div class="nboard-style">
            				  	<c:if test="${!empty board.boardMainImgPath}">
 	           				  <div class="nboard-pic">
-                				<img src="${contextPath}${board.boardMainImgPath}" alt=""> 
+                				<img src="${board.boardMainImgPath}">
 	           				 </div>
            				  	</c:if>
 		            	<div class="nboard-content" >
@@ -43,8 +43,8 @@
             	</c:choose>
         <div id="paging">
         	<c:if test="${pagination.startPage !=1}">
-	           	<a href="list?cp=1"><i class="fas fa-angle-double-left"></i></a>
-	            <a href="list?cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
+	           	<a href="list?boardCd=${boardCd}&cp=1"><i class="fas fa-angle-double-left"></i></a>
+	            <a href="list?boardCd=${boardCd}&cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
             </c:if>
             <span class="pagenum">
 				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
@@ -53,21 +53,21 @@
 							<a style="color : black; font-weigt: 700; "> ${i}</a>
 						</c:when>
 						<c:otherwise>
-							<a href="list?cp=${i}"> ${i}</a>
+							<a href="list?boardCd=${boardCd}&cp=${i}"> ${i}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>			
             </span>
             <c:if test="${pagination.maxPage !=pagination.endPage}">
-	             <a href="list?cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
-	             <a href="list?cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
+	             <a href="list?boardCd=${boardCd}&cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
+	             <a href="list?boardCd=${boardCd}&cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
              </c:if>
         </div>
- <!--       <c:if test="${empty loginMember}">  -->
-		    <div id="write">
+		<c:if test="${!empty loginMember}">
+		    <div id="write" onclick="location.href='${contextPath}/board/nwrite?boardCd=${boardCd}?cp=${pagination.currentPage }';">
 		        <i class="pen"><span>글 작성</span></i><i class="fas fa-pencil-alt fa-5x"></i>
 		    </div>
-  <!--       </c:if>    로그인 구현후 제거 -->
+ 		</c:if>
     </div>
 	</section>
 <jsp:include page="../common/footer.jsp"/>
