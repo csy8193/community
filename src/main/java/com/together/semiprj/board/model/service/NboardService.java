@@ -31,12 +31,13 @@ public class NboardService {
 	}
 	/**해당되는 게시글 리스트 반환
 	 * @param pagination
+	 * @param boardCd 
 	 * @return nboardList
 	 * @throws Exception
 	 */
-	public List<Nboard> selectBoardList(Pagination pagination, int memberNo) throws Exception{
+	public List<Nboard> selectBoardList(Pagination pagination, int memberNo, int boardCd) throws Exception{
 		Connection conn = getConnection();
-		List<Nboard> nboardList = dao.selectBoardList(conn, pagination, memberNo);
+		List<Nboard> nboardList = dao.selectBoardList(conn, pagination, memberNo, boardCd);
 		
 		for(Nboard aa : nboardList) {
 			System.out.println(aa);

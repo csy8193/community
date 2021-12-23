@@ -59,10 +59,11 @@ public class NboardDAO {
 	/**페이지네이션 해당 게시글 모두 반환
 	 * @param conn
 	 * @param pagination
+	 * @param boardCd 
 	 * @return nboardList
 	 * @throws Exception
 	 */
-	public List<Nboard> selectBoardList(Connection conn, Pagination pagination,int memberNo) throws Exception{
+	public List<Nboard> selectBoardList(Connection conn, Pagination pagination,int memberNo, int boardCd) throws Exception{
 		List<Nboard> nboardList;
 		Nboard nboard;
 		try {
@@ -86,7 +87,7 @@ public class NboardDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
-			pstmt.setInt(2, 10);
+			pstmt.setInt(2, boardCd);
 			//게시판 카테고리
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, endRow);
