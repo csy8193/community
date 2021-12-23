@@ -19,6 +19,7 @@ public class Board {
 	private String categoryName;
 	private String statusName;
 	private String boardName;
+	private String boardPicPath;
 	
 
 	// 해당 게시글 이미지 목록을 저장할 필드
@@ -121,6 +122,17 @@ public class Board {
 	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+	
+	
+
+	public String getBoardPicPath() {
+		return boardPicPath;
+	}
+
+
+	public void setBoardPicPath(String boardPicPath) {
+		this.boardPicPath = boardPicPath;
+	}
 
 
 	@Override
@@ -129,8 +141,11 @@ public class Board {
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", readCount=" + readCount
 				+ ", memberNo=" + memberNo + ", boardStatusCode=" + boardStatusCode + ", categoryCode=" + categoryCode
 				+ ", memberName=" + memberName + ", categoryName=" + categoryName + ", statusName=" + statusName
-				+ ", boardName=" + boardName + ", imgList=" + imgList + "]";
+				+ ", boardName=" + boardName + ", boardPicPath=" + boardPicPath + ", imgList=" + imgList + "]";
 	}
+
+
+	
 
 	
 

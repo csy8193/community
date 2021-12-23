@@ -47,11 +47,11 @@ public class BoardController222 extends HttpServlet{
 
 					if(command.equals("notice")) {
 						
-						int cd = Integer.parseInt(req.getParameter("cd"));
+						int bc = 20;
 						
-						Pagination pagination = service.getPagination(cp, cd);
+						Pagination pagination = service.getPagination(cp, bc);
 						
-						List<Board> boardList = service.selectBoardList(pagination, cd);
+						List<Board> boardList = service.selectBoardList(pagination, bc);
 						
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
@@ -206,6 +206,15 @@ public class BoardController222 extends HttpServlet{
 					}
 					
 					else if(command.equals("event")) {
+						
+						int bc = 70;
+						
+						Pagination pagination = service.getPagination(cp, bc);
+						
+						List<Board> boardList = service.selectBoardList(pagination, bc);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
 						
 						path = "/WEB-INF/views/board/eventList.jsp";
 						dispatcher = req.getRequestDispatcher(path);

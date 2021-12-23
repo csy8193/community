@@ -117,12 +117,12 @@ public class BoardService222 {
 	 * @return
 	 * @throws Exception
 	 */
-	public Pagination getPagination(int cp, int cd) throws Exception{
+	public Pagination getPagination(int cp, int bc) throws Exception{
 		
 		Connection conn = getConnection();
 		
 		// 전체 게시글 수 조회 DAO 생성
-		int listCount = dao.getListCount(conn, cd);
+		int listCount = dao.getListCount(conn, bc);
 		
 		close(conn);
 		
@@ -141,10 +141,25 @@ public class BoardService222 {
 		
 		List<Board> boardList = dao.selectBoardList(pagination, conn, cd);
 		
-		
 		close(conn);
 		
 		return boardList;
 	}
+
+	/** 이벤트 페이지 목록
+	 * @param bc
+	 * @return
+	 * @throws Exception
+	 */
+	/*
+	 * public List<Board> eventList(int bc) throws Exception{ Connection conn =
+	 * getConnection();
+	 * 
+	 * List<Board> boardList = dao.eventList(conn, bc);
+	 * 
+	 * close(conn);
+	 * 
+	 * return boardList; }
+	 */
 
 }

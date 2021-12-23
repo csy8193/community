@@ -148,13 +148,13 @@ public class BoardDAO222 {
 		return result;
 	}
 
-	public int getListCount(Connection conn, int cd) throws Exception{
+	public int getListCount(Connection conn, int bc) throws Exception{
 		int listCount = 0;
 		
 		try {
 			String sql = prop.getProperty("getListCount");
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cd);
+			pstmt.setInt(1, bc);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -205,6 +205,7 @@ List<Board> boardList = new ArrayList<Board>();
 				board.setBoardName(rs.getString("BOARD_NAME"));
 				board.setStatusName(rs.getString("STATUS_NM"));
 				board.setCreateDate(rs.getString("CREATE_DT"));
+				board.setBoardPicPath(rs.getString("BOARD_PIC_PATH"));
 				
 				boardList.add(board);
 			}
@@ -241,4 +242,29 @@ List<Board> boardList = new ArrayList<Board>();
 		}
 		return result;
 	}
+
+	/** 이벤트 목록 조회
+	 * @param conn
+	 * @param bc
+	 * @return
+	 * @throws Exception
+	 */
+	/*
+	 * public List<Board> eventList(Connection conn, int bc) throws Exception{
+	 * List<Board> boardList = new ArrayList<Board>();
+	 * 
+	 * try { String sql = prop.getProperty("eventList");
+	 * 
+	 * int startRow = ( pagination.getCurrentPage() -1)* pagination.getLimit() +1 ;
+	 * int endRow = startRow + pagination.getLimit() -1;
+	 * 
+	 * 
+	 * } finally {
+	 * 
+	 * 
+	 * }
+	 * 
+	 * 
+	 * return null; }
+	 */
 }
