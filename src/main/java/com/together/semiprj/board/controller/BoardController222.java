@@ -105,12 +105,13 @@ public class BoardController222 extends HttpServlet{
 					else if(command.equals("ninsert")) {
 						String boardTitle = req.getParameter("boardTitle");
 						String boardContent = req.getParameter("boardContent");
+						String picPath = req.getParameter("input-img");
 						
 						HttpSession session = req.getSession();
 						
 						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
 						
-						int result = service.insertBoard(boardTitle, boardContent, memberNo);
+						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath);
 						
 						
 					}
@@ -202,6 +203,13 @@ public class BoardController222 extends HttpServlet{
 //						}
 //						session.setAttribute("message", message);
 //						resp.sendRedirect(path);
+					}
+					
+					else if(command.equals("event")) {
+						
+						path = "/WEB-INF/views/board/eventList.jsp";
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
 					}
 				} catch (Exception e) {
 					

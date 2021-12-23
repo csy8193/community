@@ -218,4 +218,27 @@ List<Board> boardList = new ArrayList<Board>();
 		
 		return boardList;
 	}
+
+	/** 일반게시판 이미지 경로 삽입
+	 * @param conn
+	 * @param picPath
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertBoardImage(Connection conn, String picPath) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertImage");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, picPath);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
 }

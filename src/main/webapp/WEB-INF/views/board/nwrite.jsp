@@ -61,22 +61,34 @@
 					onChange: function(contents, $editable){
 						const img = $(".note-editable img");
 						const board = $(".boardImg");
+						const boardimg = $(".boardImg > img");
 						
 						if(length != img.length){
 							if(length < img.length){
-								const boardImg = $("<li class='boardImg' onclick='thumbnail(this, "+(index)+");'>");
+								const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>"); /* , "+(index)+" */
 					            boardImg.append("<img src='"+$(img[length]).attr("src")+"'>");
 					            
 					            $(".image-preview").append(boardImg);
 					            if(index == 0){
 					            	$(".boardImg > img").css("border", "3px solid #4facfe");
+						            $("#fileArea").append('<input type="text" id="input-img" value="'+$(img[length]).attr("src")+'" name="input-img">');
 					            }
-					            $("#fileArea").append('<input type="text" id="input-img'+index+'" value="'+$(img[length]).attr("src")+'" name="img'+index+'">');
 					            
 					            index += 1;
 								
 							}else{
-								$(board[img.length]).remove();
+								for(let i=0; i<board.length; i++){
+									if($(img[i]).attr("src") != $(boardimg[i]).attr("src")){
+										if($(boardimg[i]).attr("src") == $("#fileArea > input").val()){
+											$("#fileArea").empty();
+										}
+										$(board[i]).remove();
+										break;
+									}
+								}
+								/* $(board[img.length]).remove(); */
+								
+								
 							}
 							length = img.length;
 						}
@@ -84,6 +96,15 @@
 				}
 			});
 		});
+           
+        function thumbnail(value){
+        	
+			$(".boardImg").children("img").css("border", "3px solid #e7e7e7");
+			$(value).children("img").css("border", "3px solid #4facfe");
+			$("#fileArea").empty();
+			$("#fileArea").append('<input type="text" id="input-img" value="'+$(value).children("img").attr("src")+'" name="input-img">');
+			
+        }
            
 	</script>
 	<script src="${contextPath}/resources/js/boardWrite.js"></script>

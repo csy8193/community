@@ -20,15 +20,24 @@ public class BoardService222 {
 	 * @param boardTitle
 	 * @param boardContent
 	 * @param memberNo
+	 * @param picPath 
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoard(String boardTitle, String boardContent, int memberNo) throws Exception{
+	public int insertBoard(String boardTitle, String boardContent, int memberNo, String picPath) throws Exception{
 		Connection conn = getConnection();
 		
 		int result = dao.insertBoard(conn, boardTitle, boardContent, memberNo);
 		
-		if(result > 0) commit(conn);
+		if(result > 0) {
+			commit(conn);
+			
+			result = dao.insertBoardImage(conn, picPath);
+			
+			if(result > 0) commit(conn);
+			else rollback(conn);
+			
+		}
 		else rollback(conn);
 		
 		close(conn);
