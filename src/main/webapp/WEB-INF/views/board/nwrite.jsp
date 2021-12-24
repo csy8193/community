@@ -19,7 +19,10 @@
 	<main>
 		<div id="main">
 			<form action="ninsert" method="post" onsubmit="return insertValidate();">
-				<h1 class="board">게시판 이름</h1>
+				<h1 class="board">
+					${boardName}
+					<input type="text" name="boardCd" value="${boardCd}">
+				</h1>
 				<h4 class="title">글 제목<span> *</span></h4>
 				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요">
 				<h4 class="title">글 작성<span> *</span></h4>

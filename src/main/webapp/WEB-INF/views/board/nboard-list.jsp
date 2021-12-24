@@ -64,7 +64,7 @@
              </c:if>
         </div>
 		<c:if test="${!empty loginMember}">
-		    <div id="write" onclick="location.href='${contextPath}/board/nwrite?boardCd=${boardCd}?cp=${pagination.currentPage }';">
+		    <div id="write" onclick="location.href='${contextPath}/board/nwrite?boardCd=${boardCd}&cp=${pagination.currentPage }';">
 		        <i class="pen"><span>글 작성</span></i><i class="fas fa-pencil-alt fa-5x"></i>
 		    </div>
  		</c:if>

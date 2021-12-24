@@ -23,6 +23,7 @@ ol,ul,li, a{
 main{
     display: flex;
     justify-content: center;
+    margin-top: 150px;
 }
 
 #main{
@@ -33,6 +34,10 @@ main{
 .board{
     margin-top: 80px;
 }
+.board > input{
+	display: none;
+}
+
 
 .title{
     margin-top: 50px;

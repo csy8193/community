@@ -36,21 +36,25 @@ public class BoardDAO222 {
 
 	/** 일반게시판 삽입
 	 * @param conn
+	 * @param boardNo 
 	 * @param boardTitle
 	 * @param boardContent
 	 * @param memberNo
+	 * @param boardCd 
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoard(Connection conn, String boardTitle, String boardContent, int memberNo) throws Exception{
+	public int insertBoard(Connection conn, int boardNo, String boardTitle, String boardContent, int memberNo, int boardCd) throws Exception{
 		int result = 0;
 		
 		try {
 			String sql = prop.getProperty("insertBoard");
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, boardTitle);
-			pstmt.setString(2, boardContent);
-			pstmt.setInt(3, memberNo);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, boardTitle);
+			pstmt.setString(3, boardContent);
+			pstmt.setInt(4, boardCd);
+			pstmt.setInt(5, memberNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -217,16 +221,18 @@ List<Board> boardList = new ArrayList<Board>();
 	/** 일반게시판 이미지 경로 삽입
 	 * @param conn
 	 * @param picPath
+	 * @param boardNo 
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoardImage(Connection conn, String picPath) throws Exception{
+	public int insertBoardImage(Connection conn, String picPath, int boardNo) throws Exception{
 		int result = 0;
 		
 		try {
 			String sql = prop.getProperty("insertImage");
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, picPath);
+			pstmt.setInt(2, boardNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -235,6 +241,32 @@ List<Board> boardList = new ArrayList<Board>();
 			
 		}
 		return result;
+	}
+
+	/** 게시판 이름 조회
+	 * @param conn 
+	 * @param boardCd
+	 * @return
+	 * @throws Exception
+	 */
+	public String selectBoardName(Connection conn, int boardCd) throws Exception{
+		String boardName = null;
+		
+		try {
+			String sql = prop.getProperty("selectBoardName");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardCd);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardName = rs.getString(1);
+			}
+		} finally {
+			close(pstmt);
+		}
+		
+		return boardName;
 	}
 
 	/** 이벤트 목록 조회

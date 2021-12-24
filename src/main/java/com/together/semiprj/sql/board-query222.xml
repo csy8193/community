@@ -5,7 +5,7 @@
 	
 	<!-- 게시글 삽입 -->
 	<entry key="insertBoard">
-		INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT, 10, 1, ?)
+		INSERT INTO BOARD VALUES(?, ?, ?, DEFAULT, DEFAULT, ?, 1, ?)
 	</entry>
 	
 	<!-- 다음 게시글 번호 조회  -->
@@ -42,7 +42,7 @@
 	
 	<!-- 일반게시판 이미지 정보 삽입 -->
 	<entry key="insertImage">
-		INSERT INTO BOARD_PIC VALUES(SEQ_BOARD_PIC_NO.NEXTVAL, ?, DEFAULT, DEFAULT, DEFAULT, SEQ_BOARD_NO.CURRVAL)
+		INSERT INTO BOARD_PIC VALUES(SEQ_BOARD_PIC_NO.NEXTVAL, ?, DEFAULT, DEFAULT, DEFAULT, ?)
 	</entry>
 	
 	
@@ -53,6 +53,11 @@
 		        WHERE STATUS_CD != 2 AND BOARD_CD = ?
 		        ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="selectBoardName">
+		SELECT BOARD_NAME FROM BOARD_CODE WHERE BOARD_CD = ?
 	</entry>
 	
 </properties>

@@ -65,6 +65,13 @@ public class BoardController222 extends HttpServlet{
 					
 					
 					else if(command.equals("nwrite")) {
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+						
+						String boardName = service.selectBoardName(boardCd);
+						
+						req.setAttribute("boardName", boardName);
+						req.setAttribute("boardCd", boardCd);
+						
 						path = "/WEB-INF/views/board/nwrite.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
@@ -106,12 +113,17 @@ public class BoardController222 extends HttpServlet{
 						String boardTitle = req.getParameter("boardTitle");
 						String boardContent = req.getParameter("boardContent");
 						String picPath = req.getParameter("input-img");
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+
+						System.out.println(req.getParameter("input-img"));
 						
 						HttpSession session = req.getSession();
 						
 						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
 						
-						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath);
+						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath, boardCd);
+						
+						resp.sendRedirect(req.getContextPath()+"/nboard/view?cp=1&boardNo="+result+"&boardCd="+boardCd+"");
 						
 						
 					}
