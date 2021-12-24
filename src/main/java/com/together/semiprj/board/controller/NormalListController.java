@@ -43,16 +43,10 @@ public class NormalListController extends HttpServlet{
 			NboardService service = new NboardService();
 			
 			//카테고리?
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Pagination pagination = service.getPagination(cp,boardCd);
-=======
 			int boardCate =	 10;
 			Pagination pagination = service.getPagination(cp,boardCate);
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
-=======
-			Pagination pagination = service.getPagination(cp,boardCd);
->>>>>>> 4f6979215af36e4ea0194d67c57912e7ca203b84
+
 			//전체 게시글 수 조회 후 페이지네이션 객체에 넣으면 페이지 계산 나옴
 			
 			List<Nboard> boardList = service.selectBoardList(pagination,memberNo, boardCd);

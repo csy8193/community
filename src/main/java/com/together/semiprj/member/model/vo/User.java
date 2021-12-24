@@ -12,6 +12,7 @@ public class User {
 	private Date enrollDt;
 	private int statusCd;
 	private int gradeCd;
+	private String profilePath;
 	
 	public User() { }
 
@@ -99,12 +100,21 @@ public class User {
 	public void setGradeCd(int gradeCd) {
 		this.gradeCd = gradeCd;
 	}
+	
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
+		return "User [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
 				+ memberNm + ", memberEmail=" + memberEmail + ", enrollDt=" + enrollDt + ", statusCd=" + statusCd
-				+ ", gradeCd=" + gradeCd + "]";
+				+ ", gradeCd=" + gradeCd + ", profilePath=" + profilePath + "]";
 	}
 	
 }

@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.together.semiprj.board.model.dao.NboardReplyDAO;
-<<<<<<< HEAD
 import com.together.semiprj.walk.member.vo.Mypoint;
-=======
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 import com.together.semiprj.walk.member.vo.WalkRank;
 
 public class WalkDAO {
@@ -54,12 +51,9 @@ public class WalkDAO {
 				rank.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
 				rank.setAnimalGender(rs.getString("ANIMAL_SEX"));
 				rank.setAnimalBirth(rs.getString("ANIMAL_BIRTH"));
-<<<<<<< HEAD
 				rank.setAnimalCategoryNm(rs.getString("ANIMAL_CATEGORY_NM"));
 				rank.setAnimalImg(rs.getString("ANIMAL_PROFILE_IMG"));
-=======
 				rank.setAnimalImg(rs.getString("ANIMALIMG"));
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 				rankList.add(rank);
 			}
 			
@@ -104,7 +98,6 @@ public class WalkDAO {
 		
 		return history;
 	}
-<<<<<<< HEAD
 	public List<Mypoint> myPoint(Connection conn, int loginMember) throws Exception{
 		List<Mypoint> myPointList= null;
 		Mypoint mypoint = null;
@@ -170,7 +163,5 @@ public class WalkDAO {
 		
 		return result;
 	}
-=======
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 
 }

@@ -95,7 +95,7 @@ function showUpdateReply(replyNo, el){
     }
 // 댓글 수정화면 출력 전 요소를 저장해둠.
     beforeReplyRow = $(el).parent().parent().html();
-    //console.log(beforeReplyRow);
+    console.log(beforeReplyRow);
 
 
     // 작성되어있던 내용(수정 전 댓글 내용) 

@@ -6,7 +6,6 @@ public class Mypoint {
 	private String animalName;
 	private int checkWalk;
 	private String checkDate;
-<<<<<<< HEAD
 	private int myrank;
 	public int getMyrank() {
 		return myrank;
@@ -14,8 +13,6 @@ public class Mypoint {
 	public void setMyrank(int myrank) {
 		this.myrank = myrank;
 	}
-=======
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -49,14 +46,8 @@ public class Mypoint {
 	@Override
 	public String toString() {
 		return "Mypoint [memberNo=" + memberNo + ", totalp=" + totalp + ", animalName=" + animalName + ", checkWalk="
-<<<<<<< HEAD
 				+ checkWalk + ", checkDate=" + checkDate + ", myrank=" + myrank + "]";
 	}
-
-=======
-				+ checkWalk + ", checkDate=" + checkDate + "]";
-	}
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 	
 	
 }

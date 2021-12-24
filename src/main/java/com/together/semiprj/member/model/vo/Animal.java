@@ -11,7 +11,9 @@ public class Animal {
 	private int memberNo;
 	private int animalCategoryCode;
 	private String animalCategoryName;
-	
+	private String animalImgPath;
+	private String animalImgNm;
+
 	public Animal() {
 		
 	}
@@ -98,14 +100,34 @@ public class Animal {
 	public void setAnimalCategoryName(String animalCategoryName) {
 		this.animalCategoryName = animalCategoryName;
 	}
+	
+	public String getAnimalImgPath() {
+		return animalImgPath;
+	}
+
+
+	public void setAnimalImgPath(String animalImgPath) {
+		this.animalImgPath = animalImgPath;
+	}
+
+
+	public String getAnimalImgNm() {
+		return animalImgNm;
+	}
+
+
+	public void setAnimalImgNm(String animalImgNm) {
+		this.animalImgNm = animalImgNm;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Animal [animalNo=" + animalNo + ", animalNm=" + animalNm + ", animalVariety=" + animalVariety
 				+ ", animalGender=" + animalGender + ", animalBirthday=" + animalBirthday + ", memberNo=" + memberNo
-				+ ", animalCategoryCode=" + animalCategoryCode + ", animalCategoryName=" + animalCategoryName + "]";
+				+ ", animalCategoryCode=" + animalCategoryCode + ", animalCategoryName=" + animalCategoryName
+				+ ", animalImgPath=" + animalImgPath + ", animalImgNm=" + animalImgNm + "]";
 	}
-	
 
 
 }

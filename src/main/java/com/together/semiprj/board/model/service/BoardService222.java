@@ -21,20 +21,25 @@ public class BoardService222 {
 	 * @param boardContent
 	 * @param memberNo
 	 * @param picPath 
+	 * @param boardCd 
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoard(String boardTitle, String boardContent, int memberNo, String picPath) throws Exception{
+	public int insertBoard(String boardTitle, String boardContent, int memberNo, String picPath, int boardCd) throws Exception{
 		Connection conn = getConnection();
 		
-		int result = dao.insertBoard(conn, boardTitle, boardContent, memberNo);
+		int boardNo = dao.nextBoardNo(conn);
+		
+		int result = dao.insertBoard(conn, boardNo, boardTitle, boardContent, memberNo, boardCd);
 		
 		if(result > 0) {
-			commit(conn);
 			
-			result = dao.insertBoardImage(conn, picPath);
+			result = dao.insertBoardImage(conn, picPath, boardNo);
 			
-			if(result > 0) commit(conn);
+			if(result > 0) {
+				commit(conn);
+				result = boardNo;
+			}
 			else rollback(conn);
 			
 		}
@@ -144,6 +149,21 @@ public class BoardService222 {
 		close(conn);
 		
 		return boardList;
+	}
+
+	/** 게시판 이름 조회
+	 * @param boardCd
+	 * @return
+	 * @throws Exception
+	 */
+	public String selectBoardName(int boardCd) throws Exception{
+		Connection conn = getConnection();
+		
+		String boardName = dao.selectBoardName(conn, boardCd);
+		
+		close(conn);
+		
+		return boardName;
 	}
 
 	/** 이벤트 페이지 목록

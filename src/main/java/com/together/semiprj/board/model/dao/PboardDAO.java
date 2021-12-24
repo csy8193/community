@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.together.semiprj.board.model.vo.Board;
 import com.together.semiprj.board.model.vo.Pagination;
 import com.together.semiprj.board.model.vo.Pboard;
 import com.together.semiprj.board.model.vo.PboardImage;
@@ -68,7 +69,7 @@ public class PboardDAO {
 	 * @return pboardList
 	 * @throws Exception
 	 */
-	public List<Pboard> selectBoardList(Connection conn, Pagination pagination, int memberNo) throws Exception {
+	public List<Pboard> selectBoardList(Connection conn, Pagination pagination, int memberNo, int boardCd) throws Exception {
 
 		List<Pboard> pboardList = new ArrayList<Pboard>();
 		
@@ -79,8 +80,10 @@ public class PboardDAO {
 			int endRow = startRow + pagination.getLimit() -1;
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardCd);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rs = pstmt.executeQuery();
 			
@@ -90,13 +93,17 @@ public class PboardDAO {
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
-				board.setMemberNm(rs.getString("MEMBER_NM"));
 				board.setReadCount(rs.getInt("READ_COUNT"));
-				board.setBoardName(rs.getString("BOARD_NAME"));
-				board.setStatusNm(rs.getString("STATUS_NM"));
+				board.setBoardCd(rs.getInt("BOARD_CD"));
 				board.setCreateDt(rs.getString("CREATE_DT"));
-				board.setReplycount(rs.getInt("REPLY_COUNT"));
-				board.setLikecount(rs.getInt("LIKE_COUNT"));
+				board.setStatusCd(rs.getInt("STATUS_CD"));
+				board.setMemberNo(rs.getInt("MEMBER_NO"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+				board.setMemberId(rs.getString("MEMBER_ID"));
+				board.setLikecount(rs.getInt("LIKECOUNT"));
+				board.setReplycount(rs.getInt("REPLYCOUNT"));
+				board.setLikeDone(rs.getBoolean("LIKEDONE"));
+				board.setAnimalMainImgPath(rs.getNString("ANIMAL_PROFILE_IMG"));
 				
 				pboardList.add(board);
 			}
@@ -215,6 +222,34 @@ public class PboardDAO {
 		}
 		
 		return result;
+	}
+
+
+	/** board 이름 가져오기
+	 * @param conn
+	 * @param boardCd
+	 * @return result
+	 * @throws Exception
+	 */
+	public String boardNmCh(Connection conn, int boardCd) throws Exception {
+		
+		String boardNm = null;
+		
+		try {
+			String sql = prop.getProperty("boardNmCh");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardCd);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				boardNm = rs.getString(1);
+			}
+		}finally {
+			close(pstmt);
+		}
+		
+		return boardNm;
 	}
 
 }

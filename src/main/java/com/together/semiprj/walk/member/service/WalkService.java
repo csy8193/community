@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.together.semiprj.walk.member.dao.WalkDAO;
-<<<<<<< HEAD
 import com.together.semiprj.walk.member.vo.Mypoint;
-=======
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 import com.together.semiprj.walk.member.vo.WalkRank;
 
 public class WalkService {
@@ -42,7 +39,6 @@ public class WalkService {
 		return history;
 	}
 
-<<<<<<< HEAD
 	/**내 포인트 랭킹
 	 * @param loginMember
 	 * @return
@@ -73,6 +69,4 @@ public class WalkService {
 		return result;
 	}
 
-=======
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 }

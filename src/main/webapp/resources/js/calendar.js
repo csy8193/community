@@ -1,11 +1,9 @@
-<<<<<<< HEAD
     let selectMonth = 0;
 	
     window.onload= function(){
 		
 		displayCal(selectMonth);
     }
-=======
 
     let selectMonth = 0;
     window.onload= function(){
@@ -14,7 +12,6 @@
 		displayCal(selectMonth);
     }
 
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 	
 	const memberWalkHistory = function(start, end){
 
@@ -93,13 +90,10 @@
 
     let lastDate =  monthDay[month-1];
 
-<<<<<<< HEAD
     var enMonthName = new Array('1월','2월','3월','4월','5월','6월',
         '7월','8월','9월','10월','11월','12월');
-=======
     var enMonthName = new Array('1월 (January)','2월 (February)','3월 (March)','4월 (April)','5월 (May)','6월 (June)',
         '7월 (July)','8월 (August)','9월 (September)','10월 (October)','11월 (November)','12월 (December)');
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
     
     	
         const tmonth = document.getElementById("today-month");
@@ -146,17 +140,14 @@
 
 							arrcheckday.forEach(function(element){
 							    if(element==count) {
-<<<<<<< HEAD
 									$(td).addClass("walkdone");
 							    }
 								else{
 									$(td).addClass("nonewalk");
 								}
-=======
 							        console.log("됨");
 									$(td).addClass("walkdone");
 							    }
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 							});
 	                        let tempDate = new Date(year, month-1 ,count);
 	                        //console.log(count+"번째" +" tempDate: " +tempDate);
@@ -202,7 +193,6 @@ const next = function(){
         displayCal();
     }
 
-<<<<<<< HEAD
 const insertWalkHistory = function(el){
 	const walktext =  $(el).prev().val("");
 	
@@ -229,9 +219,6 @@ const insertWalkHistory = function(el){
 const resetWalkText = function(el){
 	$(el).prev().prev().val("")
 }
-=======
-
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 /**
  * 
  */
