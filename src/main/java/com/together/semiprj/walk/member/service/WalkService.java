@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.together.semiprj.walk.member.dao.WalkDAO;
+import com.together.semiprj.walk.member.vo.Mypoint;
 import com.together.semiprj.walk.member.vo.WalkRank;
 
 public class WalkService {
@@ -36,6 +37,36 @@ public class WalkService {
 		close(conn);
 		
 		return history;
+	}
+
+	/**내 포인트 랭킹
+	 * @param loginMember
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Mypoint> myPoint(int loginMember)  throws Exception{
+		Connection conn = getConnection();
+		
+		List<Mypoint> myPointList = dao.myPoint(conn,loginMember);
+		int myrank = dao.myPointRank(conn,loginMember);
+		for(Mypoint dd: myPointList) {
+			dd.setMyrank(myrank);
+		}
+		return myPointList;
+	}
+
+	public int walkinsert(int memberNo, String walktext) throws Exception{
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = dao.walkinsert(conn,memberNo,walktext);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

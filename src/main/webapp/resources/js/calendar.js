@@ -1,3 +1,9 @@
+    let selectMonth = 0;
+	
+    window.onload= function(){
+		
+		displayCal(selectMonth);
+    }
 
     let selectMonth = 0;
     window.onload= function(){
@@ -84,6 +90,8 @@
 
     let lastDate =  monthDay[month-1];
 
+    var enMonthName = new Array('1월','2월','3월','4월','5월','6월',
+        '7월','8월','9월','10월','11월','12월');
     var enMonthName = new Array('1월 (January)','2월 (February)','3월 (March)','4월 (April)','5월 (May)','6월 (June)',
         '7월 (July)','8월 (August)','9월 (September)','10월 (October)','11월 (November)','12월 (December)');
     
@@ -132,6 +140,11 @@
 
 							arrcheckday.forEach(function(element){
 							    if(element==count) {
+									$(td).addClass("walkdone");
+							    }
+								else{
+									$(td).addClass("nonewalk");
+								}
 							        console.log("됨");
 									$(td).addClass("walkdone");
 							    }
@@ -180,7 +193,32 @@ const next = function(){
         displayCal();
     }
 
-
+const insertWalkHistory = function(el){
+	const walktext =  $(el).prev().val("");
+	
+	$.ajax({
+			url : contextPath+"/walk/walkinsert",
+			data : {
+				"loginMemberNo" : loginMemberNo,
+				"walktext" : walktext
+			},
+			dataType : "json",
+			type : "POST",
+			success: function(result){
+				
+				
+			},
+			error : function(req, status, error){
+                    console.log("좋아요 에러");
+                    console.log(req.responseText);
+            }
+			
+	})
+	
+}
+const resetWalkText = function(el){
+	$(el).prev().prev().val("")
+}
 /**
  * 
  */

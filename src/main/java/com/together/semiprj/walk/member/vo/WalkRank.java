@@ -10,6 +10,17 @@ public class WalkRank {
 	private String animalGender;
 	private String animalBirth;
 	private String animalImg;
+<<<<<<< HEAD
+	private String animalCategoryNm;
+	
+	public String getAnimalCategoryNm() {
+		return animalCategoryNm;
+	}
+	public void setAnimalCategoryNm(String animalCategoryNm) {
+		this.animalCategoryNm = animalCategoryNm;
+	}
+=======
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 	public int getRank() {
 		return rank;
 	}

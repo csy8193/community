@@ -113,9 +113,8 @@ public class NboardDAO {
 				nboard.setLikeDone(rs.getBoolean("LIKEDONE"));
 				nboard.setBoardPicNo(rs.getInt("BOARD_PIC_NO"));
 				nboard.setBoardMainImgPath(rs.getString("MAINIMGPATH"));
-				nboard.setAnimalImgNo(rs.getInt("ANIMAL_IMG_NO"));
-				nboard.setAnimalMainImgPath(rs.getNString("MAINANIMALPATH"));
-				
+				//nboard.setAnimalImgNo(rs.getInt("ANIMAL_IMG_NO"));
+				nboard.setAnimalMainImgPath(rs.getNString("ANIMAL_PROFILE_IMG"));
 				nboardList.add(nboard);
 			}
 			}finally {

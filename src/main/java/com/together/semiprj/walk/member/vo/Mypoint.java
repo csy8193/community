@@ -6,6 +6,13 @@ public class Mypoint {
 	private String animalName;
 	private int checkWalk;
 	private String checkDate;
+	private int myrank;
+	public int getMyrank() {
+		return myrank;
+	}
+	public void setMyrank(int myrank) {
+		this.myrank = myrank;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -39,7 +46,7 @@ public class Mypoint {
 	@Override
 	public String toString() {
 		return "Mypoint [memberNo=" + memberNo + ", totalp=" + totalp + ", animalName=" + animalName + ", checkWalk="
-				+ checkWalk + ", checkDate=" + checkDate + "]";
+				+ checkWalk + ", checkDate=" + checkDate + ", myrank=" + myrank + "]";
 	}
 	
 	

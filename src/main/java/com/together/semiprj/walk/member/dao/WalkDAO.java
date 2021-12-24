@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.together.semiprj.board.model.dao.NboardReplyDAO;
+import com.together.semiprj.walk.member.vo.Mypoint;
 import com.together.semiprj.walk.member.vo.WalkRank;
 
 public class WalkDAO {
@@ -50,6 +51,8 @@ public class WalkDAO {
 				rank.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
 				rank.setAnimalGender(rs.getString("ANIMAL_SEX"));
 				rank.setAnimalBirth(rs.getString("ANIMAL_BIRTH"));
+				rank.setAnimalCategoryNm(rs.getString("ANIMAL_CATEGORY_NM"));
+				rank.setAnimalImg(rs.getString("ANIMAL_PROFILE_IMG"));
 				rank.setAnimalImg(rs.getString("ANIMALIMG"));
 				rankList.add(rank);
 			}
@@ -94,6 +97,71 @@ public class WalkDAO {
 		}
 		
 		return history;
+	}
+	public List<Mypoint> myPoint(Connection conn, int loginMember) throws Exception{
+		List<Mypoint> myPointList= null;
+		Mypoint mypoint = null;
+		try {
+			String sql = prop.getProperty("myPointAndRank");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember);
+			rs = pstmt.executeQuery();
+			myPointList = new ArrayList<Mypoint>();
+			while(rs.next()) {
+				mypoint = new Mypoint();
+				mypoint.setMemberNo(rs.getInt("MEMBER_NO"));
+				mypoint.setTotalp(rs.getInt("TOTALP"));
+				mypoint.setAnimalName(rs.getString("ANIMAL_NAME"));
+				myPointList.add(mypoint);
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return myPointList;
+	}
+	/** 이번달 포인트 순위
+	 * @param conn
+	 * @param loginMember
+	 * @return
+	 */
+	public int myPointRank(Connection conn, int loginMember) throws Exception{
+		int result =0;
+		try {
+			String sql = prop.getProperty("mymonthrank");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("MYRANK");
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int walkinsert(Connection conn, int memberNo, String walktext) throws Exception {
+		
+		int result = 0 ;
+		try {
+			String sql = prop.getProperty("walkinsert");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, walktext);
+			pstmt.setInt(2, memberNo);
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }
