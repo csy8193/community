@@ -8,9 +8,12 @@
 	 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/pic-board.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 >>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
+=======
+>>>>>>> 4f6979215af36e4ea0194d67c57912e7ca203b84
 	<title>사진 게시판 목록</title>
 </head>
 <body>
@@ -112,34 +115,43 @@
         
         <%---------------------- Pagination ----------------------%>
 		
-		<div class="my-5">
-			<ul class="pagination">
-				
-				
-				<c:if test="${pagination.startPage != 1 }">
-					<li><a class="page-link" href="list?cp=1">&lt;&lt;</a></li>
-					<li><a class="page-link" href="list?cp=${pagination.prevPage}">&lt;</a></li>
-				</c:if>
-				
-				<%-- 페이지네이션 번호 목록 --%>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1"  var="i">
-					<c:choose>
-						<c:when test="${i == pagination.currentPage}">
-							<li><a class="page-link" style="color:black; font-weight:bold;">${i}</a></li>   
-						</c:when>
-						
-						<c:otherwise>
-							<li><a class="page-link" href="list?cp=${i}">${i}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				
-				<c:if test="${pagination.endPage != pagination.maxPage }">
-					<li><a class="page-link" href="list?cp=${pagination.nextPage}">&gt;</a></li>
-					<li><a class="page-link" href="list?cp=${pagination.maxPage }">&gt;&gt;</a></li>
-				</c:if>
-			</ul>
-		</div>
+        <div class="page-number">
+            <ul class="page-ul">
+            	<c:if test="${pagination.startPage != 1}">
+                 <li>
+                     <a href="notice?cd=110&cp=1"><i class="fas fa-angle-double-left"></i></a>
+                 </li>
+                 <li>
+                     <a href="notice?cd=110&cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
+                 </li>
+            	</c:if>
+            	
+            	<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
+            		<c:choose>
+            			<c:when test="${i == pagination.currentPage}">
+             			<li style="border: 1px solid #4facfe; border-radius: 50%; background-color: #4facfe;">
+                       <a style="color: white;">${i}</a>
+                   </li>
+            			</c:when>
+                  <c:otherwise>
+             			<li>
+                       <a href="${contextPath}/board/notice?cd=110&cp=${i}">${i}</a>
+                   </li>
+             		</c:otherwise>
+            		</c:choose>
+            	</c:forEach>
+                
+                
+                <c:if test="${pagination.endPage != pagination.maxPage}">
+                 <li>
+                     <a href="${contextPath}/board/notice?cd=110&cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
+                 </li>
+                 <li>
+                     <a href="${contextPath}/board/notice?cd=110&cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
+                 </li>
+                </c:if>
+            </ul>
+        </div>
         
 >>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
         
