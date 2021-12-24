@@ -6,14 +6,28 @@ public class Animal {
 	private int animalNo;
 	private String animalNm;
 	private String animalVariety;
-	private int animalGender;
-	private Date animalBirthday;
+	private String animalGender;
+	private String animalBirthday;
 	private int memberNo;
 	private int animalCategoryCode;
+	private String animalCategoryName;
 	
 	public Animal() {
 		
 	}
+	
+
+	public Animal(String animalNm, String animalVariety, String animalGender, String animalBirthday, int memberNo,
+			int animalCategoryCode) {
+		super();
+		this.animalNm = animalNm;
+		this.animalVariety = animalVariety;
+		this.animalGender = animalGender;
+		this.animalBirthday = animalBirthday;
+		this.memberNo = memberNo;
+		this.animalCategoryCode = animalCategoryCode;
+	}
+
 
 	public int getAnimalNo() {
 		return animalNo;
@@ -39,19 +53,22 @@ public class Animal {
 		this.animalVariety = animalVariety;
 	}
 
-	public int getAnimalGender() {
+
+	public String getAnimalGender() {
 		return animalGender;
 	}
 
-	public void setAnimalGender(int animalGender) {
+
+	public void setAnimalGender(String animalGender) {
 		this.animalGender = animalGender;
 	}
 
-	public Date getAnimalBirthday() {
+
+	public String getAnimalBirthday() {
 		return animalBirthday;
 	}
 
-	public void setAnimalBirthday(Date animalBirthday) {
+	public void setAnimalBirthday(String animalBirthday) {
 		this.animalBirthday = animalBirthday;
 	}
 
@@ -71,7 +88,23 @@ public class Animal {
 	public void setAnimalCategoryCode(int animalCategoryCode) {
 		this.animalCategoryCode = animalCategoryCode;
 	}
-	
+
+
+
+	public String getAnimalCategoryName() {
+		return animalCategoryName;
+	}
+
+	public void setAnimalCategoryName(String animalCategoryName) {
+		this.animalCategoryName = animalCategoryName;
+	}
+
+	@Override
+	public String toString() {
+		return "Animal [animalNo=" + animalNo + ", animalNm=" + animalNm + ", animalVariety=" + animalVariety
+				+ ", animalGender=" + animalGender + ", animalBirthday=" + animalBirthday + ", memberNo=" + memberNo
+				+ ", animalCategoryCode=" + animalCategoryCode + ", animalCategoryName=" + animalCategoryName + "]";
+	}
 	
 
 

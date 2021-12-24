@@ -17,8 +17,11 @@ public class Board {
 	
 	private String memberName;
 	private String categoryName;
-	private String boardStatusName;
+	private String statusName;
+	private String boardName;
+	private String boardPicPath;
 	
+
 	// 해당 게시글 이미지 목록을 저장할 필드
 	private List<BoardImage> imgList;
 	
@@ -92,19 +95,44 @@ public class Board {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public String getBoardStatusName() {
-		return boardStatusName;
+
+	
+	public String getStatusName() {
+		return statusName;
 	}
-	public void setBoardStatusName(String boardStatusName) {
-		this.boardStatusName = boardStatusName;
+
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
+
+
 	public List<BoardImage> getImgList() {
 		return imgList;
 	}
 	public void setImgList(List<BoardImage> imgList) {
 		this.imgList = imgList;
 	}
+	
+	public String getBoardName() {
+		return boardName;
+	}
 
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	
+	
+
+	public String getBoardPicPath() {
+		return boardPicPath;
+	}
+
+
+	public void setBoardPicPath(String boardPicPath) {
+		this.boardPicPath = boardPicPath;
+	}
 
 
 	@Override
@@ -112,7 +140,13 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", readCount=" + readCount
 				+ ", memberNo=" + memberNo + ", boardStatusCode=" + boardStatusCode + ", categoryCode=" + categoryCode
-				+ ", memberName=" + memberName + ", categoryName=" + categoryName + ", boardStatusName="
-				+ boardStatusName + ", imgList=" + imgList + "]";
+				+ ", memberName=" + memberName + ", categoryName=" + categoryName + ", statusName=" + statusName
+				+ ", boardName=" + boardName + ", boardPicPath=" + boardPicPath + ", imgList=" + imgList + "]";
 	}
+
+
+	
+
+	
+
 }

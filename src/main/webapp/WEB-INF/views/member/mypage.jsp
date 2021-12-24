@@ -8,7 +8,8 @@
 <section>
 	<div id="container">
       <div id="title">
-                <h1>마이페이지</h1>
+      			${aniList}
+                <h1>${loginMember.memberNm}님의 마이페이지</h1>
             </div>
             <div id="content-wrap">
                 <div id="aside-nav">
@@ -35,43 +36,57 @@
                     <div>
                        <h2>반려동물 등록하기</h2>
                     </div>
-                    <div id="animal-add">
-                        <ul>
-                            <!-- 
-                            <li>
-                                <span>
-                                    <img src="img/dog1.jpg" class="animal-profile">
-                                </span>
-                                <p>몰리</p>
+                    
+                     <div id="profile-chk">
+                        <span>* 대표 프로필</span>
+                        <select>
+                            <option>기본</option>
+                            <option></option>
+                        </select>
+                        <button>설정</button>
+                    </div>
+                    
+                    <div id="animal-add-wrap">
+                        <ul id="animalList" >
+                        <c:forEach items="${aniList}" var="ani">
+                        	<li>
+                                <span></span>
+                                <p>${ani.animalNm}</p>
                                 <button>반려동물 정보변경</button>
                             </li>
-                             -->
-                            <li>
-                                <img src="${contextPath}/resources/images/main/plus.png" id="plus"> 
-                            </li>
-                            
+                        </c:forEach>
                         </ul>
+                        <div id="animalAdd">
+                             <img src="${contextPath}/resources/images/main/plus.png" id="plus"> 
+                        </div>
                     </div>
 
                     <!-- 동물 등록하기 모달창 시작-->
                     <div class="modal" id="modal">
                         <div class="modal-body">
-			                    <div id="fileArea">
-									<input type="file" name="img" onchange="loadImg(this)"> 
-								</div>
+                        <form action="addAnimal" method="POST" enctype="multipart/form-data" role="form" >
+		                    <div id="fileArea">
+								<input type="file" name="animalProfile" id="animalProfile" onchange="loadImg(this)"> 
+							</div>
                                 <p class="title">반려동물 등록하기</p>
+                                
                                 <table>
                                     <tr>
                                         <td colspan="2">
                                             <div id="animal-profile">  	
-                                          		<img>
+                                          		<img src="${contextPath}/resources/images/main/basis-profile-img.png">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
+	                                    <td colspan="2" class="img-size">
+	                                    	<p>*정사각형 이미지만 등록해주세요</p>
+	                                    </td>
+                                    </tr>
+                                    <tr>
                                         <th>종류</th>
                                         <td>
-                                            <select id="category" name="animalCategory">
+                                            <select id="category" name="animalCategory" required>
 		                                        <c:forEach items="${animalCategory}" var="ac">
 													<option value="${ac.animalCategoryCode}">${ac.animalCategoryName}</option>
 												</c:forEach>
@@ -81,19 +96,19 @@
                                     <tr>
                                         <th>품종</th>
                                         <td>
-                                            <input type="text" name="kind" id="kind" placeholder="반려동물 품종">
+                                            <input type="text" name="animalVariety" id="kind" placeholder="반려동물 품종" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>이름</th>
                                         <td>
-                                            <input type="text" name="animalName" id="animalName" placeholder="반려동물 이름">
+                                            <input type="text" name="animalNm" id="animalName" placeholder="반려동물 이름" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>생년월일</th>
                                         <td>
-                                            <select class="ani-birth" name="ani-birth">
+                                            <select class="ani-birth" id="year" name="ani-birth" required>
                                                 <option>2021</option>
                                                 <option>2020</option>
                                                 <option>2019</option>
@@ -117,30 +132,30 @@
                                                 <option>2001</option>
                                                 <option>2000</option>
                                             </select>
-                                            <select class="ani-birth margin" name="ani-birth">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
+                                            <select class="ani-birth margin" id="month"  name="ani-birth" required>
+                                                <option>01</option>
+                                                <option>02</option>
+                                                <option>03</option>
+                                                <option>04</option>
+                                                <option>05</option>
+                                                <option>06</option>
+                                                <option>07</option>
+                                                <option>08</option>
+                                                <option>09</option>
                                                 <option>10</option>
                                                 <option>11</option>
                                                 <option>12</option>
                                             </select>
-                                            <select class="ani-birth" name="ani-birth">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
+                                            <select class="ani-birth" id="date"  name="ani-birth" required>
+                                                <option>01</option>
+                                                <option>02</option>
+                                                <option>03</option>
+                                                <option>04</option>
+                                                <option>05</option>
+                                                <option>06</option>
+                                                <option>07</option>
+                                                <option>08</option>
+                                                <option>09</option>
                                                 <option>10</option>
                                                 <option>11</option>
                                                 <option>12</option>
@@ -169,18 +184,19 @@
                                     <tr>
                                         <th>성별</th>
                                         <td>
-                                            <input type="radio" name="gender" id="male" value="수컷">
+                                            <input type="radio" name="gender" id="male" value="수컷" required>
                                             <label for="male" style="margin-right: 50px;">수컷</label>
-                                            <input type="radio" name="gender" id="famale" value="암컷">
+                                            <input type="radio" name="gender" id="famale" value="암컷" required>
                                             <label for="famale">암컷</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <button onclick="addAnimal();">등록하기</button>
+                                            <button type="button" onclick="addAnimal();">등록하기</button>
                                         </td>
                                     </tr>
-                                </table>
+                                </table> 
+                            </form>
                         </div>
                     </div>
                     <!-- 동물 등록하기 모달창 끝 -->

@@ -2,6 +2,7 @@ let feedbackReplyStatus = false;
 let updateRepStatus = false;
 let prevReplyWriterNo = 0;
 let prevUpdateReplyClickNo = 0;
+let tempText ="";
 //등록 버튼 클릭시 댓글 달림
 document.getElementById("reply-btn").addEventListener("click", function(){
 			addReply(0);
@@ -24,7 +25,7 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 				url : contextPath + "/nboard/view/sub/like",
 				data : {
 					"boardNo" : boardNo,
-					"loginMemberNo" : loginMemberNo,
+					"loginMemberNo" : loginMemberNo==null? 0 : loginMemberNo,
 					"likecount" : likecount
 				},
 				type :"POST",
@@ -189,7 +190,7 @@ function makereply(reply, checkoriginal){
 					button1.attr("value",reply.replyNo);
 					button1.html('<i class="far fa-comment-dots"></i>댓글달기');
 					if(loginMemberNo == reply.memberNo){
-					const button3 = $('<button onclick="updateReply()">');
+					const button3 = $('<button onclick="updateReply(this)">');
 					button3.text('수정');
 					const button4 = $('<button onclick="deleteNrep(this)">');
 					button4.text('삭제');
@@ -279,12 +280,9 @@ function deleteNrep(el){
 }
 
 function updateReply(el){
-	console.log('댓글 수정 화면입니다.');
-	
-	if(!updateRepStatus){
-		const span = $(el).siblings("span");
-		const tempText = span.text();
-		$(span).text("");
+	if(updateRepStatus==false){
+		tempText = $(el).siblings("span").text();
+		$(el).siblings("span").text("");
 		const textarea = $('<textarea id ="nboardUpdateRep">');
 		textarea.text(tempText);
 		textarea.css("width", "100%");
@@ -293,34 +291,58 @@ function updateReply(el){
 		textarea.css("position", "relative");
 	
 		const button1 = $('<button id="updateRep">');
-		button1.attr("onclick","updateRep(this)")
+		button1.attr("onclick","updateRep(this)");
 		button1.text("등록");
 		const button2 = $('<button id="updateRepCancel">');
-		button2.attr("onclick","cancelUpdateRep(this)")
+		button2.attr("onclick","cancelUpdateRep(this)");
 		button2.text("취소");
 		
-		span.after(textarea,button1,button2);
+		$(el).siblings("span").after(textarea,button1,button2);
 
 		updateRepStatus= true;
 		prevUpdateReplyClickNo = $(el).prev().val();
 	}
 	else{
+		cancelUpdateRep(el);
 		let nowUpdateReplyClickNo = $(el).prev().val();
-			$("#nboardUpdateRep").next().remove()
-			$("#nboardUpdateRep").next().remove()
-			$("#nboardUpdateRep").remove();
-			updateRepStatus=false;
+		console.log(prevUpdateReplyClickNo!=nowUpdateReplyClickNo);
 		
 		if(prevUpdateReplyClickNo!=nowUpdateReplyClickNo){
-			updateReply(el)
+			updateReply(el);
 		}
 	}
 }
 
 function updateRep(el){
-	console.log("댓글수정");
+	const contents = $("#nboardUpdateRep").val();
+	console.log(contents);
+	const replyNo = $(el).next().next().next().val();
+	console.log(replyNo);
+	
+  $.ajax({
+        url : contextPath + "/nboard/view/reply/update",
+        data : {"replyNo": replyNo,
+				"replycontent" : contents
+			},
+        type : "POST",
+		success : function(result){
+			if(result) selectReplyList();
+			else alert("수정 실패")
+		},
+		error : function(req, status, error){
+            console.log("댓글 목록 조회 실패");
+            console.log(req.responseText);
+		}
+		
+		});
 }
-
 function cancelUpdateRep(el){
-	console.log("댓글삭제");
+	console.log("??");
+	console.log(tempText);
+	console.log($("#nboardUpdateRep").prev());
+			$("#nboardUpdateRep").prev().text(tempText);
+			$("#nboardUpdateRep").next().remove();
+			$("#nboardUpdateRep").next().remove();
+			$("#nboardUpdateRep").remove();
+			updateRepStatus=false;
 }
