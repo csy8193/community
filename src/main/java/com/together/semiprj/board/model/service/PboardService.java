@@ -37,10 +37,10 @@ public class PboardService {
 	 * @return boardList
 	 * @throws Exception
 	 */
-	public List<Pboard> selectBoardList(Pagination pagination, int memberNo) throws Exception {
+	public List<Pboard> selectBoardList(Pagination pagination, int memberNo, int boardCd) throws Exception {
 		Connection conn = getConnection();
-		List<Pboard> pboardList = dao.selectBoardList(conn, pagination, memberNo);
-		
+		List<Pboard> pboardList = dao.selectBoardList(conn, pagination, memberNo, boardCd);
+		System.out.println(pboardList);
 		for(Pboard temp : pboardList) {
 			List<PboardImage> imgList = dao.selectBoardImageList(temp.getBoardNo(), conn);
 			
@@ -81,6 +81,23 @@ public class PboardService {
 		close(conn);
 		
 		return board;
+	}
+
+
+	/** board 이름 가져오기
+	 * @param boardCd
+	 * @return result(1 성공)
+	 * @throws Exception
+	 */
+	public String boardNmCh(int boardCd) throws Exception {
+
+		Connection conn = getConnection();
+		
+		String boardName = dao.boardNmCh(conn, boardCd);
+		
+		close(conn);
+		
+		return boardName;
 	}
 
 }
