@@ -56,8 +56,6 @@ label{
 }
 
 .user-img{
-    background : url('https://web-wit.s3.ap-northeast-2.amazonaws.com/images/user/5135/user_1633925591.jpeg') center center no-repeat;
-    background-size: cover;
     width: 30px;
     height: 30px;
     border-radius: 15px;
@@ -154,9 +152,6 @@ label{
 .page-ul > li > a{
     display: block;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 .page-ul > li:nth-of-type(3){
     border: 1px solid #4facfe;
@@ -175,6 +170,4 @@ label{
 .pagination li {
 	cursor: pointer;
 }
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
-=======
->>>>>>> 4f6979215af36e4ea0194d67c57912e7ca203b84
+

@@ -45,31 +45,31 @@
                         <ul class="ul-count">
                         
                             <li class="img-count">
-                                <a><img src="${img0}"></a>
+                                <button class="imgBtnChange"><img src="${img0}"></button>
                             </li>
                             <c:if test="${!empty img1 }">
 	                            <li class="img-count">
-	                                <a><img src="${img1}"></a>
+	                                <button class="imgBtnChange"><img src="${img1}"></button>
 	                            </li>
                             </c:if>
                             <c:if test="${!empty img2 }">
 	                            <li class="img-count">
-	                                <a><img src="${img2}"></a>
+	                                <button class="imgBtnChange"><img src="${img2}"></button>
 	                            </li>
                             </c:if>
                             <c:if test="${!empty img3 }">
 	                            <li class="img-count">
-	                                <a><img src="${img3}"></a>
+	                               	<button class="imgBtnChange"><img src="${img3}"></button>
 	                            </li>
                             </c:if>
                             <c:if test="${!empty img4 }">
 	                            <li class="img-count">
-	                                <a><img src="${img4}"></a>
+	                            	<button class="imgBtnChange"><img src="${img4}"></button>
 	                            </li>
                             </c:if>
                             <c:if test="${!empty img5 }">
 	                            <li class="img-count">
-	                                <a><img src="${img5}"></a>
+	                                <button class="imgBtnChange"><img src="${img5}"></button>
 	                            </li>
                             </c:if>
                             
@@ -91,7 +91,18 @@
 	                        ${board.boardContent}
                     </div>
                     <div id="like-area">
-                        <i class="far fa-heart"></i><span>좋아요 ${board.likecount}</span>
+                    	
+                   		<c:choose>
+							<c:when test="${board.likeDone == 'true'}">
+								<i class="far fa-heart" id="like_btn" style="color : red; backgroundColor: red	"></i>
+							</c:when>
+							
+							<c:otherwise>
+								<i class="far fa-heart" id="unlike_btn"></i>
+							</c:otherwise>                    		
+                   		</c:choose>
+                    
+                        <span>좋아요 ${board.likecount}</span>
                         <span class="time">${board.createDt}</span>
                     </div>
                 </div>
@@ -140,19 +151,21 @@
         </div>
     </div>
     <jsp:include page="../common/footer.jsp"/>
+</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
     const contextPath = "${contextPath}";
-
 	 // 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
 	 const loginMemberNo = "${loginMember.memberNo}";
-	
+	 const memberNo = "${board.memberNo}"
 	 // 현재 게시글 번호
-	 const boardNo = ${board.boardNo};
-	
+	 const boardNo = "${board.boardNo}";
+	 const likedone = "${board.likeDone}";
+	 const likecount = "${board.likecount}";
 	 // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 	 let beforeReplyRow;
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="${contextPath}/resources/js/pBoardReply.js"></script>
-</body>
+    <script src="${contextPath}/resources/js/pBoard.js"></script>
+
 </html>

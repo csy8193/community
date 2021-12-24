@@ -12,7 +12,7 @@ ul, li, a{
     text-decoration: none;
 }
 
-label{
+label, i{
   cursor: pointer;
 }
 
@@ -81,7 +81,7 @@ label{
     margin-right: 8px;
 }
 
-li.img-count a{
+li.img-count button{
     width: 133px;
     height: 100%;
     display: block;
@@ -91,7 +91,7 @@ li.img-count a{
     overflow: hidden;
 }
 
-li.img-count a > img{
+li.img-count button > img{
     position: absolute;
     left: 50%;
     top: 50%;
@@ -99,6 +99,7 @@ li.img-count a > img{
     object-fit: cover;
     min-height: 100%;
     max-width: 100%;
+    cursor : pointer;
     
 }
 

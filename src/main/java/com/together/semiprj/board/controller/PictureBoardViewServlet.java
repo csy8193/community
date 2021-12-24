@@ -46,7 +46,7 @@ public class PictureBoardViewServlet extends HttpServlet{
 				RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 				dispatcher.forward(req, resp);
 				System.out.println(board);
-				System.out.println(rList);
+				//System.out.println(rList);
 			}else {
 				req.getSession().setAttribute("message", "게시글이 존재하지 않습니다.");
 				
