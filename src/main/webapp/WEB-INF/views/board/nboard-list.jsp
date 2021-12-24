@@ -29,8 +29,17 @@
 	           				  		</c:if>
 		                    		</div>
 	                    		<div class="nboard-info">
+			                        <c:choose>
+			                        	<c:when test="${board.likeDone}">
+			                        		<c:set var="colorlike" value="fas" />
+			                        	</c:when>
+			                        	<c:otherwise>
+			                        		<c:set var="colorlike" value="far" />
+			                        	</c:otherwise>
+			                        </c:choose>
 	                        		<a href="">${board.memberId}</a>
-			                        <i class="far fa-heart"></i><span>${board.likecount}</span>
+			                        <i class="${colorlike} fa-heart" >
+			                        </i><span>${board.likecount}</span>
 			                        <i class="far fa-comment-dots"></i><span>${board.replycount}</span>
 			                        <i class="far fa-eye fa-2x"></i><span>${board.readCount}</span>
 			                        <i class="fas fa-calendar-alt"></i><span>${board.createDt}</span>

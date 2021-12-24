@@ -92,5 +92,14 @@ public class NboardService {
 		
 		return result;
 	}
+	public int duplLikeCheck(int memberNo, int boardNo) throws Exception{
+		int result=0;
+		
+		Connection conn= getConnection();
+		result = dao.duplLikeCheck(conn, memberNo,boardNo);
+		
+		close(conn);
+		return result;
+	}
 
 }

@@ -145,7 +145,6 @@ const likedone = "${nboard.likeDone}";
 const likecount = "${nboard.likecount}";
 // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 let beforeReplyRow;
-
 </script>
 <jsp:include page="../common/footer.jsp"/>
 <script src="${contextPath}/resources/js/nboardreply.js"></script> 

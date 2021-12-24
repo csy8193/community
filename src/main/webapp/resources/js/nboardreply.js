@@ -16,11 +16,11 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 	}
 	else{
 		if(loginMemberNo==memberNo){
+			console.log($("#nboard-like").attr("title"));
 			alert("본인의 글은 좋아요를 누를 수 없습니다!");
 			return;
 		}
 		else{
-			console.log("다른사람글");
 			$.ajax({
 				url : contextPath + "/nboard/view/sub/like",
 				data : {
@@ -30,15 +30,20 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 				},
 				type :"POST",
 				success : function(result){
-					if(result>0){
+					if(result==1){
 						alert("좋아요를 누르셨습니다!")
 						$(".fa-heart").removeClass("far");
 						$(".fa-heart").addClass("fas");
 						$("#like-btn>div:last").css("background","none").css("box-shadow","none");
 						$("#like-btn>div:last>i").css("color","red");
-						$("#nboard-content > div.nboard-info > div:nth-child(3) > span:nth-child(2)").text(result);
+						$("#like-btn>div:last>i").attr("title", "좋아요를 이미 했어요")
+						const likevalue =$("#nboard-content > div.nboard-info > div:nth-child(2) > span:nth-child(2)")
+						
+						console.log(likevalue.text());
+						likevalue.text(parseInt(likevalue.text())+1);
 					}
 					else{
+						console.log("이미 좋아요를 눌렀습니다");
 						alert("이미 좋아요를 눌렀습니다.")
 					}
 				},

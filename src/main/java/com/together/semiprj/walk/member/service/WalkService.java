@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.together.semiprj.board.model.vo.Nboard;
 import com.together.semiprj.walk.member.dao.WalkDAO;
 import com.together.semiprj.walk.member.vo.Mypoint;
 import com.together.semiprj.walk.member.vo.WalkRank;
@@ -55,18 +56,32 @@ public class WalkService {
 		return myPointList;
 	}
 
-	public int walkinsert(int memberNo, String walktext) throws Exception{
+	public List<Nboard> walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
+		
 		Connection conn = getConnection();
+		List<Nboard> walkList = null;
 		int result = 0;
 		
 		result = dao.walkinsert(conn,memberNo,walktext);
 		
-		if(result>0) commit(conn);
-		else rollback(conn);
+		if(result>0) {
+			//당일 포인트 부여 확인
+			 result = dao.checkduplPoint(conn,memberNo);
+			 System.out.println(result+"0보다 크면 이미 부여했습니다!!");
+			if(result==0) {
+				//포인트 증가
+				int getPoint = 20*continueWalk;
+				result = dao.walkPointGet(conn,memberNo, getPoint);
+				commit(conn);
+				//당일 산책일지
+				walkList = dao.selectWalkList(conn,memberNo);
+			}
+		}
+		else {rollback(conn);}
 		
 		close(conn);
 		
-		return result;
+		return walkList;
 	}
 
 }

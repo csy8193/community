@@ -75,4 +75,8 @@
 		 ? , ?
 		)
 	</entry>
+	<entry key="duplLikeCheck">
+		SELECT COUNT(*) FROM "LIKE"
+		WHERE MEMBER_NO = ? AND BOARD_NO = ? 
+	</entry>
 </properties>

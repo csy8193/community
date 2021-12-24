@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.together.semiprj.board.model.vo.Nboard;
 import com.together.semiprj.member.model.vo.User;
 import com.together.semiprj.walk.member.service.WalkService;
 import com.together.semiprj.walk.member.vo.Mypoint;
@@ -67,6 +68,7 @@ public class WalkController extends HttpServlet{
 						req.setAttribute("rankList", rankList);
 						List<WalkRank> rankList2 = new ArrayList<WalkRank>();
 						rankList2 = service.pointRank();
+						req.setAttribute("rankList", rankList);
 						
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -88,14 +90,14 @@ public class WalkController extends HttpServlet{
 					}
 					else if(command.equals("walkinsert")) {
 						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));
+						int continueWalk = Integer.parseInt(req.getParameter("continueWalk"));
 						String walktext = req.getParameter("walktext");
 						
 						WalkService service = new WalkService();
 						
-						int result = service.walkinsert(memberNo,walktext);
+						List<Nboard> nboardList = service.walkinsert(memberNo,walktext,continueWalk);
 						
-						
-						//resp.getWriter().print((new Gson()).toJson(history));
+						resp.getWriter().print((new Gson()).toJson(nboardList));
 					}
 					
 				} catch (Exception e) {

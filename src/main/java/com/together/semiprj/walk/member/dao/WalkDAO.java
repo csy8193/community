@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.together.semiprj.board.model.dao.NboardReplyDAO;
+import com.together.semiprj.board.model.vo.Nboard;
 import com.together.semiprj.walk.member.vo.Mypoint;
 import com.together.semiprj.walk.member.vo.WalkRank;
 
@@ -53,7 +54,6 @@ public class WalkDAO {
 				rank.setAnimalBirth(rs.getString("ANIMAL_BIRTH"));
 				rank.setAnimalCategoryNm(rs.getString("ANIMAL_CATEGORY_NM"));
 				rank.setAnimalImg(rs.getString("ANIMAL_PROFILE_IMG"));
-				rank.setAnimalImg(rs.getString("ANIMALIMG"));
 				rankList.add(rank);
 			}
 			
@@ -74,14 +74,11 @@ public class WalkDAO {
 	public List<Integer> getWalkHistory(Connection conn, int memberNo, int start, int end) throws Exception{
 		List<Integer> history = null;
 		try {
-			
 			String sql = prop.getProperty("getWalkHistory");
-			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
-			
 			
 			rs = pstmt.executeQuery();
 			
@@ -163,5 +160,63 @@ public class WalkDAO {
 		
 		return result;
 	}
-
+	public List<Nboard> selectWalkList(Connection conn, int memberNo) throws Exception{
+		List<Nboard> walkList = null;
+		try {
+			String sql = prop.getProperty("selectWalkList");
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs= pstmt.executeQuery();
+			
+			walkList = new ArrayList<Nboard>();
+			
+			while(rs.next()) {
+				Nboard nboard = new Nboard();
+				nboard.setBoardNo(rs.getInt("BOARD_NO"));
+				nboard.setBoardContent(rs.getString("BOARD_CONTENT"));
+				nboard.setCreateDt(rs.getString("CREATE_DT"));
+				walkList.add(nboard);
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return walkList;
+	}
+	public int walkPointGet(Connection conn, int memberNo, int getPoint) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("walkPointGet");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, getPoint);
+			pstmt.setInt(2, memberNo);
+			result = pstmt.executeUpdate();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int checkduplPoint(Connection conn, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("duplpointcheck");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
 }

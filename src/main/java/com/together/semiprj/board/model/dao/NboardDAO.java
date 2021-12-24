@@ -289,6 +289,26 @@ public class NboardDAO {
 		}
 		return result;
 	}
+	public int duplLikeCheck(Connection conn, int memberNo, int boardNo) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("duplLikeCheck");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}finally {
+			close(pstmt);
+			if(result>0)System.out.println("좋아요 이미 완료");
+		}
+		return result;
+	}
 	
 
 }
