@@ -16,7 +16,10 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.together.semiprj.member.model.vo.User;
 import com.together.semiprj.walk.member.service.WalkService;
+<<<<<<< HEAD
 import com.together.semiprj.walk.member.vo.Mypoint;
+=======
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 import com.together.semiprj.walk.member.vo.WalkRank;
 
 @WebServlet("/walk/*")
@@ -55,6 +58,7 @@ public class WalkController extends HttpServlet{
 					
 					else if(command.equals("myPoint")) {
 						
+<<<<<<< HEAD
 						HttpSession session = req.getSession();
 						User loginUser = (User)session.getAttribute("loginMember");
 						int loginMember =0;
@@ -65,6 +69,12 @@ public class WalkController extends HttpServlet{
 						List<Mypoint> rankList = new ArrayList<Mypoint>();
 						rankList = service.myPoint(loginMember);
 						req.setAttribute("rankList", rankList);
+=======
+						WalkService service = new WalkService();
+						List<WalkRank> rankList = new ArrayList<WalkRank>();
+						rankList = service.pointRank();
+						
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
@@ -83,6 +93,7 @@ public class WalkController extends HttpServlet{
 		 				
 						resp.getWriter().print((new Gson()).toJson(history));
 					}
+<<<<<<< HEAD
 					else if(command.equals("walkinsert")) {
 						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));
 						String walktext = req.getParameter("walktext");
@@ -94,6 +105,8 @@ public class WalkController extends HttpServlet{
 						
 						//resp.getWriter().print((new Gson()).toJson(history));
 					}
+=======
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 					
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+=======
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
 
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 		<link rel="stylesheet" href="${contextPath}/resources/css/myPoint.css">
+<<<<<<< HEAD
 	<main>
           <div id="main">
              <h2>My 포인트
              </h2>
+=======
+		<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
+	<main>
+          <div id="main">
+             <h2>My 포인트</h2>
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
                 <div class="rank-point">
                     <div class="btn-wrap">
                         <a href="${contextPath }/walk/ranking">전체 랭킹</a>
@@ -53,6 +63,7 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
     <div class="calendar">
     <h1>이번달 My 산책일지 <br><span id="today-month"></span> </h1>
     <div>
@@ -69,11 +80,29 @@
                 <th>THU</th>
                 <th>FRI</th>
                 <th>SAT</th>
+=======
+                <div class="calendar">
+					    <h1>달력</h1>
+    <button onclick="prev()">저번달</button>
+    <button onclick="next()">저번달</button>
+    <h2>이번달 (<span id="today-month"></span> )</h2>
+    <table width=900 height=800>
+        <thead>
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
             </tr>
         </thead>
         <tbody id="month-day">
         </tbody>
     </table>
+<<<<<<< HEAD
     </div>
     <div id="walkwrite">
 		<h1> 산책 일지를 작성해주세요! </h1>
@@ -82,14 +111,26 @@
 		<button onclick="resetWalkText(this)">작성취소!</button>
 	</div>
 	 </div>
+=======
+
+                </div>
+                    
+            </div>
+    
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
         </main>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
  <script>
  	const contextPath = "${contextPath}";
+<<<<<<< HEAD
  	let loginMemberNo ="${sessionScope.loginMember.memberNo}";
  	if(loginMemberNo==""){
  		loginMemberNo=0;
  	}
+=======
+ 	const loginMemberNo = 4;
+ 		//"${sessionScope.MemberNo}"
+>>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
  </script>
  <script src="${contextPath}/resources/js/calendar.js"></script> 
 </body>
