@@ -147,7 +147,6 @@
 								}
 							        console.log("됨");
 									$(td).addClass("walkdone");
-							    }
 							});
 	                        let tempDate = new Date(year, month-1 ,count);
 	                        //console.log(count+"번째" +" tempDate: " +tempDate);
