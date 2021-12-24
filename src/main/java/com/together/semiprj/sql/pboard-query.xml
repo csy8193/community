@@ -9,13 +9,26 @@
 	</entry>
 	
 	<entry key="selectPboardList">
-		SELECT * FROM
-		(SELECT ROWNUM RNUM, A.* 
-		    FROM (SELECT * FROM BOARD_LIST
-		        WHERE STATUS_CD != 2
-		        ORDER BY BOARD_NO DESC) A)
-		WHERE BOARD_CD = ?
-		RNUM BETWEEN ? AND ?
+		            SELECT CC.*, (SELECT COUNT(*) FROM "LIKE"  D WHERE D.BOARD_NO = CC.BOARD_NO) LIKECOUNT ,
+      (SELECT COUNT(*) FROM REPLY  E WHERE E.BOARD_NO = CC.BOARD_NO) REPLYCOUNT,
+      (SELECT COUNT(*) FROM "LIKE"  F WHERE F.BOARD_NO = CC.BOARD_NO 
+      AND F.MEMBER_NO = ?) LIKEDONE
+       FROM  (SELECT BB.*
+            FROM(
+            SELECT ROWNUM RNUM, AA.*
+          FROM ( SELECT  A.BOARD_NO , A.BOARD_TITLE, A.BOARD_CONTENT, A.READ_COUNT , A.BOARD_CD,   
+          CASE WHEN SYSDATE -A.CREATE_DT > 1
+        THEN  TO_CHAR(A.CREATE_DT , 'YYYY-MM-DD')
+        ELSE TO_CHAR(A.CREATE_DT , 'HH24:MI:SS') END AS "CREATE_DT",
+         A.STATUS_CD, A.MEMBER_NO
+          , B.BOARD_NAME , C.MEMBER_ID, C.ANIMAL_PROFILE_IMG FROM BOARD A
+            JOIN BOARD_CODE  B ON (A.BOARD_CD = B.BOARD_CD)
+            JOIN MEMBER  C ON (A.MEMBER_NO = C.MEMBER_NO)
+          WHERE A.STATUS_CD != 2 AND A.BOARD_CD = ?
+            ORDER BY BOARD_NO DESC) AA) BB
+            WHERE RNUM BETWEEN ? AND ? ) CC
+            LEFT JOIN ANIMAL EE ON (CC.MEMBER_NO = EE.MEMBER_NO)
+            ORDER BY RNUM
 		
 	</entry>
 	<entry key="selectPboardImageList">
@@ -49,4 +62,10 @@
 		WHERE BOARD_NO = ?
 	</entry>
 	
+	<!-- board 이름 가져오기 -->
+	<entry key="boardNmCh">
+		SELECT BOARD_NAME
+		FROM BOARD_CODE
+		WHERE BOARD_CD =?
+	</entry>
 </properties>

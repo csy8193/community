@@ -25,8 +25,9 @@ public class PictureBoardController2 extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		User loginmember = (User)session.getAttribute("loginMember");
+		int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 		
-		
+		System.out.println(boardCd);
 		
 		int memberNo;
 		if(loginmember != null) {
@@ -40,13 +41,18 @@ public class PictureBoardController2 extends HttpServlet{
 			
 			PboardService service = new PboardService();
 			
-			int boardCate = 70;
-			Pagination pagination = service.getPagination(cp, boardCate);
+			Pagination pagination = service.getPagination(cp, boardCd);
 			
-			List<Pboard> boardList = service.selectBoardList(pagination, memberNo);
+			String boardNm = service.boardNmCh(boardCd);
+			
+			List<Pboard> boardList = service.selectBoardList(pagination, memberNo, boardCd);
 			
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("boardList", boardList);
+			req.setAttribute("boardCd", boardCd);
+			req.setAttribute("boardNm", boardNm);
+			System.out.println(boardNm);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
