@@ -24,6 +24,15 @@
                     <i class="far fa-comment-dots"></i><span>${nboard.replycount }</span>
                     <i class="far fa-eye fa-2x"></i><span>${nboard.readCount }</span>
                     <i class="fas fa-calendar-alt"></i><span>${nboard.createDt }</span>
+                    <c:if test="${nboard.memberNo == loginMember.memberNo}">
+	                    <button onclick="updateForm();">수정</button>
+	                    <button>삭제</button>
+                    	<form action="#" method="POST" name="requestForm">
+							<input type="hidden" name="boardCd" value="${param.boardCd}">
+							<input type="hidden" name="boardNo" value="${param.boardNo}">
+							<input type="hidden" name="cp" value="${param.cp}">
+						</form>
+                    </c:if>
                 </div>
         </div>
         <div class="nboard-inner">
@@ -145,6 +154,12 @@ const likedone = "${nboard.likeDone}";
 const likecount = "${nboard.likecount}";
 // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 let beforeReplyRow;
+
+function updateForm(){
+	document.requestForm.action = contextPath + "/board/updateForm";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+}
 
 </script>
 <jsp:include page="../common/footer.jsp"/>

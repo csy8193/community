@@ -102,6 +102,12 @@
             </ul>
         </div>
         
+        <c:if test="${!empty loginMember}">
+		    <div id="write" onclick="location.href='${contextPath}/board/pwrite?boardCd=${boardCd}&cp=${pagination.currentPage}';">
+		        <i class="fas fa-pen-square"></i>
+		    </div>
+ 		</c:if>
+        
         
     </div>
     <jsp:include page="../common/footer.jsp"/>

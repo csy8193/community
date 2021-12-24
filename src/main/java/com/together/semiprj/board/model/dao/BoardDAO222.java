@@ -93,11 +93,12 @@ public class BoardDAO222 {
 
 	/** 사진게시판 삽입
 	 * @param board
+	 * @param boardCd 
 	 * @param conn
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoard(Board board, Connection conn) throws Exception{
+	public int insertBoard(Board board, int boardCd, Connection conn) throws Exception{
 		int result = 0;
 
 		try {
@@ -107,7 +108,8 @@ public class BoardDAO222 {
 
 			pstmt.setInt(1, board.getBoardNo());
 			pstmt.setString(2, board.getBoardContent());
-			pstmt.setInt(3, board.getMemberNo());
+			pstmt.setInt(3, boardCd);
+			pstmt.setInt(4, board.getMemberNo());
 
 			result = pstmt.executeUpdate();
 
@@ -267,6 +269,102 @@ List<Board> boardList = new ArrayList<Board>();
 		}
 		
 		return boardName;
+	}
+
+	/** 일반게시글 수정하기 전 데이터 조회
+	 * @param conn
+	 * @param boardCd
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public Board selectBoardUpdate(Connection conn, int boardCd, int boardNo) throws Exception{
+		Board board = null;
+		
+		try {
+			String sql = prop.getProperty("selectBoardUpdate");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, boardCd);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setBoardCode(rs.getInt("BOARD_CD"));
+				board.setBoardPicPath(rs.getString("BOARD_PIC_PATH"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+				
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return board;
+	}
+
+	/** 일반게시판 글쓰기 수정
+	 * @param conn
+	 * @param boardTitle
+	 * @param boardContent
+	 * @param memberNo
+	 * @param boardCd
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(Connection conn, String boardTitle, String boardContent, int memberNo,
+			int boardCd, int boardNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateBoard");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardTitle);
+			pstmt.setString(2, boardContent);
+			pstmt.setInt(3, boardNo);
+			pstmt.setInt(4, boardCd);
+			pstmt.setInt(5, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 일반 게시판 이미지 수정
+	 * @param conn
+	 * @param boardCd
+	 * @param picPath
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateImage(Connection conn, int boardNo, String picPath) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateImage");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, picPath);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
 	}
 
 	/** 이벤트 목록 조회

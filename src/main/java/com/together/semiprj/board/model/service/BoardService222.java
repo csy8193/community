@@ -53,10 +53,11 @@ public class BoardService222 {
 	/** 사진게시판 글 삽입
 	 * @param board
 	 * @param imgList
+	 * @param boardCd 
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertBoard(Board board, List<BoardImage> imgList) throws Exception{
+	public int insertBoard(Board board, List<BoardImage> imgList, int boardCd) throws Exception{
 		
 		Connection conn = getConnection();
 
@@ -68,7 +69,7 @@ public class BoardService222 {
 		String content = board.getBoardContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")    ;
 		board.setBoardContent(content);
 
-		int result = dao.insertBoard(board, conn);
+		int result = dao.insertBoard(board, boardCd, conn);
 		
 		if(result > 0) {
 			// 3. (이미지가 있을 경우) 이미지 삽입  
@@ -164,6 +165,57 @@ public class BoardService222 {
 		close(conn);
 		
 		return boardName;
+	}
+
+	/** 일반게시글 수정하기 전 데이터 조회
+	 * @param boardCd
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public Board selectBoardUpdate(int boardCd, int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		Board board = dao.selectBoardUpdate(conn, boardCd, boardNo);
+		
+		close(conn);
+		
+		return board;
+	}
+
+	/** 일반 게시판 업데이터
+	 * @param boardTitle
+	 * @param boardContent
+	 * @param memberNo
+	 * @param picPath
+	 * @param boardCd
+	 * @param boardNo 
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(String boardTitle, String boardContent, int memberNo, String picPath, int boardCd, int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updateBoard(conn, boardTitle, boardContent, memberNo, boardCd, boardNo);
+		
+		System.out.println(result);
+		
+		if(result >0) {
+			
+			 result = dao.updateImage(conn, boardNo, picPath);
+			 if(result > 0) {
+				 commit(conn);
+			 }else { 
+				 rollback(conn); 
+			}
+
+			
+		}
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 	/** 이벤트 페이지 목록

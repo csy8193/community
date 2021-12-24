@@ -113,8 +113,10 @@
         #write{
             position: fixed;
             right: 250px;
-            bottom: 250px;
+            bottom: 100px;
             text-align:center;
+          	cursor:pointer;
+          	font-size : 20px;
         }
         @media screen and (max-width: 1200px) 
 		{  #write { 
@@ -128,25 +130,20 @@
 		}
         #write>i{
             color : #4facfe;
+            font-size: 80px;
         }
         .pen{
         	display:none;
         	font-size:20px;
         	
         }
-        #write:hover{
-        	cursor:pointer;
-        }
-        #write:hover>.pen{
-        	display: inline;
-        	font-size:24px;
-        	text-decoration: underline;
-        } 
         .fa-heart{
             color: red;
         }
         .fa-eye, .fa-comment-dots, .fa-calendar-alt{
             color: rgba(0,0,0,0.5);
         }
-
+		.content-text img{
+			display: none;
+		}
      

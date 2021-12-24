@@ -17,7 +17,7 @@
 		<!-- 게시글 삽입 -->
 	<entry key="picInsertBoard">
 		INSERT INTO BOARD VALUES
-		(?, DEFAULT, ?, DEFAULT, DEFAULT, 10, 1, ?)
+		(?, DEFAULT, ?, DEFAULT, DEFAULT, ?, 1, ?)
 	</entry>
 	
 		<!-- 사진게시판 이미지 정보 삽입 -->
@@ -58,6 +58,24 @@
 	
 	<entry key="selectBoardName">
 		SELECT BOARD_NAME FROM BOARD_CODE WHERE BOARD_CD = ?
+	</entry>
+	
+	
+	<entry key="selectBoardUpdate">
+		SELECT * FROM BOARD
+		JOIN BOARD_PIC USING(BOARD_NO)
+		JOIN BOARD_CODE USING(BOARD_CD)
+		WHERE BOARD_NO = ? AND BOARD_CD = ?
+	</entry>
+	
+	
+	<entry key="updateBoard">
+		UPDATE BOARD SET BOARD_TITLE = ?, BOARD_CONTENT = ?
+		WHERE BOARD_NO = ? AND BOARD_CD = ? AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateImage">
+		UPDATE BOARD_PIC SET BOARD_PIC_PATH = ? WHERE BOARD_NO = ?
 	</entry>
 	
 </properties>
