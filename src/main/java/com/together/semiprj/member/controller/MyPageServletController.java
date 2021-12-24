@@ -79,6 +79,24 @@ public class MyPageServletController extends HttpServlet{
 					}
 				
 				}
+				 
+				 // 반려동물 대표이미지 변경
+				 else if(command.equals("insertProfile")) {
+					 
+					 if(method.equals("POST")) {
+						 
+						 String profilePath = req.getParameter("animalProfilePath");
+						 int memberNo = loginMember.getMemberNo();
+						 int result = service.insertDelegateProfile(profilePath,memberNo);
+						 
+						 loginMember.setProfilePath(profilePath);
+						 
+						 
+						 new Gson().toJson(result,resp.getWriter());
+						
+					 }
+					 
+				 }
 				
 				// 반려동물 등록
 				else if(command.equals("addAnimal")) {
@@ -136,8 +154,6 @@ public class MyPageServletController extends HttpServlet{
 						//System.out.println(aniPro);
 						
 						int result = service.addAnimal(animal,aniPro);
-						
-						System.out.println(result);
 
 						new Gson().toJson(result,resp.getWriter());
 						
@@ -154,11 +170,12 @@ public class MyPageServletController extends HttpServlet{
 							
 							List<AnimalCategory> animalCategory = service.selectAnimalCategory();
 							List<Animal> aniList = service.selectanimalList(memberNo);
-							
+
 							
 							req.setAttribute("aniList", aniList);
 							req.setAttribute("animalCategory", animalCategory);
 							req.setAttribute("loginMember", loginMember);
+							
 							path = "/WEB-INF/views/member/mypage.jsp";
 
 						}else {

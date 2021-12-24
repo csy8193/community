@@ -175,6 +175,7 @@ public class UserDAO {
 				loginMember.setEnrollDt(rs.getDate("ENROLL_DT"));
 				loginMember.setStatusCd(rs.getInt("STATUS_CD"));
 				loginMember.setGradeCd(rs.getInt("GRADE_CD"));
+				loginMember.setProfilePath(rs.getString("ANIMAL_PROFILE_IMG"));
 			}
 			
 		}finally {
@@ -277,6 +278,8 @@ public class UserDAO {
 				animal.setAnimalCategoryCode(rs.getInt("ANIMAL_CATEGORY_CD"));
 				animal.setAnimalCategoryName(rs.getString("ANIMAL_CATEGORY_NM"));
 				animal.setMemberNo(rs.getInt("MEMBER_NO"));
+				animal.setAnimalImgPath(rs.getString("ANIMAL_IMG_PATH"));
+				animal.setAnimalImgNm(rs.getString("ANIMAL_IMG_NM"));
 				
 				aniList.add(animal);
 			}
@@ -360,8 +363,7 @@ public class UserDAO {
 	
 		try {
 			String sql = prop.getProperty("nextAnimalNo");
-			
-			System.out.println(sql);
+
 			stmt = conn.createStatement();
 			
 			rs= stmt.executeQuery(sql);
@@ -392,7 +394,7 @@ public class UserDAO {
 			String sql = prop.getProperty("insertaniProfile");
 			
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1,aniPro.getAnimalImgPath());
 			pstmt.setString(2,aniPro.getAnimalImgNm());
 			pstmt.setString(3,aniPro.getAnimalImgOriginal());
@@ -404,6 +406,33 @@ public class UserDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+
+
+	/** 프로필 경로 지정
+	 * @param profilePath
+	 * @param conn
+	 * @return int
+	 * @throws Exception
+	 */
+	public int insertDelegateProfile(String profilePath, int memberNo, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertDelegateProfile");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,profilePath);
+			pstmt.setInt(2,memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	
