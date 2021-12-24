@@ -44,6 +44,8 @@ function loadImg(value) {
 	}
 }
 
+
+// 반려동물 리스트
 function selectAnimalList() {
 
 	$.ajax({
@@ -52,23 +54,28 @@ function selectAnimalList() {
 		dataType: "JSON",
 
 		success: function(aniList) {
-
-			console.log(aniList);
+			
+			var selectedIndex = $("#profile-chk-select option").index($("#profile-chk-select option:selected")); 
 
 			$("#animalList").empty();
 
 			$.each(aniList, function(index, ani) {
 
+				const path = contextPath+ani.animalImgPath+ani.animalImgNm;
+				console.log(path);
 				const li = $('<li>');
-
 				const span = $('<span>');
+				const img = $('<img>').attr('src', path).css('width','250px');
+				span.append(img);
+				
 				const p = $('<p>').text(ani.animalNm);
 				const button = $('<button>').text("반려동물 정보 수정");
 
 				li.append(span, p, button);
 
-				$("#animalList").prepend(li);
-
+				$("#animalList").append(li);
+				
+				$("#profile-chk-select option:eq("+selectedIndex+")").attr("selected", "selected"); 
 			});
 
 		},
@@ -76,6 +83,8 @@ function selectAnimalList() {
 	});
 };
 
+
+// 반려동물 등록 ajax
 function addAnimal() {
 	
 	const animalCategory = $("#category option:selected").val();
@@ -107,6 +116,7 @@ function addAnimal() {
 		success: function(result) {
 			
 			if(result > 0){
+				
 		         alert("반려 동물 " + animalNm + " 등록 완료");
 		
 		         $("#kind").val("");
@@ -121,6 +131,7 @@ function addAnimal() {
 		         $('#modal').css("display", "none");
 		
 		         selectAnimalList();
+
 		         }else{
 		            alert("반려동물 등록 실패");
 		         }
@@ -132,4 +143,21 @@ function addAnimal() {
 
 }
 
+function insertProfile(){
+	
+	const animalProfilePath = $("#profile-chk-select option:selected").val();
+	//var index = $("#profile-chk-select option").index($("#profile-chk-select option:selected")); 
+ 	
+	$.ajax({
+		url: "insertProfile",
+		data: {"animalProfilePath":animalProfilePath},
+		type: "POST",
+		success: function(result) {
+			if(result > 0){
+				alert("대표프로필 설정되었습니다.");
+			}
+		},
+	
+});
 
+}

@@ -195,5 +195,28 @@ public class UserService {
 		return result;
 	}
 
+	/** 반려동물 프로필 경로 설정
+	 * @param profilePath
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertDelegateProfile(String profilePath,int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.insertDelegateProfile(profilePath,memberNo,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+
+	}
+
 
 }
