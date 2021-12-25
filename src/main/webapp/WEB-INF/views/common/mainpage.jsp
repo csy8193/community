@@ -22,21 +22,27 @@
                        <c:choose>
                     	<c:when test="${most.boardCode ==10}">
                     		<c:set var="cate" value="nboard/view?boardNo" />
+                    		<c:set var="displaywrite" value="${most.boardTitle}" />
                     	</c:when>
                     	<c:when test="${most.boardCode ==20}">
                     		<c:set var="cate" value="nboard/view?boardNo" />
+                    		<c:set var="displaywrite" value="${most.boardTitle}" />
                     	</c:when>
                     	<c:when test="${most.boardCode ==30}">
                     		<c:set var="cate" value="nboard/view?boardNo" />
+                    		<c:set var="displaywrite" value="${most.boardTitle}" />
                     	</c:when>
                     	<c:when test="${most.boardCode ==70}">
                     		<c:set var="cate" value="pboard/view?no" />
+                    		<c:set var="displaywrite" value="${most.boardContent}" />
                     	</c:when>
                     	<c:when test="${most.boardCode ==80}">
                     		<c:set var="cate" value="pboard/view?no" />
+                    		<c:set var="displaywrite" value="${most.boardContent}" />
                     	</c:when>
                     	<c:when test="${most.boardCode ==90}">
                     		<c:set var="cate" value="pboard/view?no" />
+                    		<c:set var="displaywrite" value="${most.boardContent}" />
                     	</c:when>
                     	</c:choose>
                   	     <li>
@@ -46,7 +52,7 @@
                                 <div>
                                 	<p>${most.boardName}</p>
                                 	<div id="best-content">
-                                   	 <p><a href="${contextPath}/${cate}=${most.boardNo}&boardCd=${most.boardCode}">${most.boardContent}</a></p>
+                                   	 <p><a href="${contextPath}/${cate}=${most.boardNo}&boardCd=${most.boardCode}">${displaywrite}</a></p>
                                 	</div>
                                     <span class="best-date">${most.createDate} </span>
                                 </div>
