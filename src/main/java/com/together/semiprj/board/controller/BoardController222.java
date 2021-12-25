@@ -47,7 +47,7 @@ public class BoardController222 extends HttpServlet{
 
 					if(command.equals("notice")) {
 						
-						int bc = 20;
+						int bc = 110;
 						
 						Pagination pagination = service.getPagination(cp, bc);
 						
@@ -55,6 +55,7 @@ public class BoardController222 extends HttpServlet{
 						
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
+						req.setAttribute("boardCd", bc);
 
 						path = "/WEB-INF/views/board/notice.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -222,7 +223,7 @@ public class BoardController222 extends HttpServlet{
 					
 					else if(command.equals("event")) {
 						
-						int bc = 70;
+						int bc = 60;
 						
 						Pagination pagination = service.getPagination(cp, bc);
 						
@@ -230,8 +231,7 @@ public class BoardController222 extends HttpServlet{
 						
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
-						
-						System.out.println(boardList);
+						req.setAttribute("boardCd", bc);
 						
 						path = "/WEB-INF/views/board/eventList.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -272,13 +272,6 @@ public class BoardController222 extends HttpServlet{
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
-						System.out.println(boardTitle);
-						System.out.println(boardContent);
-						System.out.println(picPath);
-						System.out.println(boardCd);
-						System.out.println(boardNo);
-						System.out.println(currentPage);
-						
 
 						HttpSession session = req.getSession();
 						
@@ -292,6 +285,154 @@ public class BoardController222 extends HttpServlet{
 						}else {
 							System.out.println("실패");
 						}
+						
+					}
+					
+					else if(command.equals("pupdateForm")) {
+						int currentPage = 1;
+						int boardNo = 179;
+						int boardCd = 70;
+						
+						Board board = service.selectPboardUpdate(boardNo, boardCd);
+						
+						if(board != null) {
+							List<BoardImage> boardImageList = service.selectBoardImage(boardNo);
+							
+							
+							if(boardImageList != null) {
+								req.setAttribute("board", board);
+								req.setAttribute("boardImage", boardImageList);
+								req.setAttribute("cp", currentPage);
+								
+//								System.out.println(board);
+//								System.out.println(boardImageList);
+							}
+							
+						}
+						
+						path = "/WEB-INF/views/board/updatepwrite.jsp";
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
+						
+						
+					}
+					
+					
+					else if(command.equals("pupdate")) {
+						int maxSize = 1024 * 1024 * 100; // 100MB
+						
+						HttpSession session = req.getSession();
+						
+						String root = session.getServletContext().getRealPath("/");
+						
+						String filePath = "/resources/images/board/";
+						
+						String realPath = root + filePath;
+						
+						
+						
+						MultipartRequest mReq = new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());
+						
+						String boardContent = mReq.getParameter("boardContent");
+						int boardCd = Integer.parseInt(mReq.getParameter("boardCd"));
+						int boardNo = Integer.parseInt(mReq.getParameter("boardNo"));
+						int currentPage = Integer.parseInt(mReq.getParameter("cp"));
+						
+						
+						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
+						
+						Board board = new Board();
+						board.setBoardContent(boardContent);
+						board.setBoardNo(boardNo);
+						board.setBoardCode(boardCd);
+						board.setMemberNo(memberNo);
+						
+						Enumeration<String> names = mReq.getParameterNames();
+						
+						List<BoardImage> oldImgList = new ArrayList<BoardImage>();
+						
+						while(names.hasMoreElements()) {
+							String name = names.nextElement();
+							
+							if(name.contains("img")) {
+								System.out.println("이름 : " + mReq.getParameter(name).substring(0, 24));
+								System.out.println("이름 : " + mReq.getParameter(name).substring(24));
+								
+								BoardImage temp = new BoardImage();
+								temp.setImgPath(mReq.getParameter(name).substring(0, 24));
+								temp.setImgName(mReq.getParameter(name).substring(24));
+								temp.setImgLevel(Integer.parseInt(name.replace("img", "")));
+								temp.setBoardNo(boardNo);
+								
+								oldImgList.add(temp);
+								
+							} // end if
+							
+						} // end while
+						
+						// 2) 파일 형식의 파라미터
+						Enumeration<String> files = mReq.getFileNames();
+						// Enumeration == iterator (ResultSet과 비슷)
+						// -> 폼에서 전달된 모든 input type="file" 요소의 name 속성을 반환
+						// 		-> 파일이 업로드되지 않아도 모든 요소를 얻어옴
+						
+						// 업로된 이미지 정보를 담을 List 생성
+						List<BoardImage> imgList = new ArrayList<BoardImage>();
+						
+						
+						while(files.hasMoreElements()) {
+							// 다음 요소(name)가 있으면 true
+							
+							String name = files.nextElement(); // 다음 요소값(name) 얻어오기
+							
+							System.out.println("얻어온 name : " + name);
+							System.out.println("변환된 파일명 : " + mReq.getFilesystemName(name));
+							System.out.println("원본 파일명 : " + mReq.getOriginalFileName(name));
+							System.out.println(mReq.getParameter(name));
+							
+							// 현재 요소에 업로드된 파일이 있을경우
+							if(mReq.getFilesystemName(name) != null) {
+								BoardImage temp = new BoardImage();
+
+								temp.setImgName(mReq.getFilesystemName(name));
+								temp.setImgOriginal(mReq.getOriginalFileName(name));
+								temp.setImgPath(filePath);
+
+								// name(img0~img3)에서 숫자를 제외한 "img" 문자열을 제거
+								temp.setImgLevel(  Integer.parseInt( name.replace("img", "")  ) );
+								temp.setBoardNo(boardNo);
+								
+								// imgList에 추가
+								imgList.add(temp);
+								
+							} // end if
+							
+						} // end while
+						
+						List<BoardImage> joined = new ArrayList<BoardImage>();
+						
+						joined.addAll(oldImgList);
+						joined.addAll(imgList);
+						
+						// board, imgList를 DB에 삽입하는 서비스 호출 후 결과 반환
+						int result = service.updateImgBoard(board, joined, boardCd);
+
+						if(result > 0) { // 성공
+							message = "게시글이 수정 되었습니다.";
+
+							// 상세 조회 redirect 주소
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+						}else { // 실패
+
+							message = "게시글 등록 중 문제가 발생했습니다.";
+
+							// 다시 게시글 작성 화면 redirect 주소
+							path = "insert";
+
+						}
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
+						
 						
 					}
 				} catch (Exception e) {

@@ -29,11 +29,6 @@
 				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요" value="${board.boardTitle}">
 				<h4 class="title">글 작성<span> *</span></h4>
 				<textarea id="summernote" name="boardContent"></textarea>
-				<script>
-					$(function() {
-						$(".note-editable").html('${board.boardContent}');
-					});
-				</script>
 	            <ul class="image-preview">
                 	<!-- <li class="boardImg">
 	                    <img>
@@ -48,14 +43,13 @@
 			
 				<div class="btns">
 				    <button id="reg-btn">수정하기</button>
-				    
+				    <button type="button" id="cancel-btn" onclick="cancelForm2();">취소하기</button>
 			    </div>
 			</form>
-			<form action="${contextPath}/board/cancel" method="post">
+			<form action="${contextPath}/board/cancel" method="post" name="cancelForm">
 		    	<input type="hidden" name="cp" value="${cp}" >
 		    	<input type="hidden" name="boardNo" value="${board.boardNo}">
 		    	<input type="hidden" name="boardCd" value="${board.boardCode}">
-			    <button id="cancel-btn">취소하기</button>
 		    </form>
 		</div>
 	</main>
@@ -80,7 +74,17 @@
 						
 						if(length != img.length){
 							if(length < img.length){
-								const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>"); /* , "+(index)+" */
+								$("#fileArea").empty();
+								$(".image-preview").empty();
+								
+								// 썸네일 부분에 이미지를 추가
+								for(let i=0; i<img.length; i++){
+									const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>");
+						            boardImg.append("<img src='"+$(img[i]).attr("src")+"'>");
+						            
+						            $(".image-preview").append(boardImg);
+								}
+								/* const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>");
 					            boardImg.append("<img src='"+$(img[length]).attr("src")+"'>");
 					            
 					            $(".image-preview").append(boardImg);
@@ -89,7 +93,7 @@
 						            $("#fileArea").append('<input type="text" id="input-img" value="'+$(img[length]).attr("src")+'" name="input-img">');
 					            }
 					            
-					            index += 1;
+					            index += 1; */
 								
 							}else{
 								for(let i=0; i<board.length; i++){
@@ -142,6 +146,10 @@
 				}
 			}
 		}
+        
+        function cancelForm2(){
+			document.cancelForm.submit();
+        }
            
 	</script>
 	<script src="${contextPath}/resources/js/boardWrite.js"></script>

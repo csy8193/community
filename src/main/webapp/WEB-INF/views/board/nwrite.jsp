@@ -5,9 +5,9 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -42,7 +42,7 @@
 			
 				<div class="btns">
 				    <button id="reg-btn">등록하기</button>
-				    <button id="cancel-btn">취소하기</button>
+				    <button type="button" id="cancel-btn" onclick="history.back()">취소하기</button>
 			    </div>
 			</form>
 		</div>
@@ -66,22 +66,45 @@
 						const board = $(".boardImg");
 						const boardimg = $(".boardImg > img");
 						
+						// 현재 textarea에 있는 이미지수와 썸네일 부분의 이미지 개수가 다를경우
 						if(length != img.length){
+							
+							// teatarea에 있는 이미지 수가 더 많은 경우(이미지를 추가한경우)
 							if(length < img.length){
-								const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>"); /* , "+(index)+" */
+								$("#fileArea").empty();
+								$(".image-preview").empty();
+								
+								// 썸네일 부분에 이미지를 추가
+								for(let i=0; i<img.length; i++){
+									const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>");
+						            boardImg.append("<img src='"+$(img[i]).attr("src")+"'>");
+						            
+						            $(".image-preview").append(boardImg);
+								}
+								/* const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>");
 					            boardImg.append("<img src='"+$(img[length]).attr("src")+"'>");
 					            
-					            $(".image-preview").append(boardImg);
+					            $(".image-preview").append(boardImg); */
+					            
+					            /* // 첫번째로 첨부한 이미지일 경우 테두리 색을 변경해준다
 					            if(index == 0){
 					            	$(".boardImg > img").css("border", "3px solid #4facfe");
 						            $("#fileArea").append('<input type="text" id="input-img" value="'+$(img[length]).attr("src")+'" name="input-img">');
 					            }
 					            
-					            index += 1;
+					            index += 1; */
 								
+					            
+					        // 썸네일에 있는 이미지 수가 더 많은 경우(이미지를 삭제한경우)
 							}else{
+								
+								// 썸네일에 있는 이미지수 만큼 반복문
 								for(let i=0; i<board.length; i++){
+									
+									// 썸네일의 src와 textarea의 src가 다른경우
 									if($(img[i]).attr("src") != $(boardimg[i]).attr("src")){
+										
+										// textarea의 src와 썸네일로 설정한 값이 같을경우 썸네일 값을 삭제
 										if($(boardimg[i]).attr("src") == $("#fileArea > input").val()){
 											$("#fileArea").empty();
 										}

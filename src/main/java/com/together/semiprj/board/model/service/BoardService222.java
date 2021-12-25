@@ -218,6 +218,85 @@ public class BoardService222 {
 		return result;
 	}
 
+	/** 사진 게시판 수정 전 데이터 조회
+	 * @param boardNo
+	 * @param boardCd
+	 * @return
+	 * @throws Exception
+	 */
+	public Board selectPboardUpdate(int boardNo, int boardCd) throws Exception{
+		Connection conn = getConnection();
+		
+		Board board = dao.selectPboardUpdate(conn, boardNo, boardCd);
+		
+		close(conn);
+		
+		return board;
+	}
+
+	/** 사진 게시판 수정 전 이미지 조회
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardImage> selectBoardImage(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		List<BoardImage> boardImageList = dao.selectBoardImage(conn, boardNo);
+		
+		close(conn);
+		
+		return boardImageList;
+	}
+
+	/** 사진 게시판 수정
+	 * @param board
+	 * @param oldImgList
+	 * @param boardCd
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateImgBoard(Board board, List<BoardImage> joined, int boardCd) throws Exception {
+		Connection conn = getConnection();
+		
+		String boardContent = XSS.replaceParameter(board.getBoardContent());
+		
+		boardContent = boardContent.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
+		
+		board.setBoardContent(boardContent);
+		
+		int result = dao.updatePboardContent(conn, board);
+		
+		
+		if(result > 0) { // 게시글 내용 부분 수정 되었으면
+			
+			// 이미지 파일 수정 전 이미지 삭제
+			result = dao.deleteImage(conn, board);
+			
+			if (result > 0) { // 이미지 삭제가 완료 되었으면
+				
+				for(BoardImage img : joined) {
+					
+					result = dao.insertBoardImage(img, conn);
+					
+					
+				} // end for
+				
+				if(result > 0 ) commit(conn);
+				else	rollback(conn);
+				
+			}else {
+				rollback(conn);
+			}
+			
+		}else {
+			rollback(conn);
+		}
+		
+		
+		return result;
+	}
+
 	/** 이벤트 페이지 목록
 	 * @param bc
 	 * @return

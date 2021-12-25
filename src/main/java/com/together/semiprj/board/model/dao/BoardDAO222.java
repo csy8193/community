@@ -367,6 +367,128 @@ List<Board> boardList = new ArrayList<Board>();
 		return result;
 	}
 
+	/** 사진 게시판 수정 전 데이터 조회
+	 * @param conn
+	 * @param boardNo
+	 * @param boardCd
+	 * @return
+	 * @throws Exception
+	 */
+	public Board selectPboardUpdate(Connection conn, int boardNo, int boardCd) throws Exception{
+		Board board = null;
+		
+		try {
+			String sql = prop.getProperty("selectPboardUpdate");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, boardCd);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardCode(rs.getInt("BOARD_CD"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return board;
+	}
+
+	/** 사진 게시판 수정 전 이미지 조회
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardImage> selectBoardImage(Connection conn, int boardNo) throws Exception{
+		List<BoardImage> boardImageList = new ArrayList<BoardImage>();
+		
+		try {
+			String sql = prop.getProperty("selectBoardImage");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardImage boardImage = new BoardImage();
+				
+				boardImage.setImgPath(rs.getString("BOARD_PIC_PATH"));
+				boardImage.setImgName(rs.getString("BOARD_PIC_NM"));
+				boardImage.setImgLevel(rs.getInt("BOARD_PIC_LEVEL"));
+				
+				boardImageList.add(boardImage);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return boardImageList;
+	}
+
+	/** 사진 게시판 내용 수정
+	 * @param conn
+	 * @param board
+	 * @return
+	 * @throws Exception
+	 */
+	public int updatePboardContent(Connection conn, Board board) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updatePboardContent");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getBoardContent());
+			pstmt.setInt(2, board.getMemberNo());
+			pstmt.setInt(3, board.getBoardCode());
+			pstmt.setInt(4, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	/** 사진 게시판 수정 전 이미지 삭제
+	 * @param conn
+	 * @param board
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteImage(Connection conn, Board board) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteImage");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
 	/** 이벤트 목록 조회
 	 * @param conn
 	 * @param bc
