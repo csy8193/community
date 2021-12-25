@@ -77,8 +77,10 @@
     <div id="walkwrite">
 		<h1>현재 <span id="continueCheck">0 </span>일째 연속 산책 중! <br>산책 일지를 작성해주세요! </h1>
 		<textarea rows="" cols="" id="walktext" placeholder="산책일지를 써주세요!"></textarea>
-		<button onclick="insertWalkHistory(this)">등록하기!</button>
-		<button onclick="resetWalkText(this)">작성취소!</button>
+		<div>
+		<button onclick="insertWalkHistory(this)">등록하기</button>
+		<button onclick="resetWalkText(this)">작성취소</button>
+		</div>
 	</div>
 	 </div>
         </main>

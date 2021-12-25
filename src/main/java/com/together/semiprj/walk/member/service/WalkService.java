@@ -61,20 +61,21 @@ public class WalkService {
 		Connection conn = getConnection();
 		List<Nboard> walkList = null;
 		int result = 0;
-		
+		int check = 0;
+		//당일 포인트 부여 확인
+		check = dao.checkduplPoint(conn,memberNo);
+		//0보다 크면 이미 부여했습니다
 		result = dao.walkinsert(conn,memberNo,walktext);
-		
 		if(result>0) {
-			//당일 포인트 부여 확인
-			 result = dao.checkduplPoint(conn,memberNo);
-			 System.out.println(result+"0보다 크면 이미 부여했습니다!!");
-			if(result==0) {
-				//포인트 증가
+			//삽입 성공 완료시 포인트 부여 여부
+			if(check==0) {
 				int getPoint = 20*continueWalk;
 				result = dao.walkPointGet(conn,memberNo, getPoint);
 				commit(conn);
-				//당일 산책일지
 				walkList = dao.selectWalkList(conn,memberNo);
+			}
+			else {
+				rollback(conn);
 			}
 		}
 		else {rollback(conn);}

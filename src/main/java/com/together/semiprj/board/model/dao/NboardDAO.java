@@ -183,7 +183,6 @@ public class NboardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 		}finally {
 			close(pstmt);
 		}
@@ -305,7 +304,6 @@ public class NboardDAO {
 			}
 		}finally {
 			close(pstmt);
-			if(result>0)System.out.println("좋아요 이미 완료");
 		}
 		return result;
 	}

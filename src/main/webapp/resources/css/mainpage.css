@@ -6,7 +6,9 @@
 .right-float{
     float: right;
 }
-
+.left-float > div > p> a > img{
+	display: none;
+}
 input:focus{outline:none;}
 
 
@@ -75,7 +77,7 @@ input:focus{outline:none;}
 }
 
 #best-wrap li{
-    height: 87px;
+    height: 110px;
     border-bottom: 1px solid #fff;
     padding:20px 0;
 }
@@ -108,7 +110,6 @@ input:focus{outline:none;}
 .eyes > img{
     width:25px;
 }
-
 /* 실시간 자유게시판 & 노하우게시판 */
 #first-wrap{
     width: 530px;
@@ -124,6 +125,14 @@ input:focus{outline:none;}
 .board-title-b{
     border-top: 4px solid #000;
     padding: 10px 0 20px 0;
+}
+.board-title-b>span{
+	display: inline-block;
+	width : 95%;
+}
+.board-title-b>a{
+	display: inline-block;
+	width : 5%;
 }
 
 .free-know li,
@@ -204,7 +213,13 @@ input:focus{outline:none;}
     width:650px;
     height: 100%;
 }
-
+#best-content{
+	height : 25px;
+	overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#best-content > p > a > img{
+	display : none;
+}
 /*footer*/
 #footer{
     width:100%;

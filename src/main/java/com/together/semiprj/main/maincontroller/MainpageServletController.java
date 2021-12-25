@@ -41,7 +41,6 @@ public class MainpageServletController extends HttpServlet{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		System.out.println(topLikePeople);
 		req.setAttribute("mostViewList", boardList);
 		req.setAttribute("currentFree", currentFree);
 		req.setAttribute("currentKnowhow", currentKnowhow);

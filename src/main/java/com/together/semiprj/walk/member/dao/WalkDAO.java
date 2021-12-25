@@ -209,7 +209,8 @@ public class WalkDAO {
 			pstmt.setInt(1, memberNo);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				result = rs.getInt(1);
+				result = rs.getInt("POINTDUPL");
+				System.out.println(result+"왜 1나옴?");
 			}
 		}
 		finally {
