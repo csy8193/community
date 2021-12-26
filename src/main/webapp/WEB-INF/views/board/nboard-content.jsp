@@ -51,7 +51,7 @@
         			<li class="one-reply">
         				<div class="original">
         					<p>
-								<img src="${contextPath}${reply.animalImgPath}" alt="댓글단 회원의 반려동물 이미지">
+								<img src="${contextPath}${reply.animalImgPath}" alt="">
 							</p>
 	                   		 <div class="reply-user">
 	                   		 <span>${reply.memberId}</span><span>${reply.replyCreateDate}</span>
