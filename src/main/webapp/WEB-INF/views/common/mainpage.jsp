@@ -98,17 +98,17 @@
                     <a href="${contextPath}/pboard/list?boardCd=70">자랑하기 게시판 보러가기 ></a><br>
                     <span class ="ranks123" id="ranking2"><img src="${contextPath}${topLikePeople[1].animalImg}">
                     <c:if test="${empty topLikePeople[1].animalName}">익명</c:if>${topLikePeople[1].animalName} / 
-                    <c:if test="${empty topLikePeople[1].animalName}">비밀</c:if>${topLikePeople[1].animalVariety}<br>
+                    <c:if test="${empty topLikePeople[1].animalName}">비밀</c:if>${topLikePeople[1].animalCateNM} / ${topLikePeople[1].animalVariety}<br>
                     좋아요 : ${topLikePeople[1].likeCount}  
                     </span>
                     <span class ="ranks123" id="ranking1"><img src="${contextPath}${topLikePeople[0].animalImg}">
                     <c:if test="${empty topLikePeople[0].animalName}">익명</c:if>${topLikePeople[0].animalName} / 
-                    <c:if test="${empty topLikePeople[0].animalName}">비밀</c:if>${topLikePeople[0].animalVariety}<br>
+                    <c:if test="${empty topLikePeople[0].animalName}">비밀</c:if>${topLikePeople[0].animalCateNM} / ${topLikePeople[0].animalVariety}<br>
                      좋아요 : ${topLikePeople[0].likeCount} 
                     </span>
                     <span class ="ranks123" id="ranking3"><img src="${contextPath}${topLikePeople[2].animalImg}">
                     <c:if test="${empty topLikePeople[2].animalName}">익명</c:if>${topLikePeople[2].animalName} / 
-                    <c:if test="${empty topLikePeople[2].animalName}">비밀</c:if>${topLikePeople[2].animalVariety}<br>
+                    <c:if test="${empty topLikePeople[2].animalName}">비밀</c:if>${topLikePeople[2].animalCateNM} / ${topLikePeople[2].animalVariety}<br>
                      좋아요 : ${topLikePeople[2].likeCount} 
                     </span>
                 </div>

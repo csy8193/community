@@ -124,6 +124,7 @@ public class MainPageDAO {
 				board.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
 				board.setAnimalGender(rs.getString("ANIMAL_SEX"));
 				board.setAnimalBirth(rs.getDate("ANIMAL_BIRTH"));
+				board.setAnimalCateNM(rs.getString("ANIMAL_CATEGORY_NM"));
 				board.setAnimalImg(rs.getString("ANIMALIMG"));
 				boardList.add(board);
 			}
