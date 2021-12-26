@@ -42,6 +42,10 @@
 	    	</form>
 	    </div>
 	</main>
+	
+	<jsp:include page="../common/footer.jsp"/>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		let index = 0;
@@ -111,7 +115,7 @@
 				return false;
 			}
 			
-			if($("[name=img0]").length == 0){
+			if($("[name=img0]").length == 0 || $("[name=img0]").val() == ""){
 				alert("썸네일을 지정해주세요.");
 				return false;
 			}

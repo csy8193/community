@@ -122,7 +122,21 @@ public class BoardController222 extends HttpServlet{
 						
 						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath, boardCd);
 						
-						resp.sendRedirect(req.getContextPath()+"/nboard/view?cp=1&boardNo="+result+"&boardCd="+boardCd+"");
+						if(result > 0) { // 성공
+							message = "게시글이 등록 되었습니다.";
+
+							// 상세 조회 redirect 주소
+							path = req.getContextPath()+"/nboard/view?cp=1&boardNo="+result+"&boardCd="+boardCd+"";
+						}else { // 실패
+
+							message = "게시글 등록 중 문제가 발생했습니다.";
+
+							// 다시 게시글 작성 화면 redirect 주소
+							path = req.getContextPath()+"board/nwrite?boardCd="+boardCd+"&cp=1";
+
+						}
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
 						
 						
 					}
@@ -208,13 +222,13 @@ public class BoardController222 extends HttpServlet{
 							message = "게시글이 등록 되었습니다.";
 
 							// 상세 조회 redirect 주소
-							path = req.getContextPath()+"/pboard/view?no="+result+"&cp=1";
+							path = req.getContextPath()+"/pboard/view?no="+result+"&cp=1&boardCd="+boardCd;
 						}else { // 실패
 
 							message = "게시글 등록 중 문제가 발생했습니다.";
 
 							// 다시 게시글 작성 화면 redirect 주소
-							path = "insert";
+							path = req.getContextPath()+"board/pwrite?boardCd="+boardCd+"&cp=1";
 
 						}
 						session.setAttribute("message", message);
@@ -280,18 +294,20 @@ public class BoardController222 extends HttpServlet{
 						int result = service.updateBoard(boardTitle, boardContent, memberNo, picPath, boardCd, boardNo);
 						
 						if(result > 0) {
+							session.setAttribute("message", "게시글이 수정되었습니다.");
 							resp.sendRedirect(req.getContextPath()+"/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd+"");
 							
 						}else {
-							System.out.println("실패");
+							session.setAttribute("message", "게시글 수정 실패하였습니다.");
+							resp.sendRedirect(req.getContextPath()+"/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd+"");
 						}
 						
 					}
 					
 					else if(command.equals("pupdateForm")) {
-						int currentPage = 1;
-						int boardNo = 179;
-						int boardCd = 70;
+						int currentPage = Integer.parseInt(req.getParameter("cp"));
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						
 						Board board = service.selectPboardUpdate(boardNo, boardCd);
 						
@@ -427,7 +443,7 @@ public class BoardController222 extends HttpServlet{
 							message = "게시글 등록 중 문제가 발생했습니다.";
 
 							// 다시 게시글 작성 화면 redirect 주소
-							path = "insert";
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
 
 						}
 						session.setAttribute("message", message);

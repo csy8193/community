@@ -42,6 +42,8 @@ public class PictureBoardViewServlet extends HttpServlet{
 				req.setAttribute("rList", rList);
 				
 				req.setAttribute("board", board);
+				System.out.println(rList);
+				System.out.println(board);
 				String path = "/WEB-INF/views/board/pic-detail.jsp";
 				RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 				dispatcher.forward(req, resp);
