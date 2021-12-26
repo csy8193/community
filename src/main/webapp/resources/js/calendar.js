@@ -281,27 +281,4 @@ const selecDatewalkList = function(date){
 			
 	})
 }
-$("#addwalkimg").on("click",function(){
-/*	if(loginMemberNo==0){
-		alert("로그인 후 이용해주세요!");
-		temp.val("");
-		return;
-	}*/
-	document.getElementById("walkfile").click();
-	console.log("이미지 삽입!");
-})
 
-const loadImg = function(el){
-	if (el.files[0]) {
-		var reader = new FileReader();
-		reader.readAsDataURL(el.files[0]);
-		reader.onload = function(e) {
-			$("#addwalkimg").html("");
-			const img = $("<img>");
-			img.css("width","100%");
-			img.css("height","400px");
-			img.attr("src", e.target.result);
-			$("#addwalkimg").append(img);
-		}
-	}
-}
