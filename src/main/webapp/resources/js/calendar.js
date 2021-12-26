@@ -216,14 +216,20 @@ const insertWalkHistory = function(el){
 			},
 			dataType : "json",
 			type : "POST",
-			success: function(nboardList){
-				console.log(nboardList);
-				if(nboardList ==null){
+			success: function(count2){
+				console.log(count2);
+				let getpoint = 0;
+				if(count2 >1){
 					//이미 체크
 					alert("산책일지 작성 완료! 오늘 포인트는 모두 획득했습니다.");
 				}
 				else{
-					const getpoint = 20 + 20*(continueWalk+1)
+					if(continueWalk==0){
+						 getpoint = 20;
+					}
+					else{
+						 getpoint = 20 + 20*(continueWalk+1)
+					}
 					alert("산책일지 작성 완료! "+getpoint+"점 획득!");
 					const continueCheck = $("#continueCheck").val();
 					$("#continueCheck").val(continueCheck+1);

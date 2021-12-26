@@ -66,14 +66,15 @@ public class WalkController extends HttpServlet{
 						if(loginUser!=null) {
 							loginMember = loginUser.getMemberNo();
 						}
+						
 						WalkService service = new WalkService();
 						List<Mypoint> rankList = new ArrayList<Mypoint>();
+						
 						rankList = service.myPoint(loginMember);
-						req.setAttribute("rankList", rankList);
-						List<WalkRank> rankList2 = new ArrayList<WalkRank>();
-						rankList2 = service.pointRank();
+						
 						req.setAttribute("rankList", rankList);
 						
+						System.out.println(rankList);
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
@@ -102,8 +103,11 @@ public class WalkController extends HttpServlet{
 						WalkService service = new WalkService();
 						
 						List<Nboard> nboardList = service.walkinsert(memberNo,walktext,continueWalk);
-						
-						resp.getWriter().print((new Gson()).toJson(nboardList));
+						int count2 = 0; 
+						for(Nboard abc : nboardList) {
+							count2++;
+						}
+						resp.getWriter().print(count2);
 					}
 					else if(command.equals("walkdayshow")) {
 						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));

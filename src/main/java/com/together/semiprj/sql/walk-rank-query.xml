@@ -19,13 +19,13 @@
         WHERE ROWNUM BETWEEN 1 AND 10
 	</entry>
 	<entry key="myPointAndRank">
-		SELECT EE.*, C.ANIMAL_NAME 
+        SELECT EE.*, C.ANIMAL_NAME 
         FROM(
-        SELECT ROWNUM , DD.* FROM(
-		SELECT MEMBER_NO, SUM(POINT_SCORE) TOTALP FROM POINT
-        GROUP BY MEMBER_NO) DD) EE
-        JOIN ANIMAL C ON (C.MEMBER_NO=EE.MEMBER_NO)
-        WHERE C.MEMBER_NO = ?
+        SELECT MEMBER_NO, SUM(POINT_SCORE) TOTALP FROM POINT
+        WHERE MEMBER_NO=?
+        GROUP BY MEMBER_NO
+        ) EE
+        LEFT JOIN ANIMAL C ON(C.MEMBER_NO = EE.MEMBER_NO)
 	</entry>
 	<entry key="mywalkrank">
 		SELECT DD.*, C.ANIMAL_NAME FROM
@@ -38,9 +38,14 @@
 		LEFT JOIN ANIMAL_IMG D ON (C.ANIMAL_NO = D.ANIMAL_NO)
 	</entry>
 	<entry key="mymonthrank">
-		SELECT ROWNUM MYRANK FROM (
+        SELECT DD.* FROM(
+        SELECT ROWNUM MYRANK, CC.*
+        FROM (
+        SELECT MEMBER_NO ,TOTALP FROM (
         SELECT MEMBER_NO, SUM(POINT_SCORE) TOTALP FROM POINT
 		GROUP BY MEMBER_NO) BB
+        ORDER BY TOTALP DESC) CC
+        ) DD
         WHERE MEMBER_NO = ?
 	</entry>
 	<entry key="walkinsert">
