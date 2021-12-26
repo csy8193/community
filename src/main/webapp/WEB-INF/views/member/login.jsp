@@ -17,9 +17,9 @@
 	
 </head>
 <body>
+<jsp:include page="../common/header-search.jsp"/>
 <div id="all-wrap">
-   	<jsp:include page="../common/header-search.jsp"/>
-    <div id="content">
+    <div id="content-login">
         <div id="login-form-wrap">
             <div>
                 <p><img src="${contextPath}/resources/images/main/logo.png"></p>

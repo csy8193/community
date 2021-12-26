@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <link rel="stylesheet" href="${contextPath}/resources/css/mainpage.css">
 <jsp:include page="header.jsp"/>
-<section>
+
 <div id="container">
             <div id="main-search-wrap">
                 <div id="search-wrap2">
@@ -46,7 +46,7 @@
                     	</c:when>
                     	</c:choose>
                   	     <li>
-                            <div class="left-float">
+                            <div class="left-float best-ranking-wrap" >
                                 <span class="best-ranking">${count}</span>
                                 <c:set var="count" value="${count+1}" />
                                 <div>
@@ -145,7 +145,6 @@
                 </div>
             </div>
         </div>
-</section>
 <link rel="stylesheet" href="${contextPath}/resources/css/plus2mainpage.css">
 <jsp:include page="footer.jsp"/>
 
