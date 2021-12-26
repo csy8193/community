@@ -8,7 +8,14 @@ document.getElementById("reply-btn").addEventListener("click", function(){
 			addReply(0);
 });
 
+//top버튼 기능
+document.getElementById("nboard-topbtn").addEventListener("click", function(e){
+			e.preventDefault();
+			window.scrollTo({top:0, behavior:'smooth'});
+});
 
+
+//좋아요버튼기능
 document.getElementById("nboard-like").addEventListener("click", function(){
 	if(loginMemberNo==""){
 		alert("로그인 후 이용해주세요");
@@ -16,11 +23,11 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 	}
 	else{
 		if(loginMemberNo==memberNo){
+			console.log($("#nboard-like").attr("title"));
 			alert("본인의 글은 좋아요를 누를 수 없습니다!");
 			return;
 		}
 		else{
-			console.log("다른사람글");
 			$.ajax({
 				url : contextPath + "/nboard/view/sub/like",
 				data : {
@@ -30,15 +37,20 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 				},
 				type :"POST",
 				success : function(result){
-					if(result>0){
+					if(result==1){
 						alert("좋아요를 누르셨습니다!")
 						$(".fa-heart").removeClass("far");
 						$(".fa-heart").addClass("fas");
 						$("#like-btn>div:last").css("background","none").css("box-shadow","none");
 						$("#like-btn>div:last>i").css("color","red");
-						$("#nboard-content > div.nboard-info > div:nth-child(3) > span:nth-child(2)").text(result);
+						$("#like-btn>div:last>i").attr("title", "좋아요를 이미 했어요")
+						const likevalue =$("#nboard-content > div.nboard-info > div:nth-child(2) > span:nth-child(2)")
+						
+						console.log(likevalue.text());
+						likevalue.text(parseInt(likevalue.text())+1);
 					}
 					else{
+						console.log("이미 좋아요를 눌렀습니다");
 						alert("이미 좋아요를 눌렀습니다.")
 					}
 				},
@@ -154,16 +166,11 @@ function makereply(reply, checkoriginal){
 				}
 				const p = $('<p>');
 				
-				if(reply.profileExist){
-					const img =$('<img>');
-					$(img).attr("src",contextPath+reply.animalImgPath+reply.animalImgNm)
-					p.append(img);
-				}
-				else{
-					const img =$('<img>');
-					$(img)
-					p.append(img);
-				}
+				const img =$('<img>');
+				$(img).attr("src",contextPath+reply.animalImgPath)
+				
+				p.append(img);
+				
 				div.append(p);
 				
 				const div2 = $('<div class="reply-user">');
@@ -195,6 +202,9 @@ function makereply(reply, checkoriginal){
 					const button4 = $('<button onclick="deleteNrep(this)">');
 					button4.text('삭제');
 					div3.append(button1,button3, button4)
+					}
+					else{
+						div3.append(button1)
 					}
 				}
 				//const button2 = $('<button>');
@@ -235,6 +245,9 @@ function createReplyArea(el){
 
 		feedbackReplyStatus= true;
 		prevReplyWriterNo = $(el).val();
+		
+		var offset = div.offset();
+		window.scrollTo({top : offset.top, behavior:'smooth'});
 	}
 	else{
 		let nowReplyWriterNo = $(el).val();

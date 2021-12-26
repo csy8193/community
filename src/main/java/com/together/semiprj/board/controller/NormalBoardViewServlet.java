@@ -44,26 +44,13 @@ public class NormalBoardViewServlet extends HttpServlet{
 			Nboard nboard = null;
 			nboard =service.selectBoardView(boardNo,memberNo);
 			
-			//글쓴이 대표 반려동물 프로필 이미지 주소
-			String writerAnimalProfile = "";
-			if(nboard.getNboardAnimalImg() != null) {
-				if(nboard.getNboardAnimalImg().get(0).getImgLevel()==0){
-					writerAnimalProfile = (nboard.getNboardAnimalImg()).get(0).getImgPath();
-					writerAnimalProfile += (nboard.getNboardAnimalImg()).get(0).getImgName();
-				}
-			}
 			//4. 댓글정보 가져오기
 			if(nboard != null) {
 				//+ 댓글 목록 조회하기
 				List<NboardReply> rList = (new NboardReplyService()).selectReplyList(boardNo);
 				
-				for(NboardReply dd : rList) {
-					System.out.println(dd);
-				}
-				
 				req.setAttribute("rList", rList);
 				req.setAttribute("nboard", nboard);
-				req.setAttribute("writerAnimal", writerAnimalProfile);
 				String path = "/WEB-INF/views/board/nboard-content.jsp";
 				RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 				dispatcher.forward(req, resp);

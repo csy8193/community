@@ -51,14 +51,7 @@
         			<li class="one-reply">
         				<div class="original">
         					<p>
-		                    	<c:choose>
-									<c:when test="${reply.profileExist}">
-										<img src="${contextPath}${reply.animalImgPath}${reply.animalImgNm}" alt="댓글단 회원의 반려동물 이미지">
-									</c:when>
-									<c:otherwise>
-										<img>
-									</c:otherwise>
-		                    	</c:choose>
+								<img src="${contextPath}${reply.animalImgPath}" alt="댓글단 회원의 반려동물 이미지">
 							</p>
 	                   		 <div class="reply-user">
 	                   		 <span>${reply.memberId}</span><span>${reply.replyCreateDate}</span>
@@ -85,14 +78,7 @@
 		        				<c:if test="${checkfeedback.feedbackReplyNo == reply.replyNo}">
 		        				<div class="feedback">
 			                    	<p>
-			                    	<c:choose>
-										<c:when test="${checkfeedback.profileExist}">
-											<img src="${contextPath}${checkfeedback.animalImgPath}${checkfeedback.animalImgNm}" alt="댓글단 회원의 반려동물 이미지">
-										</c:when>
-										<c:otherwise>
-											<img>
-										</c:otherwise>
-			                    	</c:choose>
+										<img src="${contextPath}${checkfeedback.animalImgPath}" alt="댓글단 회원의 반려동물 이미지">
 									</p>
 			                    	<div class="reply-user">
 			                        <i class="fas fa-level-up-alt"></i><span>${checkfeedback.memberId}</span><span>${checkfeedback.replyCreateDate}</span>
@@ -126,10 +112,10 @@
         	</div>
         <div id="like-btn">
             <div>
-                <i class="fas fa-angle-up" title="상단으로"></i>
+                <i class="fas fa-angle-up" title="상단으로" id="nboard-topbtn"></i>
             </div>
             <div>
-                <i class="fas fa-list" title="목록으로 돌아가기"></i>
+                <i class="fas fa-list" title="목록으로 돌아가기" onclick="location.href='${contextPath}/nboard/list?cp=${param.cp}&boardCd=${nboard.boardCd}'"></i>
             </div>
             <div <c:if test="${nboard.likeDone}">style="background: none; box-shadow:none; color : red"</c:if>>
             	<c:choose>

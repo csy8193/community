@@ -65,10 +65,6 @@ public class NboardService {
 			}
 			else rollback(conn);
 		}
-		List<NboardImage> NboardImgList = dao.selectNboardImgList(conn,boardNo);
-		if(NboardImgList!=null) {
-			nboard.setnBoardImgList(NboardImgList);
-		}
 		
 		close(conn);
 		return nboard;
@@ -90,6 +86,15 @@ public class NboardService {
 		
 		close(conn);
 		
+		return result;
+	}
+	public int duplLikeCheck(int memberNo, int boardNo) throws Exception{
+		int result=0;
+		
+		Connection conn= getConnection();
+		result = dao.duplLikeCheck(conn, memberNo,boardNo);
+		
+		close(conn);
 		return result;
 	}
 

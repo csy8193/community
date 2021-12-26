@@ -1,52 +1,51 @@
-    let selectMonth = 0;
-	
+ let selectMonth = 0;
+ let continueWalk = 0; 
     window.onload= function(){
 		
-		displayCal(selectMonth);
-    }
-
-    let selectMonth = 0;
-    window.onload= function(){
-	//	회원 기록 => 카테고리 100 + 해당 회원 기록
-    //달력 생성 시 해당하는 월과 기록 넣고 
-		displayCal(selectMonth);
-    }
-
+	displayCal(selectMonth);
 	
-	const memberWalkHistory = function(start, end){
+	
+    }
+const dayList = function(el){
+	const day = $(el).text();
+	//loginMemberNo
 
-		const startwalk = getYyyyMmDdMmSsToString(startdate);
-		const endwalk = getYyyyMmDdMmSsToString(enddate);
-		
-		if(loginMemberNo==""){ 
-			console.log("로그인필요");
-			return; }
-		
-		$.ajax({
-			url : contextPath+"/walk/walkhistory",
+	const checky = $("#today-month").text().split('/')[0];
+	const checkm = $("#today-month").text().split('/')[1];
+	$.ajax({
+		url : contextPath+"/walk/walkdayshow",
 			data : {
-				"startwalk" : startwalk,
 				"loginMemberNo" : loginMemberNo,
-				"endwalk" : endwalk
+				"day" : day,
+				"checky" : checky,
+				"checkm" : checkm
 			},
 			dataType : "json",
 			type : "POST",
-			success : function(history){
-					
-					
-					
-				
+			success : function(dayhistory){
+				$("#mydaywalk").text("");
+				$("#mywalklist").css("display","block");
+				$.each( dayhistory , function(index1, checkday){
+					const li = $("<li>");
+					const span1 = $("<span>");
+					span1.text(index1+1);
+					const span2 = $("<span>");
+					span2.text(checkday.boardContent);
+					const span3 = $("<span>");
+					span3.text(checkday.createDt);
+					li.append(span1,span2,span3);
+					$("#mydaywalk").append(li);
+				})
+								
+				console.log(dayhistory);
 			},
 			error : function(req, status, error){
-                    console.log("좋아요 에러");
-                    console.log(req.responseText);
+                console.log("에러");
+                console.log(req.responseText);
             }
-			
-		})
-		return;
-	}
-	
-	
+	})
+}
+
 	function getYyyyMmDdMmSsToString(date)
 {
 			var dd = date.getDate();
@@ -63,8 +62,6 @@
 			return s1;
 }
 	
-	
-	
     const displayCal = function(){
     let temp = new Date()
     let today = new Date(
@@ -76,7 +73,6 @@
     let firstDay = new Date(year, month-1 , 1).getDay();
     let day = today.getDay();
     var monthDay = Array(31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-    var dayList =Array('일', '월', '화', '수' , '목' , '금' , '토' );
     day7 = firstDay;
     /* 2월의 마지막 날 설정 */
     if (year % 400 == 0)
@@ -90,15 +86,13 @@
 
     let lastDate =  monthDay[month-1];
 
-    var enMonthName = new Array('1월','2월','3월','4월','5월','6월',
-        '7월','8월','9월','10월','11월','12월');
-    var enMonthName = new Array('1월 (January)','2월 (February)','3월 (March)','4월 (April)','5월 (May)','6월 (June)',
-        '7월 (July)','8월 (August)','9월 (September)','10월 (October)','11월 (November)','12월 (December)');
+    var enMonthName = new Array('1','2','3','4','5','6',
+        '7','8','9','10','11','12');
     
     	
         const tmonth = document.getElementById("today-month");
         const monthday = document.getElementById("month-day");
-        tmonth.innerText = year+"년 " +enMonthName[month-1] 
+        tmonth.innerText = year+"/" +enMonthName[month-1] 
 		
         let count = 1;
         let week =1;
@@ -125,8 +119,21 @@
 						arrcheckday[i] = checkday;
 						i=i+1;
 				})
+				if(arrcheckday.length != 0){
+					continueWalk=1
+					for(let pl =arrcheckday.length-1 ; pl > 0; pl--){
+						let nowval  = arrcheckday[pl];
+						let prevval = arrcheckday[pl-1];
+						if(nowval-prevval ==1){
+							continueWalk ++
+						}
+						else{
+							break;
+						}
+					}
+				}
+				$("#continueCheck").text(continueWalk);
 				console.log(arrcheckday);
-				
 				while(notLast){
 	            const tr = document.createElement("tr");
 	            for(let i = 0 ; i<7 ; i++){
@@ -140,13 +147,13 @@
 
 							arrcheckday.forEach(function(element){
 							    if(element==count) {
+									console.log("같음");
 									$(td).addClass("walkdone");
+									$(td).attr("onclick","dayList(this)");
 							    }
 								else{
 									$(td).addClass("nonewalk");
 								}
-							        console.log("됨");
-									$(td).addClass("walkdone");
 							});
 	                        let tempDate = new Date(year, month-1 ,count);
 	                        //console.log(count+"번째" +" tempDate: " +tempDate);
@@ -164,7 +171,6 @@
 	            week = week+1;//for문 1번 == 1주일
 	            monthday.append(tr);
 	        	}
-					
 			},
 			error : function(req, status, error){
                     console.log("달력 에러");
@@ -175,15 +181,12 @@
 		//------------------------------------------------------
 
 }
-    
-
 const prev = function(){
         selectMonth=selectMonth - 1;
         const monthday = document.getElementById("month-day");
         monthday.innerHTML = "";
         displayCal();
     }
-    
 
 const next = function(){
         selectMonth=selectMonth +1;
@@ -193,31 +196,89 @@ const next = function(){
     }
 
 const insertWalkHistory = function(el){
-	const walktext =  $(el).prev().val("");
-	
+	const temp =  $("#walktext");
+	if(loginMemberNo==0){
+		alert("로그인 후 이용해주세요!");
+		temp.val("");
+		return;
+	}
+	walktext = temp.val();
+	if(walktext.trim().length==0){
+		alert("내용을 작성해주세요!");
+		return;
+	}
 	$.ajax({
 			url : contextPath+"/walk/walkinsert",
 			data : {
 				"loginMemberNo" : loginMemberNo,
-				"walktext" : walktext
+				"walktext" : walktext,
+				"continueWalk" : continueWalk+1,
 			},
 			dataType : "json",
 			type : "POST",
-			success: function(result){
-				
-				
+			success: function(nboardList){
+				console.log(nboardList);
+				if(nboardList ==null){
+					//이미 체크
+					alert("산책일지 작성 완료! 오늘 포인트는 모두 획득했습니다.");
+				}
+				else{
+					const getpoint = 20 + 20*(continueWalk+1)
+					alert("산책일지 작성 완료! "+getpoint+"점 획득!");
+					const continueCheck = $("#continueCheck").val();
+					$("#continueCheck").val(continueCheck+1);
+				}
+				temp.val("");
+			    monthday.innerHTML = ""
+				displayCal(selectMonth);
+				setTimeout(function() {
+				  $(".walkdone:last").click();
+				}, 50);
 			},
 			error : function(req, status, error){
-                    console.log("좋아요 에러");
+                    console.log("에러");
                     console.log(req.responseText);
             }
 			
 	})
-	
+    const monthday = document.getElementById("month-day");
+
 }
+
 const resetWalkText = function(el){
 	$(el).prev().prev().val("")
 }
-/**
- * 
- */
+
+const selecDatewalkList = function(date){
+	$("#walkwrite").html("");
+		$.ajax({
+			url : contextPath+"/walk/walkList",
+			data : {
+				"loginMemberNo" : loginMemberNo,
+				"selectDay" : continueWalk+1
+			},
+			dataType : "json",
+			type : "POST",
+			success: function(nboardList){
+				console.log(nboardList);
+				if(nboardList ==null){
+					//이미 체크
+					alert("산책일지 작성 완료! 오늘 포인트는 모두 획득했습니다.");
+					
+				}
+				else{
+					const getpoint = 20 + 20*(continueWalk+1)
+					alert("산책일지 작성 완료! "+getpoint+"점 획득!");
+					const continueCheck = $("#continueCheck").val();
+					$("#continueCheck").val(continueCheck+1);
+				}
+				temp.val("");
+			},
+			error : function(req, status, error){
+                    console.log("에러");
+                    console.log(req.responseText);
+            }
+			
+	})
+}
+

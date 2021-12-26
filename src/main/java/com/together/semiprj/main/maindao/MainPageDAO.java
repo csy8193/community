@@ -41,14 +41,12 @@ public class MainPageDAO {
 		BoardInfo board = null;
 		try {
 			String sql = prop.getProperty("selectMaxView");
-			System.out.println(sql);
 			stmt = conn.createStatement();
 			rs= stmt.executeQuery(sql);
 			boardList = new ArrayList<BoardInfo>();
 			
 			int count = 0;
 			while(rs.next()) {
-				System.out.println(count++);
 				board = new BoardInfo();
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardName(rs.getString("BOARD_NAME"));

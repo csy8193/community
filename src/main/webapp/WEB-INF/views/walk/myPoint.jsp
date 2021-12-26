@@ -4,7 +4,7 @@
 
 <body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
-		<link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
+		<link rel="stylesheet" href="${contextPath}/resources/css/myPoint.css">
 	<main>
           <div id="main">
              <h2>My 포인트</h2>
@@ -75,10 +75,17 @@
 	    </table>
 	  </div>
     <div id="walkwrite">
-		<h1> 산책 일지를 작성해주세요! </h1>
+		<h1>현재 <span id="continueCheck">0 </span>일째 연속 산책 중! <br>산책 일지를 작성해주세요! </h1>
 		<textarea rows="" cols="" id="walktext" placeholder="산책일지를 써주세요!"></textarea>
-		<button onclick="insertWalkHistory(this)">등록하기!</button>
-		<button onclick="resetWalkText(this)">작성취소!</button>
+		<div>
+		<button onclick="insertWalkHistory(this)">등록하기</button>
+		<button onclick="resetWalkText(this)">작성취소</button>
+		</div>
+		<div id="mywalklist">
+			<h1>산책일지 리스트</h1>
+			<ul id="mydaywalk">
+			</ul>
+		</div>
 	</div>
 	 </div>
         </main>
@@ -86,10 +93,10 @@
  <script>
  	const contextPath = "${contextPath}";
  	let loginMemberNo ="${sessionScope.loginMember.memberNo}";
+ 	console.log(loginMemberNo);
  	if(loginMemberNo==""){
  		loginMemberNo=0;
  	}
- 	const loginMemberNo = 4;
  		//"${sessionScope.MemberNo}"
  </script>
  <script src="${contextPath}/resources/js/calendar.js"></script> 

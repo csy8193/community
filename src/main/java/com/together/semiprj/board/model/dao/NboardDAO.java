@@ -158,8 +158,7 @@ public class NboardDAO {
 				nboard.setLikecount(rs.getInt("LIKECOUNT"));
 				nboard.setReplycount(rs.getInt("REPLYCOUNT"));
 				nboard.setLikeDone(rs.getBoolean("LIKEDONE"));
-				nboard.setAnimalImgNo(rs.getInt("ANIMAL_IMG_NO"));
-				nboard.setAnimalMainImgPath(rs.getNString("MAINANIMALPATH"));
+				nboard.setAnimalMainImgPath(rs.getNString("ANIMAL_PROFILE_IMG"));
 			}
 			
 		}
@@ -183,7 +182,6 @@ public class NboardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 		}finally {
 			close(pstmt);
 		}
@@ -284,6 +282,25 @@ public class NboardDAO {
 			pstmt.setInt(2, boardNo);
 			
 			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int duplLikeCheck(Connection conn, int memberNo, int boardNo) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("duplLikeCheck");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
 		}finally {
 			close(pstmt);
 		}

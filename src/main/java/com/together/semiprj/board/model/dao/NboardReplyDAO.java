@@ -54,10 +54,8 @@ public class NboardReplyDAO {
 				reply.setStatusCode(rs.getInt("STATUS_CD"));
 				reply.setStatusNm(rs.getString("STATUS_NM"));
 				reply.setAnimalImgPath(rs.getString("ANIMAL_IMG_PATH"));
-				reply.setAnimalImgNm(rs.getString("ANIMAL_IMG_NM"));
+				//reply.setAnimalImgNm(rs.getString("ANIMAL_IMG_NM"));
 				reply.setFeedbackReplyNo(rs.getInt("FEEDBACK"));
-				if(rs.getInt("PROFILEEXIST")==1) {reply.setProfileExist(true);}
-				else {reply.setProfileExist(false);}
 				rList.add(reply);
 			}
 			
