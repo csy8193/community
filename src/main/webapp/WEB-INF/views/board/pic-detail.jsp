@@ -109,7 +109,6 @@
 								<form action="#" method="POST" name="requestForm">
 									<input type="hidden" name="boardCd" value="${param.boardCd}">
 									<input type="hidden" name="boardNo" value="${param.no}">
-									<input type="hidden" name="cp" value="${param.cp}">
 								</form>
 							</c:if>
 						</div>

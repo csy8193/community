@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
+
+ol,ul,li, a{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+
+.container{
+    min-width: 1400px;
+}
+
+/*메인 검색창*/
+#main-search-wrap{
+    width:1400px;
+    margin:0 auto;
+}
+
+#search-wrap2{
+    width:1000px;
+    height: 70px;
+    margin:0 200px;
+    border-radius: 50px;
+    border:3px solid #000;
+}
+#search-btn{
+    border:none;
+    background-color: #fff;
+    margin:12px 0 0 15px;
+    float: left;
+}
+#search-btn img{
+    width:40px;
+
+}
+#main-search{
+    width:800px;
+    height: 40px;
+    margin: 11px 0 0 20px;
+    font-size: 20px;
+    float: left;
+    border: none;
+    outline: none;
+}
+#main-search:checked{
+    border:none;
+}
+
+
+/* main */
+main{
+	margin-top: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+#main{
+    width: 1400px;
+}
+
+.search-result{
+    padding: 50px 0 50px 0;
+}
+
+.search-list{
+    border-top: 1px solid #e7e7e7;
+    padding: 20px 0 20px 0;
+    display: flex;
+}
+
+.search-list:last-of-type{
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.search-list > img {
+    width: 150px;
+    height: 150px;
+}
+
+.search-board{
+    margin-left: 20px;
+}
+
+.search-board > *{
+    padding: 3px 0 3px 0;
+}
+
+.search-board > span{
+    color: #4facfe;
+    font-size: 13px;
+}
+
+.search-board > div{
+    height: 80px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.search-board > div > p{
+    color: #989696 !important;
+    background-color : inherit !important;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.search-board > div > p *{
+    color: #989696 !important;
+    background-color : inherit !important;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.search-board > div > p img{
+	display: none;
+}
+
+.board-user-info{
+    display: flex;
+    margin-top: 10px;
+    
+}
+
+.board-user-info > li:not(:first-of-type) {
+    margin: 0 5px 0 5px;
+}
+
+.board-user-info > li {
+    display: flex;
+    align-items: center;
+}
+
+.board-user-info > li > img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+
+.page-number{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.page-ul{
+    display: flex;
+}
+
+.page-ul > li{
+    text-align: center;
+    line-height: 28px;
+    width: 30px;
+    height: 30px;
+}
+
+.page-ul > li > a{
+    display: block;
+}
