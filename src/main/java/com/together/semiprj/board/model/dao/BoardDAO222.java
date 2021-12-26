@@ -489,6 +489,33 @@ List<Board> boardList = new ArrayList<Board>();
 		return result;
 	}
 
+	/** 일반게시글 삭제
+	 * @param conn 
+	 * @param boardCd
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int nBoardDelete(Connection conn, int boardCd, int boardNo, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("nBoardDelete");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
 	/** 이벤트 목록 조회
 	 * @param conn
 	 * @param bc

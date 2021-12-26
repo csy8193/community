@@ -26,7 +26,7 @@
                     <i class="fas fa-calendar-alt"></i><span>${nboard.createDt }</span>
                     <c:if test="${nboard.memberNo == loginMember.memberNo}">
 	                    <button onclick="updateForm();">수정</button>
-	                    <button>삭제</button>
+	                    <button onclick="deleteForm();">삭제</button>
                     	<form action="#" method="POST" name="requestForm">
 							<input type="hidden" name="boardCd" value="${param.boardCd}">
 							<input type="hidden" name="boardNo" value="${param.boardNo}">
@@ -143,6 +143,12 @@ let beforeReplyRow;
 
 function updateForm(){
 	document.requestForm.action = contextPath + "/board/updateForm";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+}
+
+function deleteForm(){
+	document.requestForm.action = contextPath + "/board/ndelete";
 	document.requestForm.method = "POST";
 	document.requestForm.submit();
 }

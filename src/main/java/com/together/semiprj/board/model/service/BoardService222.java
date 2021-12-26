@@ -297,6 +297,24 @@ public class BoardService222 {
 		return result;
 	}
 
+	/** 일반 게시글 삭제
+	 * @param boardCd
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int nBoardDelete(int boardCd, int boardNo, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.nBoardDelete(conn, boardCd, boardNo, memberNo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+
 	/** 이벤트 페이지 목록
 	 * @param bc
 	 * @return

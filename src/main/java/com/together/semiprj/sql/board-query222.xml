@@ -105,4 +105,11 @@
 	
 	</entry>
 	
+	
+	<entry key="nBoardDelete">
+		UPDATE BOARD SET STATUS_CD = 2 WHERE MEMBER_NO = ? AND BOARD_NO = ?
+	
+	
+	</entry>
+	
 </properties>

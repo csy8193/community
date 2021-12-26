@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.together.semiprj.board.model.service.BoardService222;
@@ -44,6 +45,7 @@ public class BoardController222 extends HttpServlet{
 					BoardService222 service = new BoardService222();
 					
 					int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
+					
 
 					if(command.equals("notice")) {
 						
@@ -450,6 +452,61 @@ public class BoardController222 extends HttpServlet{
 						resp.sendRedirect(path);
 						
 						
+					}
+					
+					
+					else if(command.equals("ndelete")) {
+						
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						int currentPage = Integer.parseInt(req.getParameter("cp"));
+						
+						HttpSession session = req.getSession();
+						
+						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
+						
+						
+						int result = service.nBoardDelete(boardCd, boardNo, memberNo);
+						
+						if(result > 0) {
+							message = "게시글이 삭제되었습니다.";
+							path = req.getContextPath() + "/nboard/list?boardCd="+boardCd;
+							
+						}else {
+							message = "게시글 삭제중 문제가 발생했습니다.";
+							path = req.getContextPath() + "/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd;
+							
+						}
+						
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
+					}
+					
+					else if(command.equals("pdelete")) {
+						
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						int currentPage = Integer.parseInt(req.getParameter("cp"));
+						
+						HttpSession session = req.getSession();
+						
+						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
+						
+						
+						int result = service.nBoardDelete(boardCd, boardNo, memberNo);
+						
+						if(result > 0) {
+							message = "게시글이 삭제되었습니다.";
+							path = req.getContextPath() + "/pboard/list?boardCd="+boardCd;
+							
+						}else {
+							message = "게시글 삭제중 문제가 발생했습니다.";
+							path = req.getContextPath() + "/nboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+							
+						}
+						
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
 					}
 				} catch (Exception e) {
 					
