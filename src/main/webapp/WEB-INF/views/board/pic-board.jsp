@@ -21,7 +21,7 @@
          <c:choose>
             <c:when test="${empty boardList}">
             <%-- 조회된 게시글 목록이 없을 때 --%>
-               없다 없어!
+            
             </c:when>
             <c:otherwise>
                <c:forEach items="${boardList}" var="board">
@@ -29,8 +29,8 @@
                <%-- 조회된 게시글 목록이 있을 때 --%>
                   <div class="item">
                          <div class="item-header">
-                             <div class="user-img"></div>
-                             <p>${board.boardName}</p>
+                             <div class="user-img" style="background : url('${contextPath}${board.animalMainImgPath}') center center no-repeat; background-size: cover;"></div>
+                             <p>${board.memberNm}</p>
                          </div>
                          <div class="item-pic">
                             <c:if test="${board.PBoardImgList[0].imgLevel == 0 }">

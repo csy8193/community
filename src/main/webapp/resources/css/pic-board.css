@@ -56,8 +56,6 @@ label{
 }
 
 .user-img{
-    background : url('https://web-wit.s3.ap-northeast-2.amazonaws.com/images/user/5135/user_1633925591.jpeg') center center no-repeat;
-    background-size: cover;
     width: 30px;
     height: 30px;
     border-radius: 15px;
@@ -175,6 +173,7 @@ label{
 		right: 50px;
 	}
 }
+
 
 #write>i {
 	color: #4facfe;
