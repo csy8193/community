@@ -2,11 +2,39 @@
 
 <%-- JSTL c태그 사용을 위한 taglib 추가 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${contextPath}/resources/css/footer.css">
+
 <!-- Footer -->
 <footer>
-	 <div id="footer">
-
-     </div>
+	<div id="footer-wrap">
+            <div id="footer">
+            	<div class="left-float">
+	            	<h1><img src="${contextPath}/resources/images/main/footer-logo.png"></h1>
+	                <ul id="footer-nav">
+	                    <li><a href="#">회사소개</a></li>
+	                    <li><a href="#">이용약관</a></li>
+	                    <li><a href="#">개인정보처리방침</a></li>
+	                    <li><a href="#">운영 정책</a></li>
+	                    <li><a href="#">고객센터</a></li>
+	                    <li><a href="#">회원 혜택</a></li>
+	                </ul>
+	                <div id="text">
+	                    <p>회사명:(주)투개더 | 대표 : 아무개 | 주소: 경기도 아무시 아무구 아무로 1234로 74 <br>
+	                        사업자 등록번호 : 1215-2545151[사업자정보확인] | 통신 판매업 신고번호 : 2021- 아무아무B-1111 | 개인정보책임자 : 아무개 </p>
+	                    <p>Copyright 2021. WIT. All rights reserved</p>
+	                </div>
+            	</div>
+               
+                <div id="social-wrap" class="right-float">
+	            	<ul id="social-nav">
+	            		<li><a href="#"><img src="${contextPath}/resources/images/main/facebook.png"></a></li>
+	            		<li><a href="#"><img src="${contextPath}/resources/images/main/twitter.png"></a></li>
+	            		<li><a href="#"><img src="${contextPath}/resources/images/main/instar.png"></a></li>
+	            	</ul>
+	            </div>
+            </div>
+            
+        </div>
 </footer>
 
 
