@@ -27,7 +27,7 @@ public class PictureBoardController2 extends HttpServlet{
 		User loginmember = (User)session.getAttribute("loginMember");
 		int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 		
-		System.out.println(boardCd);
+		//System.out.println(boardCd);
 		
 		int memberNo;
 		if(loginmember != null) {
@@ -51,7 +51,7 @@ public class PictureBoardController2 extends HttpServlet{
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("boardCd", boardCd);
 			req.setAttribute("boardNm", boardNm);
-			System.out.println(boardNm);
+			//System.out.println(boardNm);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

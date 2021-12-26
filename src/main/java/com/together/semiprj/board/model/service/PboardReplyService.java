@@ -12,6 +12,7 @@ public class PboardReplyService {
 	
 	private PboardReplyDAO dao = new PboardReplyDAO();
 
+	
 	/** 댓글 조회
 	 * @param boardNo
 	 * @return rList
@@ -25,6 +26,7 @@ public class PboardReplyService {
 		
 		close(conn);
 		
+
 		return rList;
 	}
 
@@ -81,7 +83,11 @@ public class PboardReplyService {
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		  
+		close(conn);
+		
 		return result;
 	}
+
+
 
 }

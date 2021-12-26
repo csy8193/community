@@ -35,7 +35,7 @@
 		                        <c:forEach var="board" items="${boardList}">
 		                        	<tr>
 			                            <td class="table-hd table-data1">${board.boardNo}</td>
-			                            <td class="table-hd table-data2"><a href="#">${board.boardTitle}</a></td>
+			                            <td class="table-hd table-data2"><a href="${contextPath}/nboard/view?cp=${pagination.currentPage}&boardNo=${board.boardNo}&boardCd=${boardCd}">${board.boardTitle}</a></td>
 			                            <td class="table-hd table-data3">${board.createDate}</td>
 			                        </tr>
 		                        </c:forEach>
@@ -82,6 +82,11 @@
                 </div>
 
             </div>
+	   		<c:if test="${!empty loginMember}">
+			    <div id="write" onclick="location.href='${contextPath}/board/nwrite?boardCd=${boardCd}&cp=${pagination.currentPage }';">
+			        <i class="fas fa-pen-square"></i>
+			    </div>
+	 		</c:if>
             
         </main>
         
