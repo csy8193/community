@@ -22,7 +22,7 @@
 						<c:when test="${ empty sessionScope.loginMember }">
 							<%-- 로그인이 되어있지 않을 때 --%>
 		               		<li><a href="${contextPath}/member/login">로그인</a></li>
-		               		<li><a href="${contextPath}/member/signup">회원가입</a></li>
+		               		<li><a href="${contextPath}/member/agree">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
 							<%-- 로그인이 되어 있을 때 --%>
@@ -36,7 +36,7 @@
 	    </div>
 	    <div id="header">
 	        <div id="logo">
-	            <a href="#"><img src="${contextPath}/resources/images/main/logo2.png"></a>
+	            <a href="${contextPath}"><img src="${contextPath}/resources/images/main/logo2.png"></a>
 	        </div>
 	        <div id="nav_wrap">
 	            <ul id="nav">
@@ -44,9 +44,9 @@
 	                    <a href="#">반려동물</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">자유게시판</a></li>
-	                            <li><a href="#">노하우게시판</a></li>
-	                            <li><a href="#">자랑게시판</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=10">자유게시판</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=20">노하우게시판</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=70">자랑게시판</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -54,35 +54,25 @@
 	                    <a href="#">유기동물</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">신고하기</a></li>
-	                            <li><a href="#">보호소추천</a></li>
-	                            <li><a href="#">아이들근황</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=80">신고하기</a></li>
+	                            <li><a href="${contextPath}/nboard/list?boardCd=30">보호소추천</a></li>
+	                            <li><a href="${contextPath}/pboard/list?boardCd=90">아이들근황</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
 	                <li class="nav-li">
-	                  <a href="#">동물병원</a>
-	                </li>
-	                <li class="nav-li">
-	                    <a href="#">산책</a>
-	                    <div class="sub-hover">
-	                        <ul class="nav-sub">
-	                            <li><a href="#">산책일지</a></li>
-	                            <li><a href="#">산책랭킹</a></li>
-	                        </ul>
-	                    </div>
+	                    <a href="${contextPath}/walk/myPoint">산책</a>
 	                </li>
 	                <li class="nav-li">
 	                    <a href="#">공지사항</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">1:1 문의하기</a></li>
-	                            <li><a href="#">자주하는 질문</a></li>
-	                            <li><a href="#">이벤트</a></li>
+	                            <li><a href="${contextPath}/board/notice">자주하는 질문</a></li>
+	                            <li><a href="${contextPath}/board/event">이벤트</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
-	                <li class="nav-li"><a href="#">마이페이지</a></li>
+	                <li class="nav-li"><a href="${contextPath}/member/mypage">마이페이지</a></li>
 	                <li id="search">
                             <img src="${contextPath}/resources/images/main/search.png">
                             <div id="search-wrap">
