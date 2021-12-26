@@ -22,7 +22,7 @@ $(document).on("click", "#like_btn", function(){
 				type :"POST",
 				success : function(result){
 					if(result>0){
-						alert("좋아요를 해제하셨습니다.")
+						// alert("좋아요를 해제하셨습니다.")
 						$(".fa-heart").css("color", "grey");
 						$("#like_btn").attr("id","unlike_btn");
 						$("#like-area > span:nth-child(2)").text("좋아요 " + result);
@@ -56,7 +56,7 @@ $(document).on("click", "#unlike_btn", function(){
 				type :"POST",
 				success : function(result){
 					if(result>0){
-						alert("좋아요를 누르셨습니다!")
+						// alert("좋아요를 누르셨습니다!")
 						$(".fa-heart").css("color", "red");
 						$("#unlike_btn").attr("id","like_btn");
 						$("#like-area > span:nth-child(2)").text("좋아요 " + result);

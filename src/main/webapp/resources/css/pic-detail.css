@@ -16,6 +16,14 @@ label, i{
   cursor: pointer;
 }
 
+textarea{
+	width: 100%;
+    height: 22px;
+    border: 1px solid #e7e7e7;
+    resize: none;
+    outline: none;
+}
+
 #container{
     width: 1400px;
     margin: 0 auto;
@@ -113,8 +121,7 @@ li.img-count button > img{
 }
 
 .user-img{
-    background: url('https://web-wit.s3.ap-northeast-2.amazonaws.com/images/user/5624/user_1638887303.jpg') center center no-repeat;
-    background-size: cover;
+    
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -206,11 +213,13 @@ li.img-count button > img{
 }
 
 .comment-text{
-    padding : 2px 5px 5px 0;
-    overflow: hidden;
+    padding: 2px 5px 5px 0;
+    height: 30px;
+    display: flex;
 }
 
 #reply-text{
+	display : inline-block;
     font-size: 14px;
     line-height: 20px;
     word-break: break-all;
@@ -219,7 +228,9 @@ li.img-count button > img{
 
 .userName{
     font-size: 13px;
-    margin-right: 5px;
+    width: 45px;
+    text-overflow: ellipsis;
+    display: inline-block;
 }
 
 .comment-item{
@@ -238,7 +249,26 @@ li.img-count button > img{
     font-size: 12px;
 }
 
-.comment-item > ul > li:first-child{
+.comment-item > ul > li > button{
+	border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.comment-item > ul > button{
+	border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.comment-item > ul > li > button:first-child{
+	margin-right : 5px;
+}
+.comment-item > ul > button:first-child{
+	margin-right : 5px;
+}
+
+.comment-item > ul:first-child{
     margin-right: 10px;
 }
 
@@ -306,4 +336,134 @@ li::after{
     font-size: 14px;
     font-weight: 700;
 	cursor: pointer;
+}
+
+
+
+
+
+#all-reply{
+    width: 100%;
+    list-style: none;
+    display: block;
+    padding: 0px;
+}
+.one-reply{
+    width: 100%;
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+    overflow:auto; 
+}
+.one-reply>p{
+	margin-bottom : 5px;
+   	overflow-y:auto; 
+}
+
+.original>p>img,.feedback>p>img{
+    height: 80px;
+    width: 80px;
+    padding: 10px;
+    border-radius: 50%;
+}
+.original>*, .feedback>*{
+    float: left;
+}
+
+.reply-user{
+    border-bottom: 1px dotted #ddd;
+}
+
+.reply-content{
+	padding-left : 20px;
+	position: relative;
+}
+.reply-user,.reply-content{
+    width: 580px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+.reply-content>button{
+	background-color: white;
+    border: none;
+    margin-top: 10px;
+    margin-right: 20px;
+    color: #4facf2;
+}
+.reply-content>button:hover{
+	cursor:pointer;
+}
+.original{overflow: auto;}
+.feedback{
+    margin-left: 50px;
+    width: calc(100% - 50px);
+    overflow: auto;
+}
+.one-reply>div>p, .feedback>div>p{
+	display: inline-block;
+    height: 80px;
+    width: 80px;
+}
+.feedback>.reply-user,.feedback>.reply-content{
+    width: 530px;
+}
+.reply-user>span:first-of-type{
+	font-size : 15px;
+}
+.reply-user>span:last-of-type{
+	font-size : 13px;
+    float: right;
+    color: rgb(143, 142, 142);
+}
+#nboardUpdateRep{
+		width :100%;
+		height: 100px;
+		resize:none;
+		
+}
+#updateRep{
+	bottom : 8px;
+	right : 75px;
+	height : 25px;
+}
+ #updateRepCancel{
+   	bottom : 8px;
+	right : -20px;
+	height : 25px;
+}
+
+
+.fa-level-up-alt{
+    transform: rotate(90deg);
+    margin-right: 20px;
+}
+.fa-edit, .fa-trash{
+	text-align : right;
+}
+
+#feedback-text{
+	height:100px;
+}
+
+#feedbackbtn{
+    bottom: 8px;
+    right: 75pxpx;
+    height: 25px;
+}
+
+#feedbackcancelbtn{
+	bottom: 8px;
+    right: -20px;
+    height: 25px;
+}
+
+#feedbackwrite > div > button{
+	background-color: white;
+    border: none;
+    margin: 5px;
+    color: #4facf2;
+    cursor : pointer;
+    
+}
+.reply-content > span{
+	font-size : 15px;
 }

@@ -24,7 +24,7 @@ public class pictureBoardLikeServlet extends HttpServlet {
 		
 		try {
 			int result = service.plusLike(memberNo, boardNo);
-			System.out.println(result);
+			// System.out.println(result);
 			resp.getWriter().print(result);
 			
 		

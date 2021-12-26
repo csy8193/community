@@ -8,11 +8,17 @@ public class PboardReply {
    private int boardNo;
    private int memberNo;
    private String memberNm;
-   private int StatusCd;
-   private String StatusNm;
-   
+   private int statusCd;
+   private String statusNm;
+   private int feedbackReplyNo;
+   private boolean profileExist;
+   private String memberId;
+   private String animalImgPath;
+   private String animalImgNm;
+   private String animalMainImgPath;
    public PboardReply() { }
 
+   
 	public int getReplyNo() {
 		return replyNo;
 	}
@@ -61,28 +67,101 @@ public class PboardReply {
 		this.memberNm = memberNm;
 	}
 	
+	
+
+	
+	
 	public int getStatusCd() {
-		return StatusCd;
+		return statusCd;
 	}
-	
+
+
 	public void setStatusCd(int statusCd) {
-		StatusCd = statusCd;
+		this.statusCd = statusCd;
 	}
-	
+
+
 	public String getStatusNm() {
-		return StatusNm;
+		return statusNm;
+	}
+
+
+	public void setStatusNm(String statusNm) {
+		this.statusNm = statusNm;
+	}
+
+
+	public int getFeedbackReplyNo() {
+		return feedbackReplyNo;
+	}
+
+
+	public void setFeedbackReplyNo(int feedbackReplyNo) {
+		this.feedbackReplyNo = feedbackReplyNo;
+	}
+
+
+	
+	
+	public boolean isProfileExist() {
+		return profileExist;
+	}
+
+
+	public void setProfileExist(boolean profileExist) {
+		this.profileExist = profileExist;
+	}
+
+
+	
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+
+	public String getAnimalImgPath() {
+		return animalImgPath;
+	}
+
+
+	public void setAnimalImgPath(String animalImgPath) {
+		this.animalImgPath = animalImgPath;
+	}
+
+
+	public String getAnimalImgNm() {
+		return animalImgNm;
+	}
+
+
+	public void setAnimalImgNm(String animalImgNm) {
+		this.animalImgNm = animalImgNm;
 	}
 	
-	public void setStatusNm(String statusNm) {
-		StatusNm = statusNm;
+	
+
+	public String getAnimalMainImgPath() {
+		return animalMainImgPath;
 	}
+
+
+	public void setAnimalMainImgPath(String animalMainImgPath) {
+		this.animalMainImgPath = animalMainImgPath;
+	}
+
 
 	@Override
 	public String toString() {
 		return "PboardReply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDt=" + replyCreateDt
-				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberNm=" + memberNm + ", StatusCd="
-				+ StatusCd + ", StatusNm=" + StatusNm + "]";
+				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberNm=" + memberNm + ", statusCd="
+				+ statusCd + ", statusNm=" + statusNm + ", feedbackReplyNo=" + feedbackReplyNo + ", profileExist="
+				+ profileExist + ", memberId=" + memberId + ", animalImgPath=" + animalImgPath + ", animalImgNm="
+				+ animalImgNm + ", animalMainImgPath=" + animalMainImgPath + "]";
 	}
-   
-	   
 }

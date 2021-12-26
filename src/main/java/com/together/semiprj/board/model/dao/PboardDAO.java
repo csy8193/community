@@ -104,7 +104,7 @@ public class PboardDAO {
 				board.setReplycount(rs.getInt("REPLYCOUNT"));
 				board.setLikeDone(rs.getBoolean("LIKEDONE"));
 				board.setMemberNm(rs.getString("MEMBER_NM"));
-				board.setAnimalMainImgPath(rs.getNString("ANIMAL_PROFILE_IMG"));
+				board.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
 				
 				pboardList.add(board);
 			}
@@ -190,6 +190,7 @@ public class PboardDAO {
 				board.setBoardName(rs.getString("BOARD_NAME"));
 				board.setLikecount(rs.getInt("LIKECOUNT"));
 				board.setLikeDone(rs.getBoolean("LIKEDONE"));
+				board.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
 			}
 		}finally {
 			close(rs);

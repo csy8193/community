@@ -81,7 +81,7 @@
         <div id="text-area">
             <div id="text-header">
                 <div id="text-title">
-                    <div class="user-img"></div>
+                    <div class="user-img" style="background : url('${contextPath}${board.animalMainImgPath}') center center no-repeat; background-size: cover;"></div>
                     <p>${board.memberNm}</p>
                 </div>
             </div>
@@ -109,36 +109,9 @@
                	
                	<!-- 댓글 출력 부분 -->
                 <div class="text-comment">
-                    <ul>
-                		<c:forEach items="${rList}" var="reply">
-	                        <li class="mine">
-	                            <div class="profile-img">
-	                                <div class="user-img2"></div>
-	                            </div>  
-	                            <div class="comment-wrapper">
-	                                <div class="profile"></div>
-	                                <div class="comment">
-	                                    <div class="comment-text">
-	                                        <pre id="reply-text"><strong class="userName">${reply.memberNm}</strong>${reply.replyContent}</pre>
-	                                    </div>
-	                                    <div class="comment-item">
-	                                        <ul>
-	                                            <li>${reply.replyCreateDt}</li>
-	                                        </ul>
-	                                        <ul>
-	                                            <li>댓글달기</li>
-	                                            <c:if test="${reply.memberNo == loginMember.memberNo}">
-	                                            	<li><button onclick="showUpdateReply(${reply.replyNo}, this)">수정</button></li>
-	                                            	<li><button onclick="deleteReply(${reply.replyNo})">삭제</button></li>
-	                                            </c:if>
-	                                        </ul>
-	                                    </div>
-	                                </div> 
-	                            </div>
-	                        </li>
-                         </c:forEach>
-                    </ul>
-                </div>
+					<ul id="all-reply">
+					</ul>
+				</div>
             </div>
             <div id="write-area">
                 <div id ="txt-box">
@@ -164,6 +137,8 @@
 	 const likecount = "${board.likecount}";
 	 // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 	 let beforeReplyRow;
+	 let beforeContent;
+	 let textarea;
     </script>
     <script src="${contextPath}/resources/js/pBoardReply.js"></script>
     <script src="${contextPath}/resources/js/pBoard.js"></script>
