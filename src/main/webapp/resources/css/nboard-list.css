@@ -68,7 +68,7 @@
         /*  게시글 내용 */
         .nboard-content>div:nth-child(3){
             width: 100%;
-            height: 35%;
+            height: 34%;
             font-size: 18px;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -145,5 +145,11 @@
         }
 		.content-text img{
 			display: none;
+		}
+		.content-text *{
+			color : black !important;
+			background-color : white !important;
+			font-weight : 400 !important;
+			
 		}
      
