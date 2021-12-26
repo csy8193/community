@@ -154,27 +154,29 @@ label{
 .page-ul > li > a{
     display: block;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-.page-ul > li:nth-of-type(3){
-    border: 1px solid #4facfe;
-    border-radius: 50%;
-    background-color: #4facfe;
-}
-
-.page-ul > li:nth-of-type(3) a{
-    color: white;
-}
-
-.pagination {
-	justify-content: center;
-}
-
-.pagination li {
+#write {
+	position: fixed;
+	right: 250px;
+	bottom: 100px;
+	text-align: center;
 	cursor: pointer;
+	font-size: 20px;
 }
->>>>>>> 62daa807be32e3dee20aac2ddeb315b330bdca7b
-=======
->>>>>>> 4f6979215af36e4ea0194d67c57912e7ca203b84
+
+@media screen and (max-width: 1200px) {
+	#write {
+		right: 100px;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	#write {
+		right: 50px;
+	}
+}
+
+#write>i {
+	color: #4facfe;
+	font-size: 80px;
+}

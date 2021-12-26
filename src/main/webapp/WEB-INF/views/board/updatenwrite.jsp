@@ -5,9 +5,9 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -18,16 +18,17 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<main>
 		<div id="main">
-			<form action="ninsert" method="post" onsubmit="return insertValidate();">
+			<form action="nupdate" method="post" onsubmit="return insertValidate();">
 				<h1 class="board">
-					${boardName}
-					<input type="text" name="boardCd" value="${boardCd}">
+					${board.boardName}
+					<input type="text" name="boardCd" value="${board.boardCode}">
+					<input type="hidden" name="boardNo" value="${board.boardNo}">
+					<input type="hidden" name="cp" value="${param.cp}" >
 				</h1>
 				<h4 class="title">글 제목<span> *</span></h4>
-				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요">
+				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요" value="${board.boardTitle}">
 				<h4 class="title">글 작성<span> *</span></h4>
 				<textarea id="summernote" name="boardContent"></textarea>
-				
 	            <ul class="image-preview">
                 	<!-- <li class="boardImg">
 	                    <img>
@@ -41,10 +42,15 @@
 				</div>
 			
 				<div class="btns">
-				    <button id="reg-btn">등록하기</button>
-				    <button type="button" id="cancel-btn" onclick="history.back()">취소하기</button>
+				    <button id="reg-btn">수정하기</button>
+				    <button type="button" id="cancel-btn" onclick="cancelForm2();">취소하기</button>
 			    </div>
 			</form>
+			<form action="${contextPath}/board/cancel" method="post" name="cancelForm">
+		    	<input type="hidden" name="cp" value="${cp}" >
+		    	<input type="hidden" name="boardNo" value="${board.boardNo}">
+		    	<input type="hidden" name="boardCd" value="${board.boardCode}">
+		    </form>
 		</div>
 	</main>
        
@@ -66,10 +72,7 @@
 						const board = $(".boardImg");
 						const boardimg = $(".boardImg > img");
 						
-						// 현재 textarea에 있는 이미지수와 썸네일 부분의 이미지 개수가 다를경우
 						if(length != img.length){
-							
-							// teatarea에 있는 이미지 수가 더 많은 경우(이미지를 추가한경우)
 							if(length < img.length){
 								$("#fileArea").empty();
 								$(".image-preview").empty();
@@ -84,9 +87,7 @@
 								/* const boardImg = $("<li class='boardImg' onclick='thumbnail(this);'>");
 					            boardImg.append("<img src='"+$(img[length]).attr("src")+"'>");
 					            
-					            $(".image-preview").append(boardImg); */
-					            
-					            /* // 첫번째로 첨부한 이미지일 경우 테두리 색을 변경해준다
+					            $(".image-preview").append(boardImg);
 					            if(index == 0){
 					            	$(".boardImg > img").css("border", "3px solid #4facfe");
 						            $("#fileArea").append('<input type="text" id="input-img" value="'+$(img[length]).attr("src")+'" name="input-img">');
@@ -94,17 +95,9 @@
 					            
 					            index += 1; */
 								
-					            
-					        // 썸네일에 있는 이미지 수가 더 많은 경우(이미지를 삭제한경우)
 							}else{
-								
-								// 썸네일에 있는 이미지수 만큼 반복문
 								for(let i=0; i<board.length; i++){
-									
-									// 썸네일의 src와 textarea의 src가 다른경우
 									if($(img[i]).attr("src") != $(boardimg[i]).attr("src")){
-										
-										// textarea의 src와 썸네일로 설정한 값이 같을경우 썸네일 값을 삭제
 										if($(boardimg[i]).attr("src") == $("#fileArea > input").val()){
 											$("#fileArea").empty();
 										}
@@ -118,6 +111,9 @@
 							}
 							length = img.length;
 						}
+					},
+					onInit: function(){
+						$('#summernote').summernote('pasteHTML', '${board.boardContent}');
 					}
 				}
 			});
@@ -150,6 +146,10 @@
 				}
 			}
 		}
+        
+        function cancelForm2(){
+			document.cancelForm.submit();
+        }
            
 	</script>
 	<script src="${contextPath}/resources/js/boardWrite.js"></script>

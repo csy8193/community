@@ -13,7 +13,7 @@ public class Board {
 	private int readCount;
 	private int memberNo;
 	private int boardStatusCode;
-	private int categoryCode;
+	private int boardCode;
 	
 	private String memberName;
 	private String categoryName;
@@ -77,12 +77,17 @@ public class Board {
 	public void setBoardStatusCode(int boardStatusCode) {
 		this.boardStatusCode = boardStatusCode;
 	}
-	public int getCategoryCode() {
-		return categoryCode;
+	
+	public int getBoardCode() {
+		return boardCode;
 	}
-	public void setCategoryCode(int categoryCode) {
-		this.categoryCode = categoryCode;
+
+
+	public void setBoardCode(int boardCode) {
+		this.boardCode = boardCode;
 	}
+
+
 	public String getMemberName() {
 		return memberName;
 	}
@@ -139,10 +144,12 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", readCount=" + readCount
-				+ ", memberNo=" + memberNo + ", boardStatusCode=" + boardStatusCode + ", categoryCode=" + categoryCode
+				+ ", memberNo=" + memberNo + ", boardStatusCode=" + boardStatusCode + ", boardCode=" + boardCode
 				+ ", memberName=" + memberName + ", categoryName=" + categoryName + ", statusName=" + statusName
 				+ ", boardName=" + boardName + ", boardPicPath=" + boardPicPath + ", imgList=" + imgList + "]";
 	}
+
+
 
 
 	

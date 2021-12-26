@@ -34,7 +34,7 @@
                          </div>
                          <div class="item-pic">
                             <c:if test="${board.PBoardImgList[0].imgLevel == 0 }">
-                            <div class="item-img" onclick="location.href='${contextPath}/pboard/view?no=${board.boardNo}&cp=${pagination.currentPage}'" style="background : url('${contextPath}${board.PBoardImgList[0].imgPath}${board.PBoardImgList[0].imgName}') center center no-repeat; background-size:cover;"></div>
+                            <div class="item-img" onclick="location.href='${contextPath}/pboard/view?no=${board.boardNo}&cp=${pagination.currentPage}&boardCd=${boardCd}'" style="background : url('${contextPath}${board.PBoardImgList[0].imgPath}${board.PBoardImgList[0].imgName}') center center no-repeat; background-size:cover;"></div>
                          
                             </c:if>
                              </div>
@@ -101,6 +101,12 @@
                 </c:if>
             </ul>
         </div>
+        
+        <c:if test="${!empty loginMember}">
+		    <div id="write" onclick="location.href='${contextPath}/board/pwrite?boardCd=${boardCd}&cp=${pagination.currentPage}';">
+		        <i class="fas fa-pen-square"></i>
+		    </div>
+ 		</c:if>
         
         
     </div>
