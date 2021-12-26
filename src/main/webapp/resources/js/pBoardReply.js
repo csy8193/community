@@ -239,36 +239,37 @@ function deleteNrep(el){
 	});
 	}
 }
-
-if(updateRepStatus==false){
+function updateReply(el){
+	if(updateRepStatus==false){
+			
+		tempText = $(el).siblings("span").text();
+		$(el).siblings("span").text("");
+		const textarea = $('<textarea id ="nboardUpdateRep">');
+		textarea.text(tempText);
+		textarea.css("width", "100%");
+		textarea.css("height", "100px");
+		textarea.css("resize", "none");
+		textarea.css("position", "relative");
+	
+		const button1 = $('<button id="updateRep">');
+		button1.attr("onclick","updateRep(this)");
+		button1.text("등록");
+		const button2 = $('<button id="updateRepCancel">');
+		button2.attr("onclick","cancelUpdateRep(this)");
+		button2.text("취소");
 		
-	tempText = $(el).siblings("span").text();
-	$(el).siblings("span").text("");
-	const textarea = $('<textarea id ="nboardUpdateRep">');
-	textarea.text(tempText);
-	textarea.css("width", "100%");
-	textarea.css("height", "100px");
-	textarea.css("resize", "none");
-	textarea.css("position", "relative");
-
-	const button1 = $('<button id="updateRep">');
-	button1.attr("onclick","updateRep(this)");
-	button1.text("등록");
-	const button2 = $('<button id="updateRepCancel">');
-	button2.attr("onclick","cancelUpdateRep(this)");
-	button2.text("취소");
+		$(el).siblings("span").after(textarea,button1,button2);
 	
-	$(el).siblings("span").after(textarea,button1,button2);
-
-	updateRepStatus= true;
-	prevUpdateReplyClickNo = $(el).prev().val();
-}
-else{
-	cancelUpdateRep(el);
-	let nowUpdateReplyClickNo = $(el).prev().val();
-	
-	if(prevUpdateReplyClickNo!=nowUpdateReplyClickNo){
-		updateReply(el);
+		updateRepStatus= true;
+		prevUpdateReplyClickNo = $(el).prev().val();
+	}
+	else{
+		cancelUpdateRep(el);
+		let nowUpdateReplyClickNo = $(el).prev().val();
+		
+		if(prevUpdateReplyClickNo!=nowUpdateReplyClickNo){
+			updateReply(el);
+		}
 	}
 }
 
