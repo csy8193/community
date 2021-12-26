@@ -29,15 +29,15 @@ public class WalkController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// ë°ì´í„° ì „ë‹¬ ë°©ì‹ ì €ì¥ìš© ë³€ìˆ˜
+		// µ¥ÀÌÅÍ Àü´Ş ¹æ½Ä ÀúÀå¿ë º¯¼ö
 				String method = req.getMethod();
-				// ìš”ì²­ ì£¼ì†Œ ë’· ë¶€ë¶„ì„ ì˜ë¼ë‚´ì–´ êµ¬ë¶„ ë°©ë²• ë§Œë“¤ê¸°
+				// ¿äÃ» ÁÖ¼Ò µŞ ºÎºĞÀ» Àß¶ó³»¾î ±¸ºĞ ¹æ¹ı ¸¸µé±â
 				String uri = req.getRequestURI();
 				String contextPath = req.getContextPath();
 				
 				String command = uri.substring( (contextPath + "/walk/").length() );
 												// /semi/board/
-				// -> ìš”ì²­ ì£¼ì†Œì—ì„œ /semi/board/ ì˜ ê¸¸ì´ë§Œí¼ ì˜ë¼ë‚¸ í›„ ë‚˜ë¨¸ì§€ ë¬¸ìì—´ì„ ì €ì¥
+				// -> ¿äÃ» ÁÖ¼Ò¿¡¼­ /semi/board/ ÀÇ ±æÀÌ¸¸Å­ Àß¶ó³½ ÈÄ ³ª¸ÓÁö ¹®ÀÚ¿­À» ÀúÀå
 				
 				String path = null;
 				RequestDispatcher dispatcher = null;

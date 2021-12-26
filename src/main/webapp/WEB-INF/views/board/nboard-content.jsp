@@ -115,7 +115,15 @@
                 <i class="fas fa-angle-up" title="상단으로" id="nboard-topbtn"></i>
             </div>
             <div>
-                <i class="fas fa-list" title="목록으로 돌아가기" onclick="location.href='${contextPath}/nboard/list?cp=${param.cp}&boardCd=${nboard.boardCd}'"></i>
+            	<c:choose>
+            		<c:when test="${empty param.cp}">
+            			<c:set var="newcp" value="1" />
+            		</c:when>
+            		<c:otherwise>
+            			<c:set var="newcp" value="${param.cp}" />
+            		</c:otherwise>
+            	</c:choose>
+                <i class="fas fa-list" title="목록으로 돌아가기" onclick="location.href='${contextPath}/nboard/list?cp=${newcp}&boardCd=${nboard.boardCd}'"></i>
             </div>
             <div <c:if test="${nboard.likeDone}">style="background: none; box-shadow:none; color : red"</c:if>>
             	<c:choose>

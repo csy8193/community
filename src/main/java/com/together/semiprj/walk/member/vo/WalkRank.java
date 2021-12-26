@@ -11,7 +11,13 @@ public class WalkRank {
 	private String animalBirth;
 	private String animalImg;
 	private String animalCategoryNm;
-	
+	private String memberId;
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getAnimalCategoryNm() {
 		return animalCategoryNm;
 	}

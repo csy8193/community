@@ -72,7 +72,7 @@ public class WalkService {
 		if(result>0) {
 				//삽입 성공 완료시 포인트 부여 여부
 				if(check==0) {
-					int getPoint = 20+20*continueWalk;
+					int getPoint = 20+20*(continueWalk);
 					result = dao.walkPointGet(conn,memberNo, getPoint);
 				}
 				if(result>0) {
