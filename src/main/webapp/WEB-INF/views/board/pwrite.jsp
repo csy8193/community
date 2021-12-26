@@ -13,7 +13,10 @@
 	<main>
 	    <div id="main">
 	    	<form action="pinsert"  method="post" enctype="multipart/form-data" role="form" onsubmit="return insertValidate();">
-		        <h1 class="board">게시판 이름</h1>
+		        <h1 class="board">
+		        	${boardName}
+		        	<input type="text" name="boardCd" value="${boardCd}">
+		        </h1>
 		        <div class="image-reg">
 		            <h4 class="title">이미지 등록<span> *</span></h4>
 		            <button type="button" id="image-upload">이미지 업로드</button>
