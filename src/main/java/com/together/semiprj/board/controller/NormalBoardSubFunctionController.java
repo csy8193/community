@@ -35,7 +35,6 @@ public class NormalBoardSubFunctionController extends HttpServlet{
  			result = service.duplLikeCheck(memberNo,boardNo);
  			if(result==0){
  				result = service.plusLike(memberNo,boardNo);
- 				System.out.println(result+"반환합니다");
  			}
  			else {
  				result = 0;

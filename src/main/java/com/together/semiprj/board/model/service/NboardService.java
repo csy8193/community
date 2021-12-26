@@ -39,9 +39,6 @@ public class NboardService {
 		Connection conn = getConnection();
 		List<Nboard> nboardList = dao.selectBoardList(conn, pagination, memberNo, boardCd);
 		
-		for(Nboard aa : nboardList) {
-			System.out.println(aa);
-		}
 		close(conn);
 		return nboardList;
 	}
