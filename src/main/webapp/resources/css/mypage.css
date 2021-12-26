@@ -1,3 +1,12 @@
+
+/*공통*/
+.left-float{
+    float: left;
+}
+.right-float{
+    float: right;
+}
+
 #container{
     width:1400px;
     margin: 0 auto;
@@ -41,7 +50,7 @@
 }
 
 
-.btn{
+.btn,.btn2,.btn3,.btn4{
     cursor: pointer;
     display: block;
     font-size: 15px;
@@ -49,6 +58,16 @@
 }
 
 .btn:hover{
+    font-weight: 600;
+}
+
+.btn2:hover{
+    font-weight: 600;
+}
+.btn3:hover{
+    font-weight: 600;
+}
+.btn4:hover{
     font-weight: 600;
 }
 
@@ -118,7 +137,6 @@
 }
 
 
-
 #animalList li span{
     width:250px;
     height: 250px;
@@ -149,13 +167,13 @@
 	text-align: right;
 }
 
-#animalList li p{
+.animalNm{
     font-size: 20px;
     font-weight: bold;
     margin: 15px 0;
 }
 
-#animalList li button{
+.updateAnimalModalBtn{
     width:280px;
     height:40px;
     border :1px solid #ddd;
@@ -188,10 +206,28 @@
     cursor: pointer;
 }
 
+/*수정 모달창*/
+#deleteBtn{
+	background-color:#fff;
+	border:none;
+	color:#000;
+	font-size:15px;
+	font-weight:400;
+	cursor: pointer;
+}
+
+
+
+#deleteBtn:hover{
+	color:#c91c1c;
+	font-weight:700;
+}
+
 
 /* 모달창 */
 
-#fileArea{
+#fileArea,
+.fileArea{
 	display: none;
 }
 
@@ -251,7 +287,12 @@
     margin-bottom: 20px;
 }
 
-#animal-profile{
+.title2{
+	text-align : left;
+}
+
+#animal-profile2,
+.animalProfileImg{
     width:200px;
     height:200px;
     border-radius:300px;
@@ -260,6 +301,10 @@
     background-color: #ddd;
     position: relative;
     cursor: pointer;
+}
+
+.animalProfileImg > img{
+	width:200px;
 }
 
 #animal-profile > img{
@@ -271,7 +316,8 @@
     bottom: 0;
 }
 
-#category{
+#category,
+.updateCategory{
     width:420px;
     height:45px;
     border:1px solid #ddd;
@@ -293,7 +339,7 @@
     margin:0 20px;
 }
 
-.modal-body button {
+#upBtn,.insertBtn{
     width:400px;
     height: 50px;
     border: none;
@@ -304,6 +350,8 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
+
 
 /* 회원정보 변경 */
 #userUpdate{
@@ -335,7 +383,7 @@
 }
 
 #userUpdate input[type="email"]{
-    width:180px;
+    width:300px;
 }
 
 #userUpdate input[type="text"]{
@@ -347,11 +395,10 @@
     width:130px;
 }
 
-#userUpdate span{
-    display: inline-block;
-    margin-bottom: 20px;
-    font-size: 13px;
-    color:red;
+
+#chkPw1,#chkPw2{
+	 font-size: 13px;
+	 margin:10px 0 20px 0;
 }
 
 #chk{
@@ -371,22 +418,22 @@
     text-align: center;
 }
 
-.sub{
+.sub,.sub2,.sub3,.sub4{
     clear: both;
     display: none;
 }
 
-.sub p{
+.sub p,.sub2 p,.sub3 p,.sub4 p{
     text-align: center;
     color:#ddd;
 }
 
-.sub input{
+.sub input,.sub2 input,.sub3 input,.sub4 input{
     height: 45px;
     border:1px solid #ddd;
 }
 
-.sub button{
+.sub button,.sub2 button,.sub3 button,.sub4 button{
     width:500px;
     height: 50px;
     background-color: #4facfe;

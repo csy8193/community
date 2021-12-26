@@ -252,6 +252,32 @@ document.getElementById("pw1").addEventListener("input", function(){
 
 });
 
+
+
+// 비밀번호 수정 유효성 검사
+document.getElementById("userPw2").addEventListener("input", function(){
+
+	// 수정 비밀번호
+    const inputPw = this.value;
+	
+    const regExp = /^[a-zA-Z\d\!\@\#\-\_]{6,20}$/;
+    
+    const chkPw = document.getElementById("chkPw");
+
+    if(inputPw.length == 0){
+        chkPw.innerText = "";
+    }else if(regExp.test(inputPw)){
+        chkPw.innerText = "유효한 비밀번호 입니다.";
+        chkPw.style.color = "green";
+    }else{
+        chkPw.innerText = "6~20자 영문 대 소문자, 숫자, 특수문자(!,@,#,-,_)를 사용하세요.";
+        chkPw.style.color = "red";
+    }
+
+});
+
+
+
 // 비밀번호 확인 유효성 검사 ==> pw1이랑 같은 값이면 유효
 $("#pw2, #pw1").on("input", function(){
 
@@ -272,6 +298,7 @@ $("#pw2, #pw1").on("input", function(){
         signUpCheckObj.pw2 = false;
     }
 });
+
 
 // 로그인 시 유효성 검사
 function loginValidate(){
