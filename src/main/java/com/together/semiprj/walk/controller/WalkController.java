@@ -3,6 +3,7 @@ package com.together.semiprj.walk.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.together.semiprj.board.model.vo.Nboard;
+import com.together.semiprj.board.model.vo.NboardImage;
+import com.together.semiprj.common.MyRenamePolicy;
 import com.together.semiprj.member.model.vo.User;
 import com.together.semiprj.walk.member.service.WalkService;
 import com.together.semiprj.walk.member.vo.Mypoint;
@@ -67,6 +72,7 @@ public class WalkController extends HttpServlet{
 						req.setAttribute("rankList", rankList);
 						List<WalkRank> rankList2 = new ArrayList<WalkRank>();
 						rankList2 = service.pointRank();
+						req.setAttribute("rankList", rankList);
 						
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -87,15 +93,29 @@ public class WalkController extends HttpServlet{
 						resp.getWriter().print((new Gson()).toJson(history));
 					}
 					else if(command.equals("walkinsert")) {
+
 						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));
+						int continueWalk = Integer.parseInt(req.getParameter("continueWalk"));
 						String walktext = req.getParameter("walktext");
+						
 						
 						WalkService service = new WalkService();
 						
-						int result = service.walkinsert(memberNo,walktext);
+						List<Nboard> nboardList = service.walkinsert(memberNo,walktext,continueWalk);
 						
+						resp.getWriter().print((new Gson()).toJson(nboardList));
+					}
+					else if(command.equals("walkdayshow")) {
+						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));
+						int year = Integer.parseInt(req.getParameter("checky"));
+						int month = Integer.parseInt(req.getParameter("checkm"));
+						int day = Integer.parseInt(req.getParameter("day"));
 						
-						//resp.getWriter().print((new Gson()).toJson(history));
+						WalkService service = new WalkService();
+						
+						List<Nboard> nboardList = service.walkdayshow(memberNo,year,month,day);
+						
+						resp.getWriter().print((new Gson()).toJson(nboardList));
 					}
 					
 				} catch (Exception e) {

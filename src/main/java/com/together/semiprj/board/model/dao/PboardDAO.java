@@ -103,7 +103,8 @@ public class PboardDAO {
 				board.setLikecount(rs.getInt("LIKECOUNT"));
 				board.setReplycount(rs.getInt("REPLYCOUNT"));
 				board.setLikeDone(rs.getBoolean("LIKEDONE"));
-				board.setAnimalMainImgPath(rs.getNString("ANIMAL_PROFILE_IMG"));
+				board.setMemberNm(rs.getString("MEMBER_NM"));
+				board.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
 				
 				pboardList.add(board);
 			}
@@ -162,7 +163,7 @@ public class PboardDAO {
 	 * @return board(없으면 null)
 	 * @throws Exception
 	 */
-	public Pboard selectBoard(int boardNo, Connection conn) throws Exception {
+	public Pboard selectBoard(int boardNo, Connection conn, int memberNo) throws Exception {
 
 		Pboard board = null;
 		
@@ -170,7 +171,8 @@ public class PboardDAO {
 			String sql = prop.getProperty("selectPboard");
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,boardNo);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2,boardNo);
 			
 			rs = pstmt.executeQuery();
 			
@@ -183,12 +185,12 @@ public class PboardDAO {
 				board.setMemberNm(rs.getString("MEMBER_NM"));
 				board.setCreateDt(rs.getString("CREATE_DT"));
 				board.setStatusCd(rs.getInt("STATUS_CD"));
-				board.setStatusNm(rs.getString("STATUS_NM"));
 				board.setReadCount(rs.getInt("READ_COUNT"));
 				board.setBoardCd(rs.getInt("BOARD_CD"));
 				board.setBoardName(rs.getString("BOARD_NAME"));
-				
-				
+				board.setLikecount(rs.getInt("LIKECOUNT"));
+				board.setLikeDone(rs.getBoolean("LIKEDONE"));
+				board.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
 			}
 		}finally {
 			close(rs);
@@ -250,6 +252,83 @@ public class PboardDAO {
 		}
 		
 		return boardNm;
+	}
+
+
+	/** 좋아요 증가
+	 * @param conn
+	 * @param memberNo
+	 * @param boardNo
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int plusLike(Connection conn, int memberNo, int boardNo) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateLikeCount");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	/** 좋아요 삭제
+	 * @param conn
+	 * @param memberNo
+	 * @param boardNo
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int unLike(Connection conn, int memberNo, int boardNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("unLike");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	/** 좋아요 조회
+	 * @param boardNo
+	 * @param conn
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int likeSelect(int boardNo, Connection conn) throws Exception{
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("likeselect");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

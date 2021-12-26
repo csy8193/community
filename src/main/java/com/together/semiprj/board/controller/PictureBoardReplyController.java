@@ -1,6 +1,7 @@
 package com.together.semiprj.board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.together.semiprj.board.model.service.PboardReplyService;
 import com.together.semiprj.board.model.vo.PboardReply;
 
@@ -29,22 +31,31 @@ public class PictureBoardReplyController extends HttpServlet{
 		PboardReplyService service = new PboardReplyService();
 		
 		try {
-			if(command.equals("slect")) {
+			if(command.equals("select")) {
+				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+ 				List<PboardReply> rList = service.selectReplyList(boardNo);
+ 				
+ 				System.out.println(rList);
+				new Gson().toJson(rList,resp.getWriter());
+				
+				
 				
 			}else if(command.equals("insert")) {
 				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-				System.out.println(memberNo);
 				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-				String replyContent = req.getParameter("commentArea");
+				int feedbackNo = Integer.parseInt(req.getParameter("feedbackNo"));
+				String replyContent = req.getParameter("replyContent");
 				
 				PboardReply reply = new PboardReply();
+				
 				reply.setMemberNo(memberNo);
 				reply.setBoardNo(boardNo);
 				reply.setReplyContent(replyContent);
+				reply.setFeedbackReplyNo(feedbackNo);
 				
 				int result = service.insertReply(reply);
-				
 				resp.getWriter().print(result);
+				
 			}else if(command.equals("update")) {
 				
 				 int replyNo = Integer.parseInt(req.getParameter("replyNo"));
@@ -55,7 +66,7 @@ public class PictureBoardReplyController extends HttpServlet{
 	             resp.getWriter().print(result);
 
 			}else if(command.equals("delete")) {
-				int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+				int replyNo = Integer.parseInt(req.getParameter("delReplyNo"));
 	             
 	             int result = service.deleteReply(replyNo);
 	             

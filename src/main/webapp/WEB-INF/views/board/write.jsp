@@ -27,7 +27,7 @@
 		
 			<div class="btns">
 			    <button id="reg-btn">등록하기</button>
-			    <button id="cancel-btn">취소하기</button>
+			    <button type="button" id="cancel-btn" onclick="history.back();">취소하기</button>
 		    </div>
 		</form>
 	</div>

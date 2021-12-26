@@ -57,10 +57,21 @@ public class PboardReplyDAO {
 				reply.setBoardNo(rs.getInt("BOARD_NO"));
 				reply.setMemberNo(rs.getInt("MEMBER_NO"));
 				reply.setMemberNm(rs.getString("MEMBER_NM"));
+				reply.setMemberId(rs.getString("MEMBER_ID"));
+				//System.out.println(rs.getString("MEMBER_NM"));
 				reply.setStatusCd(rs.getInt("STATUS_CD"));
 				reply.setStatusNm(rs.getString("STATUS_NM"));
-				
+				reply.setAnimalImgPath(rs.getString("ANIMAL_IMG_PATH"));
+				reply.setAnimalImgNm(rs.getString("ANIMAL_IMG_NM"));
+				reply.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
+				reply.setProfileExist(rs.getBoolean("PROFILEEXIST"));
+				reply.setFeedbackReplyNo(rs.getInt("FEEDBACK"));
+				if(rs.getInt("PROFILEEXIST")==1) {reply.setProfileExist(true);}
+				else {reply.setProfileExist(false);}
+				// System.out.println(rs.getString("ANIMAL_PROFILE_IMG"));
 				rList.add(reply);
+				
+				
 			}
 		}finally {
 			close(rs);
@@ -88,6 +99,8 @@ public class PboardReplyDAO {
 			pstmt.setString(1, reply.getReplyContent());
 			pstmt.setInt(2, reply.getBoardNo());
 			pstmt.setInt(3, reply.getMemberNo());
+			if(reply.getFeedbackReplyNo()==0) {pstmt.setString(4, null);}
+			else {pstmt.setInt(4, reply.getFeedbackReplyNo());}
 			
 			result = pstmt.executeUpdate();
 		}finally {
@@ -143,5 +156,4 @@ public class PboardReplyDAO {
 		}
 		return result;
 	}
-
 }

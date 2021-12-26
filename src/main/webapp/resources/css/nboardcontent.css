@@ -38,7 +38,21 @@
     height: 100%;
     width: 70%;
     font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
+.nboard-info>div:last-of-type > button{
+    background-color: #4facfe;
+    border: 0;
+    color: white;
+    border-radius: 5px;
+    width: 40px;
+    height: 30px;
+    margin: 5px;
+    cursor: pointer;
+}
+
 .nboard-info>div:last-of-type>div:last-of-type{
     width: 30%;
 }

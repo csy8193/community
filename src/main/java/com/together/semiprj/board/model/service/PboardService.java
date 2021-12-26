@@ -62,7 +62,7 @@ public class PboardService {
 
 		Connection conn = getConnection();
 		
-		Pboard board = dao.selectBoard(boardNo, conn);
+		Pboard board = dao.selectBoard(boardNo, conn, memberNo);
 		
 		List<PboardImage> imgList = dao.selectBoardImageList(boardNo, conn);
 		
@@ -98,6 +98,55 @@ public class PboardService {
 		close(conn);
 		
 		return boardName;
+	}
+
+
+	/** 좋아요 증가
+	 * @param memberNo
+	 * @param boardNo
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int plusLike(int memberNo, int boardNo) throws Exception{
+		
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.plusLike(conn, memberNo, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+			
+			result = dao.likeSelect(boardNo,conn);
+		}
+		else rollback(conn);
+		
+		
+		close(conn);
+		return result;
+	}
+
+
+	/** 좋아요 삭제
+	 * @param memberNo
+	 * @param boardNo
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int unLike(int memberNo, int boardNo) throws Exception {
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.unLike(conn, memberNo, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+			
+			result = dao.likeSelect(boardNo, conn);
+		}
+		else rollback(conn);
+		
+		
+		close(conn);
+		return result;
 	}
 
 }

@@ -11,6 +11,13 @@ public class PersonAnimalInfo {
 	private String animalName;
 	private String animalVariety;
 	private String animalGender;
+	private String animalCateNM;
+	public String getAnimalCateNM() {
+		return animalCateNM;
+	}
+	public void setAnimalCateNM(String animalCateNM) {
+		this.animalCateNM = animalCateNM;
+	}
 	private Date animalBirth;
 	private String animalImg;
 	public int getRanking() {
