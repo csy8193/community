@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="${contextPath}/resources/css/myPoint.css">
 	<main>
           <div id="main">
-             <h2>My 포인트</h2>
+             <h2>My 포인트 </h2>
                 <div class="rank-point">
                     <div class="btn-wrap">
                         <a href="${contextPath }/walk/ranking">전체 랭킹</a>
@@ -20,14 +20,14 @@
 	                    <p>아직 모으신 산책 포인트가 없어요</p>
 	                    <p>산책 포인트를 모아 매달 새로워지는 상품과 교환하세요!</p>
                     </c:if>
-                <fmt:parseNumber var= "templevel" integerOnly= "true" value= "${rankList[0].totalp/100}"/>
+                <fmt:parseNumber var= "templevel" integerOnly= "true" value= "${rankList[0].totalp/100+1}"/>
                     <c:if test="${!empty rankList}">
-                    <br><p>레벨업까지 <strong>${(templevel+1)*100 - rankList[0].totalp}</strong> 점 남았습니다!</p>
+                    <br><p>레벨업까지 <strong>${(templevel)*100 - rankList[0].totalp}</strong> 점 남았습니다!</p>
                     </c:if>
                     <%-- <a href="#">자세히 보기${templevel}</a> --%>
                 </div>
                 <div class="progress">
-	                <progress value="${rankList[0].totalp}" max="${(templevel+1)*100}" id = "pro-bar"></progress>
+	                <progress value="${rankList[0].totalp}" max="${(templevel)*100}" id = "pro-bar"></progress>
                     <div></div>
                     <div></div>
                     <div></div>

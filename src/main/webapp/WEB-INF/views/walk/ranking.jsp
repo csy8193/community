@@ -71,7 +71,6 @@
                         </tr>
                     </table>
                 </div>
-                    
             </div>
         </main>
 </body>

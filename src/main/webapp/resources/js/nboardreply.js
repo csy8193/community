@@ -38,14 +38,12 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 				type :"POST",
 				success : function(result){
 					if(result==1){
-						alert("좋아요를 누르셨습니다!")
 						$(".fa-heart").removeClass("far");
 						$(".fa-heart").addClass("fas");
 						$("#like-btn>div:last").css("background","none").css("box-shadow","none");
 						$("#like-btn>div:last>i").css("color","red");
 						$("#like-btn>div:last>i").attr("title", "좋아요를 이미 했어요")
-						const likevalue =$("#nboard-content > div.nboard-info > div:nth-child(2) > span:nth-child(2)")
-						
+						const likevalue =$("#nboard-content > div.nboard-info > div:nth-child(3) > span:nth-child(2)")
 						console.log(likevalue.text());
 						likevalue.text(parseInt(likevalue.text())+1);
 					}
