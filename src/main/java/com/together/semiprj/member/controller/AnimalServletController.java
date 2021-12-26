@@ -27,7 +27,7 @@ import com.together.semiprj.member.model.vo.User;
 
 
 @WebServlet("/member/*")
-public class MyPageServletController extends HttpServlet{
+public class AnimalServletController extends HttpServlet{
 	
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +44,6 @@ public class MyPageServletController extends HttpServlet{
 			String command = uri.substring(  (contextPath + "/member/").length()  );
 			// -> 요청 주소에서 /semi/board/ 의 길이만큼 잘라낸 후 
 			//    나머지 문자열을 command 변수에 저장	
-			
 			
 			String path = null;
 			RequestDispatcher dispatcher = null;
@@ -150,8 +149,11 @@ public class MyPageServletController extends HttpServlet{
 
 						Animal animal = new Animal(animalNm, animalVariety, animalGender,aniBirthday,memberNo,animalCategoryCode);
 						
-						//System.out.println(animal);
-						//System.out.println(aniPro);
+						System.out.println("등록 start");
+						
+						System.out.println(animal);
+						System.out.println(aniPro);
+						
 						
 						int result = service.addAnimal(animal,aniPro);
 
@@ -159,6 +161,83 @@ public class MyPageServletController extends HttpServlet{
 						
 					}
 				}
+				
+				//수정하기 반려동물
+				else if(command.equals("updateAnimal")) {
+						
+					if(method.equals("POST")) {
+						
+						int maxSize = 1024 * 1024 * 100; //100MB
+						
+						// 프로젝트의 webapp 폴더의 컴퓨터상 실제 절대 경로
+						String root = session.getServletContext().getRealPath("/");
+						
+						// 나머지 파일경로 (DB에 저장되어 주소 경로로 사용할 예정)
+						String filePath = "/resources/images/animalProfileImg/";
+						
+						// 실제 경로
+						String realPath = root+filePath;
+						
+						MultipartRequest mReq = 
+								new MultipartRequest(req,realPath,maxSize,"UTF-8",new MyRenamePolicy());
+						
+						// 반려동물 정보 파라미터 가지고 오기
+						int animalNo =  Integer.parseInt(mReq.getParameter("animalNo"));
+						int animalCategoryCode =  Integer.parseInt(mReq.getParameter("animalCategory"));
+						String animalVariety = mReq.getParameter("animalVariety");
+						String animalNm = mReq.getParameter("animalNm");
+						String aniBirthday = mReq.getParameter("aniBirthday");                				
+						String animalGender = mReq.getParameter("animalGender");
+						
+
+						// 파일 형식의 파라미터
+						Enumeration<String> files = mReq.getFileNames();
+						
+						// 업로드된 이미지 정보를 담을 객체 생성
+						AnimalProfile aniPro = new AnimalProfile();
+						
+						while(files.hasMoreElements()) {
+							
+							String name = files.nextElement(); 
+							
+							if(mReq.getFilesystemName(name) != null) {
+								
+								//파일 파라미터 값 가지고 오기
+								aniPro.setAnimalImgNm(mReq.getFilesystemName(name));
+								aniPro.setAnimalImgOriginal(mReq.getOriginalFileName(name));
+								aniPro.setAnimalImgPath(filePath);
+								
+							}// end if
+							
+						} // end while
+						
+						
+						Animal animal = new Animal(animalNo,animalNm,animalVariety,animalGender,aniBirthday,animalCategoryCode);
+
+						System.out.println("수정 start");
+						int result = service.updateAnimal(animal,aniPro);
+
+						resp.getWriter().print(result);
+						
+					}
+				}
+				 
+				 
+				 // 삭제하기 
+				 else if(command.equals("deleteAnimal")) {
+						
+					if(method.equals("POST")) {
+						
+						int animalNo =  Integer.parseInt(req.getParameter("animalNo"));
+						
+						System.out.println("삭제 start");
+						int result = service.deleteAnimal(animalNo);
+						
+						resp.getWriter().print(result);
+					}
+				} 
+				 
+				 
 				// 마이페이지 이동
 				 else if(command.equals("mypage")) {
 					
@@ -190,6 +269,65 @@ public class MyPageServletController extends HttpServlet{
 					}
 	
 				}
+				 
+				 
+				 // 비밀번호 변경
+				 if(command.equals("mypagePwUpdate")) {
+						
+						if(method.equals("POST")) {
+							
+							String nowPw = req.getParameter("nowPw");
+							String updatePw2 = req.getParameter("userPw2");
+							int memberNo = loginMember.getMemberNo();						
+							
+							int result = service.mypagePwUpdate(updatePw2, nowPw, memberNo);
+							
+							
+							if(result > 0) {
+								message = "비밀번호 변경 완료";
+								path = "mypage";
+							}else {
+								message = "현재 비밀번호가 일치하지 않습니다.";
+								path = "mypage";
+							}
+							req.getSession().setAttribute("message",message);			
+							resp.sendRedirect(path);
+						}
+						
+					}
+				 
+				 
+				 // 회원 탈퇴
+				 if(command.equals("mypagePwDelete")) {
+						
+						if(method.equals("POST")) {
+							
+							String nowPw = req.getParameter("myPagedelete");
+							int memberNo = loginMember.getMemberNo();
+							
+							System.out.println("test22"+nowPw);
+							System.out.println("test22"+memberNo);	
+							
+							int result = service.mypagePwDelete(nowPw, memberNo);
+							
+							
+							System.out.println("탈퇴"+result);
+							
+							if(result > 0) {
+								message = "회원 탈퇴 완료";
+								path = req.getContextPath(); // 메인 페이지
+								session.invalidate();
+							}else {
+								message = "현재 비밀번호가 일치하지 않습니다.";
+								path = "mypage";
+							}
+							req.getSession().setAttribute("message",message);			
+							resp.sendRedirect(path);
+						}
+						
+					}
+				 
+				 
 				
 			}catch(Exception e) {
 				e.printStackTrace();

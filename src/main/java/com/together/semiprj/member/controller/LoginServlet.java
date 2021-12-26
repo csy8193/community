@@ -58,9 +58,12 @@ public class LoginServlet extends HttpServlet{
 					cookie.setPath(req.getContextPath());
 					
 					resp.addCookie(cookie);
+				}else if(loginMember.getStatusCd() == 2) {
+					session.setAttribute("message", "탈퇴한 회원 입니다.");
 				}else {
 					session.setAttribute("message", "정지된 회원 입니다.");
 				}
+				
 			}else {
 				session.setAttribute("message", "아이디 또는 비밀번호를 확인해주세요.");
 			}

@@ -2,8 +2,10 @@ package com.together.semiprj.member.model.service;
 
 import static com.together.semiprj.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.util.List;
+import java.util.Properties;
 
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
@@ -170,31 +172,43 @@ public class UserService {
 		animal.setAnimalVariety(animal.getAnimalVariety().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		animal.setAnimalNm(animal.getAnimalNm().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		
+		System.out.println("service addAnimal start");
 		int result = dao.addAnimal(animal,conn);
 		
 		if(result > 0) {
 			
-			if(aniPro != null) {
-				
+			// 이미지 있을때
+			if(aniPro.getAnimalImgPath() != null && aniPro.getAnimalImgOriginal() != null) {
+			
 				aniPro.setAnimalNo(animalNo);
 				
+				System.out.println("service addProfile start");
 				result = dao.insertaniProfile(aniPro,conn);
-							
-			}
-			
-			if(result > 0) {
-				commit(conn);
-			}else {
-				rollback(conn); 
+				
+				// 이미지 등록
+				if(result > 0) {
+					commit(conn);
+				}
+				// 이미지 등록 실패
+				else {
+					rollback(conn); 
+				}
+			} else {
+				// 이미지 없어도 등록 가능이면
+				//commit(conn);
+				
+				// 이미지 필수 이면 롤백
+				rollback(conn);
 			}
 
 		}else {
 			rollback(conn);
 		}
 		
+		close(conn);
+		
 		return result;
 	}
-
 	/** 반려동물 프로필 경로 설정
 	 * @param profilePath
 	 * @return
@@ -219,4 +233,115 @@ public class UserService {
 	}
 
 
-}
+	/** 반려동물 수정하기
+	    * @param animal
+	    * @param aniPro
+	    * @return
+	    * @throws Exception
+	    */
+	public int updateAnimal(Animal animal, AnimalProfile aniPro) throws Exception{
+	      
+	   Connection conn = getConnection();
+	      
+	   int animalNo = animal.getAnimalNo();
+	      
+	   animal.setAnimalVariety(XSS.replaceParameter(animal.getAnimalVariety()));
+	   animal.setAnimalNm(XSS.replaceParameter(animal.getAnimalNm()));
+	      
+	   animal.setAnimalVariety(animal.getAnimalVariety().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+	   animal.setAnimalNm(animal.getAnimalNm().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+	      
+	   System.out.println("updateAnimal start");
+	   int result = dao.updateAnimal(animal,conn);
+	   
+	   if(result > 0) {
+		   System.out.println(aniPro);
+ 
+		  // 이미지 있을때
+	      if(aniPro.getAnimalImgPath() != null && aniPro.getAnimalImgOriginal() != null) {
+	            
+	         aniPro.setAnimalNo(animalNo);
+	            
+	         System.out.println("update profile start");
+	         result = dao.updateAniProfile(aniPro,conn);
+	         
+	         // 이미지 수정
+	         if(result > 0) commit(conn);
+	         // 이미지 수정 실패
+	         else rollback(conn);
+	         
+	      } else {
+	    	  // 프로필?이미지 없어도 내용 수정 가능
+	    	  commit(conn);
+	      }
+	   } else {
+	      rollback(conn);
+	   }
+	   return result;
+	}
+
+
+	
+	/** 반려동물 삭제
+	 * @param animalNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAnimal(int animalNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.deleteAnimal(animalNo,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 비밀번호 변경
+	 * @param updatePw2
+	 * @param nowPw
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int mypagePwUpdate(String updatePw2, String nowPw, int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.mypagePwUpdate(updatePw2,nowPw,memberNo,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int mypagePwDelete(String nowPw, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.mypagePwDelete(nowPw,memberNo,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}   
+	
+
+	}

@@ -1,7 +1,5 @@
 package com.together.semiprj.member.model.vo;
 
-import java.sql.Date;
-
 public class Animal {
 	private int animalNo;
 	private String animalNm;
@@ -10,6 +8,7 @@ public class Animal {
 	private String animalBirthday;
 	private int memberNo;
 	private int animalCategoryCode;
+	
 	private String animalCategoryName;
 	private String animalImgPath;
 	private String animalImgNm;
@@ -18,7 +17,18 @@ public class Animal {
 		
 	}
 	
-
+	public Animal(int animalNo, String animalNm, String animalVariety, String animalGender, String animalBirthday, 
+			int animalCategoryCode) {
+		
+		super();
+		this.animalNo = animalNo;
+		this.animalNm = animalNm;
+		this.animalVariety = animalVariety;
+		this.animalGender = animalGender;
+		this.animalBirthday = animalBirthday;
+		this.animalCategoryCode = animalCategoryCode;
+	}
+	
 	public Animal(String animalNm, String animalVariety, String animalGender, String animalBirthday, int memberNo,
 			int animalCategoryCode) {
 		super();

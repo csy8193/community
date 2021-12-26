@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
@@ -50,6 +51,23 @@
 		AND status_cd != 2
 	</entry>
 	
+	<!-- 마이페이지 비밀번호 변경 -->
+	<entry key="mypagePwUpdate">
+		UPDATE MEMBER 
+		SET MEMBER_PW = ?
+		WHERE MEMBER_NO = ?
+		AND MEMBER_PW = ?
+		AND STATUS_CD != 2
+	</entry>
+	
+	<!-- 탈퇴하기 -->
+	<entry key="mypagePwDelete">
+		UPDATE MEMBER SET
+		STATUS_CD = 2
+		WHERE MEMBER_NO = ?
+		AND MEMBER_PW = ?
+	</entry>
+	
 	<!-- 반려동물 카테고리 목록 조회 -->
 	<entry key="selectAnimalCategory">
 		SELECT * FROM ANIMAL_CATEGORY
@@ -65,6 +83,8 @@
 		ORDER BY ANIMAL_NO DESC
 	</entry>
 	
+
+	<!-- 반려동물 등록 -->
 	<entry key="addAnimal">
 	INSERT INTO ANIMAL VALUES(?,?,?,?,?,?,?)
 	</entry>
@@ -85,5 +105,30 @@
 		SET ANIMAL_PROFILE_IMG = ?
 		WHERE MEMBER_NO = ?
 	</entry>
-
+	
+	<!-- 반려동물 수정 -->
+	<entry key="updateAnimal">
+		UPDATE ANIMAL SET 
+		ANIMAL_NAME = ?,
+		ANIMAL_VARIETY = ?,
+		ANIMAL_SEX = ?,
+		ANIMAL_BIRTH = ?,
+		ANIMAL_CATEGORY_CD = ?
+		WHERE ANIMAL_NO = ?
+	</entry>
+	
+	<!-- 반려동물 프로필 수정 -->
+	<entry key="updateAniProfile">
+		UPDATE ANIMAL_IMG SET 
+		ANIMAL_IMG_PATH = ?,
+		ANIMAL_IMG_NM = ?,
+		ANIMAL_IMG_ORIGINAL = ?
+		WHERE ANIMAL_NO = ?
+	</entry>
+	
+	<!-- 반려동물 삭제 -->
+	<entry key="deleteAnimal">
+		DELETE FROM ANIMAL WHERE ANIMAL_NO = ?
+	</entry>
+	
 </properties>

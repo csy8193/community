@@ -2,9 +2,6 @@ package com.together.semiprj.member.model.dao;
 
 import static com.together.semiprj.common.JDBCTemplate.*;
 
-
-
-
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -313,7 +310,7 @@ public class UserDAO {
 				ac.setAnimalCategoryCode(rs.getInt("ANIMAL_CATEGORY_CD"));
 				ac.setAnimalCategoryName(rs.getString("ANIMAL_CATEGORY_NM"));
 				
-				AnimalCategory.add(ac);
+				AnimalCategory.add(ac); 
 			}
 		}finally {
 			close(rs);
@@ -324,7 +321,15 @@ public class UserDAO {
 
 
 
+	/** 반려동물 등록
+	 * @param animal
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
 	public int addAnimal(Animal animal, Connection conn) throws Exception{
+		
+		System.out.println(5);
 		
 		int result = 0;
 		
@@ -342,6 +347,8 @@ public class UserDAO {
 			pstmt.setInt(7,animal.getAnimalCategoryCode());
 			
 			result = pstmt.executeUpdate();
+			
+			System.out.println(6);
 			
 		}finally {
 			close(pstmt);
@@ -433,6 +440,161 @@ public class UserDAO {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+
+	
+	/** 프로필 정보 수정
+	 * @param animal
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateAnimal(Animal animal, Connection conn) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("updateAnimal");
+			
+			pstmt = conn.prepareStatement(sql);
+					
+			
+			pstmt.setString(1,animal.getAnimalNm());
+			pstmt.setString(2,animal.getAnimalVariety());
+			pstmt.setString(3,animal.getAnimalGender());
+			pstmt.setString(4,animal.getAnimalBirthday());			
+			pstmt.setInt(5,animal.getAnimalCategoryCode());
+			pstmt.setInt(6,animal.getAnimalNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 반려동물 프로필 수정
+	 * @param animalNo
+	 * @param aniPro
+	 * @param conn
+	 * @return 
+	 * @throws Exception
+	 */
+	public int updateAniProfile(AnimalProfile aniPro, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("updateAniProfile");
+			
+			pstmt = conn.prepareStatement(sql);
+	
+			pstmt.setString(1,aniPro.getAnimalImgPath());
+			pstmt.setString(2,aniPro.getAnimalImgNm());
+			pstmt.setString(3,aniPro.getAnimalImgOriginal());
+			pstmt.setInt(4,aniPro.getAnimalNo());
+
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/** 반려동물 삭제
+	 * @param animalNo
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAnimal(int animalNo, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteAnimal");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,animalNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 비밀번호 변경
+	 * @param updatePw2
+	 * @param nowPw
+	 * @param memberNo
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int mypagePwUpdate(String updatePw2, String nowPw, int memberNo, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("mypagePwUpdate");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePw2);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, nowPw);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 탈퇴하기
+	 * @param nowPw
+	 * @param memberNo
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int mypagePwDelete(String nowPw, int memberNo, Connection conn)  throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("mypagePwDelete");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, nowPw);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 	

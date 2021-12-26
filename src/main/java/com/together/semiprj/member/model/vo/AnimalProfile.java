@@ -10,6 +10,13 @@ public class AnimalProfile {
 	public AnimalProfile() {
 	}
 
+	public AnimalProfile(String animalImgPath, String animalImgNm, String animalImgOriginal) {
+		super();
+		this.animalImgPath = animalImgPath;
+		this.animalImgNm = animalImgNm;
+		this.animalImgOriginal = animalImgOriginal;
+	}
+
 	public int getAnimalImgNo() {
 		return animalImgNo;
 	}
