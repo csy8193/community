@@ -81,6 +81,11 @@
 		<button onclick="insertWalkHistory(this)">등록하기</button>
 		<button onclick="resetWalkText(this)">작성취소</button>
 		</div>
+		<div id="mywalklist">
+			<h1>산책일지 리스트</h1>
+			<ul id="mydaywalk">
+			</ul>
+		</div>
 	</div>
 	 </div>
         </main>

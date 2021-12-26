@@ -8,7 +8,14 @@ document.getElementById("reply-btn").addEventListener("click", function(){
 			addReply(0);
 });
 
+//top버튼 기능
+document.getElementById("nboard-topbtn").addEventListener("click", function(e){
+			e.preventDefault();
+			window.scrollTo({top:0, behavior:'smooth'});
+});
 
+
+//좋아요버튼기능
 document.getElementById("nboard-like").addEventListener("click", function(){
 	if(loginMemberNo==""){
 		alert("로그인 후 이용해주세요");
@@ -159,16 +166,11 @@ function makereply(reply, checkoriginal){
 				}
 				const p = $('<p>');
 				
-				if(reply.profileExist){
-					const img =$('<img>');
-					$(img).attr("src",contextPath+reply.animalImgPath+reply.animalImgNm)
-					p.append(img);
-				}
-				else{
-					const img =$('<img>');
-					$(img)
-					p.append(img);
-				}
+				const img =$('<img>');
+				$(img).attr("src",contextPath+reply.animalImgPath)
+				
+				p.append(img);
+				
 				div.append(p);
 				
 				const div2 = $('<div class="reply-user">');
@@ -200,6 +202,9 @@ function makereply(reply, checkoriginal){
 					const button4 = $('<button onclick="deleteNrep(this)">');
 					button4.text('삭제');
 					div3.append(button1,button3, button4)
+					}
+					else{
+						div3.append(button1)
 					}
 				}
 				//const button2 = $('<button>');
@@ -240,6 +245,9 @@ function createReplyArea(el){
 
 		feedbackReplyStatus= true;
 		prevReplyWriterNo = $(el).val();
+		
+		var offset = div.offset();
+		window.scrollTo({top : offset.top, behavior:'smooth'});
 	}
 	else{
 		let nowReplyWriterNo = $(el).val();

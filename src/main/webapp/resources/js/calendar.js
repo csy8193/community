@@ -6,6 +6,46 @@
 	
 	
     }
+const dayList = function(el){
+	const day = $(el).text();
+	//loginMemberNo
+
+	const checky = $("#today-month").text().split('/')[0];
+	const checkm = $("#today-month").text().split('/')[1];
+	$.ajax({
+		url : contextPath+"/walk/walkdayshow",
+			data : {
+				"loginMemberNo" : loginMemberNo,
+				"day" : day,
+				"checky" : checky,
+				"checkm" : checkm
+			},
+			dataType : "json",
+			type : "POST",
+			success : function(dayhistory){
+				$("#mydaywalk").text("");
+				$("#mywalklist").css("display","block");
+				$.each( dayhistory , function(index1, checkday){
+					const li = $("<li>");
+					const span1 = $("<span>");
+					span1.text(index1+1);
+					const span2 = $("<span>");
+					span2.text(checkday.boardContent);
+					const span3 = $("<span>");
+					span3.text(checkday.createDt);
+					li.append(span1,span2,span3);
+					$("#mydaywalk").append(li);
+				})
+								
+				console.log(dayhistory);
+			},
+			error : function(req, status, error){
+                console.log("에러");
+                console.log(req.responseText);
+            }
+	})
+}
+
 	function getYyyyMmDdMmSsToString(date)
 {
 			var dd = date.getDate();
@@ -46,13 +86,13 @@
 
     let lastDate =  monthDay[month-1];
 
-    var enMonthName = new Array('1월','2월','3월','4월','5월','6월',
-        '7월','8월','9월','10월','11월','12월');
+    var enMonthName = new Array('1','2','3','4','5','6',
+        '7','8','9','10','11','12');
     
     	
         const tmonth = document.getElementById("today-month");
         const monthday = document.getElementById("month-day");
-        tmonth.innerText = year+"년 " +enMonthName[month-1] 
+        tmonth.innerText = year+"/" +enMonthName[month-1] 
 		
         let count = 1;
         let week =1;
@@ -109,6 +149,7 @@
 							    if(element==count) {
 									console.log("같음");
 									$(td).addClass("walkdone");
+									$(td).attr("onclick","dayList(this)");
 							    }
 								else{
 									$(td).addClass("nonewalk");
@@ -138,6 +179,7 @@
 			
 		})
 		//------------------------------------------------------
+
 }
 const prev = function(){
         selectMonth=selectMonth - 1;
@@ -154,10 +196,10 @@ const next = function(){
     }
 
 const insertWalkHistory = function(el){
-	const temp =  $(el).prev();
+	const temp =  $("#walktext");
 	if(loginMemberNo==0){
 		alert("로그인 후 이용해주세요!");
-		walktext = temp.val("");
+		temp.val("");
 		return;
 	}
 	walktext = temp.val();
@@ -165,13 +207,12 @@ const insertWalkHistory = function(el){
 		alert("내용을 작성해주세요!");
 		return;
 	}
-	
 	$.ajax({
 			url : contextPath+"/walk/walkinsert",
 			data : {
 				"loginMemberNo" : loginMemberNo,
 				"walktext" : walktext,
-				"continueWalk" : continueWalk+1
+				"continueWalk" : continueWalk+1,
 			},
 			dataType : "json",
 			type : "POST",
@@ -188,6 +229,11 @@ const insertWalkHistory = function(el){
 					$("#continueCheck").val(continueCheck+1);
 				}
 				temp.val("");
+			    monthday.innerHTML = ""
+				displayCal(selectMonth);
+				setTimeout(function() {
+				  $(".walkdone:last").click();
+				}, 50);
 			},
 			error : function(req, status, error){
                     console.log("에러");
@@ -196,10 +242,7 @@ const insertWalkHistory = function(el){
 			
 	})
     const monthday = document.getElementById("month-day");
-    monthday.innerHTML = ""
-	displayCal(selectMonth);
-	
-	selecDatewalkList(day);
+
 }
 
 const resetWalkText = function(el){
@@ -221,6 +264,7 @@ const selecDatewalkList = function(date){
 				if(nboardList ==null){
 					//이미 체크
 					alert("산책일지 작성 완료! 오늘 포인트는 모두 획득했습니다.");
+					
 				}
 				else{
 					const getpoint = 20 + 20*(continueWalk+1)
@@ -236,4 +280,28 @@ const selecDatewalkList = function(date){
             }
 			
 	})
+}
+$("#addwalkimg").on("click",function(){
+/*	if(loginMemberNo==0){
+		alert("로그인 후 이용해주세요!");
+		temp.val("");
+		return;
+	}*/
+	document.getElementById("walkfile").click();
+	console.log("이미지 삽입!");
+})
+
+const loadImg = function(el){
+	if (el.files[0]) {
+		var reader = new FileReader();
+		reader.readAsDataURL(el.files[0]);
+		reader.onload = function(e) {
+			$("#addwalkimg").html("");
+			const img = $("<img>");
+			img.css("width","100%");
+			img.css("height","400px");
+			img.attr("src", e.target.result);
+			$("#addwalkimg").append(img);
+		}
+	}
 }

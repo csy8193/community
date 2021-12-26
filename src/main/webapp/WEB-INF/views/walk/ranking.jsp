@@ -16,12 +16,14 @@
                     <div class="ranking123">
                         <div class="ranking-list">
                             <img src="${contextPath}${rankList[1].animalImg}">
-                            <p><strong>${rankList[1].rank} 위! ${rankList[1].animalName}</strong> / ${rankList[1].animalCategoryNm} </p>
+                            <p><strong>${rankList[1].rank} 위! ${rankList[1].animalName}</strong> / 
+                            ${rankList[1].animalCategoryNm} </p>
                             <p><span>${rankList[1].totalP}</span>point</p>
                         </div>
                         <div class="ranking-list">
                             <img src="${contextPath}${rankList[0].animalImg}">
-                            <p><strong>${rankList[0].rank} 위! ${rankList[0].animalName}</strong> / ${rankList[0].animalVariety}</p>
+                            <p><strong>${rankList[0].rank} 위! ${rankList[0].animalName}</strong> / 
+                            ${rankList[0].animalVariety}</p>
                             <p><span>${rankList[0].totalP}</span>point</p>
                         </div>
                         <div class="ranking-list">

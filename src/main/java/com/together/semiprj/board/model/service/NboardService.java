@@ -65,10 +65,6 @@ public class NboardService {
 			}
 			else rollback(conn);
 		}
-		List<NboardImage> NboardImgList = dao.selectNboardImgList(conn,boardNo);
-		if(NboardImgList!=null) {
-			nboard.setnBoardImgList(NboardImgList);
-		}
 		
 		close(conn);
 		return nboard;

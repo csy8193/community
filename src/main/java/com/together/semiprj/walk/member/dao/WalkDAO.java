@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.together.semiprj.board.model.dao.NboardReplyDAO;
 import com.together.semiprj.board.model.vo.Nboard;
+import com.together.semiprj.board.model.vo.NboardImage;
 import com.together.semiprj.walk.member.vo.Mypoint;
 import com.together.semiprj.walk.member.vo.WalkRank;
 
@@ -210,7 +211,6 @@ public class WalkDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("POINTDUPL");
-				System.out.println(result+"왜 1나옴?");
 			}
 		}
 		finally {
@@ -220,4 +220,39 @@ public class WalkDAO {
 		
 		
 	}
+	/** DAY 산책 기록
+	 * @param conn
+	 * @param memberNo
+	 * @param day 
+	 * @param month 
+	 * @param year 
+	 * @return
+	 */
+	public List<Nboard> walkdayshow(Connection conn, int memberNo, int year, int month, int day) throws Exception{
+		List<Nboard> walkList = null;
+		try {
+			String sql = prop.getProperty("walkdayshow");
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, year);
+			pstmt.setInt(3, month);
+			pstmt.setInt(4, day);
+			rs= pstmt.executeQuery();
+			walkList = new ArrayList<Nboard>();
+			while(rs.next()) {
+				Nboard nboard = new Nboard();
+				nboard.setBoardNo(rs.getInt("BOARD_NO"));
+				nboard.setBoardContent(rs.getString("BOARD_CONTENT"));
+				nboard.setCreateDt(rs.getString("CREATE_DT"));
+				walkList.add(nboard);
+			}
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return walkList;
+	}
+
 }
