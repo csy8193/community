@@ -53,6 +53,9 @@
 		    </form>
 		</div>
 	</main>
+	
+	<jsp:include page="../common/footer.jsp"/>
+	
        
     <script>
 		const contextPath = "${contextPath}";
