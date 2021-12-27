@@ -217,6 +217,10 @@ input:focus{outline:none;}
 	height : 25px;
 	overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
+#best-content > p > strong > a{
+	color : #fff;
+	font-size : 20px;
+}
 #best-content > p > a > img{
 	display : none;
 }

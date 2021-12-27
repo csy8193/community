@@ -52,11 +52,12 @@
                                 <span class="best-ranking">${count}</span>
                                 <c:set var="count" value="${count+1}" />
                                 <div>
-                                	<p>${most.boardName}</p>
+                                	<p></p>
                                 	<div id="best-content">
-                                   	 <p><a href="${contextPath}/${cate}=${most.boardNo}&boardCd=${most.boardCode}">${displaywrite}</a></p>
+                                   	 <p><strong><a href="${contextPath}/${cate}=${most.boardNo}&boardCd=${most.boardCode}"
+                                   	 >${displaywrite}</a></strong></p>
                                 	</div>
-                                    <span class="best-date">${most.createDate} </span>
+                                    <span class="best-date">${most.createDate} [${most.boardName}]</span>
                                 </div>
                             </div>
                             <div class="right-float">
