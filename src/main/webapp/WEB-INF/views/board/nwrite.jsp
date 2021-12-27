@@ -129,7 +129,7 @@
 			$(".boardImg").children("img").css("border", "3px solid #e7e7e7");
 			$(value).children("img").css("border", "3px solid #4facfe");
 			$("#fileArea").empty();
-			$("#fileArea").append('<input type="text" id="input-img" value="'+$(value).children("img").attr("src")+'" name="input-img">');
+			$("#fileArea").append('<input type="text" id="input-img" value="'+$(value).children("img").attr("src").replace("${contextPath}", "")+'" name="input-img">');
 			
         }
         

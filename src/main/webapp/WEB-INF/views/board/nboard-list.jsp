@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../common/header.jsp"/>
 <link rel="stylesheet" href="${contextPath}/resources/css/nboard-list.css">
-	<section>
+	<section style="min-height: 500px;">
 	    <div id="nboard-wrapper">
         <h1 id = "nboard-category">${boardList[0].boardName}</h1>
             	<c:choose>
@@ -14,7 +14,7 @@
 			         <div class="nboard-style">
            				  	<c:if test="${!empty board.boardMainImgPath}">
 	           				  <div class="nboard-pic">
-                				<img src="${board.boardMainImgPath}">
+                				<img src="${contextPath}${board.boardMainImgPath}">
 	           				 </div>
            				  	</c:if>
 		            	<div class="nboard-content" >
