@@ -26,7 +26,6 @@ public class WalkDAO {
 	
 	public WalkDAO() {
 		String filePath = NboardReplyDAO.class.getResource("/com/together/semiprj/sql/walk-rank-query.xml").getPath();                    
-		
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream(filePath));

@@ -41,9 +41,7 @@ public class WalkController extends HttpServlet{
 				String message = null;
 				
 				try {
-					
 					if(command.equals("ranking")) {
-						
 						WalkService service = new WalkService();
 						List<WalkRank> rankList = new ArrayList<WalkRank>();
 						rankList = service.pointRank();
@@ -52,7 +50,6 @@ public class WalkController extends HttpServlet{
 						path = "/WEB-INF/views/walk/ranking.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
-						
 					}
 					
 					else if(command.equals("myPoint")) {

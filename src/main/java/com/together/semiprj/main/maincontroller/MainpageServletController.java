@@ -34,7 +34,7 @@ public class MainpageServletController extends HttpServlet{
 			boardList = service.selectMostView();
 			currentFree = service.selectFreqB(10,10);
 			currentKnowhow = service.selectFreqB(20,10);
-			currentFreQ = service.selectFreqB(50,10);
+			currentFreQ = service.selectFreqB(30,10);
 			currentNotice = service.selectFreqB(110,10);
 			
 			topLikePeople = service.selectTopLikePeople();

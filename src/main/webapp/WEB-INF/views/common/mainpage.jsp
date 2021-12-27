@@ -124,12 +124,12 @@
 
             <div id="notice-wrap">
                 <div id="qna" class="left-float">
-                    <h1 class="board-title-b">자주하는 질문</h1>
+                    <h1 class="board-title-b">유기동물 보호소 추천!</h1>
                     <ul>
                     <%-- <li>${currentFreQ }</li> --%>
                     <c:forEach items="${currentFreQ}" var ="FreQ">
                     	<li>
-                            <p><a href="#">${FreQ.boardTitle}</a><span>${FreQ.createDate}</span></p>
+                            <p><a href="${contextPath}/nboard/view?boardNo=${FreQ.boardNo}&boardCd=30">${FreQ.boardTitle}</a><span>${FreQ.createDate}</span></p>
                         </li>
                     </c:forEach>
                     </ul>
@@ -140,7 +140,7 @@
                     	<%-- <li>${currentNotice}</li> --%>
                     <c:forEach items="${currentNotice}" var ="Notice">
                     	<li>
-                            <p><a href="#">${Notice.boardTitle}</a><span>${Notice.createDate}</span></p>
+                            <p><a href="${contextPath}/nboard/view?boardNo=${Notice.boardNo}&boardCd=110">${Notice.boardTitle}</a><span>${Notice.createDate}</span></p>
                         </li>
                     </c:forEach>
                     </ul>
