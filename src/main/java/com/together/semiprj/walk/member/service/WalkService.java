@@ -58,7 +58,7 @@ public class WalkService {
 		return myPointList;
 	}
 
-	public List<Nboard> walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
+	public int walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
 		
 		Connection conn = getConnection();
 		List<Nboard> walkList = null;
@@ -72,7 +72,7 @@ public class WalkService {
 		if(result>0) {
 				//삽입 성공 완료시 포인트 부여 여부
 				if(check==0) {
-					int getPoint = 20+20*continueWalk;
+					int getPoint = 20+20*(continueWalk);
 					result = dao.walkPointGet(conn,memberNo, getPoint);
 				}
 				if(result>0) {
@@ -85,7 +85,13 @@ public class WalkService {
 		
 		close(conn);
 		
-		return walkList;
+		int count2 = 0;
+		for(Nboard abc : walkList) {
+			count2++;
+		}
+		
+		
+		return count2;
 	}
 
 	public List<Nboard> walkdayshow(int memberNo, int year, int month, int day) throws Exception{
