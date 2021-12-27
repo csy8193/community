@@ -27,7 +27,6 @@
           WHERE A.STATUS_CD != 2 AND A.BOARD_CD = ?
             ORDER BY BOARD_NO DESC) AA) BB
             WHERE RNUM BETWEEN ? AND ? ) CC
-            LEFT JOIN ANIMAL EE ON (CC.MEMBER_NO = EE.MEMBER_NO)
             ORDER BY RNUM
 		
 	</entry>
