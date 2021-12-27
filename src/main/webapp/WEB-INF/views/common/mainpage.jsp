@@ -98,16 +98,16 @@
                 <div>
                     <h2>이달의 좋아요 순위!<br><span>누가 제일 멋쟁이인지 구경할까요?</span></h2>
                     <a href="${contextPath}/pboard/list?boardCd=70">자랑하기 게시판 보러가기 ></a><br>
-                    <span class ="ranks123" id="ranking2"><img src="${contextPath}${topLikePeople[1].animalImg}">
-                    ${topLikePeople[1].memberId} <br>
+                    <span class ="ranks123" id="ranking2"><img src="${contextPath}${topLikePeople[1].animalImg}"  onclick="location.href ='pboard/view?no=${topLikePeople[1].boardNo}&boardCd=70'">
+                    2위 [ ${topLikePeople[1].memberId}] <br>
                     좋아요 : ${topLikePeople[1].likeCount}  
                     </span>
-                    <span class ="ranks123" id="ranking1"><img src="${contextPath}${topLikePeople[0].animalImg}">
-                    ${topLikePeople[0].memberId} <br>
+                    <span class ="ranks123" id="ranking1"><img src="${contextPath}${topLikePeople[0].animalImg}" onclick="location.href ='pboard/view?no=${topLikePeople[0].boardNo}&boardCd=70'">
+                    1위 [ ${topLikePeople[0].memberId} ]<br>
                      좋아요 : ${topLikePeople[0].likeCount} 
                     </span>
-                    <span class ="ranks123" id="ranking3"><img src="${contextPath}${topLikePeople[2].animalImg}">
-                    ${topLikePeople[2].memberId} <br>
+                    <span class ="ranks123" id="ranking3"><img src="${contextPath}${topLikePeople[2].animalImg}" onclick="location.href ='pboard/view?no=${topLikePeople[2].boardNo}&boardCd=70'">
+                    3위 [ ${topLikePeople[2].memberId}] <br>
                      좋아요 : ${topLikePeople[2].likeCount} 
                     </span>
                 </div>
