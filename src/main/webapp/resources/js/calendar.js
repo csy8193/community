@@ -212,7 +212,7 @@ const insertWalkHistory = function(el){
 			data : {
 				"loginMemberNo" : loginMemberNo,
 				"walktext" : walktext,
-				"continueWalk" : continueWalk+1,
+				"continueWalk" : continueWalk,
 			},
 			dataType : "json",
 			type : "POST",
@@ -228,7 +228,7 @@ const insertWalkHistory = function(el){
 						 getpoint = 20;
 					}
 					else{
-						 getpoint = 20 + 20*(continueWalk+1)
+						 getpoint = 20 + 20*(continueWalk)
 					}
 					alert("산책일지 작성 완료! "+getpoint+"점 획득!");
 					const continueCheck = $("#continueCheck").val();
@@ -261,7 +261,7 @@ const selecDatewalkList = function(date){
 			url : contextPath+"/walk/walkList",
 			data : {
 				"loginMemberNo" : loginMemberNo,
-				"selectDay" : continueWalk+1
+				"selectDay" : continueWalk
 			},
 			dataType : "json",
 			type : "POST",
@@ -273,7 +273,7 @@ const selecDatewalkList = function(date){
 					
 				}
 				else{
-					const getpoint = 20 + 20*(continueWalk+1)
+					const getpoint = 20 + 20*(continueWalk)
 					alert("산책일지 작성 완료! "+getpoint+"점 획득!");
 					const continueCheck = $("#continueCheck").val();
 					$("#continueCheck").val(continueCheck+1);
