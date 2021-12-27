@@ -64,8 +64,6 @@ document.getElementById("email").addEventListener("input", function(){
 
 document.getElementById("certification-btn").addEventListener("click", function(){
 	
-	$("#id").attr("readonly",true);
-	$("#email").attr("readonly",true);
 	const id = document.getElementById("id").value;
 	const email = document.getElementById("email").value;
 	const confirmContent =document.getElementById("confirm");
@@ -79,6 +77,8 @@ document.getElementById("certification-btn").addEventListener("click", function(
 			console.log(data);
 			if(data != ""){
 				alert(email + "로 인증번호를 전송했습니다.");
+				$("#id").attr("readonly",true);
+				$("#email").attr("readonly",true);
 				confirmContent.style.display = "block";
 				document.getElementById("confirm-btn").addEventListener("click", function(){
 					const confirmNum = document.getElementById("confirmEmail").value;
@@ -98,6 +98,7 @@ document.getElementById("certification-btn").addEventListener("click", function(
 				});
 			}else{
 				$("#certification-btn").show();
+				alert("아이디, 이메일을 확인해주세요.");
 			}
 		},
 		error : function(request, status, error){

@@ -393,7 +393,7 @@ function selectBoardList(boardCd){
 				const tr = $('<tr>').addClass('tr');
 				const th1 = $('<th>').text('번호');
 				
-				console.log(bList.boardTitle);
+				// console.log(bList.boardTitle);
 
 				const th3 = $('<th>').text('작성일');
 				
