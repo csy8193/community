@@ -255,8 +255,7 @@ document.getElementById("pw1").addEventListener("input", function(){
 
 
 // 비밀번호 수정 유효성 검사
-document.getElementById("userPw2").addEventListener("input", function(){
-
+$("#userPw2").on("input", function(){
 	// 수정 비밀번호
     const inputPw = this.value;
 	
@@ -355,6 +354,7 @@ let flag = true;
 document.getElementById("check-btn").addEventListener("click", function(){
 	signUpCheckObj.confirmEmail = false;
 	if(flag){
+		
 		const inputEmail = document.getElementById("email").value;
 		const regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
 		
@@ -362,7 +362,7 @@ document.getElementById("check-btn").addEventListener("click", function(){
 		
 		const btn = document.createElement("button");
 		const p = document.createElement("p");
-		if(signUpCheckObj.email == true){
+		if(regExp.test(inputEmail) == true){
 			console.log(inputEmail);
 			alert(inputEmail +"로 인증번호를 전송했습니다.");
 			checkEmail.nextElementSibling.className = "ps-box email-box";

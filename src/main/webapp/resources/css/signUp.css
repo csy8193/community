@@ -66,6 +66,7 @@ label{
     font-size: 13px;
     font-weight: 700;
     float : right;
+    cursor: pointer;
 }
 
 .check{

@@ -17,7 +17,7 @@
 	
 </head>
 <body>
-<jsp:include page="../common/header-search.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 <div id="all-wrap">
     <div id="content-login">
         <div id="login-form-wrap">

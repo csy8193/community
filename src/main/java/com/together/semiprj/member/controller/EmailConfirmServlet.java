@@ -94,12 +94,12 @@ public class EmailConfirmServlet extends HttpServlet {
 	         msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
 
 	         // 메일 제목
-	         msg.setSubject("안녕하세요  인증 메일입니다.");
+	         msg.setSubject("안녕하세요 투개더 인증 메일입니다.");
 	         // 메일 내용
-	         msg.setText("인증 번호는 :" + temp);
+	         msg.setText("인증 번호는 : " + temp);
 
 	         Transport.send(msg);
-	         System.out.println("이메일 전송");
+	         // System.out.println("이메일 전송");
 
 	         resp.getWriter().print(temp);
 	         
