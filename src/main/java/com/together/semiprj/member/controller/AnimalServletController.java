@@ -23,6 +23,7 @@ import com.together.semiprj.member.model.service.UserService;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
 import com.together.semiprj.member.model.vo.AnimalProfile;
+import com.together.semiprj.member.model.vo.Board;
 import com.together.semiprj.member.model.vo.User;
 
 
@@ -132,9 +133,20 @@ public class AnimalServletController extends HttpServlet{
 						// 업로드된 이미지 정보를 담을 객체 생성
 						AnimalProfile aniPro = new AnimalProfile();
 						
+						
+						aniPro.setAnimalImgNm("basis-profile-img.png");
+						aniPro.setAnimalImgOriginal("basis-profile-img.png");
+						aniPro.setAnimalImgPath("/resources/images/main/");
+						
+						
 						while(files.hasMoreElements()) {
 							
 							String name = files.nextElement(); 
+							
+							System.out.println("얻어온 file name: "+name);
+							System.out.println("변환된 파일명: "+mReq.getFilesystemName(name));
+							System.out.println("원본파일명 : "+mReq.getOriginalFileName(name));
+							
 							
 							if(mReq.getFilesystemName(name) != null) {
 								
@@ -143,9 +155,12 @@ public class AnimalServletController extends HttpServlet{
 								aniPro.setAnimalImgOriginal(mReq.getOriginalFileName(name));
 								aniPro.setAnimalImgPath(filePath);
 								
-							}// end if
+							}
+							
 							
 						} // end while
+						
+						
 
 						Animal animal = new Animal(animalNm, animalVariety, animalGender,aniBirthday,memberNo,animalCategoryCode);
 						
@@ -153,6 +168,7 @@ public class AnimalServletController extends HttpServlet{
 						
 						System.out.println(animal);
 						System.out.println(aniPro);
+						
 						
 						
 						int result = service.addAnimal(animal,aniPro);
@@ -223,7 +239,7 @@ public class AnimalServletController extends HttpServlet{
 				}
 				 
 				 
-				 // 삭제하기 
+				 // 반려동물삭제하기 
 				 else if(command.equals("deleteAnimal")) {
 						
 					if(method.equals("POST")) {
@@ -238,38 +254,7 @@ public class AnimalServletController extends HttpServlet{
 				} 
 				 
 				 
-				// 마이페이지 이동
-				 else if(command.equals("mypage")) {
-					
-					if(method.equals("GET")) {
-						
-						if(loginMember != null) {
-							
-							int memberNo = loginMember.getMemberNo();
-							
-							List<AnimalCategory> animalCategory = service.selectAnimalCategory();
-							List<Animal> aniList = service.selectanimalList(memberNo);
-
-							
-							req.setAttribute("aniList", aniList);
-							req.setAttribute("animalCategory", animalCategory);
-							req.setAttribute("loginMember", loginMember);
-							
-							path = "/WEB-INF/views/member/mypage.jsp";
-
-						}else {
-							path = "/WEB-INF/views/member/login.jsp";
-						}
-							
-						dispatcher = req.getRequestDispatcher(path);
-						dispatcher.forward(req, resp);
-						
-					}else { // post 방식
-
-					}
-	
-				}
-				 
+				
 				 
 				 // 비밀번호 변경
 				 if(command.equals("mypagePwUpdate")) {
@@ -327,6 +312,54 @@ public class AnimalServletController extends HttpServlet{
 						
 					}
 				 
+				 // 게시판 리스트
+				 else if(command.equals("selectBoardList")) {
+						
+					 if(method.equals("GET")) {
+						 
+						 int boardCd =  Integer.parseInt(req.getParameter("boardCd"));
+						 int memberNo = loginMember.getMemberNo();
+						 
+						 List<Board> bList = service.selectBoardList(memberNo,boardCd);
+						 
+						 System.out.println(bList);
+						 
+						 new Gson().toJson(bList,resp.getWriter());
+						 
+					 }
+				 }
+	
+				// 마이페이지 이동
+				 else if(command.equals("mypage")) {
+					
+					if(method.equals("GET")) {
+						
+						if(loginMember != null) {
+							
+							int memberNo = loginMember.getMemberNo();
+							
+							List<AnimalCategory> animalCategory = service.selectAnimalCategory();
+							List<Animal> aniList = service.selectanimalList(memberNo);
+
+							
+							req.setAttribute("aniList", aniList);
+							req.setAttribute("animalCategory", animalCategory);
+							req.setAttribute("loginMember", loginMember);
+							
+							path = "/WEB-INF/views/member/mypage.jsp";
+
+						}else {
+							path = "/WEB-INF/views/member/login.jsp";
+						}
+							
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
+						
+					}else { // post 방식
+
+					}
+	
+				}
 				 
 				
 			}catch(Exception e) {

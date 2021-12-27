@@ -355,4 +355,91 @@ function deleteAnimal(animalNo){
 	
 }
 
+function selectBoardList(boardCd){
+	
+	$.ajax({
+			url: "selectBoardList",
+			data: {"boardCd":boardCd},
+			type: "GET",
+			dataType: "JSON",
+			
+			success: function(bList) {
+				
+				console.log(bList);
+				console.log(boardCd);
+				
+				
+				const h2 = $('<h2>');
+				let title = '';
+				const p = $('<p>');
+				let boardPath = "";
+				let th2;
+				
+				switch(boardCd){
+				case 10 :  title = "자유 게시판"; boardPath = "/nboard/view?&boardNo="; th2 = $('<th>').text('제목'); break;
+				case 20 :  title = "노하우 게시판"; boardPath = "/nboard/view?&boardNo="; th2 = $('<th>').text('제목'); break;
+				case 30 :  title = "유기동물 보호소"; boardPath = "/nboard/view?&boardNo="; th2 = $('<th>').text('제목');break;
+				case 40 :  title = "문의하기"; boardPath = "/nboard/view?&boardNo="; th2 = $('<th>').text('제목');break;
+				case 70 :  title = "자랑하기"; boardPath = "/pboard/view?&no="; th2 = $('<th>').text('내용'); break;
+				case 80 :  title = "유기동물 신고"; boardPath = "/pboard/view?&no="; th2 =$('<th>').text('내용'); break;
+				case 90 :  title = "아이들 근황"; boardPath = "/pboard/view?&no="; th2 = $('<th>').text('내용'); break;
+						
+				}
+				
+				h2.append(title);
+				
+				const table = $('<table>').addClass('sub-table');
+				
+				const tr = $('<tr>').addClass('tr');
+				const th1 = $('<th>').text('번호');
+				
+				console.log(bList.boardTitle);
+
+				const th3 = $('<th>').text('작성일');
+				
+				tr.append(th1,th2,th3);
+				table.append(tr);
+				
+				$("#sub-board").empty();
+				$(".sub2").css("display","none");
+				
+				if(bList == null){
+					p.text("아직 작성된 글이 없어요").css("margin-top","40px");
+					$("#sub-board").append(h2,table,p);
+				}else{
+					
+					$.each(bList, function(index,board) {
+						
+						const tr2 = $('<tr>');
+						const test = $('<a>').attr("href",""+contextPath+boardPath+board.boardNo+"&boardCd="+board.boardCode+"");
+						
+						if(board.boardTitle == null){
+							test.text(board.boardContent);
+							
+						}
+						else{
+							test.text(board.boardTitle);
+						}
+						
+						const td1 = $('<td>').text(board.boardNo);
+						const td2 = $('<td>').append(test);
+						const td3 = $('<td>').text(board.createDate);
+						
+						tr2.append(td1,td2,td3);
+						table.append(tr2);
+						$("#sub-board").append(h2,table);
+						
+					});
+					
+				}
+
+			
+			}, // success 		
+			
+			
+		}); //ajax
+	
+	}
+
+
 

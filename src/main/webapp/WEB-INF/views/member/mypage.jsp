@@ -4,7 +4,7 @@
 <c:set var="contextPath" value ="${pageContext.servletContext.contextPath}" scope="application"/>
 <link rel="stylesheet" href="${contextPath}/resources/css/mypage.css">
 
-<jsp:include page="../common/header-search.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 <section>
 	<div id="container">
       <div id="title">
@@ -15,30 +15,24 @@
                 <div id="aside-nav">
 
                     <h3>반려동물</h3>
-                    <div class="btn" >자유게시판</div>
-                    <div class="btn">노하우게시판</div>
-                    <div class="btn">자랑하기</div>
+                    <div class="btn" onclick="selectBoardList(10);">자유게시판</div>
+                    <div class="btn" onclick="selectBoardList(20);">노하우게시판</div>
+                    <div class="btn" onclick="selectBoardList(70);">자랑하기</div>
 
                     <h3>유기동물</h3>
-                    <div class="btn">신고하기</div>
-                    <div class="btn">보호소추천</div>
-                    <div class="btn">아이들근황</div>
+                    <div class="btn" onclick="selectBoardList(80);">신고하기</div>
+                    <div class="btn" onclick="selectBoardList(30);">보호소추천</div>
+                    <div class="btn" onclick="selectBoardList(90);">아이들근황</div>
                 
                     <h3>회원정보</h3>
-                    <div class="btn">
-                    <div style="display:none;">
-                  		${loginMember }
-                  	</div>
-                    
-                    회원정보 변경
-                    
+                    <div class="btn2">
+	                    <div style="display:none;">${loginMember}</div>
+	                    회원정보 변경
                     </div>
-                    <div class="btn" id="deleteMember">
-                    탈퇴하기
-                    </div>
+                    <div class="btn2" id="deleteMember">탈퇴하기</div>
 
                     <h3>고객센터</h3>
-                    <div class="btn">1:1 문의하기</div>
+                    <div class="btn" onclick="selectBoardList(40);">1:1 문의하기</div>
 
                 </div>
                 <div id="content">
@@ -378,49 +372,14 @@
                    
                     
                      <!-- 자유게시판 -->
-                    <div class="sub">
-                        <h2>자유게시판</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
+                     <div class="sub" id="sub-board">    
+                        
+                     </div>
                     <!-- 자유게시판 끝 -->
-                    
-                     <!-- 노하우게시판 -->
-                     <div class="sub">
-                        <h2>노하우 게시판</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 자유게시판 끝 -->
-
-                     <!-- 자랑하기 게시판 -->
-                     <div class="sub ">
-                        <h2>자랑하기</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 자유게시판 끝 -->
-
-                    <!-- 신고하기 -->
-                    <div class="sub">
-                        <h2>신고하기</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 자유게시판 끝 -->
-
-                    <!-- 보호소추천 -->
-                    <div class="sub">
-                        <h2>보호소추천</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 자유게시판 끝 -->
-
-                    <!-- 아이들 근황 -->
-                    <div class="sub">
-                        <h2>아이들근황</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 자유게시판 끝 -->
+                 
 
                     <!-- 회원정보수정 -->
-                    <div class="sub">
+                    <div class="sub2">
                         <h2>회원 정보 변경</h2>
                         <form method="POST" action="mypagePwUpdate" onsubmit="return validate();">
                             <table id="userUpdate">
@@ -471,7 +430,7 @@
                     <!-- 회원정보수정 끝 -->
                     
                     <!-- 탈퇴하기4-->
-                    <div class="sub">
+                    <div class="sub2">
                         <h2>탈퇴하기</h2>
                         <div class="center">
                         	<form method="POST" action="mypagePwDelete" onsubmit="return mypagePwDelete();">
@@ -485,17 +444,9 @@
                     </div>
                     <!-- 탈퇴하기 끝-->
 
-                    <!-- 1:1 문의하기 -->
-                    <div class="sub">
-                        <h2>1:1 문의하기</h2>
-                        <p>아직 작성한 글이 없어요!</p>
-                    </div>
-                    <!-- 1:1문의하기 끝 -->
-
                 </div>
             </div>
-
-            
+    
             </div>
 </section>
 
