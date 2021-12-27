@@ -58,17 +58,10 @@ public class PboardReplyDAO {
 				reply.setMemberNo(rs.getInt("MEMBER_NO"));
 				reply.setMemberNm(rs.getString("MEMBER_NM"));
 				reply.setMemberId(rs.getString("MEMBER_ID"));
-				//System.out.println(rs.getString("MEMBER_NM"));
 				reply.setStatusCd(rs.getInt("STATUS_CD"));
 				reply.setStatusNm(rs.getString("STATUS_NM"));
-				reply.setAnimalImgPath(rs.getString("ANIMAL_IMG_PATH"));
-				reply.setAnimalImgNm(rs.getString("ANIMAL_IMG_NM"));
 				reply.setAnimalMainImgPath(rs.getString("ANIMAL_PROFILE_IMG"));
-				reply.setProfileExist(rs.getBoolean("PROFILEEXIST"));
 				reply.setFeedbackReplyNo(rs.getInt("FEEDBACK"));
-				if(rs.getInt("PROFILEEXIST")==1) {reply.setProfileExist(true);}
-				else {reply.setProfileExist(false);}
-				// System.out.println(rs.getString("ANIMAL_PROFILE_IMG"));
 				rList.add(reply);
 				
 				
