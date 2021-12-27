@@ -62,23 +62,13 @@
 	                    </div>
 	                </li>
 	                <li class="nav-li">
-	                  <a href="#">동물병원</a>
+	                    <a href="${contextPath}/walk/myPoint">산책</a>
 	                </li>
 	                <li class="nav-li">
-	                    <a href="#">산책</a>
+	                    <a href="#">고객센터</a>
 	                    <div class="sub-hover">
 	                        <ul class="nav-sub">
-	                            <li><a href="#">산책일지</a></li>
-	                            <li><a href="#">산책랭킹</a></li>
-	                        </ul>
-	                    </div>
-	                </li>
-	                <li class="nav-li">
-	                    <a href="#">공지사항</a>
-	                    <div class="sub-hover">
-	                        <ul class="nav-sub">
-	                            <li><a href="#">1:1 문의하기</a></li>
-	                            <li><a href="${contextPath}/board/notice">자주하는 질문</a></li>
+	                            <li><a href="${contextPath}/board/notice">공지사항</a></li>
 	                            <li><a href="${contextPath}/board/event">이벤트</a></li>
 	                        </ul>
 	                    </div>

@@ -178,7 +178,7 @@ public class BoardDAO222 {
 	 * @throws Exception
 	 */
 	public List<Board> selectBoardList(Pagination pagination, Connection conn, int cd) throws Exception{
-List<Board> boardList = new ArrayList<Board>();
+		List<Board> boardList = new ArrayList<Board>();
 		
 		try {
 			String sql = prop.getProperty("selectBoardList");
@@ -489,28 +489,116 @@ List<Board> boardList = new ArrayList<Board>();
 		return result;
 	}
 
-	/** 이벤트 목록 조회
-	 * @param conn
-	 * @param bc
+	/** 일반게시글 삭제
+	 * @param conn 
+	 * @param boardCd
+	 * @param boardNo
+	 * @param memberNo
 	 * @return
 	 * @throws Exception
 	 */
-	/*
-	 * public List<Board> eventList(Connection conn, int bc) throws Exception{
-	 * List<Board> boardList = new ArrayList<Board>();
-	 * 
-	 * try { String sql = prop.getProperty("eventList");
-	 * 
-	 * int startRow = ( pagination.getCurrentPage() -1)* pagination.getLimit() +1 ;
-	 * int endRow = startRow + pagination.getLimit() -1;
-	 * 
-	 * 
-	 * } finally {
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 * return null; }
+	public int nBoardDelete(Connection conn, int boardCd, int boardNo, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("nBoardDelete");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	/** 검색 페이지네이션
+	 * @param conn
+	 * @param search
+	 * @return
 	 */
+	public int getListCount2(Connection conn, String search) throws Exception{
+		int listCount = 0;
+		String search2 = "%" + search + "%";
+		
+		try {
+			String sql = prop.getProperty("getListCount2");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search2);
+			pstmt.setString(2, search2);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+				
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return listCount;
+	}
+
+	/** 검색 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @param search
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> searchBoard(Connection conn, Pagination pagination, String search) throws Exception{
+		List<Board> boardList = new ArrayList<Board>();
+		String search2 = "%" + search + "%";
+		
+		try {
+			String sql = prop.getProperty("searchBoard");
+			
+			// 조회 하려는 범위의 시작/끝 행 계산
+			int startRow = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int endRow = startRow + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search2);
+			pstmt.setString(2, search2);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				// 게시글 번호, 제목, 작성자명, 조회수, 카테고리명, 작성일, 게시글 상태명
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberName(rs.getString("MEMBER_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+				board.setStatusName(rs.getString("STATUS_NM"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+				board.setBoardPicPath(rs.getString("BOARD_PIC_PATH"));
+				board.setBoardPicName(rs.getString("BOARD_PIC_NM"));
+				board.setAnimalProfile(rs.getString("ANIMAL_PROFILE_IMG"));
+				board.setBoardCode(rs.getInt("BOARD_CD"));
+				
+				boardList.add(board);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		
+		return boardList;
+	}
+
 }

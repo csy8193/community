@@ -297,20 +297,56 @@ public class BoardService222 {
 		return result;
 	}
 
-	/** 이벤트 페이지 목록
-	 * @param bc
+	/** 일반 게시글 삭제
+	 * @param boardCd
+	 * @param boardNo
+	 * @param memberNo
 	 * @return
 	 * @throws Exception
 	 */
-	/*
-	 * public List<Board> eventList(int bc) throws Exception{ Connection conn =
-	 * getConnection();
-	 * 
-	 * List<Board> boardList = dao.eventList(conn, bc);
-	 * 
-	 * close(conn);
-	 * 
-	 * return boardList; }
+	public int nBoardDelete(int boardCd, int boardNo, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.nBoardDelete(conn, boardCd, boardNo, memberNo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+
+	/** 게시글 검색
+	 * @param pagination 
+	 * @param search
+	 * @return
+	 * @throws Exception
 	 */
+	public List<Board> searchBoard(Pagination pagination, String search) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Board> boardList = dao.searchBoard(conn, pagination, search);
+		
+		close(conn);
+		
+		return boardList;
+	}
+
+	/** 검색 페이지네이션
+	 * @param cp
+	 * @param search
+	 * @return
+	 */
+	public Pagination getPagination2(int cp, String search) throws Exception{
+		Connection conn = getConnection();
+		
+		// 전체 게시글 수 조회 DAO 생성
+		int listCount = dao.getListCount2(conn, search);
+		
+		close(conn);
+		
+		
+		return new Pagination(listCount, cp);
+	}
+
 
 }

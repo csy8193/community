@@ -26,11 +26,10 @@
                     <i class="fas fa-calendar-alt"></i><span>${nboard.createDt }</span>
                     <c:if test="${nboard.memberNo == loginMember.memberNo}">
 	                    <button onclick="updateForm();">수정</button>
-	                    <button>삭제</button>
+	                    <button onclick="deleteForm();">삭제</button>
                     	<form action="#" method="POST" name="requestForm">
 							<input type="hidden" name="boardCd" value="${param.boardCd}">
 							<input type="hidden" name="boardNo" value="${param.boardNo}">
-							<input type="hidden" name="cp" value="${param.cp}">
 						</form>
                     </c:if>
                 </div>
@@ -51,7 +50,7 @@
         			<li class="one-reply">
         				<div class="original">
         					<p>
-								<img src="${contextPath}${reply.animalImgPath}" alt="댓글단 회원의 반려동물 이미지">
+								<img src="${contextPath}${reply.animalImgPath}" alt="">
 							</p>
 	                   		 <div class="reply-user">
 	                   		 <span>${reply.memberId}</span><span>${reply.replyCreateDate}</span>
@@ -115,7 +114,15 @@
                 <i class="fas fa-angle-up" title="상단으로" id="nboard-topbtn"></i>
             </div>
             <div>
-                <i class="fas fa-list" title="목록으로 돌아가기" onclick="location.href='${contextPath}/nboard/list?cp=${param.cp}&boardCd=${nboard.boardCd}'"></i>
+            	<c:choose>
+            		<c:when test="${empty param.cp}">
+            			<c:set var="newcp" value="1" />
+            		</c:when>
+            		<c:otherwise>
+            			<c:set var="newcp" value="${param.cp}" />
+            		</c:otherwise>
+            	</c:choose>
+                <i class="fas fa-list" title="목록으로 돌아가기" onclick="location.href='${contextPath}/nboard/list?cp=${newcp}&boardCd=${nboard.boardCd}'"></i>
             </div>
             <div <c:if test="${nboard.likeDone}">style="background: none; box-shadow:none; color : red"</c:if>>
             	<c:choose>
@@ -143,6 +150,12 @@ let beforeReplyRow;
 
 function updateForm(){
 	document.requestForm.action = contextPath + "/board/updateForm";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+}
+
+function deleteForm(){
+	document.requestForm.action = contextPath + "/board/ndelete";
 	document.requestForm.method = "POST";
 	document.requestForm.submit();
 }

@@ -29,15 +29,12 @@ public class WalkController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 데이터 전달 방식 저장용 변수
 				String method = req.getMethod();
-				// 요청 주소 뒷 부분을 잘라내어 구분 방법 만들기
 				String uri = req.getRequestURI();
 				String contextPath = req.getContextPath();
 				
 				String command = uri.substring( (contextPath + "/walk/").length() );
 												// /semi/board/
-				// -> 요청 주소에서 /semi/board/ 의 길이만큼 잘라낸 후 나머지 문자열을 저장
 				
 				String path = null;
 				RequestDispatcher dispatcher = null;
@@ -66,14 +63,15 @@ public class WalkController extends HttpServlet{
 						if(loginUser!=null) {
 							loginMember = loginUser.getMemberNo();
 						}
+						
 						WalkService service = new WalkService();
 						List<Mypoint> rankList = new ArrayList<Mypoint>();
+						
 						rankList = service.myPoint(loginMember);
-						req.setAttribute("rankList", rankList);
-						List<WalkRank> rankList2 = new ArrayList<WalkRank>();
-						rankList2 = service.pointRank();
+						
 						req.setAttribute("rankList", rankList);
 						
+						System.out.println(rankList);
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);
@@ -101,9 +99,9 @@ public class WalkController extends HttpServlet{
 						
 						WalkService service = new WalkService();
 						
-						List<Nboard> nboardList = service.walkinsert(memberNo,walktext,continueWalk);
-						
-						resp.getWriter().print((new Gson()).toJson(nboardList));
+						int count2 = service.walkinsert(memberNo,walktext,continueWalk);
+
+						resp.getWriter().print(count2);
 					}
 					else if(command.equals("walkdayshow")) {
 						int memberNo = Integer.parseInt(req.getParameter("loginMemberNo"));

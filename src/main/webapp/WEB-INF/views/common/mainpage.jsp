@@ -8,8 +8,10 @@
 <div id="container">
             <div id="main-search-wrap">
                 <div id="search-wrap2">
-                    <button id="search-btn"><img src="${contextPath}/resources/images/main/search.png"></button>
-                    <input type="text" name="main-search" id="main-search" placeholder="관심있는 내용을 검색해보세요!">
+                	<form action="${contextPath}/board/search">
+	                    <button id="search-btn"><img src="${contextPath}/resources/images/main/search.png"></button>
+	                    <input type="text" name="main-search" id="main-search" placeholder="관심있는 내용을 검색해보세요!">
+                	</form>
                 </div>
             </div>
             <div id="board-wrap">

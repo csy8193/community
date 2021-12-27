@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.together.semiprj.board.model.service.BoardService222;
@@ -44,6 +45,7 @@ public class BoardController222 extends HttpServlet{
 					BoardService222 service = new BoardService222();
 					
 					int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
+					
 
 					if(command.equals("notice")) {
 						
@@ -122,7 +124,21 @@ public class BoardController222 extends HttpServlet{
 						
 						int result = service.insertBoard(boardTitle, boardContent, memberNo, picPath, boardCd);
 						
-						resp.sendRedirect(req.getContextPath()+"/nboard/view?cp=1&boardNo="+result+"&boardCd="+boardCd+"");
+						if(result > 0) { // 성공
+							message = "게시글이 등록 되었습니다.";
+
+							// 상세 조회 redirect 주소
+							path = req.getContextPath()+"/nboard/view?cp=1&boardNo="+result+"&boardCd="+boardCd+"";
+						}else { // 실패
+
+							message = "게시글 등록 중 문제가 발생했습니다.";
+
+							// 다시 게시글 작성 화면 redirect 주소
+							path = req.getContextPath()+"board/nwrite?boardCd="+boardCd+"&cp=1";
+
+						}
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
 						
 						
 					}
@@ -208,13 +224,13 @@ public class BoardController222 extends HttpServlet{
 							message = "게시글이 등록 되었습니다.";
 
 							// 상세 조회 redirect 주소
-							path = req.getContextPath()+"/pboard/view?no="+result+"&cp=1";
+							path = req.getContextPath()+"/pboard/view?no="+result+"&cp=1&boardCd="+boardCd;
 						}else { // 실패
 
 							message = "게시글 등록 중 문제가 발생했습니다.";
 
 							// 다시 게시글 작성 화면 redirect 주소
-							path = "insert";
+							path = req.getContextPath()+"board/pwrite?boardCd="+boardCd+"&cp=1";
 
 						}
 						session.setAttribute("message", message);
@@ -242,12 +258,10 @@ public class BoardController222 extends HttpServlet{
 						
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 						Board board = service.selectBoardUpdate(boardCd, boardNo);
 						
 						req.setAttribute("board", board);
-						req.setAttribute("cp", currentPage);
 						
 						path = "/WEB-INF/views/board/updatenwrite.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -270,7 +284,6 @@ public class BoardController222 extends HttpServlet{
 						String picPath = req.getParameter("input-img");
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 
 						HttpSession session = req.getSession();
@@ -280,18 +293,19 @@ public class BoardController222 extends HttpServlet{
 						int result = service.updateBoard(boardTitle, boardContent, memberNo, picPath, boardCd, boardNo);
 						
 						if(result > 0) {
-							resp.sendRedirect(req.getContextPath()+"/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd+"");
+							session.setAttribute("message", "게시글이 수정되었습니다.");
+							resp.sendRedirect(req.getContextPath()+"/nboard/view?boardNo="+boardNo+"&boardCd="+boardCd+"");
 							
 						}else {
-							System.out.println("실패");
+							session.setAttribute("message", "게시글 수정 실패하였습니다.");
+							resp.sendRedirect(req.getContextPath()+"/nboard/view?boardNo="+boardNo+"&boardCd="+boardCd+"");
 						}
 						
 					}
 					
 					else if(command.equals("pupdateForm")) {
-						int currentPage = 1;
-						int boardNo = 179;
-						int boardCd = 70;
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						
 						Board board = service.selectPboardUpdate(boardNo, boardCd);
 						
@@ -302,7 +316,6 @@ public class BoardController222 extends HttpServlet{
 							if(boardImageList != null) {
 								req.setAttribute("board", board);
 								req.setAttribute("boardImage", boardImageList);
-								req.setAttribute("cp", currentPage);
 								
 //								System.out.println(board);
 //								System.out.println(boardImageList);
@@ -336,7 +349,6 @@ public class BoardController222 extends HttpServlet{
 						String boardContent = mReq.getParameter("boardContent");
 						int boardCd = Integer.parseInt(mReq.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(mReq.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(mReq.getParameter("cp"));
 						
 						
 						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
@@ -421,17 +433,91 @@ public class BoardController222 extends HttpServlet{
 							message = "게시글이 수정 되었습니다.";
 
 							// 상세 조회 redirect 주소
-							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&boardCd="+boardCd;
 						}else { // 실패
 
 							message = "게시글 등록 중 문제가 발생했습니다.";
 
 							// 다시 게시글 작성 화면 redirect 주소
-							path = "insert";
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&boardCd="+boardCd;
 
 						}
 						session.setAttribute("message", message);
 						resp.sendRedirect(path);
+						
+						
+					}
+					
+					
+					else if(command.equals("ndelete")) {
+						
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						
+						HttpSession session = req.getSession();
+						
+						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
+						
+						
+						int result = service.nBoardDelete(boardCd, boardNo, memberNo);
+						
+						if(result > 0) {
+							message = "게시글이 삭제되었습니다.";
+							path = req.getContextPath() + "/nboard/list?boardCd="+boardCd;
+							
+						}else {
+							message = "게시글 삭제중 문제가 발생했습니다.";
+							path = req.getContextPath() + "/nboard/view?&boardNo="+boardNo+"&boardCd="+boardCd;
+							
+						}
+						
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
+					}
+					
+					else if(command.equals("pdelete")) {
+						
+						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
+						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+						
+						HttpSession session = req.getSession();
+						
+						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
+						
+						
+						int result = service.nBoardDelete(boardCd, boardNo, memberNo);
+						
+						if(result > 0) {
+							message = "게시글이 삭제되었습니다.";
+							path = req.getContextPath() + "/pboard/list?boardCd="+boardCd;
+							
+						}else {
+							message = "게시글 삭제중 문제가 발생했습니다.";
+							path = req.getContextPath() + "/nboard/view?no="+boardNo+"&boardCd="+boardCd;
+							
+						}
+						
+						session.setAttribute("message", message);
+						resp.sendRedirect(path);
+					}
+					
+					
+					else if(command.equals("search")) {
+						
+						String search = req.getParameter("main-search");
+						
+						Pagination pagination = service.getPagination2(cp, search);
+						
+						List<Board> boardList = service.searchBoard(pagination, search);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
+						req.setAttribute("search", search);
+						System.out.println(boardList);
+						
+						path = "/WEB-INF/views/board/search.jsp";
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
 						
 						
 					}

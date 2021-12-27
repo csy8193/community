@@ -20,6 +20,8 @@ public class Board {
 	private String statusName;
 	private String boardName;
 	private String boardPicPath;
+	private String boardPicName;
+	private String animalProfile;
 	
 
 	// 해당 게시글 이미지 목록을 저장할 필드
@@ -138,6 +140,28 @@ public class Board {
 	public void setBoardPicPath(String boardPicPath) {
 		this.boardPicPath = boardPicPath;
 	}
+	
+
+	public String getBoardPicName() {
+		return boardPicName;
+	}
+
+
+	public void setBoardPicName(String boardPicName) {
+		this.boardPicName = boardPicName;
+	}
+
+	
+	
+
+	public String getAnimalProfile() {
+		return animalProfile;
+	}
+
+
+	public void setAnimalProfile(String animalProfile) {
+		this.animalProfile = animalProfile;
+	}
 
 
 	@Override
@@ -146,13 +170,12 @@ public class Board {
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", readCount=" + readCount
 				+ ", memberNo=" + memberNo + ", boardStatusCode=" + boardStatusCode + ", boardCode=" + boardCode
 				+ ", memberName=" + memberName + ", categoryName=" + categoryName + ", statusName=" + statusName
-				+ ", boardName=" + boardName + ", boardPicPath=" + boardPicPath + ", imgList=" + imgList + "]";
+				+ ", boardName=" + boardName + ", boardPicPath=" + boardPicPath + ", boardPicName=" + boardPicName
+				+ ", animalProfile=" + animalProfile + ", imgList=" + imgList + "]";
 	}
 
 
 
-
-	
 
 	
 

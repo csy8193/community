@@ -50,6 +50,7 @@ public class WalkService {
 		Connection conn = getConnection();
 		
 		List<Mypoint> myPointList = dao.myPoint(conn,loginMember);
+		System.out.println(myPointList);
 		int myrank = dao.myPointRank(conn,loginMember);
 		for(Mypoint dd: myPointList) {
 			dd.setMyrank(myrank);
@@ -57,7 +58,7 @@ public class WalkService {
 		return myPointList;
 	}
 
-	public List<Nboard> walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
+	public int walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
 		
 		Connection conn = getConnection();
 		List<Nboard> walkList = null;
@@ -66,22 +67,31 @@ public class WalkService {
 		//당일 포인트 부여 확인
 		check = dao.checkduplPoint(conn,memberNo);
 		//0보다 크면 이미 부여했습니다
-			result = dao.walkinsert(conn,memberNo,walktext);
+		
+		result = dao.walkinsert(conn,memberNo,walktext);
 		if(result>0) {
 				//삽입 성공 완료시 포인트 부여 여부
 				if(check==0) {
-					int getPoint = 20*continueWalk;
+					int getPoint = 20+20*(continueWalk);
 					result = dao.walkPointGet(conn,memberNo, getPoint);
+				}
+				if(result>0) {
+					commit(conn);
 					walkList = dao.selectWalkList(conn,memberNo);
 				}
-				if(result>0) commit(conn);
 				else rollback(conn);
 			}
 		else {rollback(conn);}
 		
 		close(conn);
 		
-		return walkList;
+		int count2 = 0;
+		for(Nboard abc : walkList) {
+			count2++;
+		}
+		
+		
+		return count2;
 	}
 
 	public List<Nboard> walkdayshow(int memberNo, int year, int month, int day) throws Exception{

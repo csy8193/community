@@ -102,14 +102,15 @@
 						style="background : url('${contextPath}${board.animalMainImgPath}') center center no-repeat; background-size: cover;"></div>
 					<div style="display: flex; justify-content: space-between;">
 						<p>${board.memberNm}</p>
-						<div>
-							<button>수정</button>
-							<button>삭제</button>
-							<form action="#" method="POST" name="requestForm">
-								<input type="hidden" name="boardCd" value="${param.boardCd}">
-								<input type="hidden" name="boardNo" value="${param.boardNo}">
-								<input type="hidden" name="cp" value="${param.cp}">
-							</form>
+						<div class="updateDelete">
+							<c:if test="${board.memberNo == loginMember.memberNo}">
+								<button onclick="updateForm();">수정</button>
+								<button onclick="deleteForm();">삭제</button>
+								<form action="#" method="POST" name="requestForm">
+									<input type="hidden" name="boardCd" value="${param.boardCd}">
+									<input type="hidden" name="boardNo" value="${param.no}">
+								</form>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -173,6 +174,12 @@
 	
 	function updateForm(){
 		document.requestForm.action = contextPath + "/board/pupdateForm";
+		document.requestForm.method = "POST";
+		document.requestForm.submit();
+	}
+	
+	function deleteForm(){
+		document.requestForm.action = contextPath + "/board/pdelete";
 		document.requestForm.method = "POST";
 		document.requestForm.submit();
 	}

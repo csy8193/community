@@ -51,10 +51,8 @@ public class WalkDAO {
 				rank.setTotalP(rs.getInt("TOTALP"));
 				rank.setAnimalName(rs.getString("ANIMAL_NAME"));
 				rank.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
-				rank.setAnimalGender(rs.getString("ANIMAL_SEX"));
-				rank.setAnimalBirth(rs.getString("ANIMAL_BIRTH"));
-				rank.setAnimalCategoryNm(rs.getString("ANIMAL_CATEGORY_NM"));
 				rank.setAnimalImg(rs.getString("ANIMAL_PROFILE_IMG"));
+				rank.setMemberId(rs.getString("MEMBER_ID"));
 				rankList.add(rank);
 			}
 			

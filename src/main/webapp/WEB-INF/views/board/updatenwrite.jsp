@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/write.css">
 </head>
 	
@@ -23,7 +20,6 @@
 					${board.boardName}
 					<input type="text" name="boardCd" value="${board.boardCode}">
 					<input type="hidden" name="boardNo" value="${board.boardNo}">
-					<input type="hidden" name="cp" value="${param.cp}" >
 				</h1>
 				<h4 class="title">글 제목<span> *</span></h4>
 				<input type="text" id="boardTitle" name="boardTitle" placeholder="글 제목을 입력하세요" value="${board.boardTitle}">
@@ -53,6 +49,11 @@
 		    </form>
 		</div>
 	</main>
+	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	
        
     <script>
 		const contextPath = "${contextPath}";
