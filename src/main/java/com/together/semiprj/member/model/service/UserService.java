@@ -10,6 +10,7 @@ import java.util.Properties;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
 import com.together.semiprj.member.model.vo.AnimalProfile;
+import com.together.semiprj.member.model.vo.Board;
 import com.together.semiprj.common.XSS;
 import com.together.semiprj.member.model.dao.UserDAO;
 import com.together.semiprj.member.model.vo.User;
@@ -341,6 +342,22 @@ public class UserService {
 		close(conn);
 		
 		return result;
+	}
+
+	/** 게시판 리스트
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectBoardList(int memberNo,int boardCd) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<Board> bList = dao.selectBoardList(memberNo,boardCd,conn);
+		
+		close(conn);
+		
+		return bList;
 	}   
 	
 

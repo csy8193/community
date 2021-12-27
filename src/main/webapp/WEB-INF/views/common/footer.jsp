@@ -90,12 +90,16 @@
 	// 서브바 누르면 밑에 게시판 리스트 나오게 하는 제이쿼리
 	$(document).ready(function(){
 
-		$('.btn').each(function(i){
-
+		$('.btn2').each(function(i){
+			
+			
+			
 			$(this).click(function(){
 				
-				$('.sub').hide();
-				$('.sub').eq(i).show();
+				$("#sub-board").empty();
+				
+				$('.sub2').hide();
+				$('.sub2').eq(i).show();
 			});
 
 		});

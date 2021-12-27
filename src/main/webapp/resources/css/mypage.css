@@ -24,7 +24,7 @@
 
 #content-wrap{
     width:100%;
-    height: 1300px;
+    height: 1200px;
     margin-top: 60px;
 }
 
@@ -354,6 +354,7 @@
 
 
 /* 회원정보 변경 */
+
 #userUpdate{
     width:1106px;
 }
@@ -418,22 +419,27 @@
     text-align: center;
 }
 
-.sub,.sub2,.sub3,.sub4{
+.sub{
+    clear: both;
+}
+
+.sub2{
     clear: both;
     display: none;
 }
 
-.sub p,.sub2 p,.sub3 p,.sub4 p{
+
+.sub p, .sub2 p{
     text-align: center;
     color:#ddd;
 }
 
-.sub input,.sub2 input,.sub3 input,.sub4 input{
+.sub input, .sub2 input{
     height: 45px;
     border:1px solid #ddd;
 }
 
-.sub button,.sub2 button,.sub3 button,.sub4 button{
+.sub button, .sub2 button{
     width:500px;
     height: 50px;
     background-color: #4facfe;
@@ -443,4 +449,32 @@
     color:#fff;
     cursor: pointer;
 }
+
+/* 게시글 리스트 css*/
+.sub-table{
+    width:100%;
+}
+
+.tr{
+    width:1400px;
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.sub-table th{
+    font-size: 20px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding:20px 0;
+}
+
+.sub-table td{
+    height: 80px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
 

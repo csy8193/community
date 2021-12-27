@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.together.semiprj.member.model.vo.Animal;
 import com.together.semiprj.member.model.vo.AnimalCategory;
 import com.together.semiprj.member.model.vo.AnimalProfile;
+import com.together.semiprj.member.model.vo.Board;
 import com.together.semiprj.member.model.vo.User;
 
 	
@@ -596,6 +597,49 @@ public class UserDAO {
 		}
 		
 		return result;
+	}
+
+
+
+	public List<Board> selectBoardList(int memberNo,int boardCd, Connection conn) throws Exception{
+		
+		List<Board> bList = null;
+		
+		try {
+			
+			String sql = prop.getProperty("selectBoardList");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,memberNo);
+			pstmt.setInt(2,boardCd);			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				bList = new ArrayList<Board>();
+				
+				Board board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+				board.setBoardName(rs.getString("BOARD_NAME"));
+				board.setBoardCode(rs.getInt("BOARD_CD"));
+				board.setBoardStatusCode(rs.getInt("STATUS_CD"));
+				
+				bList.add(board);
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return bList;
 	}
 	
 }
