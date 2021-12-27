@@ -616,9 +616,9 @@ public class UserDAO {
 			
 			rs = pstmt.executeQuery();
 			
+			bList = new ArrayList<Board>();
+			
 			while(rs.next()) {
-				
-				bList = new ArrayList<Board>();
 				
 				Board board = new Board();
 				

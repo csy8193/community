@@ -366,8 +366,6 @@ function selectBoardList(boardCd){
 			success: function(bList) {
 				
 				console.log(bList);
-				console.log(boardCd);
-				
 				
 				const h2 = $('<h2>');
 				let title = '';
@@ -386,14 +384,14 @@ function selectBoardList(boardCd){
 						
 				}
 				
+				// h2에 제목 넣기
 				h2.append(title);
 				
 				const table = $('<table>').addClass('sub-table');
 				
 				const tr = $('<tr>').addClass('tr');
-				const th1 = $('<th>').text('번호');
 				
-				// console.log(bList.boardTitle);
+				const th1 = $('<th>').text('번호');
 
 				const th3 = $('<th>').text('작성일');
 				
