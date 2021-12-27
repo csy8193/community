@@ -149,11 +149,10 @@ function addAnimal() {
 			if (result > 0) {
 
 				alert("반려 동물 " + animalNm + " 등록 완료");
-				$("#animal-profile2 > img").attr("src',"+contextPath+"/resources/images/main/basis-profile-img.png");
+				$("#animal-profile2 > img").attr("src", contextPath +"/resources/images/main/basis-profile-img.png");
 				$("#kind").val("");
 				$("#animalName").val("");
 				$(':radio[name="gender"]').prop("checked", false);
-
 				$("#category option:eq(0)").prop("selected", true);
 				$("#year option:eq(0)").prop("selected", true);
 				$("#month option:eq(0)").prop("selected", true);
