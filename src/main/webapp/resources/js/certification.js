@@ -74,7 +74,6 @@ document.getElementById("certification-btn").addEventListener("click", function(
 		type:"POST",
 		data : {"id" : id, "email" : email},
 		success : function(data){
-			console.log(data);
 			if(data != ""){
 				alert(email + "로 인증번호를 전송했습니다.");
 				$("#id").attr("readonly",true);
@@ -114,7 +113,6 @@ document.getElementById("certification-btn").addEventListener("click", function(
 
    		complete : function () { 
            
-            console.log("complete 수행");
         
       	}
 	});

@@ -198,7 +198,6 @@ public class BoardService222 {
 		
 		int result = dao.updateBoard(conn, boardTitle, boardContent, memberNo, boardCd, boardNo);
 		
-		System.out.println(result);
 		
 		if(result >0) {
 			

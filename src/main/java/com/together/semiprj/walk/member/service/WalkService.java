@@ -50,7 +50,6 @@ public class WalkService {
 		Connection conn = getConnection();
 		
 		List<Mypoint> myPointList = dao.myPoint(conn,loginMember);
-		System.out.println(myPointList);
 		int myrank = dao.myPointRank(conn,loginMember);
 		for(Mypoint dd: myPointList) {
 			dd.setMyrank(myrank);

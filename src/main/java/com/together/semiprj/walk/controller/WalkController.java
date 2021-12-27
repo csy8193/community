@@ -68,7 +68,6 @@ public class WalkController extends HttpServlet{
 						
 						req.setAttribute("rankList", rankList);
 						
-						System.out.println(rankList);
 						path = "/WEB-INF/views/walk/myPoint.jsp";
 						dispatcher = req.getRequestDispatcher(path);
 						dispatcher.forward(req, resp);

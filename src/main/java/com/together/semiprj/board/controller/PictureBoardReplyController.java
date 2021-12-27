@@ -35,7 +35,6 @@ public class PictureBoardReplyController extends HttpServlet{
 				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
  				List<PboardReply> rList = service.selectReplyList(boardNo);
  				
- 				System.out.println(rList);
 				new Gson().toJson(rList,resp.getWriter());
 				
 				

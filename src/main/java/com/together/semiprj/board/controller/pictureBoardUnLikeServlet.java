@@ -24,7 +24,6 @@ public class pictureBoardUnLikeServlet extends HttpServlet{
 		
 		try {
 			int result = service.unLike(memberNo, boardNo);
-			//System.out.println(result);
 			resp.getWriter().print(result);
 			
 		} catch (Exception e) {

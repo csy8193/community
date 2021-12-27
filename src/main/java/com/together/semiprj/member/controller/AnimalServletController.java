@@ -143,10 +143,6 @@ public class AnimalServletController extends HttpServlet{
 							
 							String name = files.nextElement(); 
 							
-							System.out.println("얻어온 file name: "+name);
-							System.out.println("변환된 파일명: "+mReq.getFilesystemName(name));
-							System.out.println("원본파일명 : "+mReq.getOriginalFileName(name));
-							
 							
 							if(mReq.getFilesystemName(name) != null) {
 								
@@ -163,12 +159,6 @@ public class AnimalServletController extends HttpServlet{
 						
 
 						Animal animal = new Animal(animalNm, animalVariety, animalGender,aniBirthday,memberNo,animalCategoryCode);
-						
-						System.out.println("등록 start");
-						
-						System.out.println(animal);
-						System.out.println(aniPro);
-						
 						
 						
 						int result = service.addAnimal(animal,aniPro);
@@ -230,7 +220,6 @@ public class AnimalServletController extends HttpServlet{
 						
 						Animal animal = new Animal(animalNo,animalNm,animalVariety,animalGender,aniBirthday,animalCategoryCode);
 
-						System.out.println("수정 start");
 						int result = service.updateAnimal(animal,aniPro);
 
 						resp.getWriter().print(result);
@@ -246,7 +235,6 @@ public class AnimalServletController extends HttpServlet{
 						
 						int animalNo =  Integer.parseInt(req.getParameter("animalNo"));
 						
-						System.out.println("삭제 start");
 						int result = service.deleteAnimal(animalNo);
 						
 						resp.getWriter().print(result);
@@ -290,13 +278,8 @@ public class AnimalServletController extends HttpServlet{
 							String nowPw = req.getParameter("myPagedelete");
 							int memberNo = loginMember.getMemberNo();
 							
-							System.out.println("test22"+nowPw);
-							System.out.println("test22"+memberNo);	
-							
 							int result = service.mypagePwDelete(nowPw, memberNo);
 							
-							
-							System.out.println("탈퇴"+result);
 							
 							if(result > 0) {
 								message = "회원 탈퇴 완료";
@@ -322,7 +305,6 @@ public class AnimalServletController extends HttpServlet{
 						 
 						 List<Board> bList = service.selectBoardList(memberNo,boardCd);
 						 
-						 System.out.println(bList);
 						 
 						 new Gson().toJson(bList,resp.getWriter());
 						 

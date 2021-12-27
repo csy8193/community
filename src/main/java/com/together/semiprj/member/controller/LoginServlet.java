@@ -38,8 +38,6 @@ public class LoginServlet extends HttpServlet{
 			
 			HttpSession session = req.getSession();
 			
-			System.out.println(loginMember);
-			
 			if(loginMember != null) {
 				
 				if(loginMember.getStatusCd() == 1) {

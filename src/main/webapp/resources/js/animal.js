@@ -330,8 +330,6 @@ function deleteAnimal(animalNo){
 				type: "POST",
 				success: function(result) {
 					
-				console.log(result);
-				
 					if (result > 0) {
 						
 						
@@ -363,8 +361,6 @@ function selectBoardList(boardCd){
 			dataType: "JSON",
 			
 			success: function(bList) {
-				
-				console.log(bList);
 				
 				const h2 = $('<h2>');
 				let title = '';

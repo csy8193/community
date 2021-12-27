@@ -33,7 +33,6 @@ public class EmailConfirmServlet extends HttpServlet {
 	   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		  String sendMail = req.getParameter("inputEmail");
-	      System.out.println("보낼 이메일 주소입니다 :" +sendMail);
 	      
 	      String host = "smtp.gmail.com";
 	      String user = "sseungjoon0319@gmail.com"; // 자신의  계정
@@ -79,7 +78,6 @@ public class EmailConfirmServlet extends HttpServlet {
 	         }
 	      }
 	      String AuthenticationKey = temp.toString();
-	      System.out.println(AuthenticationKey);
 
 	      Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	         protected PasswordAuthentication getPasswordAuthentication() {
@@ -99,7 +97,6 @@ public class EmailConfirmServlet extends HttpServlet {
 	         msg.setText("인증 번호는 : " + temp);
 
 	         Transport.send(msg);
-	         // System.out.println("이메일 전송");
 
 	         resp.getWriter().print(temp);
 	         

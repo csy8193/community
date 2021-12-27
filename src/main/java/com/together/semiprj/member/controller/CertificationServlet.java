@@ -34,8 +34,6 @@ public class CertificationServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String memberId = req.getParameter("id");
 		String memberEmail = req.getParameter("email");
-		System.out.println(memberId);
-		System.out.println(memberEmail);
 		User member = new User(memberId, memberEmail);
 		try {
 			UserService service = new UserService();
@@ -85,7 +83,6 @@ public class CertificationServlet extends HttpServlet{
 			         }
 			      }
 			      String AuthenticationKey = temp.toString();
-			      System.out.println(AuthenticationKey);
 
 			      Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			         protected PasswordAuthentication getPasswordAuthentication() {
@@ -105,7 +102,6 @@ public class CertificationServlet extends HttpServlet{
 			         msg.setText("인증 번호는 :" + temp);
 
 			         Transport.send(msg);
-			         System.out.println("이메일 전송");
 
 			         resp.getWriter().print(temp);
 			         
@@ -122,7 +118,7 @@ public class CertificationServlet extends HttpServlet{
 			       */
 				
 			}else {
-				System.out.println("아이디, 이메일을 확인해주세요.");
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

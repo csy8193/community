@@ -55,10 +55,11 @@
                 </div>
 
     <div class="calendar">
-    	<h1>이번달 My 산책일지 <br><span id="today-month"></span> </h1>
-	    <div>
-	    <button class="month-control" onclick="prev()">&lt;저번달</button>
-	    <button class="month-control" onclick="next()">다음달&gt;</button>
+    	<h4 style="margin-top: 30px;">이번달 My 산책일지 <br></h4>
+	    <div style="margin-top: 30px;">
+	    <button class="month-control" onclick="prev()"><i class="fas fa-angle-left"></i></button>
+	    <span id="today-month"></span>
+	    <button class="month-control" onclick="next()"><i class="fas fa-angle-right"></i></button>
 	    </div>
 	    <table id = "walkhistory">
 	        <thead>
@@ -77,11 +78,11 @@
 	    </table>
 	  </div>
     <div id="walkwrite">
-		<h1>현재 <span id="continueCheck">0 </span>일째 연속 산책 중! <br>산책 일지를 작성해주세요! </h1>
+		<h3>현재 <span id="continueCheck">0 </span>일째 연속 산책 중! <br>산책 일지를 작성해주세요! </h3>
 		<textarea rows="" cols="" id="walktext" placeholder="산책일지를 써주세요!"></textarea>
-		<div>
-		<button onclick="insertWalkHistory(this)">등록하기</button>
-		<button onclick="resetWalkText(this)">작성취소</button>
+		<div id="reg-btn">
+			<button onclick="insertWalkHistory(this)">등록하기</button>
+			<button onclick="resetWalkText(this)">작성취소</button>
 		</div>
 		<div id="mywalklist">
 			<h1>산책일지 리스트</h1>
@@ -91,6 +92,7 @@
 	</div>
 	 </div>
         </main>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
  <script>
  	const contextPath = "${contextPath}";
