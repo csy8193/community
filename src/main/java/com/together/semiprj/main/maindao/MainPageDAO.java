@@ -119,13 +119,8 @@ public class MainPageDAO {
 				board.setRanking(rs.getInt("ROWNUM"));
 				board.setLikeCount(rs.getInt("LIKECOUNT"));
 				board.setMemberNo(rs.getInt("MEMBER_NO"));
-				board.setAnimalNo(rs.getInt("ANIMAL_NO"));
-				board.setAnimalName(rs.getString("ANIMAL_NAME"));
-				board.setAnimalVariety(rs.getString("ANIMAL_VARIETY"));
-				board.setAnimalGender(rs.getString("ANIMAL_SEX"));
-				board.setAnimalBirth(rs.getDate("ANIMAL_BIRTH"));
-				board.setAnimalCateNM(rs.getString("ANIMAL_CATEGORY_NM"));
 				board.setAnimalImg(rs.getString("ANIMALIMG"));
+				board.setMemberId(rs.getString("MEMBER_ID"));
 				boardList.add(board);
 			}
 		}
