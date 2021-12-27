@@ -155,9 +155,13 @@ function updateForm(){
 }
 
 function deleteForm(){
-	document.requestForm.action = contextPath + "/board/ndelete";
-	document.requestForm.method = "POST";
-	document.requestForm.submit();
+	if(confirm("삭제 하시겠습니까?")){
+		document.requestForm.action = contextPath + "/board/ndelete";
+		document.requestForm.method = "POST";
+		document.requestForm.submit();
+	}else{
+		return false;
+	}
 }
 
 </script>

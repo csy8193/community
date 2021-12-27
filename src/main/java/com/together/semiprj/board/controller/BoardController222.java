@@ -101,10 +101,6 @@ public class BoardController222 extends HttpServlet{
 						
 						String name = files.nextElement();
 						
-						System.out.println("얻어온 name : " + name);
-						System.out.println("변환된 파일명 : " + mReq.getFilesystemName(name));
-						System.out.println("원본 파일명 : " + mReq.getOriginalFileName(name));
-						
 						resp.getWriter().print(mReq.getFilesystemName(name));
 						
 						
@@ -194,10 +190,6 @@ public class BoardController222 extends HttpServlet{
 							// 다음 요소(name)가 있으면 true
 							
 							String name = files.nextElement(); // 다음 요소값(name) 얻어오기
-							
-							System.out.println("얻어온 name : " + name);
-							System.out.println("변환된 파일명 : " + mReq.getFilesystemName(name));
-							System.out.println("원본 파일명 : " + mReq.getOriginalFileName(name));
 							
 							// 현재 요소에 업로드된 파일이 있을경우
 							if(mReq.getFilesystemName(name) != null) {
@@ -317,8 +309,6 @@ public class BoardController222 extends HttpServlet{
 								req.setAttribute("board", board);
 								req.setAttribute("boardImage", boardImageList);
 								
-//								System.out.println(board);
-//								System.out.println(boardImageList);
 							}
 							
 						}
@@ -367,9 +357,6 @@ public class BoardController222 extends HttpServlet{
 							String name = names.nextElement();
 							
 							if(name.contains("img")) {
-								System.out.println("이름 : " + mReq.getParameter(name).substring(0, 24));
-								System.out.println("이름 : " + mReq.getParameter(name).substring(24));
-								
 								BoardImage temp = new BoardImage();
 								temp.setImgPath(mReq.getParameter(name).substring(0, 24));
 								temp.setImgName(mReq.getParameter(name).substring(24));
@@ -397,10 +384,6 @@ public class BoardController222 extends HttpServlet{
 							
 							String name = files.nextElement(); // 다음 요소값(name) 얻어오기
 							
-							System.out.println("얻어온 name : " + name);
-							System.out.println("변환된 파일명 : " + mReq.getFilesystemName(name));
-							System.out.println("원본 파일명 : " + mReq.getOriginalFileName(name));
-							System.out.println(mReq.getParameter(name));
 							
 							// 현재 요소에 업로드된 파일이 있을경우
 							if(mReq.getFilesystemName(name) != null) {
@@ -513,7 +496,6 @@ public class BoardController222 extends HttpServlet{
 						req.setAttribute("pagination", pagination);
 						req.setAttribute("boardList", boardList);
 						req.setAttribute("search", search);
-						System.out.println(boardList);
 						
 						path = "/WEB-INF/views/board/search.jsp";
 						dispatcher = req.getRequestDispatcher(path);

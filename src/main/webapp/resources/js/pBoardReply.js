@@ -56,6 +56,10 @@ function addReply(feedbackNo) {
                         replyValue.value ="";
 						$("#feedback-text").text("");
                         selectReplyList();//댓글 조회 함수 새로 호출
+						setTimeout(function(){
+							$("#contend-area").scrollTop($("#contend-area")[0].scrollHeight);
+							
+						}, 100)
                     }
                     else{
                         alert("댓글 삽입 실패");
