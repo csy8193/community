@@ -393,7 +393,6 @@ function selectBoardList(boardCd){
 				const tr = $('<tr>').addClass('tr');
 				const th1 = $('<th>').text('번호');
 				
-				console.log(bList.boardTitle);
 
 				const th3 = $('<th>').text('작성일');
 				
@@ -409,7 +408,7 @@ function selectBoardList(boardCd){
 				}else{
 					
 					$.each(bList, function(index,board) {
-						
+						console.log(board);
 						const tr2 = $('<tr>');
 						const test = $('<a>').attr("href",""+contextPath+boardPath+board.boardNo+"&boardCd="+board.boardCode+"");
 						
