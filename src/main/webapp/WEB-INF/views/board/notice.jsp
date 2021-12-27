@@ -14,8 +14,6 @@
 	<main>
             <div id="main">
                 <div class="main-header">
-                    <a href="#"><h2>자주하는 질문</h2></a>
-                    <h2> | </h2>
                     <a href="#"><h2>공지사항</h2></a>
                 </div>
                 <div class="main-content">

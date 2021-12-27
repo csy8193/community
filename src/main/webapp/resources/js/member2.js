@@ -204,7 +204,6 @@ document.getElementById("email").addEventListener("input", function(){
                 // success, error 수행 후
                 // ajax 요청/응답 처리가 완료되었을 때
                 // (마지막에 무조건 수행)
-                console.log("complete 수행");
                 
               }
 

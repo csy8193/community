@@ -30,7 +30,6 @@ function validate(){ // 회원 가입 버튼 클릭시 유효성 검사여부 �
 				case "confirmEmail" : message = "이메일 인증이 일치하지 않습니다."; break;
             }
             alert(message);
-			console.log(confirmEmail);
             // 유효하지 않은 input 요소로 포커스 이동
             document.getElementById(key).focus();
 
@@ -207,7 +206,6 @@ document.getElementById("email").addEventListener("input", function(){
                 // success, error 수행 후
                 // ajax 요청/응답 처리가 완료되었을 때
                 // (마지막에 무조건 수행)
-                console.log("complete 수행");
                 
               }
 
@@ -363,7 +361,6 @@ document.getElementById("check-btn").addEventListener("click", function(){
 		const btn = document.createElement("button");
 		const p = document.createElement("p");
 		if(regExp.test(inputEmail) == true){
-			console.log(inputEmail);
 			alert(inputEmail +"로 인증번호를 전송했습니다.");
 			checkEmail.nextElementSibling.className = "ps-box email-box";
 			checkEmail.nextElementSibling.innerHTML ='<input type="text" id="confirmEmail" name="confirmEmail" placeholder="인증번호 입력">';
@@ -417,7 +414,6 @@ document.getElementById("check-btn").addEventListener("click", function(){
 	                // success, error 수행 후
 	                // ajax 요청/응답 처리가 완료되었을 때
 	                // (마지막에 무조건 수행)
-	                console.log("complete 수행");
                 
               	}
 

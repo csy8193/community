@@ -173,7 +173,6 @@ public class UserService {
 		animal.setAnimalVariety(animal.getAnimalVariety().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		animal.setAnimalNm(animal.getAnimalNm().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		
-		System.out.println("service addAnimal start");
 		int result = dao.addAnimal(animal,conn);
 		
 		if(result > 0) {
@@ -183,7 +182,6 @@ public class UserService {
 			
 				aniPro.setAnimalNo(animalNo);
 				
-				System.out.println("service addProfile start");
 				result = dao.insertaniProfile(aniPro,conn);
 				
 				// 이미지 등록
@@ -252,18 +250,15 @@ public class UserService {
 	   animal.setAnimalVariety(animal.getAnimalVariety().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 	   animal.setAnimalNm(animal.getAnimalNm().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 	      
-	   System.out.println("updateAnimal start");
 	   int result = dao.updateAnimal(animal,conn);
 	   
 	   if(result > 0) {
-		   System.out.println(aniPro);
  
 		  // 이미지 있을때
 	      if(aniPro.getAnimalImgPath() != null && aniPro.getAnimalImgOriginal() != null) {
 	            
 	         aniPro.setAnimalNo(animalNo);
 	            
-	         System.out.println("update profile start");
 	         result = dao.updateAniProfile(aniPro,conn);
 	         
 	         // 이미지 수정

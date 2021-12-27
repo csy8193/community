@@ -50,10 +50,6 @@ public class MypageMemberUpdateServletController extends HttpServlet{
 					String nowPw = req.getParameter("nowPw");
 					String updatePw2 = req.getParameter("userPw2");
 					
-					System.out.println(nowPw);
-					System.out.println(updatePw2);
-
-					
 				}
 				
 			}

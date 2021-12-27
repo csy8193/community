@@ -50,7 +50,6 @@ function addReply(feedbackNo) {
 			},
 			type : "POST",
 			success : function(result){
-                    console.log(result);
                     if(result>0){
                         alert("댓글 삽입 성공");
                         replyValue.value ="";
@@ -82,9 +81,7 @@ function selectReplyList() {
         dataType : "JSON",  // 반환되는 데이터 형식 지정 -> 응답 받은 후 형변환 진행
 		
 		success : function(rList){
-            console.log(rList);
             $("#all-reply").empty(); // 기존 댓글 내용 모두 삭제
-			console.log("성공");
 			
             $.each( rList , function(index, reply){
 				if(reply.feedbackReplyNo==0){
@@ -182,7 +179,6 @@ function createReplyArea(el){
 		
 		const temp = $(el).parents(".original").children(".reply-content").children("button:first");
 		const originalRepl = temp.val();
-		console.log(originalRepl);
 		
 		const feedbackbtn = $('<button id="feedbackbtn">');
 		feedbackbtn.attr("onclick", "addReply("+originalRepl+")");
@@ -214,7 +210,6 @@ function createReplyArea(el){
 function removeFeedback(el){
 	if(confirm("내용이 지워집니다. 댓글 등록을 취소하시겠습니까? ")){
 		$("#feedbackwrite").remove();
-		console.log(feedbackReplyStatus);
 		feedbackReplyStatus=false;
 	}
 }
@@ -280,9 +275,7 @@ function updateReply(el){
 
 function updateRep(el){
 	const contents = $("#nboardUpdateRep").val();
-	console.log(contents);
 	const replyNo = $(el).next().next().next().val();
-	console.log(replyNo);
 	
   $.ajax({
         url : contextPath + "/reply/update",

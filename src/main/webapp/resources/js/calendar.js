@@ -37,7 +37,6 @@ const dayList = function(el){
 					$("#mydaywalk").append(li);
 				})
 								
-				console.log(dayhistory);
 			},
 			error : function(req, status, error){
                 console.log("에러");
@@ -100,8 +99,6 @@ const dayList = function(el){
 		
 		let startdate = getYyyyMmDdMmSsToString(new Date(year, month-1 , 1));
 		let enddate =  getYyyyMmDdMmSsToString(new Date(year, month-1 , lastDate));
-					console.log(startdate);
-					console.log(enddate);
 		//----------------------------------------------------------
 			$.ajax({
 			url : contextPath+"/walk/walkhistory",
@@ -133,7 +130,6 @@ const dayList = function(el){
 					}
 				}
 				$("#continueCheck").text(continueWalk);
-				console.log(arrcheckday);
 				while(notLast){
 	            const tr = document.createElement("tr");
 	            for(let i = 0 ; i<7 ; i++){
@@ -147,7 +143,6 @@ const dayList = function(el){
 
 							arrcheckday.forEach(function(element){
 							    if(element==count) {
-									console.log("같음");
 									$(td).addClass("walkdone");
 									$(td).attr("onclick","dayList(this)");
 							    }
@@ -163,7 +158,6 @@ const dayList = function(el){
 	                    tr.style.textAlign = "center";
 	                    //해당 월의 마지막 날짜까지 표기됐는지 검사
 	                    if(count == lastDate+1) {
-	                        console.log("완료");
 	                        notLast = false;
 	                        break;
 	                    }
@@ -217,7 +211,6 @@ const insertWalkHistory = function(el){
 			dataType : "json",
 			type : "POST",
 			success: function(count2){
-				console.log(count2);
 				let getpoint = 0;
 				if(count2 >1){
 					//이미 체크
@@ -251,8 +244,8 @@ const insertWalkHistory = function(el){
 
 }
 
-const resetWalkText = function(el){
-	$(el).prev().prev().val("")
+function resetWalkText(el){
+	$(el).parent().prev().val("")
 }
 
 const selecDatewalkList = function(date){
@@ -266,7 +259,6 @@ const selecDatewalkList = function(date){
 			dataType : "json",
 			type : "POST",
 			success: function(nboardList){
-				console.log(nboardList);
 				if(nboardList ==null){
 					//이미 체크
 					alert("산책일지 작성 완료! 오늘 포인트는 모두 획득했습니다.");

@@ -330,7 +330,6 @@ public class UserDAO {
 	 */
 	public int addAnimal(Animal animal, Connection conn) throws Exception{
 		
-		System.out.println(5);
 		
 		int result = 0;
 		
@@ -349,7 +348,6 @@ public class UserDAO {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(6);
 			
 		}finally {
 			close(pstmt);

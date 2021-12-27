@@ -21,7 +21,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		String value = null;
-		System.out.println(name);
 		switch(name) {
 		case "memberPw" : /*암호화*/
 		case "pw1" :
@@ -67,9 +66,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	         //  Base64 : 바이트 코드를 문자열로 바꾸는 라이브러리
 	         encPwd = Base64.getEncoder().encodeToString(md.digest());
 	         // md.digest() : 암호화된 코드를 꺼내옴
-	         
-	         System.out.println("암호화 전 : " + pwd);
-	         System.out.println("암호화 후 : " + encPwd);
 	         
 	      }catch (NoSuchAlgorithmException e) {
 	         // SHA-512 해쉬함수가 없는 경우 발생

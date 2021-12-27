@@ -261,21 +261,27 @@ footer{
 }
 .month-control{
 	display : inline-block;
-	width : 150px;
+	width : 50px;
 	height : 30px;
 	font-size : 20px;
 	background : none;
 	border : none;
+	cursor : pointer;
 }
 .calendar>h1 ,#walkwrite>h1, .calendar>div{
 	text-align : center;
 	margin-bottom : 25px;
 }
 #walktext{
-	width:100%;
+	width:500px;
 	height: 10%;
 	resize:none;
-	font-size : 25px;
+	font-size : 15px;
+	border : 1px solid #e7e7e7;
+	padding: 10px;
+}
+#walktext::placeholder{
+	font-size: 15px;
 }
 #walkwrite>h1{
 	margin-top : 30px;
@@ -327,5 +333,17 @@ footer{
 }
 #walkfile{
 	display: none;
+}
+
+#walkwrite > h3{
+	margin: 30px 0 30px 0;
+}
+
+#reg-btn > button{
+	margin: 10px;
+	border-radius: 5px;
+	width: 150px;
+	cursor: pointer;
+	
 }
 

@@ -23,7 +23,6 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 	}
 	else{
 		if(loginMemberNo==memberNo){
-			console.log($("#nboard-like").attr("title"));
 			alert("본인의 글은 좋아요를 누를 수 없습니다!");
 			return;
 		}
@@ -44,11 +43,9 @@ document.getElementById("nboard-like").addEventListener("click", function(){
 						$("#like-btn>div:last>i").css("color","red");
 						$("#like-btn>div:last>i").attr("title", "좋아요를 이미 했어요")
 						const likevalue =$("#nboard-content > div.nboard-info > div:nth-child(3) > span:nth-child(2)")
-						console.log(likevalue.text());
 						likevalue.text(parseInt(likevalue.text())+1);
 					}
 					else{
-						console.log("이미 좋아요를 눌렀습니다");
 						alert("이미 좋아요를 눌렀습니다.")
 					}
 				},
@@ -99,7 +96,6 @@ function addReply(feedbackNo) {
 			},
 			type : "POST",
 			success : function(result){
-                    console.log(result);
                     if(result>0){
                         alert("댓글 삽입 성공");
                         replyValue.value ="";
@@ -129,9 +125,7 @@ function selectReplyList() {
         dataType : "JSON",  // 반환되는 데이터 형식 지정 -> 응답 받은 후 형변환 진행
 		
 		success : function(rList){
-            console.log(rList);
             $("#all-reply").empty(); // 기존 댓글 내용 모두 삭제
-			console.log("성공");
 			
             $.each( rList , function(index, reply){
 				if(reply.feedbackReplyNo==0){
@@ -226,7 +220,6 @@ function createReplyArea(el){
 		
 		const temp = $(el).parents(".original").children(".reply-content").children("button:first");
 		const originalRepl = temp.val();
-		console.log(originalRepl);
 		
 		const feedbackbtn = $('<button id="feedbackbtn">');
 		feedbackbtn.attr("onclick", "addReply("+originalRepl+")");
@@ -264,7 +257,6 @@ function createReplyArea(el){
 function removeFeedback(el){
 	if(confirm("내용이 지워집니다. 댓글 등록을 취소하시겠습니까? ")){
 		$("#feedbackwrite").remove();
-		console.log(feedbackReplyStatus);
 		feedbackReplyStatus=false;
 	}
 }
@@ -319,7 +311,6 @@ function updateReply(el){
 	else{
 		cancelUpdateRep(el);
 		let nowUpdateReplyClickNo = $(el).prev().val();
-		console.log(prevUpdateReplyClickNo!=nowUpdateReplyClickNo);
 		
 		if(prevUpdateReplyClickNo!=nowUpdateReplyClickNo){
 			updateReply(el);
@@ -329,9 +320,7 @@ function updateReply(el){
 
 function updateRep(el){
 	const contents = $("#nboardUpdateRep").val();
-	console.log(contents);
 	const replyNo = $(el).next().next().next().val();
-	console.log(replyNo);
 	
   $.ajax({
         url : contextPath + "/nboard/view/reply/update",
@@ -351,9 +340,6 @@ function updateRep(el){
 		});
 }
 function cancelUpdateRep(el){
-	console.log("??");
-	console.log(tempText);
-	console.log($("#nboardUpdateRep").prev());
 			$("#nboardUpdateRep").prev().text(tempText);
 			$("#nboardUpdateRep").next().remove();
 			$("#nboardUpdateRep").next().remove();
