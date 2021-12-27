@@ -25,7 +25,7 @@ function validate(){
             alert(message);
 
             // 유효하지 않은 input 요소로 포커스 이동
-            document.getElementById(key).focus();
+            //document.getElementById(key).focus();
 
             // form 태그 submit 기본 이벤트 제거
             return false;
@@ -62,7 +62,7 @@ document.getElementById("userPw2").addEventListener("input", function(){
 
 
 // 비밀번호 확인 유효성 검사 
-$("#userPw2, #userPw3").on("input", function(){
+$("#userPw3").on("input", function(){
 
     const pw1 = $("#userPw2").val();
     const pw2 = $("#userPw3").val();
@@ -77,7 +77,7 @@ $("#userPw2, #userPw3").on("input", function(){
         checkPw2.css("color", "green");
 		signUpCheckObj.pwd2 = true;
     }else{  // 유효하지 않은 경우
-        checkPw2.text("비밀번호가 불일치합니다..")
+        checkPw2.text("비밀번호가 불일치합니다.")
         checkPw2.css("color", "red");
 		signUpCheckObj.pwd2 = false;
     }
@@ -87,11 +87,10 @@ $("#userPw2, #userPw3").on("input", function(){
 function mypagePwDelete(){
 	
 	// 1) 비밀번호가 입력되어 있지 않으면 false
-	const currentPw = document.getElementById("withdrawPwChk").value;
+	const currentPw = document.getElementById("myPagedelete").value;
 	
 	if(currentPw.trim().length == 0){
 		alert("비밀번호를 입력해주세요.");
-		currentPw.focus();
 		return false;
 	}
 	

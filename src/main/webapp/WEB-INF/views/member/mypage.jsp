@@ -395,20 +395,20 @@
                                     <th rowspan="3">비밀번호</th>
                                     <td>
                                         <label for="nowPw">현재 비밀번호</label>
-                                        <input type="password" name="nowPw" id="nowPw">
+                                        <input type="password" name="nowPw" id="nowPw" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label for="userPw2">변경 비밀번호</label>
-                                        <input type="password" name="userPw2" id="userPw2"><br>
+                                        <input type="password" name="userPw2" id="userPw2" required><br>
                                         <span id="chkPw1"></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label for="userPw3">변경 비밀번호 확인</label>
-                                        <input type="password" name="userPw3" id="userPw3"><br>
+                                        <input type="password" name="userPw3" id="userPw3" required><br>
                                        	<span id="chkPw2"></span>
                                     </td>
                                 </tr>
