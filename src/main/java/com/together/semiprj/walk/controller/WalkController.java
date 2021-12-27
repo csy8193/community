@@ -29,15 +29,12 @@ public class WalkController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 데이터 전달 방식 저장용 변수
 				String method = req.getMethod();
-				// 요청 주소 뒷 부분을 잘라내어 구분 방법 만들기
 				String uri = req.getRequestURI();
 				String contextPath = req.getContextPath();
 				
 				String command = uri.substring( (contextPath + "/walk/").length() );
 												// /semi/board/
-				// -> 요청 주소에서 /semi/board/ 의 길이만큼 잘라낸 후 나머지 문자열을 저장
 				
 				String path = null;
 				RequestDispatcher dispatcher = null;
@@ -102,11 +99,8 @@ public class WalkController extends HttpServlet{
 						
 						WalkService service = new WalkService();
 						
-						List<Nboard> nboardList = service.walkinsert(memberNo,walktext,continueWalk);
-						int count2 = 0; 
-						for(Nboard abc : nboardList) {
-							count2++;
-						}
+						int count2 = service.walkinsert(memberNo,walktext,continueWalk);
+
 						resp.getWriter().print(count2);
 					}
 					else if(command.equals("walkdayshow")) {

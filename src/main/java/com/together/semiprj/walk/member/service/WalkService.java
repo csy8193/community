@@ -58,7 +58,7 @@ public class WalkService {
 		return myPointList;
 	}
 
-	public List<Nboard> walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
+	public int walkinsert(int memberNo, String walktext, int continueWalk) throws Exception{
 		
 		Connection conn = getConnection();
 		List<Nboard> walkList = null;
@@ -85,7 +85,13 @@ public class WalkService {
 		
 		close(conn);
 		
-		return walkList;
+		int count2 = 0;
+		for(Nboard abc : walkList) {
+			count2++;
+		}
+		
+		
+		return count2;
 	}
 
 	public List<Nboard> walkdayshow(int memberNo, int year, int month, int day) throws Exception{

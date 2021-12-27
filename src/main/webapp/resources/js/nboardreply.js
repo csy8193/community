@@ -105,6 +105,8 @@ function addReply(feedbackNo) {
                         replyValue.value ="";
 						$("#feedback-text").text("");
                         selectReplyList();//댓글 조회 함수 새로 호출
+						const reviewCount = $("#nboard-content > div.nboard-info > div:nth-child(3) > span:nth-child(4)");
+						reviewCount.text($(reviewCount).text()+1);
                     }
                     else{
                         alert("댓글 삽입 실패");
@@ -188,7 +190,7 @@ function makereply(reply, checkoriginal){
 					div3.append(span3);
 				}
 				else{
-					$(span3).text(reply.replyContent);
+					$(span3).html(reply.replyContent);
 					const br3 = $('<br>');
 					div3.append(span3,br3);
 					const button1 = $('<button onclick="createReplyArea(this)">');
@@ -245,7 +247,8 @@ function createReplyArea(el){
 		prevReplyWriterNo = $(el).val();
 		
 		var offset = div.offset();
-		window.scrollTo({top : offset.top, behavior:'smooth'});
+		
+		window.scrollTo({top : offset.top-200, behavior:'smooth'});
 	}
 	else{
 		let nowReplyWriterNo = $(el).val();
@@ -282,7 +285,7 @@ function deleteNrep(el){
 			}
 		},
 		error : function(req, status, error){
-            console.log("좋아요 에러");
+            console.log("삭제 에러");
             console.log(req.responseText);
         }
 		
