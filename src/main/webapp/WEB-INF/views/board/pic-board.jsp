@@ -68,10 +68,10 @@
             <ul class="page-ul">
                <c:if test="${pagination.startPage != 1}">
                  <li>
-                     <a href="notice?cd=110&cp=1"><i class="fas fa-angle-double-left"></i></a>
+                     <a href="${contextPath}/pboard/list?boardCd=${boardCd}&cp=1"><i class="fas fa-angle-double-left"></i></a>
                  </li>
                  <li>
-                     <a href="notice?cd=110&cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
+                     <a href="${contextPath}/pboard/list?boardCd=${boardCd}&cp=${pagination.prevPage}"><i class="fas fa-angle-left"></i></a>
                  </li>
                </c:if>
                
@@ -84,7 +84,7 @@
                      </c:when>
                   <c:otherwise>
                       <li>
-                       <a href="${contextPath}/board/notice?cd=110&cp=${i}">${i}</a>
+                       <a href="${contextPath}/pboard/list?boardCd=${boardCd}&cp=${i}">${i}</a>
                    </li>
                    </c:otherwise>
                   </c:choose>
@@ -93,10 +93,10 @@
                 
                 <c:if test="${pagination.endPage != pagination.maxPage}">
                  <li>
-                     <a href="${contextPath}/board/notice?cd=110&cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
+                     <a href="${contextPath}/pboard/list?boardCd=${boardCd}&cp=${pagination.nextPage}"><i class="fas fa-angle-right"></i></a>
                  </li>
                  <li>
-                     <a href="${contextPath}/board/notice?cd=110&cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
+                     <a href="${contextPath}/pboard/list?boardCd=${boardCd}&cp=${pagination.maxPage}"><i class="fas fa-angle-double-right"></i></a>
                  </li>
                 </c:if>
             </ul>

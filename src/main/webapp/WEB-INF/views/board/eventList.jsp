@@ -47,9 +47,9 @@
 	<div class="page-number">
 		<ul class="page-ul">
 			<c:if test="${pagination.startPage != 1}">
-				<li><a href="notice?cd=110&cp=1"><i
+				<li><a href="event?cp=1"><i
 						class="fas fa-angle-double-left"></i></a></li>
-				<li><a href="notice?cd=110&cp=${pagination.prevPage}"><i
+				<li><a href="event?cp=${pagination.prevPage}"><i
 						class="fas fa-angle-left"></i></a></li>
 			</c:if>
 
@@ -63,7 +63,7 @@
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="${contextPath}/board/notice?cd=110&cp=${i}">${i}</a>
+						<li><a href="event?cp=${i}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -72,10 +72,10 @@
 
 			<c:if test="${pagination.endPage != pagination.maxPage}">
 				<li><a
-					href="${contextPath}/board/notice?cd=110&cp=${pagination.nextPage}"><i
+					href="event?cp=${pagination.nextPage}"><i
 						class="fas fa-angle-right"></i></a></li>
 				<li><a
-					href="${contextPath}/board/notice?cd=110&cp=${pagination.maxPage}"><i
+					href="event?cp=${pagination.maxPage}"><i
 						class="fas fa-angle-double-right"></i></a></li>
 			</c:if>
 		</ul>

@@ -71,6 +71,9 @@
 .fa-eye, .fa-comment-dots, .fa-calendar-alt{
     color: rgba(0,0,0,0.5);
 }
+.nboard-inner{
+	min-height: 500px;
+}
 .nboard-inner,.nboard-reply{
     width: 100%;
     padding-top: 20px;

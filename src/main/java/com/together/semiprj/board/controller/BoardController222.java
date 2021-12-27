@@ -258,12 +258,10 @@ public class BoardController222 extends HttpServlet{
 						
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 						Board board = service.selectBoardUpdate(boardCd, boardNo);
 						
 						req.setAttribute("board", board);
-						req.setAttribute("cp", currentPage);
 						
 						path = "/WEB-INF/views/board/updatenwrite.jsp";
 						dispatcher = req.getRequestDispatcher(path);
@@ -286,7 +284,6 @@ public class BoardController222 extends HttpServlet{
 						String picPath = req.getParameter("input-img");
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 
 						HttpSession session = req.getSession();
@@ -297,17 +294,16 @@ public class BoardController222 extends HttpServlet{
 						
 						if(result > 0) {
 							session.setAttribute("message", "게시글이 수정되었습니다.");
-							resp.sendRedirect(req.getContextPath()+"/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd+"");
+							resp.sendRedirect(req.getContextPath()+"/nboard/view?boardNo="+boardNo+"&boardCd="+boardCd+"");
 							
 						}else {
 							session.setAttribute("message", "게시글 수정 실패하였습니다.");
-							resp.sendRedirect(req.getContextPath()+"/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd+"");
+							resp.sendRedirect(req.getContextPath()+"/nboard/view?boardNo="+boardNo+"&boardCd="+boardCd+"");
 						}
 						
 					}
 					
 					else if(command.equals("pupdateForm")) {
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						
@@ -320,7 +316,6 @@ public class BoardController222 extends HttpServlet{
 							if(boardImageList != null) {
 								req.setAttribute("board", board);
 								req.setAttribute("boardImage", boardImageList);
-								req.setAttribute("cp", currentPage);
 								
 //								System.out.println(board);
 //								System.out.println(boardImageList);
@@ -354,7 +349,6 @@ public class BoardController222 extends HttpServlet{
 						String boardContent = mReq.getParameter("boardContent");
 						int boardCd = Integer.parseInt(mReq.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(mReq.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(mReq.getParameter("cp"));
 						
 						
 						int memberNo = ((User)session.getAttribute("loginMember")).getMemberNo();
@@ -439,13 +433,13 @@ public class BoardController222 extends HttpServlet{
 							message = "게시글이 수정 되었습니다.";
 
 							// 상세 조회 redirect 주소
-							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&boardCd="+boardCd;
 						}else { // 실패
 
 							message = "게시글 등록 중 문제가 발생했습니다.";
 
 							// 다시 게시글 작성 화면 redirect 주소
-							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+							path = req.getContextPath()+"/pboard/view?no="+boardNo+"&boardCd="+boardCd;
 
 						}
 						session.setAttribute("message", message);
@@ -459,7 +453,6 @@ public class BoardController222 extends HttpServlet{
 						
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 						HttpSession session = req.getSession();
 						
@@ -474,7 +467,7 @@ public class BoardController222 extends HttpServlet{
 							
 						}else {
 							message = "게시글 삭제중 문제가 발생했습니다.";
-							path = req.getContextPath() + "/nboard/view?cp="+currentPage+"&boardNo="+boardNo+"&boardCd="+boardCd;
+							path = req.getContextPath() + "/nboard/view?&boardNo="+boardNo+"&boardCd="+boardCd;
 							
 						}
 						
@@ -486,7 +479,6 @@ public class BoardController222 extends HttpServlet{
 						
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-						int currentPage = Integer.parseInt(req.getParameter("cp"));
 						
 						HttpSession session = req.getSession();
 						
@@ -501,12 +493,33 @@ public class BoardController222 extends HttpServlet{
 							
 						}else {
 							message = "게시글 삭제중 문제가 발생했습니다.";
-							path = req.getContextPath() + "/nboard/view?no="+boardNo+"&cp="+currentPage+"&boardCd="+boardCd;
+							path = req.getContextPath() + "/nboard/view?no="+boardNo+"&boardCd="+boardCd;
 							
 						}
 						
 						session.setAttribute("message", message);
 						resp.sendRedirect(path);
+					}
+					
+					
+					else if(command.equals("search")) {
+						
+						String search = req.getParameter("main-search");
+						
+						Pagination pagination = service.getPagination2(cp, search);
+						
+						List<Board> boardList = service.searchBoard(pagination, search);
+						
+						req.setAttribute("pagination", pagination);
+						req.setAttribute("boardList", boardList);
+						req.setAttribute("search", search);
+						System.out.println(boardList);
+						
+						path = "/WEB-INF/views/board/search.jsp";
+						dispatcher = req.getRequestDispatcher(path);
+						dispatcher.forward(req, resp);
+						
+						
 					}
 				} catch (Exception e) {
 					
