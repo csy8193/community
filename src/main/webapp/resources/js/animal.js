@@ -401,7 +401,7 @@ function selectBoardList(boardCd){
 				$("#sub-board").empty();
 				$(".sub2").css("display","none");
 				
-				if(bList == null){
+				if(bList.length == 0){
 					p.text("아직 작성된 글이 없어요").css("margin-top","40px");
 					$("#sub-board").append(h2,table,p);
 				}else{
