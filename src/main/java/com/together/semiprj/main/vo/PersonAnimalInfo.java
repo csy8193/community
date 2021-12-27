@@ -7,6 +7,7 @@ public class PersonAnimalInfo {
 	private int boardNo;
 	private int likeCount;
 	private int memberNo;
+	private String memberId;
 	private int animalNo;
 	private String animalName;
 	private String animalVariety;
@@ -17,6 +18,12 @@ public class PersonAnimalInfo {
 	}
 	public void setAnimalCateNM(String animalCateNM) {
 		this.animalCateNM = animalCateNM;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	private Date animalBirth;
 	private String animalImg;
