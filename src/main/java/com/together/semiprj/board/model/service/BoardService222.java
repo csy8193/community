@@ -170,13 +170,14 @@ public class BoardService222 {
 	/** 일반게시글 수정하기 전 데이터 조회
 	 * @param boardCd
 	 * @param boardNo
+	 * @param contextPath 
 	 * @return
 	 * @throws Exception
 	 */
-	public Board selectBoardUpdate(int boardCd, int boardNo) throws Exception{
+	public Board selectBoardUpdate(int boardCd, int boardNo, String contextPath) throws Exception{
 		Connection conn = getConnection();
 		
-		Board board = dao.selectBoardUpdate(conn, boardCd, boardNo);
+		Board board = dao.selectBoardUpdate(conn, boardCd, boardNo, contextPath);
 		
 		close(conn);
 		

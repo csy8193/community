@@ -275,10 +275,11 @@ public class BoardDAO222 {
 	 * @param conn
 	 * @param boardCd
 	 * @param boardNo
+	 * @param contextPath 
 	 * @return
 	 * @throws Exception
 	 */
-	public Board selectBoardUpdate(Connection conn, int boardCd, int boardNo) throws Exception{
+	public Board selectBoardUpdate(Connection conn, int boardCd, int boardNo, String contextPath) throws Exception{
 		Board board = null;
 		
 		try {
@@ -294,7 +295,7 @@ public class BoardDAO222 {
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
-				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT").replaceAll("/resources/", contextPath+"/resources/"));
 				board.setBoardCode(rs.getInt("BOARD_CD"));
 				board.setBoardPicPath(rs.getString("BOARD_PIC_PATH"));
 				board.setBoardName(rs.getString("BOARD_NAME"));

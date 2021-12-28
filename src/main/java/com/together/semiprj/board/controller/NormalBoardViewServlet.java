@@ -42,7 +42,7 @@ public class NormalBoardViewServlet extends HttpServlet{
 			//3. 사진 가져오기
 			NboardService service = new NboardService();
 			Nboard nboard = null;
-			nboard =service.selectBoardView(boardNo,memberNo);
+			nboard =service.selectBoardView(boardNo,memberNo, req.getContextPath());
 			
 			//4. 댓글정보 가져오기
 			if(nboard != null) {
