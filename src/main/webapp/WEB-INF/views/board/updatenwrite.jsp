@@ -39,7 +39,7 @@
 			
 				<div class="btns">
 				    <button id="reg-btn">수정하기</button>
-				    <button type="button" id="cancel-btn" onclick="cancelForm2();">취소하기</button>
+				    <button type="button" id="cancel-btn" onclick="history.back();">취소하기</button>
 			    </div>
 			</form>
 			<form action="${contextPath}/board/cancel" method="post" name="cancelForm">
