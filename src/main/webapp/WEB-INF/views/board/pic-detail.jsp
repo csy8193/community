@@ -145,7 +145,7 @@
 				<div id="txt-box">
 					<textarea id="commentArea" style="resize: none;"
 						name="reply_contents" cols="30" rows="10"
-						placeholder="댓글을 작성하려면 위트에 로그인 해주세요."></textarea>
+						placeholder="댓글을 작성하려면 로그인 해주세요."></textarea>
 				</div>
 				<div id="click_btn">
 					<button id="addReply" onclick="addReply();">등록</button>

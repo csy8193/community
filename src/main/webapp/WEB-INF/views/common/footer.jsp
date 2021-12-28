@@ -21,7 +21,7 @@
 	                <div id="text">
 	                    <p>회사명:(주)투개더 | 대표 : 아무개 | 주소: 경기도 아무시 아무구 아무로 1234로 74 <br>
 	                        사업자 등록번호 : 1215-2545151[사업자정보확인] | 통신 판매업 신고번호 : 2021- 아무아무B-1111 | 개인정보책임자 : 아무개 </p>
-	                    <p>Copyright 2021. WIT. All rights reserved</p>
+	                    <p>Copyright 2021. TOGETHER. All rights reserved</p>
 	                </div>
             	</div>
                
