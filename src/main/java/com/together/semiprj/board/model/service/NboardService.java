@@ -45,12 +45,13 @@ public class NboardService {
 	/**해당 게시글 반환 + 조회수 증가
 	 * @param boardNo
 	 * @param memberNo 
+	 * @param contextPath 
 	 * @return nboard
 	 * @throws Exception
 	 */
-	public Nboard selectBoardView(int boardNo, int memberNo) throws Exception{
+	public Nboard selectBoardView(int boardNo, int memberNo, String contextPath) throws Exception{
 		Connection conn = getConnection();
-		Nboard nboard = dao.selectBoardView(conn, boardNo,memberNo);
+		Nboard nboard = dao.selectBoardView(conn, boardNo,memberNo, contextPath);
 		int result = 0 ;
 		
 		if(memberNo != nboard.getMemberNo()) {

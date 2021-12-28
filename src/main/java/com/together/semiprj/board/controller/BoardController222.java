@@ -110,7 +110,7 @@ public class BoardController222 extends HttpServlet{
 					
 					else if(command.equals("ninsert")) {
 						String boardTitle = req.getParameter("boardTitle");
-						String boardContent = req.getParameter("boardContent");
+						String boardContent = req.getParameter("boardContent").replaceAll(req.getContextPath(), "");
 						String picPath = req.getParameter("input-img");
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 
@@ -251,7 +251,7 @@ public class BoardController222 extends HttpServlet{
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 						
-						Board board = service.selectBoardUpdate(boardCd, boardNo);
+						Board board = service.selectBoardUpdate(boardCd, boardNo, req.getContextPath());
 						
 						req.setAttribute("board", board);
 						
@@ -272,7 +272,7 @@ public class BoardController222 extends HttpServlet{
 					
 					else if(command.equals("nupdate")) {
 						String boardTitle = req.getParameter("boardTitle");
-						String boardContent = req.getParameter("boardContent");
+						String boardContent = req.getParameter("boardContent").replaceAll(req.getContextPath(), "");
 						String picPath = req.getParameter("input-img");
 						int boardCd = Integer.parseInt(req.getParameter("boardCd"));
 						int boardNo = Integer.parseInt(req.getParameter("boardNo"));

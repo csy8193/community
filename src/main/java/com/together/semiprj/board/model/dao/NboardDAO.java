@@ -128,10 +128,11 @@ public class NboardDAO {
 	 * @param conn
 	 * @param boardNo
 	 * @param memberNo
+	 * @param contextPath 
 	 * @return nboard (상세게시판 정보)
 	 * @throws Exception
 	 */
-	public Nboard selectBoardView(Connection conn, int boardNo, int memberNo) throws Exception{
+	public Nboard selectBoardView(Connection conn, int boardNo, int memberNo, String contextPath) throws Exception{
 		Nboard nboard = null;
 		try {
 			String sql = prop.getProperty("selectBoardView");
@@ -147,7 +148,7 @@ public class NboardDAO {
 				nboard = new Nboard();
 				nboard.setBoardNo(rs.getInt("BOARD_NO"));
 				nboard.setBoardTitle(rs.getString("BOARD_TITLE"));
-				nboard.setBoardContent(rs.getString("BOARD_CONTENT"));
+				nboard.setBoardContent(rs.getString("BOARD_CONTENT").replaceAll("/resources/", contextPath+"/resources/"));
 				nboard.setReadCount(rs.getInt("READ_COUNT"));
 				nboard.setBoardCd(rs.getInt("BOARD_CD"));
 				nboard.setCreateDt(rs.getString("CREATE_DT"));
