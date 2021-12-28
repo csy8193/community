@@ -27,7 +27,7 @@
 						</c:when>
 						<c:otherwise>
 							<%-- 로그인이 되어 있을 때 --%>
-							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/myPage">${sessionScope.loginMember.memberNm}</a></li>
+							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/mypage">${sessionScope.loginMember.memberNm}</a></li>
 							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout">로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>
